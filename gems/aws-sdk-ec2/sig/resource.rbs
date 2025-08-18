@@ -143,6 +143,7 @@ module Aws
                                 enabled: bool
                               },
                               ?placement: {
+                                availability_zone_id: ::String?,
                                 affinity: ::String?,
                                 group_name: ::String?,
                                 partition_number: ::Integer?,
@@ -588,7 +589,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Resource.html#create_volume-instance_method
       def create_volume: (
-                           availability_zone: ::String,
+                           ?availability_zone: ::String,
+                           ?availability_zone_id: ::String,
                            ?encrypted: bool,
                            ?iops: ::Integer,
                            ?kms_key_id: ::String,

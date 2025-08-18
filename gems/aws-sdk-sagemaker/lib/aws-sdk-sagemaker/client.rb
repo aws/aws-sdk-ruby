@@ -2690,6 +2690,9 @@ module Aws::SageMaker
     #         {
     #           instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
     #           count: 1,
+    #           accelerators: 1,
+    #           v_cpu: 1.0,
+    #           memory_in_gi_b: 1.0,
     #         },
     #       ],
     #       resource_sharing_config: {
@@ -3374,6 +3377,9 @@ module Aws::SageMaker
     #         },
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
+    #       trusted_identity_propagation_settings: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
     #       docker_settings: {
     #         enable_docker_access: "ENABLED", # accepts ENABLED, DISABLED
     #         vpc_only_trusted_accounts: ["AccountId"],
@@ -6077,10 +6083,8 @@ module Aws::SageMaker
     #     using is not listed below, the attribute name *must not* end with
     #     "-ref".
     #
-    #     * Image semantic segmentation (`SemanticSegmentation)`, and
-    #       adjustment (`AdjustmentSemanticSegmentation`) and verification
-    #       (`VerificationSemanticSegmentation`) labeling jobs for this task
-    #       type.
+    #     * Verification (`VerificationSemanticSegmentation`) labeling jobs
+    #       for this task type.
     #
     #     * Video frame object detection (`VideoObjectDetection`), and
     #       adjustment and verification (`AdjustmentVideoObjectDetection`)
@@ -12780,6 +12784,7 @@ module Aws::SageMaker
     #   * {Types::DescribeAppResponse#user_profile_name #user_profile_name} => String
     #   * {Types::DescribeAppResponse#space_name #space_name} => String
     #   * {Types::DescribeAppResponse#status #status} => String
+    #   * {Types::DescribeAppResponse#effective_trusted_identity_propagation_status #effective_trusted_identity_propagation_status} => String
     #   * {Types::DescribeAppResponse#recovery_mode #recovery_mode} => Boolean
     #   * {Types::DescribeAppResponse#last_health_check_timestamp #last_health_check_timestamp} => Time
     #   * {Types::DescribeAppResponse#last_user_activity_timestamp #last_user_activity_timestamp} => Time
@@ -12807,6 +12812,7 @@ module Aws::SageMaker
     #   resp.user_profile_name #=> String
     #   resp.space_name #=> String
     #   resp.status #=> String, one of "Deleted", "Deleting", "Failed", "InService", "Pending"
+    #   resp.effective_trusted_identity_propagation_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.recovery_mode #=> Boolean
     #   resp.last_health_check_timestamp #=> Time
     #   resp.last_user_activity_timestamp #=> Time
@@ -13754,6 +13760,9 @@ module Aws::SageMaker
     #   resp.compute_quota_config.compute_quota_resources #=> Array
     #   resp.compute_quota_config.compute_quota_resources[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge"
     #   resp.compute_quota_config.compute_quota_resources[0].count #=> Integer
+    #   resp.compute_quota_config.compute_quota_resources[0].accelerators #=> Integer
+    #   resp.compute_quota_config.compute_quota_resources[0].v_cpu #=> Float
+    #   resp.compute_quota_config.compute_quota_resources[0].memory_in_gi_b #=> Float
     #   resp.compute_quota_config.resource_sharing_config.strategy #=> String, one of "Lend", "DontLend", "LendAndBorrow"
     #   resp.compute_quota_config.resource_sharing_config.borrow_limit #=> Integer
     #   resp.compute_quota_config.preempt_team_tasks #=> String, one of "Never", "LowerPriority"
@@ -14224,6 +14233,7 @@ module Aws::SageMaker
     #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.16xlarge", "ml.g5.12xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.12xlarge", "ml.g6.16xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.12xlarge", "ml.g6e.16xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.geospatial.interactive", "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.trn1.2xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.p5.48xlarge", "ml.p5en.48xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.c7i.large", "ml.c7i.xlarge", "ml.c7i.2xlarge", "ml.c7i.4xlarge", "ml.c7i.8xlarge", "ml.c7i.12xlarge", "ml.c7i.16xlarge", "ml.c7i.24xlarge", "ml.c7i.48xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge", "ml.m6id.large", "ml.m6id.xlarge", "ml.m6id.2xlarge", "ml.m6id.4xlarge", "ml.m6id.8xlarge", "ml.m6id.12xlarge", "ml.m6id.16xlarge", "ml.m6id.24xlarge", "ml.m6id.32xlarge", "ml.c6id.large", "ml.c6id.xlarge", "ml.c6id.2xlarge", "ml.c6id.4xlarge", "ml.c6id.8xlarge", "ml.c6id.12xlarge", "ml.c6id.16xlarge", "ml.c6id.24xlarge", "ml.c6id.32xlarge", "ml.r6id.large", "ml.r6id.xlarge", "ml.r6id.2xlarge", "ml.r6id.4xlarge", "ml.r6id.8xlarge", "ml.r6id.12xlarge", "ml.r6id.16xlarge", "ml.r6id.24xlarge", "ml.r6id.32xlarge"
     #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.lifecycle_config_arn #=> String
     #   resp.domain_settings.execution_role_identity_config #=> String, one of "USER_PROFILE_NAME", "DISABLED"
+    #   resp.domain_settings.trusted_identity_propagation_settings.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_settings.docker_settings.enable_docker_access #=> String, one of "ENABLED", "DISABLED"
     #   resp.domain_settings.docker_settings.vpc_only_trusted_accounts #=> Array
     #   resp.domain_settings.docker_settings.vpc_only_trusted_accounts[0] #=> String
@@ -20621,6 +20631,9 @@ module Aws::SageMaker
     #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources #=> Array
     #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources[0].instance_type #=> String, one of "ml.p4d.24xlarge", "ml.p4de.24xlarge", "ml.p5.48xlarge", "ml.trn1.32xlarge", "ml.trn1n.32xlarge", "ml.g5.xlarge", "ml.g5.2xlarge", "ml.g5.4xlarge", "ml.g5.8xlarge", "ml.g5.12xlarge", "ml.g5.16xlarge", "ml.g5.24xlarge", "ml.g5.48xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.c5n.large", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.g6.xlarge", "ml.g6.2xlarge", "ml.g6.4xlarge", "ml.g6.8xlarge", "ml.g6.16xlarge", "ml.g6.12xlarge", "ml.g6.24xlarge", "ml.g6.48xlarge", "ml.gr6.4xlarge", "ml.gr6.8xlarge", "ml.g6e.xlarge", "ml.g6e.2xlarge", "ml.g6e.4xlarge", "ml.g6e.8xlarge", "ml.g6e.16xlarge", "ml.g6e.12xlarge", "ml.g6e.24xlarge", "ml.g6e.48xlarge", "ml.p5e.48xlarge", "ml.p5en.48xlarge", "ml.p6-b200.48xlarge", "ml.trn2.48xlarge", "ml.c6i.large", "ml.c6i.xlarge", "ml.c6i.2xlarge", "ml.c6i.4xlarge", "ml.c6i.8xlarge", "ml.c6i.12xlarge", "ml.c6i.16xlarge", "ml.c6i.24xlarge", "ml.c6i.32xlarge", "ml.m6i.large", "ml.m6i.xlarge", "ml.m6i.2xlarge", "ml.m6i.4xlarge", "ml.m6i.8xlarge", "ml.m6i.12xlarge", "ml.m6i.16xlarge", "ml.m6i.24xlarge", "ml.m6i.32xlarge", "ml.r6i.large", "ml.r6i.xlarge", "ml.r6i.2xlarge", "ml.r6i.4xlarge", "ml.r6i.8xlarge", "ml.r6i.12xlarge", "ml.r6i.16xlarge", "ml.r6i.24xlarge", "ml.r6i.32xlarge", "ml.i3en.large", "ml.i3en.xlarge", "ml.i3en.2xlarge", "ml.i3en.3xlarge", "ml.i3en.6xlarge", "ml.i3en.12xlarge", "ml.i3en.24xlarge", "ml.m7i.large", "ml.m7i.xlarge", "ml.m7i.2xlarge", "ml.m7i.4xlarge", "ml.m7i.8xlarge", "ml.m7i.12xlarge", "ml.m7i.16xlarge", "ml.m7i.24xlarge", "ml.m7i.48xlarge", "ml.r7i.large", "ml.r7i.xlarge", "ml.r7i.2xlarge", "ml.r7i.4xlarge", "ml.r7i.8xlarge", "ml.r7i.12xlarge", "ml.r7i.16xlarge", "ml.r7i.24xlarge", "ml.r7i.48xlarge"
     #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources[0].count #=> Integer
+    #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources[0].accelerators #=> Integer
+    #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources[0].v_cpu #=> Float
+    #   resp.compute_quota_summaries[0].compute_quota_config.compute_quota_resources[0].memory_in_gi_b #=> Float
     #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.strategy #=> String, one of "Lend", "DontLend", "LendAndBorrow"
     #   resp.compute_quota_summaries[0].compute_quota_config.resource_sharing_config.borrow_limit #=> Integer
     #   resp.compute_quota_summaries[0].compute_quota_config.preempt_team_tasks #=> String, one of "Never", "LowerPriority"
@@ -27716,6 +27729,9 @@ module Aws::SageMaker
     #         {
     #           instance_type: "ml.p4d.24xlarge", # required, accepts ml.p4d.24xlarge, ml.p4de.24xlarge, ml.p5.48xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.c5n.large, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.g6.xlarge, ml.g6.2xlarge, ml.g6.4xlarge, ml.g6.8xlarge, ml.g6.16xlarge, ml.g6.12xlarge, ml.g6.24xlarge, ml.g6.48xlarge, ml.gr6.4xlarge, ml.gr6.8xlarge, ml.g6e.xlarge, ml.g6e.2xlarge, ml.g6e.4xlarge, ml.g6e.8xlarge, ml.g6e.16xlarge, ml.g6e.12xlarge, ml.g6e.24xlarge, ml.g6e.48xlarge, ml.p5e.48xlarge, ml.p5en.48xlarge, ml.p6-b200.48xlarge, ml.trn2.48xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.m6i.large, ml.m6i.xlarge, ml.m6i.2xlarge, ml.m6i.4xlarge, ml.m6i.8xlarge, ml.m6i.12xlarge, ml.m6i.16xlarge, ml.m6i.24xlarge, ml.m6i.32xlarge, ml.r6i.large, ml.r6i.xlarge, ml.r6i.2xlarge, ml.r6i.4xlarge, ml.r6i.8xlarge, ml.r6i.12xlarge, ml.r6i.16xlarge, ml.r6i.24xlarge, ml.r6i.32xlarge, ml.i3en.large, ml.i3en.xlarge, ml.i3en.2xlarge, ml.i3en.3xlarge, ml.i3en.6xlarge, ml.i3en.12xlarge, ml.i3en.24xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
     #           count: 1,
+    #           accelerators: 1,
+    #           v_cpu: 1.0,
+    #           memory_in_gi_b: 1.0,
     #         },
     #       ],
     #       resource_sharing_config: {
@@ -28146,6 +28162,9 @@ module Aws::SageMaker
     #       },
     #       execution_role_identity_config: "USER_PROFILE_NAME", # accepts USER_PROFILE_NAME, DISABLED
     #       security_group_ids: ["SecurityGroupId"],
+    #       trusted_identity_propagation_settings: {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
     #       docker_settings: {
     #         enable_docker_access: "ENABLED", # accepts ENABLED, DISABLED
     #         vpc_only_trusted_accounts: ["AccountId"],
@@ -31075,7 +31094,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.320.0'
+      context[:gem_version] = '1.322.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

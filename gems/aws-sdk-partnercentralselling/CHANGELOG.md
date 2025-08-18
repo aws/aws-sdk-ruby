@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2025-08-13)
+------------------
+
+* Feature - Add Tagging Support for Opportunity resources
+
 1.14.0 (2025-08-08)
 ------------------
 

@@ -7,7 +7,7 @@ module Aws
     # @api private
     class FileUploader
 
-      ONE_HUNDRED_MEGABYTES = 100 * 1024 * 1024
+      DEFAULT_MULTIPART_THRESHOLD = 100 * 1024 * 1024
 
       # @param [Hash] options
       # @option options [Client] :client
@@ -15,15 +15,13 @@ module Aws
       def initialize(options = {})
         @options = options
         @client = options[:client] || Client.new
-        @multipart_threshold = options[:multipart_threshold] ||
-                               ONE_HUNDRED_MEGABYTES
+        @multipart_threshold = options[:multipart_threshold] || DEFAULT_MULTIPART_THRESHOLD
       end
 
       # @return [Client]
       attr_reader :client
 
-      # @return [Integer] Files larger than or equal to this in bytes are uploaded
-      #   using a {MultipartFileUploader}.
+      # @return [Integer] Files larger than or equal to this in bytes are uploaded using a {MultipartFileUploader}.
       attr_reader :multipart_threshold
 
       # @param [String, Pathname, File, Tempfile] source The file to upload.

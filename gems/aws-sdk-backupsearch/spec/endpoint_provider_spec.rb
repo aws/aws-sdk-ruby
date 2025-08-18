@@ -43,7 +43,7 @@ module Aws::BackupSearch
 
     context "For region us-east-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "https://backup-search-fips.us-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://backup-search-fips.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -57,7 +57,7 @@ module Aws::BackupSearch
 
     context "For region us-east-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "https://backup-search.us-east-1.api.aws"}}
+        {"endpoint" => {"url" => "https://backup-search.us-east-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -71,7 +71,7 @@ module Aws::BackupSearch
 
     context "For region cn-northwest-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "url" => "https://backup-search-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://backup-search-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -85,7 +85,7 @@ module Aws::BackupSearch
 
     context "For region cn-northwest-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "cn-northwest-1"}]}, "url" => "https://backup-search.cn-northwest-1.api.amazonwebservices.com.cn"}}
+        {"endpoint" => {"url" => "https://backup-search.cn-northwest-1.api.amazonwebservices.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -99,7 +99,7 @@ module Aws::BackupSearch
 
     context "For region us-gov-west-1 with FIPS enabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "url" => "https://backup-search-fips.us-gov-west-1.api.aws"}}
+        {"endpoint" => {"url" => "https://backup-search-fips.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -113,7 +113,7 @@ module Aws::BackupSearch
 
     context "For region us-gov-west-1 with FIPS disabled and DualStack enabled" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingRegion" => "us-gov-west-1"}]}, "url" => "https://backup-search.us-gov-west-1.api.aws"}}
+        {"endpoint" => {"url" => "https://backup-search.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

@@ -280,6 +280,42 @@ module Aws
                                ) -> _CancelSubscriptionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSubscriptionResponseSuccess
 
+      interface _CreateAccountPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccountPoolOutput]
+        def account_source: () -> Types::AccountSource
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def domain_unit_id: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def resolution_strategy: () -> ("MANUAL")
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_account_pool-instance_method
+      def create_account_pool: (
+                                 account_source: {
+                                   accounts: Array[
+                                     {
+                                       aws_account_id: ::String,
+                                       aws_account_name: ::String?,
+                                       supported_regions: Array[::String]
+                                     },
+                                   ]?,
+                                   custom_account_pool_handler: {
+                                     lambda_execution_role_arn: ::String?,
+                                     lambda_function_arn: ::String
+                                   }?
+                                 },
+                                 ?description: ::String,
+                                 domain_identifier: ::String,
+                                 name: ::String,
+                                 resolution_strategy: ("MANUAL")
+                               ) -> _CreateAccountPoolResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountPoolResponseSuccess
+
       interface _CreateAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetOutput]
         def created_at: () -> ::Time
@@ -1114,7 +1150,12 @@ module Aws
                                     name: ::String?,
                                     value: ::String?
                                   },
-                                ]?
+                                ]?,
+                                environment_resolved_account: {
+                                  aws_account_id: ::String,
+                                  region_name: ::String,
+                                  source_account_pool_id: ::String?
+                                }?
                               },
                             ]
                           ) -> _CreateProjectResponseSuccess
@@ -1155,14 +1196,15 @@ module Aws
                                     ?domain_unit_identifier: ::String,
                                     ?environment_configurations: Array[
                                       {
+                                        account_pools: Array[::String]?,
                                         aws_account: {
                                           aws_account_id: ::String?,
                                           aws_account_id_path: ::String?
-                                        },
+                                        }?,
                                         aws_region: {
                                           region_name: ::String?,
                                           region_name_path: ::String?
-                                        },
+                                        }?,
                                         configuration_parameters: {
                                           parameter_overrides: Array[
                                             {
@@ -1378,6 +1420,16 @@ module Aws
                                  ?user_type: ("IAM_USER" | "IAM_ROLE" | "SSO_USER")
                                ) -> _CreateUserProfileResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserProfileResponseSuccess
+
+      interface _DeleteAccountPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountPoolOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_account_pool-instance_method
+      def delete_account_pool: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> _DeleteAccountPoolResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountPoolResponseSuccess
 
       interface _DeleteAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetOutput]
@@ -1660,6 +1712,27 @@ module Aws
                                            environment_role_arn: ::String
                                          ) -> _DisassociateEnvironmentRoleResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateEnvironmentRoleResponseSuccess
+
+      interface _GetAccountPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountPoolOutput]
+        def account_source: () -> Types::AccountSource
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def domain_unit_id: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def resolution_strategy: () -> ("MANUAL")
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_account_pool-instance_method
+      def get_account_pool: (
+                              domain_identifier: ::String,
+                              identifier: ::String
+                            ) -> _GetAccountPoolResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountPoolResponseSuccess
 
       interface _GetAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetOutput]
@@ -2397,6 +2470,36 @@ module Aws
                               user_identifier: ::String
                             ) -> _GetUserProfileResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserProfileResponseSuccess
+
+      interface _ListAccountPoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountPoolsOutput]
+        def items: () -> ::Array[Types::AccountPoolSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_account_pools-instance_method
+      def list_account_pools: (
+                                domain_identifier: ::String,
+                                ?max_results: ::Integer,
+                                ?name: ::String,
+                                ?next_token: ::String,
+                                ?sort_by: ("NAME"),
+                                ?sort_order: ("ASCENDING" | "DESCENDING")
+                              ) -> _ListAccountPoolsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountPoolsResponseSuccess
+
+      interface _ListAccountsInAccountPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountsInAccountPoolOutput]
+        def items: () -> ::Array[Types::AccountInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_accounts_in_account_pool-instance_method
+      def list_accounts_in_account_pool: (
+                                           domain_identifier: ::String,
+                                           identifier: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListAccountsInAccountPoolResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountsInAccountPoolResponseSuccess
 
       interface _ListAssetFiltersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetFiltersOutput]
@@ -3327,6 +3430,43 @@ module Aws
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
+      interface _UpdateAccountPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountPoolOutput]
+        def account_source: () -> Types::AccountSource
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def description: () -> ::String
+        def domain_id: () -> ::String
+        def domain_unit_id: () -> ::String
+        def id: () -> ::String
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def resolution_strategy: () -> ("MANUAL")
+        def updated_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_account_pool-instance_method
+      def update_account_pool: (
+                                 ?account_source: {
+                                   accounts: Array[
+                                     {
+                                       aws_account_id: ::String,
+                                       aws_account_name: ::String?,
+                                       supported_regions: Array[::String]
+                                     },
+                                   ]?,
+                                   custom_account_pool_handler: {
+                                     lambda_execution_role_arn: ::String?,
+                                     lambda_function_arn: ::String
+                                   }?
+                                 },
+                                 ?description: ::String,
+                                 domain_identifier: ::String,
+                                 identifier: ::String,
+                                 ?name: ::String,
+                                 ?resolution_strategy: ("MANUAL")
+                               ) -> _UpdateAccountPoolResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountPoolResponseSuccess
+
       interface _UpdateAssetFilterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetFilterOutput]
         def asset_id: () -> ::String
@@ -3852,7 +3992,12 @@ module Aws
                                     name: ::String?,
                                     value: ::String?
                                   },
-                                ]?
+                                ]?,
+                                environment_resolved_account: {
+                                  aws_account_id: ::String,
+                                  region_name: ::String,
+                                  source_account_pool_id: ::String?
+                                }?
                               },
                             ]
                           ) -> _UpdateProjectResponseSuccess
@@ -3878,14 +4023,15 @@ module Aws
                                     ?domain_unit_identifier: ::String,
                                     ?environment_configurations: Array[
                                       {
+                                        account_pools: Array[::String]?,
                                         aws_account: {
                                           aws_account_id: ::String?,
                                           aws_account_id_path: ::String?
-                                        },
+                                        }?,
                                         aws_region: {
                                           region_name: ::String?,
                                           region_name_path: ::String?
-                                        },
+                                        }?,
                                         configuration_parameters: {
                                           parameter_overrides: Array[
                                             {

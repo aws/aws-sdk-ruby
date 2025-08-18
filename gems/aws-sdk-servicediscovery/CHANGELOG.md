@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2025-08-14)
+------------------
+
+* Feature - Added support for cross account through Id parameter overloading with ARN and allow owner account for some APIs instead of ARN
+
 1.88.0 (2025-08-04)
 ------------------
 

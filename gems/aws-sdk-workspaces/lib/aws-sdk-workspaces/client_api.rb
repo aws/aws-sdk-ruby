@@ -134,6 +134,10 @@ module Aws::WorkSpaces
     CreateWorkspacesPoolResult = Shapes::StructureShape.new(name: 'CreateWorkspacesPoolResult')
     CreateWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateWorkspacesRequest')
     CreateWorkspacesResult = Shapes::StructureShape.new(name: 'CreateWorkspacesResult')
+    CustomImageProtocol = Shapes::StringShape.new(name: 'CustomImageProtocol')
+    CustomWorkspaceImageImportErrorDetails = Shapes::StructureShape.new(name: 'CustomWorkspaceImageImportErrorDetails')
+    CustomWorkspaceImageImportErrorDetailsList = Shapes::ListShape.new(name: 'CustomWorkspaceImageImportErrorDetailsList')
+    CustomWorkspaceImageImportState = Shapes::StringShape.new(name: 'CustomWorkspaceImageImportState')
     DataReplication = Shapes::StringShape.new(name: 'DataReplication')
     DataReplicationSettings = Shapes::StructureShape.new(name: 'DataReplicationSettings')
     DedicatedTenancyAccountType = Shapes::StringShape.new(name: 'DedicatedTenancyAccountType')
@@ -191,6 +195,8 @@ module Aws::WorkSpaces
     DescribeConnectionAliasPermissionsResult = Shapes::StructureShape.new(name: 'DescribeConnectionAliasPermissionsResult')
     DescribeConnectionAliasesRequest = Shapes::StructureShape.new(name: 'DescribeConnectionAliasesRequest')
     DescribeConnectionAliasesResult = Shapes::StructureShape.new(name: 'DescribeConnectionAliasesResult')
+    DescribeCustomWorkspaceImageImportRequest = Shapes::StructureShape.new(name: 'DescribeCustomWorkspaceImageImportRequest')
+    DescribeCustomWorkspaceImageImportResult = Shapes::StructureShape.new(name: 'DescribeCustomWorkspaceImageImportResult')
     DescribeImageAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeImageAssociationsRequest')
     DescribeImageAssociationsResult = Shapes::StructureShape.new(name: 'DescribeImageAssociationsResult')
     DescribeIpGroupsRequest = Shapes::StructureShape.new(name: 'DescribeIpGroupsRequest')
@@ -244,7 +250,9 @@ module Aws::WorkSpaces
     DnsIpAddresses = Shapes::ListShape.new(name: 'DnsIpAddresses')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     Ec2ImageId = Shapes::StringShape.new(name: 'Ec2ImageId')
+    Ec2ImportTaskId = Shapes::StringShape.new(name: 'Ec2ImportTaskId')
     EndpointEncryptionMode = Shapes::StringShape.new(name: 'EndpointEncryptionMode')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorDetailsList = Shapes::ListShape.new(name: 'ErrorDetailsList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -269,16 +277,23 @@ module Aws::WorkSpaces
     IdleDisconnectTimeoutInSeconds = Shapes::IntegerShape.new(name: 'IdleDisconnectTimeoutInSeconds')
     ImageAssociatedResourceType = Shapes::StringShape.new(name: 'ImageAssociatedResourceType')
     ImageAssociatedResourceTypeList = Shapes::ListShape.new(name: 'ImageAssociatedResourceTypeList')
+    ImageBuildVersionArn = Shapes::StringShape.new(name: 'ImageBuildVersionArn')
+    ImageComputeType = Shapes::StringShape.new(name: 'ImageComputeType')
+    ImageErrorMessage = Shapes::StringShape.new(name: 'ImageErrorMessage')
     ImagePermission = Shapes::StructureShape.new(name: 'ImagePermission')
     ImagePermissions = Shapes::ListShape.new(name: 'ImagePermissions')
     ImageResourceAssociation = Shapes::StructureShape.new(name: 'ImageResourceAssociation')
     ImageResourceAssociationList = Shapes::ListShape.new(name: 'ImageResourceAssociationList')
+    ImageSourceIdentifier = Shapes::UnionShape.new(name: 'ImageSourceIdentifier')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
     ImportClientBrandingRequest = Shapes::StructureShape.new(name: 'ImportClientBrandingRequest')
     ImportClientBrandingResult = Shapes::StructureShape.new(name: 'ImportClientBrandingResult')
+    ImportCustomWorkspaceImageRequest = Shapes::StructureShape.new(name: 'ImportCustomWorkspaceImageRequest')
+    ImportCustomWorkspaceImageResult = Shapes::StructureShape.new(name: 'ImportCustomWorkspaceImageResult')
     ImportWorkspaceImageRequest = Shapes::StructureShape.new(name: 'ImportWorkspaceImageRequest')
     ImportWorkspaceImageResult = Shapes::StructureShape.new(name: 'ImportWorkspaceImageResult')
     IncompatibleApplicationsException = Shapes::StructureShape.new(name: 'IncompatibleApplicationsException')
+    InfrastructureConfigurationArn = Shapes::StringShape.new(name: 'InfrastructureConfigurationArn')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternetFallbackProtocol = Shapes::StringShape.new(name: 'InternetFallbackProtocol')
     InternetFallbackProtocolList = Shapes::ListShape.new(name: 'InternetFallbackProtocolList')
@@ -314,6 +329,7 @@ module Aws::WorkSpaces
     ManagementCidrRangeMaxResults = Shapes::IntegerShape.new(name: 'ManagementCidrRangeMaxResults')
     MaxUserDurationInSeconds = Shapes::IntegerShape.new(name: 'MaxUserDurationInSeconds')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
+    Message = Shapes::StringShape.new(name: 'Message')
     MicrosoftEntraConfig = Shapes::StructureShape.new(name: 'MicrosoftEntraConfig')
     MicrosoftEntraConfigTenantId = Shapes::StringShape.new(name: 'MicrosoftEntraConfigTenantId')
     MigrateWorkspaceRequest = Shapes::StructureShape.new(name: 'MigrateWorkspaceRequest')
@@ -346,6 +362,7 @@ module Aws::WorkSpaces
     ModifyWorkspaceStateResult = Shapes::StructureShape.new(name: 'ModifyWorkspaceStateResult')
     NetworkAccessConfiguration = Shapes::StructureShape.new(name: 'NetworkAccessConfiguration')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    OSVersion = Shapes::StringShape.new(name: 'OSVersion')
     OperatingSystem = Shapes::StructureShape.new(name: 'OperatingSystem')
     OperatingSystemName = Shapes::StringShape.new(name: 'OperatingSystemName')
     OperatingSystemNameList = Shapes::ListShape.new(name: 'OperatingSystemNameList')
@@ -356,6 +373,7 @@ module Aws::WorkSpaces
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PendingCreateStandbyWorkspacesRequest = Shapes::StructureShape.new(name: 'PendingCreateStandbyWorkspacesRequest')
     PendingCreateStandbyWorkspacesRequestList = Shapes::ListShape.new(name: 'PendingCreateStandbyWorkspacesRequestList')
+    Platform = Shapes::StringShape.new(name: 'Platform')
     PoolsRunningMode = Shapes::StringShape.new(name: 'PoolsRunningMode')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
@@ -833,6 +851,12 @@ module Aws::WorkSpaces
     CreateWorkspacesResult.add_member(:pending_requests, Shapes::ShapeRef.new(shape: WorkspaceList, location_name: "PendingRequests"))
     CreateWorkspacesResult.struct_class = Types::CreateWorkspacesResult
 
+    CustomWorkspaceImageImportErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    CustomWorkspaceImageImportErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ImageErrorMessage, location_name: "ErrorMessage"))
+    CustomWorkspaceImageImportErrorDetails.struct_class = Types::CustomWorkspaceImageImportErrorDetails
+
+    CustomWorkspaceImageImportErrorDetailsList.member = Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportErrorDetails)
+
     DataReplicationSettings.add_member(:data_replication, Shapes::ShapeRef.new(shape: DataReplication, location_name: "DataReplication"))
     DataReplicationSettings.add_member(:recovery_snapshot_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RecoverySnapshotTime"))
     DataReplicationSettings.struct_class = Types::DataReplicationSettings
@@ -934,6 +958,7 @@ module Aws::WorkSpaces
     DescribeAccountResult.add_member(:dedicated_tenancy_support, Shapes::ShapeRef.new(shape: DedicatedTenancySupportResultEnum, location_name: "DedicatedTenancySupport"))
     DescribeAccountResult.add_member(:dedicated_tenancy_management_cidr_range, Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: "DedicatedTenancyManagementCidrRange"))
     DescribeAccountResult.add_member(:dedicated_tenancy_account_type, Shapes::ShapeRef.new(shape: DedicatedTenancyAccountType, location_name: "DedicatedTenancyAccountType"))
+    DescribeAccountResult.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DescribeAccountResult.struct_class = Types::DescribeAccountResult
 
     DescribeApplicationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
@@ -1011,6 +1036,19 @@ module Aws::WorkSpaces
     DescribeConnectionAliasesResult.add_member(:connection_aliases, Shapes::ShapeRef.new(shape: ConnectionAliasList, location_name: "ConnectionAliases"))
     DescribeConnectionAliasesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     DescribeConnectionAliasesResult.struct_class = Types::DescribeConnectionAliasesResult
+
+    DescribeCustomWorkspaceImageImportRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
+    DescribeCustomWorkspaceImageImportRequest.struct_class = Types::DescribeCustomWorkspaceImageImportRequest
+
+    DescribeCustomWorkspaceImageImportResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: "InfrastructureConfigurationArn"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:state, Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportState, location_name: "State"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSourceIdentifier, location_name: "ImageSource"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:image_builder_instance_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ImageBuilderInstanceId"))
+    DescribeCustomWorkspaceImageImportResult.add_member(:error_details, Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportErrorDetailsList, location_name: "ErrorDetails"))
+    DescribeCustomWorkspaceImageImportResult.struct_class = Types::DescribeCustomWorkspaceImageImportResult
 
     DescribeImageAssociationsRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "ImageId"))
     DescribeImageAssociationsRequest.add_member(:associated_resource_types, Shapes::ShapeRef.new(shape: ImageAssociatedResourceTypeList, required: true, location_name: "AssociatedResourceTypes"))
@@ -1242,6 +1280,16 @@ module Aws::WorkSpaces
 
     ImageResourceAssociationList.member = Shapes::ShapeRef.new(shape: ImageResourceAssociation)
 
+    ImageSourceIdentifier.add_member(:ec2_import_task_id, Shapes::ShapeRef.new(shape: Ec2ImportTaskId, location_name: "Ec2ImportTaskId"))
+    ImageSourceIdentifier.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, location_name: "ImageBuildVersionArn"))
+    ImageSourceIdentifier.add_member(:ec2_image_id, Shapes::ShapeRef.new(shape: Ec2ImageId, location_name: "Ec2ImageId"))
+    ImageSourceIdentifier.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ImageSourceIdentifier.add_member_subclass(:ec2_import_task_id, Types::ImageSourceIdentifier::Ec2ImportTaskId)
+    ImageSourceIdentifier.add_member_subclass(:image_build_version_arn, Types::ImageSourceIdentifier::ImageBuildVersionArn)
+    ImageSourceIdentifier.add_member_subclass(:ec2_image_id, Types::ImageSourceIdentifier::Ec2ImageId)
+    ImageSourceIdentifier.add_member_subclass(:unknown, Types::ImageSourceIdentifier::Unknown)
+    ImageSourceIdentifier.struct_class = Types::ImageSourceIdentifier
+
     ImportClientBrandingRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
     ImportClientBrandingRequest.add_member(:device_type_windows, Shapes::ShapeRef.new(shape: DefaultImportClientBrandingAttributes, location_name: "DeviceTypeWindows"))
     ImportClientBrandingRequest.add_member(:device_type_osx, Shapes::ShapeRef.new(shape: DefaultImportClientBrandingAttributes, location_name: "DeviceTypeOsx"))
@@ -1258,6 +1306,21 @@ module Aws::WorkSpaces
     ImportClientBrandingResult.add_member(:device_type_linux, Shapes::ShapeRef.new(shape: DefaultClientBrandingAttributes, location_name: "DeviceTypeLinux"))
     ImportClientBrandingResult.add_member(:device_type_web, Shapes::ShapeRef.new(shape: DefaultClientBrandingAttributes, location_name: "DeviceTypeWeb"))
     ImportClientBrandingResult.struct_class = Types::ImportClientBrandingResult
+
+    ImportCustomWorkspaceImageRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "ImageName"))
+    ImportCustomWorkspaceImageRequest.add_member(:image_description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, required: true, location_name: "ImageDescription"))
+    ImportCustomWorkspaceImageRequest.add_member(:compute_type, Shapes::ShapeRef.new(shape: ImageComputeType, required: true, location_name: "ComputeType"))
+    ImportCustomWorkspaceImageRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: CustomImageProtocol, required: true, location_name: "Protocol"))
+    ImportCustomWorkspaceImageRequest.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSourceIdentifier, required: true, location_name: "ImageSource"))
+    ImportCustomWorkspaceImageRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "InfrastructureConfigurationArn"))
+    ImportCustomWorkspaceImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "Platform"))
+    ImportCustomWorkspaceImageRequest.add_member(:os_version, Shapes::ShapeRef.new(shape: OSVersion, required: true, location_name: "OsVersion"))
+    ImportCustomWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportCustomWorkspaceImageRequest.struct_class = Types::ImportCustomWorkspaceImageRequest
+
+    ImportCustomWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    ImportCustomWorkspaceImageResult.add_member(:state, Shapes::ShapeRef.new(shape: CustomWorkspaceImageImportState, location_name: "State"))
+    ImportCustomWorkspaceImageResult.struct_class = Types::ImportCustomWorkspaceImageResult
 
     ImportWorkspaceImageRequest.add_member(:ec2_image_id, Shapes::ShapeRef.new(shape: Ec2ImageId, required: true, location_name: "Ec2ImageId"))
     ImportWorkspaceImageRequest.add_member(:ingestion_process, Shapes::ShapeRef.new(shape: WorkspaceImageIngestionProcess, required: true, location_name: "IngestionProcess"))
@@ -1359,6 +1422,7 @@ module Aws::WorkSpaces
     ModifyAccountRequest.add_member(:dedicated_tenancy_management_cidr_range, Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange, location_name: "DedicatedTenancyManagementCidrRange"))
     ModifyAccountRequest.struct_class = Types::ModifyAccountRequest
 
+    ModifyAccountResult.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ModifyAccountResult.struct_class = Types::ModifyAccountResult
 
     ModifyCertificateBasedAuthPropertiesRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
@@ -2443,6 +2507,16 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
+      api.add_operation(:describe_custom_workspace_image_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCustomWorkspaceImageImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCustomWorkspaceImageImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCustomWorkspaceImageImportResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_image_associations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeImageAssociations"
         o.http_method = "POST"
@@ -2653,6 +2727,20 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:import_custom_workspace_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportCustomWorkspaceImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportCustomWorkspaceImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportCustomWorkspaceImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
       end)
 
       api.add_operation(:import_workspace_image, Seahorse::Model::Operation.new.tap do |o|

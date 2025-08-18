@@ -483,25 +483,18 @@ module Aws::Evs
 
     # @!group API Operations
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Creates an Amazon EVS environment that runs VCF software, such as
-    # SDDC
+    # Creates an Amazon EVS environment that runs VCF software, such as SDDC
     # Manager, NSX Manager, and vCenter Server.
     #
-    #  During environment creation, Amazon EVS performs validations on DNS
+    # During environment creation, Amazon EVS performs validations on DNS
     # settings, provisions VLAN subnets and hosts, and deploys the supplied
     # version of VCF.
     #
-    #  It can take several hours to create an environment. After the
+    # It can take several hours to create an environment. After the
     # deployment completes, you can configure VCF in the vSphere user
     # interface according to your needs.
     #
-    #  <note markdown="1"> You cannot use the `dedicatedHostId` and
-    # `placementGroupId` parameters
+    # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     # together in the same `CreateEnvironment` action. This results in a
     # `ValidationException` response.
     #
@@ -783,28 +776,19 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Creates an ESXi host and adds it to an Amazon EVS environment. Amazon
+    # Creates an ESXi host and adds it to an Amazon EVS environment. Amazon
     # EVS supports 4-16 hosts per environment.
     #
-    #  This action can only be used after the Amazon EVS environment is
-    # deployed. All Amazon EVS hosts are created with the latest AMI release
-    # version for the respective VCF version of the environment. Amazon EVS
-    # hosts are commissioned in the SDDC Manager inventory as unassigned
-    # hosts.
+    # This action can only be used after the Amazon EVS environment is
+    # deployed.
     #
-    #  You can use the `dedicatedHostId` parameter to specify an Amazon EC2
+    # You can use the `dedicatedHostId` parameter to specify an Amazon EC2
     # Dedicated Host for ESXi host creation.
     #
-    #  You can use the `placementGroupId` parameter to specify a cluster or
+    # You can use the `placementGroupId` parameter to specify a cluster or
     # partition placement group to launch EC2 instances into.
     #
-    #  <note markdown="1"> You cannot use the `dedicatedHostId` and
-    # `placementGroupId` parameters
+    # <note markdown="1"> You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     # together in the same `CreateEnvironmentHost` action. This results in a
     # `ValidationException` response.
     #
@@ -883,19 +867,15 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
+    # Deletes an Amazon EVS environment.
     #
-    #  </note>
-    #
-    #  Deletes an Amazon EVS environment.
-    #
-    #  Amazon EVS environments will only be enabled for deletion once the
+    # Amazon EVS environments will only be enabled for deletion once the
     # hosts are deleted. You can delete hosts using the
     # `DeleteEnvironmentHost` action.
     #
-    #  Environment deletion also deletes the associated Amazon EVS VLAN
-    # subnets. Other associated Amazon Web Services resources are not
+    # Environment deletion also deletes the associated Amazon EVS VLAN
+    # subnets and Amazon Web Services Secrets Manager secrets that Amazon
+    # EVS created. Amazon Web Services resources that you create are not
     # deleted. These resources may continue to incur costs.
     #
     # @option params [String] :client_token
@@ -975,15 +955,9 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
+    # Deletes a host from an Amazon EVS environment.
     #
-    #  </note>
-    #
-    #  Deletes a host from an Amazon EVS environment.
-    #
-    #  <note markdown="1"> Before deleting a host, you must unassign and
-    # decommission the host
+    # <note markdown="1"> Before deleting a host, you must unassign and decommission the host
     # from within the SDDC Manager user interface. Not doing so could impact
     # the availability of your virtual machines or result in data loss.
     #
@@ -1056,12 +1030,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Returns a description of the specified environment.
+    # Returns a description of the specified environment.
     #
     # @option params [required, String] :environment_id
     #   A unique ID for the environment.
@@ -1124,12 +1093,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  List the hosts within an environment.
+    # List the hosts within an environment.
     #
     # @option params [String] :next_token
     #   A unique pagination token for each page. If `nextToken` is returned,
@@ -1188,12 +1152,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Lists environment VLANs that are associated with the specified
+    # Lists environment VLANs that are associated with the specified
     # environment.
     #
     # @option params [String] :next_token
@@ -1249,12 +1208,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Lists the Amazon EVS environments in your Amazon Web Services account
+    # Lists the Amazon EVS environments in your Amazon Web Services account
     # in the specified Amazon Web Services Region.
     #
     # @option params [String] :next_token
@@ -1310,12 +1264,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Lists the tags for an Amazon EVS resource.
+    # Lists the tags for an Amazon EVS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to list
@@ -1345,12 +1294,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Associates the specified tags to an Amazon EVS resource with the
+    # Associates the specified tags to an Amazon EVS resource with the
     # specified `resourceArn`. If existing tags on a resource are not
     # specified in the request parameters, they aren't changed. When a
     # resource is deleted, the tags associated with that resource are also
@@ -1388,12 +1332,7 @@ module Aws::Evs
       req.send_request(options)
     end
 
-    # <note markdown="1"> Amazon EVS is in public preview release and is
-    # subject to change.
-    #
-    #  </note>
-    #
-    #  Deletes specified tags from an Amazon EVS resource.
+    # Deletes specified tags from an Amazon EVS resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to delete tags from.
@@ -1437,7 +1376,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

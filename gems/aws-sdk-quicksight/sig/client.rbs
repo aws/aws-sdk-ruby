@@ -12721,6 +12721,64 @@ module Aws
                                                other_categories: ("INCLUDE" | "EXCLUDE")?
                                              }?
                                            }?,
+                                           row_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
+                                           }?,
                                            row_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              sort_icon_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -12749,6 +12807,64 @@ module Aws
                                                  }?
                                                },
                                              ]?
+                                           }?,
+                                           column_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
                                            }?,
                                            column_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
@@ -35206,6 +35322,70 @@ module Aws
                                              }?
                                            }?
                                          }?,
+                                         actions: Array[
+                                           {
+                                             custom_action_id: ::String,
+                                             name: ::String,
+                                             status: ("ENABLED" | "DISABLED")?,
+                                             trigger: ("DATA_POINT_CLICK" | "DATA_POINT_MENU"),
+                                             action_operations: Array[
+                                               {
+                                                 filter_operation: {
+                                                   selected_fields_configuration: {
+                                                     selected_fields: Array[::String]?,
+                                                     selected_field_options: ("ALL_FIELDS")?,
+                                                     selected_columns: Array[
+                                                       {
+                                                         data_set_identifier: ::String,
+                                                         column_name: ::String
+                                                       },
+                                                     ]?
+                                                   },
+                                                   target_visuals_configuration: {
+                                                     same_sheet_target_visual_configuration: {
+                                                       target_visuals: Array[::String]?,
+                                                       target_visual_options: ("ALL_VISUALS")?
+                                                     }?
+                                                   }
+                                                 }?,
+                                                 navigation_operation: {
+                                                   local_navigation_configuration: {
+                                                     target_sheet_id: ::String
+                                                   }?
+                                                 }?,
+                                                 url_operation: {
+                                                   url_template: ::String,
+                                                   url_target: ("NEW_TAB" | "NEW_WINDOW" | "SAME_TAB")
+                                                 }?,
+                                                 set_parameters_operation: {
+                                                   parameter_value_configurations: Array[
+                                                     {
+                                                       destination_parameter_name: ::String,
+                                                       value: {
+                                                         custom_values_configuration: {
+                                                           include_null_value: bool?,
+                                                           custom_values: {
+                                                             string_values: Array[::String]?,
+                                                             integer_values: Array[::Integer]?,
+                                                             decimal_values: Array[::Float]?,
+                                                             date_time_values: Array[::Time]?
+                                                           }
+                                                         }?,
+                                                         select_all_value_options: ("ALL_VALUES")?,
+                                                         source_parameter_name: ::String?,
+                                                         source_field: ::String?,
+                                                         source_column: {
+                                                           data_set_identifier: ::String,
+                                                           column_name: ::String
+                                                         }?
+                                                       }
+                                                     },
+                                                   ]
+                                                 }?
+                                               },
+                                             ]
+                                           },
+                                         ]?,
                                          visual_content_alt_text: ::String?
                                        }?
                                      },
@@ -50059,6 +50239,64 @@ module Aws
                                                 other_categories: ("INCLUDE" | "EXCLUDE")?
                                               }?
                                             }?,
+                                            row_axis_display_options: {
+                                              tick_label_options: {
+                                                label_options: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  font_configuration: {
+                                                    font_size: {
+                                                      relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                      absolute: ::String?
+                                                    }?,
+                                                    font_decoration: ("UNDERLINE" | "NONE")?,
+                                                    font_color: ::String?,
+                                                    font_weight: {
+                                                      name: ("NORMAL" | "BOLD")?
+                                                    }?,
+                                                    font_style: ("NORMAL" | "ITALIC")?,
+                                                    font_family: ::String?
+                                                  }?,
+                                                  custom_label: ::String?
+                                                }?,
+                                                rotation_angle: ::Float?
+                                              }?,
+                                              axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              data_options: {
+                                                numeric_axis_options: {
+                                                  scale: {
+                                                    linear: {
+                                                      step_count: ::Integer?,
+                                                      step_size: ::Float?
+                                                    }?,
+                                                    logarithmic: {
+                                                      base: ::Float?
+                                                    }?
+                                                  }?,
+                                                  range: {
+                                                    min_max: {
+                                                      minimum: ::Float?,
+                                                      maximum: ::Float?
+                                                    }?,
+                                                    data_driven: {
+                                                    }?
+                                                  }?
+                                                }?,
+                                                date_axis_options: {
+                                                  missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?
+                                              }?,
+                                              scrollbar_options: {
+                                                visibility: ("HIDDEN" | "VISIBLE")?,
+                                                visible_range: {
+                                                  percent_range: {
+                                                    from: ::Float?,
+                                                    to: ::Float?
+                                                  }?
+                                                }?
+                                              }?,
+                                              axis_offset: ::String?
+                                            }?,
                                             row_label_options: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
                                               sort_icon_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -50087,6 +50325,64 @@ module Aws
                                                   }?
                                                 },
                                               ]?
+                                            }?,
+                                            column_axis_display_options: {
+                                              tick_label_options: {
+                                                label_options: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  font_configuration: {
+                                                    font_size: {
+                                                      relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                      absolute: ::String?
+                                                    }?,
+                                                    font_decoration: ("UNDERLINE" | "NONE")?,
+                                                    font_color: ::String?,
+                                                    font_weight: {
+                                                      name: ("NORMAL" | "BOLD")?
+                                                    }?,
+                                                    font_style: ("NORMAL" | "ITALIC")?,
+                                                    font_family: ::String?
+                                                  }?,
+                                                  custom_label: ::String?
+                                                }?,
+                                                rotation_angle: ::Float?
+                                              }?,
+                                              axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              data_options: {
+                                                numeric_axis_options: {
+                                                  scale: {
+                                                    linear: {
+                                                      step_count: ::Integer?,
+                                                      step_size: ::Float?
+                                                    }?,
+                                                    logarithmic: {
+                                                      base: ::Float?
+                                                    }?
+                                                  }?,
+                                                  range: {
+                                                    min_max: {
+                                                      minimum: ::Float?,
+                                                      maximum: ::Float?
+                                                    }?,
+                                                    data_driven: {
+                                                    }?
+                                                  }?
+                                                }?,
+                                                date_axis_options: {
+                                                  missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?
+                                              }?,
+                                              scrollbar_options: {
+                                                visibility: ("HIDDEN" | "VISIBLE")?,
+                                                visible_range: {
+                                                  percent_range: {
+                                                    from: ::Float?,
+                                                    to: ::Float?
+                                                  }?
+                                                }?
+                                              }?,
+                                              axis_offset: ::String?
                                             }?,
                                             column_label_options: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
@@ -72544,6 +72840,70 @@ module Aws
                                               }?
                                             }?
                                           }?,
+                                          actions: Array[
+                                            {
+                                              custom_action_id: ::String,
+                                              name: ::String,
+                                              status: ("ENABLED" | "DISABLED")?,
+                                              trigger: ("DATA_POINT_CLICK" | "DATA_POINT_MENU"),
+                                              action_operations: Array[
+                                                {
+                                                  filter_operation: {
+                                                    selected_fields_configuration: {
+                                                      selected_fields: Array[::String]?,
+                                                      selected_field_options: ("ALL_FIELDS")?,
+                                                      selected_columns: Array[
+                                                        {
+                                                          data_set_identifier: ::String,
+                                                          column_name: ::String
+                                                        },
+                                                      ]?
+                                                    },
+                                                    target_visuals_configuration: {
+                                                      same_sheet_target_visual_configuration: {
+                                                        target_visuals: Array[::String]?,
+                                                        target_visual_options: ("ALL_VISUALS")?
+                                                      }?
+                                                    }
+                                                  }?,
+                                                  navigation_operation: {
+                                                    local_navigation_configuration: {
+                                                      target_sheet_id: ::String
+                                                    }?
+                                                  }?,
+                                                  url_operation: {
+                                                    url_template: ::String,
+                                                    url_target: ("NEW_TAB" | "NEW_WINDOW" | "SAME_TAB")
+                                                  }?,
+                                                  set_parameters_operation: {
+                                                    parameter_value_configurations: Array[
+                                                      {
+                                                        destination_parameter_name: ::String,
+                                                        value: {
+                                                          custom_values_configuration: {
+                                                            include_null_value: bool?,
+                                                            custom_values: {
+                                                              string_values: Array[::String]?,
+                                                              integer_values: Array[::Integer]?,
+                                                              decimal_values: Array[::Float]?,
+                                                              date_time_values: Array[::Time]?
+                                                            }
+                                                          }?,
+                                                          select_all_value_options: ("ALL_VALUES")?,
+                                                          source_parameter_name: ::String?,
+                                                          source_field: ::String?,
+                                                          source_column: {
+                                                            data_set_identifier: ::String,
+                                                            column_name: ::String
+                                                          }?
+                                                        }
+                                                      },
+                                                    ]
+                                                  }?
+                                                },
+                                              ]
+                                            },
+                                          ]?,
                                           visual_content_alt_text: ::String?
                                         }?
                                       },
@@ -87998,6 +88358,64 @@ module Aws
                                                other_categories: ("INCLUDE" | "EXCLUDE")?
                                              }?
                                            }?,
+                                           row_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
+                                           }?,
                                            row_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              sort_icon_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -88026,6 +88444,64 @@ module Aws
                                                  }?
                                                },
                                              ]?
+                                           }?,
+                                           column_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
                                            }?,
                                            column_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
@@ -110483,6 +110959,70 @@ module Aws
                                              }?
                                            }?
                                          }?,
+                                         actions: Array[
+                                           {
+                                             custom_action_id: ::String,
+                                             name: ::String,
+                                             status: ("ENABLED" | "DISABLED")?,
+                                             trigger: ("DATA_POINT_CLICK" | "DATA_POINT_MENU"),
+                                             action_operations: Array[
+                                               {
+                                                 filter_operation: {
+                                                   selected_fields_configuration: {
+                                                     selected_fields: Array[::String]?,
+                                                     selected_field_options: ("ALL_FIELDS")?,
+                                                     selected_columns: Array[
+                                                       {
+                                                         data_set_identifier: ::String,
+                                                         column_name: ::String
+                                                       },
+                                                     ]?
+                                                   },
+                                                   target_visuals_configuration: {
+                                                     same_sheet_target_visual_configuration: {
+                                                       target_visuals: Array[::String]?,
+                                                       target_visual_options: ("ALL_VISUALS")?
+                                                     }?
+                                                   }
+                                                 }?,
+                                                 navigation_operation: {
+                                                   local_navigation_configuration: {
+                                                     target_sheet_id: ::String
+                                                   }?
+                                                 }?,
+                                                 url_operation: {
+                                                   url_template: ::String,
+                                                   url_target: ("NEW_TAB" | "NEW_WINDOW" | "SAME_TAB")
+                                                 }?,
+                                                 set_parameters_operation: {
+                                                   parameter_value_configurations: Array[
+                                                     {
+                                                       destination_parameter_name: ::String,
+                                                       value: {
+                                                         custom_values_configuration: {
+                                                           include_null_value: bool?,
+                                                           custom_values: {
+                                                             string_values: Array[::String]?,
+                                                             integer_values: Array[::Integer]?,
+                                                             decimal_values: Array[::Float]?,
+                                                             date_time_values: Array[::Time]?
+                                                           }
+                                                         }?,
+                                                         select_all_value_options: ("ALL_VALUES")?,
+                                                         source_parameter_name: ::String?,
+                                                         source_field: ::String?,
+                                                         source_column: {
+                                                           data_set_identifier: ::String,
+                                                           column_name: ::String
+                                                         }?
+                                                       }
+                                                     },
+                                                   ]
+                                                 }?
+                                               },
+                                             ]
+                                           },
+                                         ]?,
                                          visual_content_alt_text: ::String?
                                        }?
                                      },
@@ -128427,6 +128967,64 @@ module Aws
                                                other_categories: ("INCLUDE" | "EXCLUDE")?
                                              }?
                                            }?,
+                                           row_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
+                                           }?,
                                            row_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              sort_icon_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -128455,6 +129053,64 @@ module Aws
                                                  }?
                                                },
                                              ]?
+                                           }?,
+                                           column_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
                                            }?,
                                            column_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
@@ -150912,6 +151568,70 @@ module Aws
                                              }?
                                            }?
                                          }?,
+                                         actions: Array[
+                                           {
+                                             custom_action_id: ::String,
+                                             name: ::String,
+                                             status: ("ENABLED" | "DISABLED")?,
+                                             trigger: ("DATA_POINT_CLICK" | "DATA_POINT_MENU"),
+                                             action_operations: Array[
+                                               {
+                                                 filter_operation: {
+                                                   selected_fields_configuration: {
+                                                     selected_fields: Array[::String]?,
+                                                     selected_field_options: ("ALL_FIELDS")?,
+                                                     selected_columns: Array[
+                                                       {
+                                                         data_set_identifier: ::String,
+                                                         column_name: ::String
+                                                       },
+                                                     ]?
+                                                   },
+                                                   target_visuals_configuration: {
+                                                     same_sheet_target_visual_configuration: {
+                                                       target_visuals: Array[::String]?,
+                                                       target_visual_options: ("ALL_VISUALS")?
+                                                     }?
+                                                   }
+                                                 }?,
+                                                 navigation_operation: {
+                                                   local_navigation_configuration: {
+                                                     target_sheet_id: ::String
+                                                   }?
+                                                 }?,
+                                                 url_operation: {
+                                                   url_template: ::String,
+                                                   url_target: ("NEW_TAB" | "NEW_WINDOW" | "SAME_TAB")
+                                                 }?,
+                                                 set_parameters_operation: {
+                                                   parameter_value_configurations: Array[
+                                                     {
+                                                       destination_parameter_name: ::String,
+                                                       value: {
+                                                         custom_values_configuration: {
+                                                           include_null_value: bool?,
+                                                           custom_values: {
+                                                             string_values: Array[::String]?,
+                                                             integer_values: Array[::Integer]?,
+                                                             decimal_values: Array[::Float]?,
+                                                             date_time_values: Array[::Time]?
+                                                           }
+                                                         }?,
+                                                         select_all_value_options: ("ALL_VALUES")?,
+                                                         source_parameter_name: ::String?,
+                                                         source_field: ::String?,
+                                                         source_column: {
+                                                           data_set_identifier: ::String,
+                                                           column_name: ::String
+                                                         }?
+                                                       }
+                                                     },
+                                                   ]
+                                                 }?
+                                               },
+                                             ]
+                                           },
+                                         ]?,
                                          visual_content_alt_text: ::String?
                                        }?
                                      },
@@ -165804,6 +166524,64 @@ module Aws
                                                 other_categories: ("INCLUDE" | "EXCLUDE")?
                                               }?
                                             }?,
+                                            row_axis_display_options: {
+                                              tick_label_options: {
+                                                label_options: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  font_configuration: {
+                                                    font_size: {
+                                                      relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                      absolute: ::String?
+                                                    }?,
+                                                    font_decoration: ("UNDERLINE" | "NONE")?,
+                                                    font_color: ::String?,
+                                                    font_weight: {
+                                                      name: ("NORMAL" | "BOLD")?
+                                                    }?,
+                                                    font_style: ("NORMAL" | "ITALIC")?,
+                                                    font_family: ::String?
+                                                  }?,
+                                                  custom_label: ::String?
+                                                }?,
+                                                rotation_angle: ::Float?
+                                              }?,
+                                              axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              data_options: {
+                                                numeric_axis_options: {
+                                                  scale: {
+                                                    linear: {
+                                                      step_count: ::Integer?,
+                                                      step_size: ::Float?
+                                                    }?,
+                                                    logarithmic: {
+                                                      base: ::Float?
+                                                    }?
+                                                  }?,
+                                                  range: {
+                                                    min_max: {
+                                                      minimum: ::Float?,
+                                                      maximum: ::Float?
+                                                    }?,
+                                                    data_driven: {
+                                                    }?
+                                                  }?
+                                                }?,
+                                                date_axis_options: {
+                                                  missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?
+                                              }?,
+                                              scrollbar_options: {
+                                                visibility: ("HIDDEN" | "VISIBLE")?,
+                                                visible_range: {
+                                                  percent_range: {
+                                                    from: ::Float?,
+                                                    to: ::Float?
+                                                  }?
+                                                }?
+                                              }?,
+                                              axis_offset: ::String?
+                                            }?,
                                             row_label_options: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
                                               sort_icon_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -165832,6 +166610,64 @@ module Aws
                                                   }?
                                                 },
                                               ]?
+                                            }?,
+                                            column_axis_display_options: {
+                                              tick_label_options: {
+                                                label_options: {
+                                                  visibility: ("HIDDEN" | "VISIBLE")?,
+                                                  font_configuration: {
+                                                    font_size: {
+                                                      relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                      absolute: ::String?
+                                                    }?,
+                                                    font_decoration: ("UNDERLINE" | "NONE")?,
+                                                    font_color: ::String?,
+                                                    font_weight: {
+                                                      name: ("NORMAL" | "BOLD")?
+                                                    }?,
+                                                    font_style: ("NORMAL" | "ITALIC")?,
+                                                    font_family: ::String?
+                                                  }?,
+                                                  custom_label: ::String?
+                                                }?,
+                                                rotation_angle: ::Float?
+                                              }?,
+                                              axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                              data_options: {
+                                                numeric_axis_options: {
+                                                  scale: {
+                                                    linear: {
+                                                      step_count: ::Integer?,
+                                                      step_size: ::Float?
+                                                    }?,
+                                                    logarithmic: {
+                                                      base: ::Float?
+                                                    }?
+                                                  }?,
+                                                  range: {
+                                                    min_max: {
+                                                      minimum: ::Float?,
+                                                      maximum: ::Float?
+                                                    }?,
+                                                    data_driven: {
+                                                    }?
+                                                  }?
+                                                }?,
+                                                date_axis_options: {
+                                                  missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                                }?
+                                              }?,
+                                              scrollbar_options: {
+                                                visibility: ("HIDDEN" | "VISIBLE")?,
+                                                visible_range: {
+                                                  percent_range: {
+                                                    from: ::Float?,
+                                                    to: ::Float?
+                                                  }?
+                                                }?
+                                              }?,
+                                              axis_offset: ::String?
                                             }?,
                                             column_label_options: {
                                               visibility: ("HIDDEN" | "VISIBLE")?,
@@ -188289,6 +189125,70 @@ module Aws
                                               }?
                                             }?
                                           }?,
+                                          actions: Array[
+                                            {
+                                              custom_action_id: ::String,
+                                              name: ::String,
+                                              status: ("ENABLED" | "DISABLED")?,
+                                              trigger: ("DATA_POINT_CLICK" | "DATA_POINT_MENU"),
+                                              action_operations: Array[
+                                                {
+                                                  filter_operation: {
+                                                    selected_fields_configuration: {
+                                                      selected_fields: Array[::String]?,
+                                                      selected_field_options: ("ALL_FIELDS")?,
+                                                      selected_columns: Array[
+                                                        {
+                                                          data_set_identifier: ::String,
+                                                          column_name: ::String
+                                                        },
+                                                      ]?
+                                                    },
+                                                    target_visuals_configuration: {
+                                                      same_sheet_target_visual_configuration: {
+                                                        target_visuals: Array[::String]?,
+                                                        target_visual_options: ("ALL_VISUALS")?
+                                                      }?
+                                                    }
+                                                  }?,
+                                                  navigation_operation: {
+                                                    local_navigation_configuration: {
+                                                      target_sheet_id: ::String
+                                                    }?
+                                                  }?,
+                                                  url_operation: {
+                                                    url_template: ::String,
+                                                    url_target: ("NEW_TAB" | "NEW_WINDOW" | "SAME_TAB")
+                                                  }?,
+                                                  set_parameters_operation: {
+                                                    parameter_value_configurations: Array[
+                                                      {
+                                                        destination_parameter_name: ::String,
+                                                        value: {
+                                                          custom_values_configuration: {
+                                                            include_null_value: bool?,
+                                                            custom_values: {
+                                                              string_values: Array[::String]?,
+                                                              integer_values: Array[::Integer]?,
+                                                              decimal_values: Array[::Float]?,
+                                                              date_time_values: Array[::Time]?
+                                                            }
+                                                          }?,
+                                                          select_all_value_options: ("ALL_VALUES")?,
+                                                          source_parameter_name: ::String?,
+                                                          source_field: ::String?,
+                                                          source_column: {
+                                                            data_set_identifier: ::String,
+                                                            column_name: ::String
+                                                          }?
+                                                        }
+                                                      },
+                                                    ]
+                                                  }?
+                                                },
+                                              ]
+                                            },
+                                          ]?,
                                           visual_content_alt_text: ::String?
                                         }?
                                       },
@@ -203879,6 +204779,64 @@ module Aws
                                                other_categories: ("INCLUDE" | "EXCLUDE")?
                                              }?
                                            }?,
+                                           row_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
+                                           }?,
                                            row_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
                                              sort_icon_visibility: ("HIDDEN" | "VISIBLE")?,
@@ -203907,6 +204865,64 @@ module Aws
                                                  }?
                                                },
                                              ]?
+                                           }?,
+                                           column_axis_display_options: {
+                                             tick_label_options: {
+                                               label_options: {
+                                                 visibility: ("HIDDEN" | "VISIBLE")?,
+                                                 font_configuration: {
+                                                   font_size: {
+                                                     relative: ("EXTRA_SMALL" | "SMALL" | "MEDIUM" | "LARGE" | "EXTRA_LARGE")?,
+                                                     absolute: ::String?
+                                                   }?,
+                                                   font_decoration: ("UNDERLINE" | "NONE")?,
+                                                   font_color: ::String?,
+                                                   font_weight: {
+                                                     name: ("NORMAL" | "BOLD")?
+                                                   }?,
+                                                   font_style: ("NORMAL" | "ITALIC")?,
+                                                   font_family: ::String?
+                                                 }?,
+                                                 custom_label: ::String?
+                                               }?,
+                                               rotation_angle: ::Float?
+                                             }?,
+                                             axis_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             grid_line_visibility: ("HIDDEN" | "VISIBLE")?,
+                                             data_options: {
+                                               numeric_axis_options: {
+                                                 scale: {
+                                                   linear: {
+                                                     step_count: ::Integer?,
+                                                     step_size: ::Float?
+                                                   }?,
+                                                   logarithmic: {
+                                                     base: ::Float?
+                                                   }?
+                                                 }?,
+                                                 range: {
+                                                   min_max: {
+                                                     minimum: ::Float?,
+                                                     maximum: ::Float?
+                                                   }?,
+                                                   data_driven: {
+                                                   }?
+                                                 }?
+                                               }?,
+                                               date_axis_options: {
+                                                 missing_date_visibility: ("HIDDEN" | "VISIBLE")?
+                                               }?
+                                             }?,
+                                             scrollbar_options: {
+                                               visibility: ("HIDDEN" | "VISIBLE")?,
+                                               visible_range: {
+                                                 percent_range: {
+                                                   from: ::Float?,
+                                                   to: ::Float?
+                                                 }?
+                                               }?
+                                             }?,
+                                             axis_offset: ::String?
                                            }?,
                                            column_label_options: {
                                              visibility: ("HIDDEN" | "VISIBLE")?,
@@ -226364,6 +227380,70 @@ module Aws
                                              }?
                                            }?
                                          }?,
+                                         actions: Array[
+                                           {
+                                             custom_action_id: ::String,
+                                             name: ::String,
+                                             status: ("ENABLED" | "DISABLED")?,
+                                             trigger: ("DATA_POINT_CLICK" | "DATA_POINT_MENU"),
+                                             action_operations: Array[
+                                               {
+                                                 filter_operation: {
+                                                   selected_fields_configuration: {
+                                                     selected_fields: Array[::String]?,
+                                                     selected_field_options: ("ALL_FIELDS")?,
+                                                     selected_columns: Array[
+                                                       {
+                                                         data_set_identifier: ::String,
+                                                         column_name: ::String
+                                                       },
+                                                     ]?
+                                                   },
+                                                   target_visuals_configuration: {
+                                                     same_sheet_target_visual_configuration: {
+                                                       target_visuals: Array[::String]?,
+                                                       target_visual_options: ("ALL_VISUALS")?
+                                                     }?
+                                                   }
+                                                 }?,
+                                                 navigation_operation: {
+                                                   local_navigation_configuration: {
+                                                     target_sheet_id: ::String
+                                                   }?
+                                                 }?,
+                                                 url_operation: {
+                                                   url_template: ::String,
+                                                   url_target: ("NEW_TAB" | "NEW_WINDOW" | "SAME_TAB")
+                                                 }?,
+                                                 set_parameters_operation: {
+                                                   parameter_value_configurations: Array[
+                                                     {
+                                                       destination_parameter_name: ::String,
+                                                       value: {
+                                                         custom_values_configuration: {
+                                                           include_null_value: bool?,
+                                                           custom_values: {
+                                                             string_values: Array[::String]?,
+                                                             integer_values: Array[::Integer]?,
+                                                             decimal_values: Array[::Float]?,
+                                                             date_time_values: Array[::Time]?
+                                                           }
+                                                         }?,
+                                                         select_all_value_options: ("ALL_VALUES")?,
+                                                         source_parameter_name: ::String?,
+                                                         source_field: ::String?,
+                                                         source_column: {
+                                                           data_set_identifier: ::String,
+                                                           column_name: ::String
+                                                         }?
+                                                       }
+                                                     },
+                                                   ]
+                                                 }?
+                                               },
+                                             ]
+                                           },
+                                         ]?,
                                          visual_content_alt_text: ::String?
                                        }?
                                      },

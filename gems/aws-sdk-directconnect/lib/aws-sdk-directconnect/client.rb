@@ -812,6 +812,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#asn_long #asn_long} => Integer
     #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
@@ -839,7 +840,8 @@ module Aws::DirectConnect
     #     new_private_virtual_interface_allocation: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -864,6 +866,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.asn_long #=> Integer
     #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
@@ -880,6 +883,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers #=> Array
     #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].asn_long #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.bgp_peers[0].amazon_address #=> String
@@ -943,6 +947,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#asn_long #asn_long} => Integer
     #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
@@ -970,7 +975,8 @@ module Aws::DirectConnect
     #     new_public_virtual_interface_allocation: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
     #       customer_address: "CustomerAddress",
@@ -999,6 +1005,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.asn_long #=> Integer
     #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
@@ -1015,6 +1022,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers #=> Array
     #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].asn_long #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.bgp_peers[0].amazon_address #=> String
@@ -1076,6 +1084,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -1100,6 +1109,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_name #=> String
     #   resp.virtual_interface.vlan #=> Integer
     #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.asn_long #=> Integer
     #   resp.virtual_interface.amazon_side_asn #=> Integer
     #   resp.virtual_interface.auth_key #=> String
     #   resp.virtual_interface.amazon_address #=> String
@@ -1116,6 +1126,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers #=> Array
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interface.bgp_peers[0].asn_long #=> Integer
     #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
     #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
@@ -1449,6 +1460,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#asn_long #asn_long} => Integer
     #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
@@ -1485,6 +1497,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.asn_long #=> Integer
     #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
@@ -1501,6 +1514,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers #=> Array
     #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].asn_long #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.bgp_peers[0].amazon_address #=> String
@@ -1745,6 +1759,7 @@ module Aws::DirectConnect
     #     virtual_interface_id: "VirtualInterfaceId",
     #     new_bgp_peer: {
     #       asn: 1,
+    #       asn_long: 1,
     #       auth_key: "BGPAuthKey",
     #       address_family: "ipv4", # accepts ipv4, ipv6
     #       amazon_address: "AmazonAddress",
@@ -1762,6 +1777,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_name #=> String
     #   resp.virtual_interface.vlan #=> Integer
     #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.asn_long #=> Integer
     #   resp.virtual_interface.amazon_side_asn #=> Integer
     #   resp.virtual_interface.auth_key #=> String
     #   resp.virtual_interface.amazon_address #=> String
@@ -1778,6 +1794,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers #=> Array
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interface.bgp_peers[0].asn_long #=> Integer
     #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
     #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
@@ -2479,6 +2496,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#asn_long #asn_long} => Integer
     #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
@@ -2505,7 +2523,8 @@ module Aws::DirectConnect
     #     new_private_virtual_interface: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -2533,6 +2552,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.asn_long #=> Integer
     #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
@@ -2549,6 +2569,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers #=> Array
     #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].asn_long #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.bgp_peers[0].amazon_address #=> String
@@ -2599,6 +2620,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#asn_long #asn_long} => Integer
     #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
@@ -2625,7 +2647,8 @@ module Aws::DirectConnect
     #     new_public_virtual_interface: { # required
     #       virtual_interface_name: "VirtualInterfaceName", # required
     #       vlan: 1, # required
-    #       asn: 1, # required
+    #       asn: 1,
+    #       asn_long: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
     #       customer_address: "CustomerAddress",
@@ -2654,6 +2677,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.asn_long #=> Integer
     #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
@@ -2670,6 +2694,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers #=> Array
     #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].asn_long #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.bgp_peers[0].amazon_address #=> String
@@ -2735,6 +2760,7 @@ module Aws::DirectConnect
     #       virtual_interface_name: "VirtualInterfaceName",
     #       vlan: 1,
     #       asn: 1,
+    #       asn_long: 1,
     #       mtu: 1,
     #       auth_key: "BGPAuthKey",
     #       amazon_address: "AmazonAddress",
@@ -2761,6 +2787,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_name #=> String
     #   resp.virtual_interface.vlan #=> Integer
     #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.asn_long #=> Integer
     #   resp.virtual_interface.amazon_side_asn #=> Integer
     #   resp.virtual_interface.auth_key #=> String
     #   resp.virtual_interface.amazon_address #=> String
@@ -2777,6 +2804,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers #=> Array
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interface.bgp_peers[0].asn_long #=> Integer
     #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
     #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
@@ -2811,8 +2839,35 @@ module Aws::DirectConnect
     #   The ID of the virtual interface.
     #
     # @option params [Integer] :asn
-    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system number (ASN). The valid range is from 1 to
+    #   2147483646 for Border Gateway Protocol (BGP) configuration. If you
+    #   provide a number greater than the maximum, an error is returned. Use
+    #   `asnLong` instead.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :asn_long
+    #   The long ASN for the BGP peer to be deleted from a Direct Connect
+    #   virtual interface. The valid range is from 1 to 4294967294 for BGP
     #   configuration.
+    #
+    #   <note markdown="1"> You can use `asnLong` or `asn`, but not both. We recommend using
+    #   `asnLong` as it supports a greater pool of numbers.
+    #
+    #    * The `asnLong` attribute accepts both ASN and long ASN ranges.
+    #
+    #   * If you provide a value in the same API call for both `asn` and
+    #     `asnLong`, the API will only accept the value for `asnLong`.
+    #
+    #    </note>
     #
     # @option params [String] :customer_address
     #   The IP address assigned to the customer interface.
@@ -2829,6 +2884,7 @@ module Aws::DirectConnect
     #   resp = client.delete_bgp_peer({
     #     virtual_interface_id: "VirtualInterfaceId",
     #     asn: 1,
+    #     asn_long: 1,
     #     customer_address: "CustomerAddress",
     #     bgp_peer_id: "BGPPeerId",
     #   })
@@ -2843,6 +2899,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.virtual_interface_name #=> String
     #   resp.virtual_interface.vlan #=> Integer
     #   resp.virtual_interface.asn #=> Integer
+    #   resp.virtual_interface.asn_long #=> Integer
     #   resp.virtual_interface.amazon_side_asn #=> Integer
     #   resp.virtual_interface.auth_key #=> String
     #   resp.virtual_interface.amazon_address #=> String
@@ -2859,6 +2916,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers #=> Array
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interface.bgp_peers[0].asn_long #=> Integer
     #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
     #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
@@ -3329,14 +3387,28 @@ module Aws::DirectConnect
     # @option params [String] :connection_id
     #   The ID of the connection.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::Connections#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_connections({
     #     connection_id: "ConnectionId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -3371,6 +3443,7 @@ module Aws::DirectConnect
     #   resp.connections[0].mac_sec_keys[0].state #=> String
     #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -3398,6 +3471,7 @@ module Aws::DirectConnect
     # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::Connections#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3437,6 +3511,7 @@ module Aws::DirectConnect
     #   resp.connections[0].mac_sec_keys[0].state #=> String
     #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -3768,14 +3843,28 @@ module Aws::DirectConnect
     # @option params [required, String] :connection_id
     #   The ID of the interconnect or LAG.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::Connections#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hosted_connections({
     #     connection_id: "ConnectionId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -3810,6 +3899,7 @@ module Aws::DirectConnect
     #   resp.connections[0].mac_sec_keys[0].state #=> String
     #   resp.connections[0].mac_sec_keys[0].start_on #=> String
     #   resp.connections[0].partner_interconnect_mac_sec_capable #=> Boolean
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
     #
@@ -3881,14 +3971,28 @@ module Aws::DirectConnect
     # @option params [String] :interconnect_id
     #   The ID of the interconnect.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::Interconnects] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Interconnects#interconnects #interconnects} => Array&lt;Types::Interconnect&gt;
+    #   * {Types::Interconnects#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_interconnects({
     #     interconnect_id: "InterconnectId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -3919,6 +4023,7 @@ module Aws::DirectConnect
     #   resp.interconnects[0].mac_sec_keys[0].ckn #=> String
     #   resp.interconnects[0].mac_sec_keys[0].state #=> String
     #   resp.interconnects[0].mac_sec_keys[0].start_on #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -3934,14 +4039,28 @@ module Aws::DirectConnect
     # @option params [String] :lag_id
     #   The ID of the LAG.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::Lags] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Lags#lags #lags} => Array&lt;Types::Lag&gt;
+    #   * {Types::Lags#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_lags({
     #     lag_id: "LagId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -4003,6 +4122,7 @@ module Aws::DirectConnect
     #   resp.lags[0].mac_sec_keys[0].ckn #=> String
     #   resp.lags[0].mac_sec_keys[0].state #=> String
     #   resp.lags[0].mac_sec_keys[0].start_on #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
     #
@@ -4219,21 +4339,42 @@ module Aws::DirectConnect
     # A virtual interface (VLAN) transmits the traffic between the Direct
     # Connect location and the customer network.
     #
+    # * If you're using an `asn`, the response includes ASN value in both
+    #   the `asn` and `asnLong` fields.
+    #
+    # * If you're using `asnLong`, the response returns a value of `0`
+    #   (zero) for the `asn` attribute because it exceeds the highest ASN
+    #   value of 2,147,483,647 that it can support
+    #
     # @option params [String] :connection_id
     #   The ID of the connection.
     #
     # @option params [String] :virtual_interface_id
     #   The ID of the virtual interface.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::VirtualInterfaces] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::VirtualInterfaces#virtual_interfaces #virtual_interfaces} => Array&lt;Types::VirtualInterface&gt;
+    #   * {Types::VirtualInterfaces#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_virtual_interfaces({
     #     connection_id: "ConnectionId",
     #     virtual_interface_id: "VirtualInterfaceId",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -4247,6 +4388,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].virtual_interface_name #=> String
     #   resp.virtual_interfaces[0].vlan #=> Integer
     #   resp.virtual_interfaces[0].asn #=> Integer
+    #   resp.virtual_interfaces[0].asn_long #=> Integer
     #   resp.virtual_interfaces[0].amazon_side_asn #=> Integer
     #   resp.virtual_interfaces[0].auth_key #=> String
     #   resp.virtual_interfaces[0].amazon_address #=> String
@@ -4263,6 +4405,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].bgp_peers #=> Array
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_id #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].asn #=> Integer
+    #   resp.virtual_interfaces[0].bgp_peers[0].asn_long #=> Integer
     #   resp.virtual_interfaces[0].bgp_peers[0].auth_key #=> String
     #   resp.virtual_interfaces[0].bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.virtual_interfaces[0].bgp_peers[0].amazon_address #=> String
@@ -4278,6 +4421,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].tags[0].key #=> String
     #   resp.virtual_interfaces[0].tags[0].value #=> String
     #   resp.virtual_interfaces[0].site_link_enabled #=> Boolean
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces AWS API Documentation
     #
@@ -5033,6 +5177,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
     #   * {Types::VirtualInterface#vlan #vlan} => Integer
     #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#asn_long #asn_long} => Integer
     #   * {Types::VirtualInterface#amazon_side_asn #amazon_side_asn} => Integer
     #   * {Types::VirtualInterface#auth_key #auth_key} => String
     #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
@@ -5071,6 +5216,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface_name #=> String
     #   resp.vlan #=> Integer
     #   resp.asn #=> Integer
+    #   resp.asn_long #=> Integer
     #   resp.amazon_side_asn #=> Integer
     #   resp.auth_key #=> String
     #   resp.amazon_address #=> String
@@ -5087,6 +5233,7 @@ module Aws::DirectConnect
     #   resp.bgp_peers #=> Array
     #   resp.bgp_peers[0].bgp_peer_id #=> String
     #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].asn_long #=> Integer
     #   resp.bgp_peers[0].auth_key #=> String
     #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
     #   resp.bgp_peers[0].amazon_address #=> String
@@ -5130,7 +5277,7 @@ module Aws::DirectConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

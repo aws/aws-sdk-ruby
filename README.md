@@ -327,6 +327,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Billing                                            | Aws::Billing                             | aws-sdk-billing                             | 2023-09-07  |
 | AWS Billing and Cost Management Data Exports           | Aws::BCMDataExports                      | aws-sdk-bcmdataexports                      | 2023-11-26  |
 | AWS Billing and Cost Management Pricing Calculator     | Aws::BCMPricingCalculator                | aws-sdk-bcmpricingcalculator                | 2024-06-19  |
+| AWS Billing and Cost Management Recommended Actions    | Aws::BCMRecommendedActions               | aws-sdk-bcmrecommendedactions               | 2024-11-14  |
 | AWS Budgets                                            | Aws::Budgets                             | aws-sdk-budgets                             | 2016-10-20  |
 | AWS Certificate Manager                                | Aws::ACM                                 | aws-sdk-acm                                 | 2015-12-08  |
 | AWS Certificate Manager Private Certificate Authority  | Aws::ACMPCA                              | aws-sdk-acmpca                              | 2017-08-22  |

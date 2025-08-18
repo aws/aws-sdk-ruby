@@ -271,6 +271,107 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The account information within an account pool.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The account name.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_regions
+    #   The regions supported for an account within an account pool.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AccountInfo AWS API Documentation
+    #
+    class AccountInfo < Struct.new(
+      :aws_account_id,
+      :aws_account_name,
+      :supported_regions)
+      SENSITIVE = [:aws_account_name]
+      include Aws::Structure
+    end
+
+    # The summary of the account pool.
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The user who updated the account pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AccountPoolSummary AWS API Documentation
+    #
+    class AccountPoolSummary < Struct.new(
+      :created_by,
+      :domain_id,
+      :domain_unit_id,
+      :id,
+      :name,
+      :resolution_strategy,
+      :updated_by)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # The source of accounts for the account pool. In the current release,
+    # it's either a static list of accounts provided by the customer or a
+    # custom Amazon Web Services Lambda handler.
+    #
+    # @note AccountSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AccountSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AccountSource corresponding to the set member.
+    #
+    # @!attribute [rw] accounts
+    #   The static list of accounts within an account pool.
+    #   @return [Array<Types::AccountInfo>]
+    #
+    # @!attribute [rw] custom_account_pool_handler
+    #   The custom Amazon Web Services Lambda handler within an account
+    #   pool.
+    #   @return [Types::CustomAccountPoolHandler]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AccountSource AWS API Documentation
+    #
+    class AccountSource < Struct.new(
+      :accounts,
+      :custom_account_pool_handler,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Accounts < AccountSource; end
+      class CustomAccountPoolHandler < AccountSource; end
+      class Unknown < AccountSource; end
+    end
+
     # The parameters of the environment action.
     #
     # @note ActionParameters is a union - when making an API calls you must set exactly one of the members.
@@ -1795,6 +1896,106 @@ module Aws::DataZone
       :props,
       :type)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #   @return [Types::AccountSource]
+    #
+    # @!attribute [rw] description
+    #   The description of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the account pool is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAccountPoolInput AWS API Documentation
+    #
+    class CreateAccountPoolInput < Struct.new(
+      :account_source,
+      :description,
+      :domain_identifier,
+      :name,
+      :resolution_strategy)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #   @return [Types::AccountSource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the account pool was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain where the account pool is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The ID of the domain where the account pool is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp at which the account pool was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The user who last updated the account pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAccountPoolOutput AWS API Documentation
+    #
+    class CreateAccountPoolOutput < Struct.new(
+      :account_source,
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :domain_unit_id,
+      :id,
+      :last_updated_at,
+      :name,
+      :resolution_strategy,
+      :updated_by)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -4835,6 +5036,28 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The custom Amazon Web Services Lambda handler within an account pool.
+    #
+    # @!attribute [rw] lambda_execution_role_arn
+    #   The ARN of the IAM role that enables Amazon SageMaker Unified Studio
+    #   to invoke the Amazon Web Services Lambda funtion if the account
+    #   source is the custom account pool handler.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The ARN of the Amazon Web Services Lambda function for the custom
+    #   Amazon Web Services Lambda handler.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CustomAccountPoolHandler AWS API Documentation
+    #
+    class CustomAccountPoolHandler < Struct.new(
+      :lambda_execution_role_arn,
+      :lambda_function_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of user parameters of an environment blueprint.
     #
     # @!attribute [rw] default_value
@@ -5483,6 +5706,27 @@ module Aws::DataZone
       SENSITIVE = [:description, :name, :schedule]
       include Aws::Structure
     end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where the account pool is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the account pool to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteAccountPoolInput AWS API Documentation
+    #
+    class DeleteAccountPoolInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteAccountPoolOutput AWS API Documentation
+    #
+    class DeleteAccountPoolOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] asset_identifier
     #   The ID of the data asset.
@@ -6733,6 +6977,10 @@ module Aws::DataZone
 
     # The configuration of an environment.
     #
+    # @!attribute [rw] account_pools
+    #   The account pools used by a custom project profile.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] aws_account
     #   The Amazon Web Services account of the environment.
     #   @return [Types::AwsAccount]
@@ -6772,6 +7020,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentConfiguration AWS API Documentation
     #
     class EnvironmentConfiguration < Struct.new(
+      :account_pools,
       :aws_account,
       :aws_region,
       :configuration_parameters,
@@ -6847,12 +7096,18 @@ module Aws::DataZone
     #   The environment parameters.
     #   @return [Array<Types::EnvironmentParameter>]
     #
+    # @!attribute [rw] environment_resolved_account
+    #   Specifies the account/Region that is to be used during project
+    #   creation for a particular blueprint.
+    #   @return [Types::EnvironmentResolvedAccount]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentConfigurationUserParameter AWS API Documentation
     #
     class EnvironmentConfigurationUserParameter < Struct.new(
       :environment_configuration_name,
       :environment_id,
-      :environment_parameters)
+      :environment_parameters,
+      :environment_resolved_account)
       SENSITIVE = [:environment_configuration_name]
       include Aws::Structure
     end
@@ -6981,6 +7236,31 @@ module Aws::DataZone
       :project_id,
       :updated_at)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # Specifies the account/Region that is to be used during project
+    # creation for a particular blueprint.
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the resolved account.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the resolved Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_pool_id
+    #   The ID of the account pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentResolvedAccount AWS API Documentation
+    #
+    class EnvironmentResolvedAccount < Struct.new(
+      :aws_account_id,
+      :region_name,
+      :source_account_pool_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7367,6 +7647,90 @@ module Aws::DataZone
       :revision,
       :status)
       SENSITIVE = [:description, :model, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain in which the account pool lives whose details
+    #   are to be displayed.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the account pool whose details are to be displayed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAccountPoolInput AWS API Documentation
+    #
+    class GetAccountPoolInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #   @return [Types::AccountSource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the account pool was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain in which the account pool lives whose details
+    #   are to be displayed.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The domain unit ID of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp at which the account pool was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The user who last updated the account pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAccountPoolOutput AWS API Documentation
+    #
+    class GetAccountPoolOutput < Struct.new(
+      :account_source,
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :domain_unit_id,
+      :id,
+      :last_updated_at,
+      :name,
+      :resolution_strategy,
+      :updated_by)
+      SENSITIVE = [:description, :name]
       include Aws::Structure
     end
 
@@ -11576,6 +11940,134 @@ module Aws::DataZone
     #
     class LineageSyncSchedule < Struct.new(
       :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where exsting account pools are to be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of account pools to return in a single call to
+    #   ListAccountPools. When the number of account pools to be listed is
+    #   greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListAccountPools to list the next set of account pools.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool to be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of account pools is greater than the default value
+    #   for the MaxResults parameter, or if you explicitly specify a value
+    #   for MaxResults that is less than the number of account pools, the
+    #   response includes a pagination token named NextToken. You can
+    #   specify this NextToken value in a subsequent call to
+    #   ListAccountPools to list the next set of account pools.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The sort by mechanism in which the existing account pools are to be
+    #   listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order in which the existing account pools are to be listed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAccountPoolsInput AWS API Documentation
+    #
+    class ListAccountPoolsInput < Struct.new(
+      :domain_identifier,
+      :max_results,
+      :name,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the ListAccountPools operation.
+    #   @return [Array<Types::AccountPoolSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of account pools is greater than the default value
+    #   for the MaxResults parameter, or if you explicitly specify a value
+    #   for MaxResults that is less than the number of account pools, the
+    #   response includes a pagination token named NextToken. You can
+    #   specify this NextToken value in a subsequent call to
+    #   ListAccountPools to list the next set of account pools.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAccountPoolsOutput AWS API Documentation
+    #
+    class ListAccountPoolsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain in which the accounts in the specified account
+    #   pool are to be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the account pool whose accounts are to be listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of accounts to return in a single call to
+    #   ListAccountsInAccountPool. When the number of accounts to be listed
+    #   is greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListAccountsInAccountPool to list the next set of accounts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of accounts is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of accounts, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListAccountsInAccountPool to
+    #   list the next set of accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAccountsInAccountPoolInput AWS API Documentation
+    #
+    class ListAccountsInAccountPoolInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the ListAccountsInAccountPool operation.
+    #   @return [Array<Types::AccountInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of accounts is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of accounts, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListAccountsInAccountPool to
+    #   list the next set of accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAccountsInAccountPoolOutput AWS API Documentation
+    #
+    class ListAccountsInAccountPoolOutput < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18638,6 +19130,111 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #   @return [Types::AccountSource]
+    #
+    # @!attribute [rw] description
+    #   The description of the account pool that is to be udpated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID where the account pool that is to be updated lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the account pool that is to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool that is to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAccountPoolInput AWS API Documentation
+    #
+    class UpdateAccountPoolInput < Struct.new(
+      :account_source,
+      :description,
+      :domain_identifier,
+      :identifier,
+      :name,
+      :resolution_strategy)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #   @return [Types::AccountSource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the account pool was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the account pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the account pool that is to be udpated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The domain ID where the account pool that is to be updated lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_unit_id
+    #   The domain ID in which the account pool that is to be updated lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the account pool that is to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp at which the account pool was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the account pool that is to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_by
+    #   The user who last updated the account pool.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAccountPoolOutput AWS API Documentation
+    #
+    class UpdateAccountPoolOutput < Struct.new(
+      :account_source,
+      :created_at,
+      :created_by,
+      :description,
+      :domain_id,
+      :domain_unit_id,
+      :id,
+      :last_updated_at,
+      :name,
+      :resolution_strategy,
+      :updated_by)
+      SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
 
     # @!attribute [rw] asset_identifier
     #   The ID of the data asset.

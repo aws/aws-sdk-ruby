@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.238.0 (2025-08-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-bcmrecommendedactions` gem.
+
 3.237.0 (2025-08-01)
 ------------------
 

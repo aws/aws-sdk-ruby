@@ -1996,12 +1996,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #
     # @return [Types::CreateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8280,12 +8275,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #
     # @return [Types::UpdateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8360,7 +8350,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.157.0'
+      context[:gem_version] = '1.158.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

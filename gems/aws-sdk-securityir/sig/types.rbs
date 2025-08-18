@@ -109,6 +109,7 @@ module Aws::SecurityIR
       attr_accessor incident_response_team: ::Array[Types::IncidentResponder]
       attr_accessor opt_in_features: ::Array[Types::OptInFeature]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor cover_entire_organization: bool
       SENSITIVE: [:membership_name]
     end
 
@@ -178,8 +179,8 @@ module Aws::SecurityIR
 
     class GetMembershipAccountDetailItem
       attr_accessor account_id: ::String
-      attr_accessor relationship_status: ("Associated" | "Disassociated")
-      attr_accessor relationship_type: ("Organization")
+      attr_accessor relationship_status: ("Associated" | "Disassociated" | "Unassociated")
+      attr_accessor relationship_type: ("Organization" | "Unrelated")
       SENSITIVE: []
     end
 
@@ -191,7 +192,7 @@ module Aws::SecurityIR
     class GetMembershipResponse
       attr_accessor membership_id: ::String
       attr_accessor account_id: ::String
-      attr_accessor region: ("af-south-1" | "ap-east-1" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+      attr_accessor region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
       attr_accessor membership_name: ::String
       attr_accessor membership_arn: ::String
       attr_accessor membership_status: ("Active" | "Cancelled" | "Terminated")
@@ -201,11 +202,12 @@ module Aws::SecurityIR
       attr_accessor number_of_accounts_covered: ::Integer
       attr_accessor incident_response_team: ::Array[Types::IncidentResponder]
       attr_accessor opt_in_features: ::Array[Types::OptInFeature]
+      attr_accessor membership_accounts_configurations: Types::MembershipAccountsConfigurations
       SENSITIVE: [:membership_name]
     end
 
     class ImpactedAwsRegion
-      attr_accessor region: ("af-south-1" | "ap-east-1" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+      attr_accessor region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
       SENSITIVE: []
     end
 
@@ -295,7 +297,7 @@ module Aws::SecurityIR
     class ListMembershipItem
       attr_accessor membership_id: ::String
       attr_accessor account_id: ::String
-      attr_accessor region: ("af-south-1" | "ap-east-1" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
+      attr_accessor region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
       attr_accessor membership_arn: ::String
       attr_accessor membership_status: ("Active" | "Cancelled" | "Terminated")
       SENSITIVE: []
@@ -320,6 +322,19 @@ module Aws::SecurityIR
 
     class ListTagsForResourceOutput
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MembershipAccountsConfigurations
+      attr_accessor cover_entire_organization: bool
+      attr_accessor organizational_units: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MembershipAccountsConfigurationsUpdate
+      attr_accessor cover_entire_organization: bool
+      attr_accessor organizational_units_to_add: ::Array[::String]
+      attr_accessor organizational_units_to_remove: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -432,6 +447,8 @@ module Aws::SecurityIR
       attr_accessor membership_name: ::String
       attr_accessor incident_response_team: ::Array[Types::IncidentResponder]
       attr_accessor opt_in_features: ::Array[Types::OptInFeature]
+      attr_accessor membership_accounts_configurations_update: Types::MembershipAccountsConfigurationsUpdate
+      attr_accessor undo_membership_cancellation: bool
       SENSITIVE: [:membership_name]
     end
 

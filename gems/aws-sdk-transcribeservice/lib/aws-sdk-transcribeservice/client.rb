@@ -1700,6 +1700,7 @@ module Aws::TranscribeService
     #   resp.medical_scribe_job.channel_definitions #=> Array
     #   resp.medical_scribe_job.channel_definitions[0].channel_id #=> Integer
     #   resp.medical_scribe_job.channel_definitions[0].participant_role #=> String, one of "PATIENT", "CLINICIAN"
+    #   resp.medical_scribe_job.medical_scribe_context_provided #=> Boolean
     #   resp.medical_scribe_job.tags #=> Array
     #   resp.medical_scribe_job.tags[0].key #=> String
     #   resp.medical_scribe_job.tags[0].value #=> String
@@ -2789,24 +2790,42 @@ module Aws::TranscribeService
     #   access your transcript.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of a KMS key that you want to use to
-    #   encrypt your Call Analytics output.
+    #   The KMS key you want to use to encrypt your Call Analytics output.
     #
-    #   KMS key ARNs have the format
-    #   `arn:partition:kms:region:account:key/key-id`. For example:
-    #   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
-    #   For more information, see [ KMS key ARNs][1].
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
+    #
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
+    #
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
+    #
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
     #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
-    #   Note that the role making the request and the role specified in the
-    #   `DataAccessRoleArn` request parameter (if present) must have
-    #   permission to use the specified KMS key.
+    #   If you specify a KMS key to encrypt your output, you must also specify
+    #   an output location using the `OutputLocation` parameter.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+    #   Note that the role making the request must have permission to use the
+    #   specified KMS key.
     #
     # @option params [String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
@@ -2983,7 +3002,7 @@ module Aws::TranscribeService
     # * `OutputBucketName`: The Amazon S3 bucket where you want your output
     #   files stored.
     #
-    # * `Settings`: A `MedicalScribeSettings` obect that must set exactly
+    # * `Settings`: A `MedicalScribeSettings` object that must set exactly
     #   one of `ShowSpeakerLabels` or `ChannelIdentification` to true. If
     #   `ShowSpeakerLabels` is true, `MaxSpeakerLabels` must also be set.
     #
@@ -3031,24 +3050,39 @@ module Aws::TranscribeService
     #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of a KMS key that you want to use to
-    #   encrypt your Medical Scribe output.
+    #   The KMS key you want to use to encrypt your Medical Scribe output.
     #
-    #   KMS key ARNs have the format
-    #   `arn:partition:kms:region:account:key/key-id`. For example:
-    #   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
-    #   For more information, see [ KMS key ARNs][1].
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
+    #
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
+    #
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
+    #
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
     #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
-    #   Note that the role making the request and the role specified in the
-    #   `DataAccessRoleArn` request parameter (if present) must have
-    #   permission to use the specified KMS key.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+    #   Note that the role specified in the `DataAccessRoleArn` request
+    #   parameter must have permission to use the specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
     #   A map of plain text, non-secret key:value pairs, known as encryption
@@ -3102,7 +3136,7 @@ module Aws::TranscribeService
     #
     # @option params [Array<Types::Tag>] :tags
     #   Adds one or more custom tags, each in the form of a key:value pair, to
-    #   the Medica Scribe job.
+    #   the Medical Scribe job.
     #
     #   To learn more about using tags with Amazon Transcribe, refer to
     #   [Tagging resources][1].
@@ -3110,6 +3144,11 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
+    #
+    # @option params [Types::MedicalScribeContext] :medical_scribe_context
+    #   The `MedicalScribeContext` object that contains contextual information
+    #   which is used during clinical note generation to add relevant context
+    #   to the note.
     #
     # @return [Types::StartMedicalScribeJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3152,6 +3191,11 @@ module Aws::TranscribeService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     medical_scribe_context: {
+    #       patient_context: {
+    #         pronouns: "HE_HIM", # accepts HE_HIM, SHE_HER, THEY_THEM
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -3178,6 +3222,7 @@ module Aws::TranscribeService
     #   resp.medical_scribe_job.channel_definitions #=> Array
     #   resp.medical_scribe_job.channel_definitions[0].channel_id #=> Integer
     #   resp.medical_scribe_job.channel_definitions[0].participant_role #=> String, one of "PATIENT", "CLINICIAN"
+    #   resp.medical_scribe_job.medical_scribe_context_provided #=> Boolean
     #   resp.medical_scribe_job.tags #=> Array
     #   resp.medical_scribe_job.tags[0].key #=> String
     #   resp.medical_scribe_job.tags[0].value #=> String
@@ -3337,24 +3382,43 @@ module Aws::TranscribeService
     #   doesn't exist, one is created for you.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of a KMS key that you want to use to
-    #   encrypt your medical transcription output.
+    #   The KMS key you want to use to encrypt your medical transcription
+    #   output.
     #
-    #   KMS key ARNs have the format
-    #   `arn:partition:kms:region:account:key/key-id`. For example:
-    #   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
-    #   For more information, see [ KMS key ARNs][1].
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
+    #
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
+    #
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
+    #
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
     #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
-    #   Note that the role making the request and the role specified in the
-    #   `DataAccessRoleArn` request parameter (if present) must have
-    #   permission to use the specified KMS key.
+    #   If you specify a KMS key to encrypt your output, you must also specify
+    #   an output location using the `OutputLocation` parameter.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+    #   Note that the role making the request must have permission to use the
+    #   specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
     #   A map of plain text, non-secret key:value pairs, known as encryption
@@ -3637,24 +3701,42 @@ module Aws::TranscribeService
     #   doesn't exist, one is created for you.
     #
     # @option params [String] :output_encryption_kms_key_id
-    #   The Amazon Resource Name (ARN) of a KMS key that you want to use to
-    #   encrypt your transcription output.
+    #   The KMS key you want to use to encrypt your transcription output.
     #
-    #   KMS key ARNs have the format
-    #   `arn:partition:kms:region:account:key/key-id`. For example:
-    #   `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
-    #   For more information, see [ KMS key ARNs][1].
+    #   If using a key located in the **current** Amazon Web Services account,
+    #   you can specify your KMS key in one of four ways:
+    #
+    #   1.  Use the KMS key ID itself. For example,
+    #       `1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use an alias for the KMS key ID. For example,
+    #       `alias/ExampleAlias`.
+    #
+    #   3.  Use the Amazon Resource Name (ARN) for the KMS key ID. For
+    #       example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   4.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
+    #
+    #   If using a key located in a **different** Amazon Web Services account
+    #   than the current Amazon Web Services account, you can specify your KMS
+    #   key in one of two ways:
+    #
+    #   1.  Use the ARN for the KMS key ID. For example,
+    #       `arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
+    #
+    #   2.  Use the ARN for the KMS key alias. For example,
+    #       `arn:aws:kms:region:account-ID:alias/ExampleAlias`.
     #
     #   If you do not specify an encryption key, your output is encrypted with
     #   the default Amazon S3 key (SSE-S3).
     #
-    #   Note that the role making the request and the role specified in the
-    #   `DataAccessRoleArn` request parameter (if present) must have
-    #   permission to use the specified KMS key.
+    #   If you specify a KMS key to encrypt your output, you must also specify
+    #   an output location using the `OutputLocation` parameter.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+    #   Note that the role making the request must have permission to use the
+    #   specified KMS key.
     #
     # @option params [Hash<String,String>] :kms_encryption_context
     #   A map of plain text, non-secret key:value pairs, known as encryption
@@ -4502,7 +4584,7 @@ module Aws::TranscribeService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

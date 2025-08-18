@@ -81,6 +81,7 @@ module Aws::TranscribeStreamingService
     MedicalScribeChannelDefinitions = Shapes::ListShape.new(name: 'MedicalScribeChannelDefinitions')
     MedicalScribeChannelId = Shapes::IntegerShape.new(name: 'MedicalScribeChannelId')
     MedicalScribeConfigurationEvent = Shapes::StructureShape.new(name: 'MedicalScribeConfigurationEvent')
+    MedicalScribeContext = Shapes::StructureShape.new(name: 'MedicalScribeContext')
     MedicalScribeEncryptionSettings = Shapes::StructureShape.new(name: 'MedicalScribeEncryptionSettings')
     MedicalScribeInputStream = Shapes::StructureShape.new(name: 'MedicalScribeInputStream')
     MedicalScribeLanguageCode = Shapes::StringShape.new(name: 'MedicalScribeLanguageCode')
@@ -88,6 +89,7 @@ module Aws::TranscribeStreamingService
     MedicalScribeMediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MedicalScribeMediaSampleRateHertz')
     MedicalScribeNoteTemplate = Shapes::StringShape.new(name: 'MedicalScribeNoteTemplate')
     MedicalScribeParticipantRole = Shapes::StringShape.new(name: 'MedicalScribeParticipantRole')
+    MedicalScribePatientContext = Shapes::StructureShape.new(name: 'MedicalScribePatientContext')
     MedicalScribePostStreamAnalyticsResult = Shapes::StructureShape.new(name: 'MedicalScribePostStreamAnalyticsResult')
     MedicalScribePostStreamAnalyticsSettings = Shapes::StructureShape.new(name: 'MedicalScribePostStreamAnalyticsSettings')
     MedicalScribeResultStream = Shapes::StructureShape.new(name: 'MedicalScribeResultStream')
@@ -113,6 +115,7 @@ module Aws::TranscribeStreamingService
     PiiEntityTypes = Shapes::StringShape.new(name: 'PiiEntityTypes')
     PointsOfInterest = Shapes::StructureShape.new(name: 'PointsOfInterest')
     PostCallAnalyticsSettings = Shapes::StructureShape.new(name: 'PostCallAnalyticsSettings')
+    Pronouns = Shapes::StringShape.new(name: 'Pronouns')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Result = Shapes::StructureShape.new(name: 'Result')
@@ -327,7 +330,11 @@ module Aws::TranscribeStreamingService
     MedicalScribeConfigurationEvent.add_member(:channel_definitions, Shapes::ShapeRef.new(shape: MedicalScribeChannelDefinitions, location_name: "ChannelDefinitions"))
     MedicalScribeConfigurationEvent.add_member(:encryption_settings, Shapes::ShapeRef.new(shape: MedicalScribeEncryptionSettings, location_name: "EncryptionSettings"))
     MedicalScribeConfigurationEvent.add_member(:post_stream_analytics_settings, Shapes::ShapeRef.new(shape: MedicalScribePostStreamAnalyticsSettings, required: true, location_name: "PostStreamAnalyticsSettings"))
+    MedicalScribeConfigurationEvent.add_member(:medical_scribe_context, Shapes::ShapeRef.new(shape: MedicalScribeContext, location_name: "MedicalScribeContext"))
     MedicalScribeConfigurationEvent.struct_class = Types::MedicalScribeConfigurationEvent
+
+    MedicalScribeContext.add_member(:patient_context, Shapes::ShapeRef.new(shape: MedicalScribePatientContext, location_name: "PatientContext"))
+    MedicalScribeContext.struct_class = Types::MedicalScribeContext
 
     MedicalScribeEncryptionSettings.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KMSEncryptionContextMap, location_name: "KmsEncryptionContext"))
     MedicalScribeEncryptionSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, required: true, location_name: "KmsKeyId"))
@@ -337,6 +344,9 @@ module Aws::TranscribeStreamingService
     MedicalScribeInputStream.add_member(:session_control_event, Shapes::ShapeRef.new(shape: MedicalScribeSessionControlEvent, event: true, location_name: "SessionControlEvent"))
     MedicalScribeInputStream.add_member(:configuration_event, Shapes::ShapeRef.new(shape: MedicalScribeConfigurationEvent, event: true, location_name: "ConfigurationEvent"))
     MedicalScribeInputStream.struct_class = Types::MedicalScribeInputStream
+
+    MedicalScribePatientContext.add_member(:pronouns, Shapes::ShapeRef.new(shape: Pronouns, location_name: "Pronouns"))
+    MedicalScribePatientContext.struct_class = Types::MedicalScribePatientContext
 
     MedicalScribePostStreamAnalyticsResult.add_member(:clinical_note_generation_result, Shapes::ShapeRef.new(shape: ClinicalNoteGenerationResult, location_name: "ClinicalNoteGenerationResult"))
     MedicalScribePostStreamAnalyticsResult.struct_class = Types::MedicalScribePostStreamAnalyticsResult
@@ -370,6 +380,7 @@ module Aws::TranscribeStreamingService
     MedicalScribeStreamDetails.add_member(:stream_status, Shapes::ShapeRef.new(shape: MedicalScribeStreamStatus, location_name: "StreamStatus"))
     MedicalScribeStreamDetails.add_member(:post_stream_analytics_settings, Shapes::ShapeRef.new(shape: MedicalScribePostStreamAnalyticsSettings, location_name: "PostStreamAnalyticsSettings"))
     MedicalScribeStreamDetails.add_member(:post_stream_analytics_result, Shapes::ShapeRef.new(shape: MedicalScribePostStreamAnalyticsResult, location_name: "PostStreamAnalyticsResult"))
+    MedicalScribeStreamDetails.add_member(:medical_scribe_context_provided, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "MedicalScribeContextProvided"))
     MedicalScribeStreamDetails.struct_class = Types::MedicalScribeStreamDetails
 
     MedicalScribeTranscriptEvent.add_member(:transcript_segment, Shapes::ShapeRef.new(shape: MedicalScribeTranscriptSegment, location_name: "TranscriptSegment"))

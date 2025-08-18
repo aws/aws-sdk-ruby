@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.211.0 (2025-08-11)
+------------------
+
+* Feature - Updating SearchUserHierarchyGroups API
+
 1.210.0 (2025-08-08)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2025-08-11)
+------------------
+
+* Feature - Remove SigV4 auth requirement for GetTokensFromRefreshToken
+
 1.126.0 (2025-08-04)
 ------------------
 

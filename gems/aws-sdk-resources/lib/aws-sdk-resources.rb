@@ -43,6 +43,7 @@ module Aws
   autoload :B2bi, 'aws-sdk-b2bi'
   autoload :BCMDataExports, 'aws-sdk-bcmdataexports'
   autoload :BCMPricingCalculator, 'aws-sdk-bcmpricingcalculator'
+  autoload :BCMRecommendedActions, 'aws-sdk-bcmrecommendedactions'
   autoload :Backup, 'aws-sdk-backup'
   autoload :BackupGateway, 'aws-sdk-backupgateway'
   autoload :BackupSearch, 'aws-sdk-backupsearch'

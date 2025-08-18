@@ -826,9 +826,15 @@ module Aws::ServiceDiscovery
     #   [1]: http://www.haproxy.org/
     #
     # @option params [String] :namespace_id
-    #   The ID of the namespace that you want to use to create the service.
-    #   The namespace ID must be specified, but it can be specified either
-    #   here or in the `DnsConfig` object.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want to
+    #   use to create the service. For namespaces shared with your Amazon Web
+    #   Services account, specify the namespace ARN. For more information
+    #   about shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -934,7 +940,7 @@ module Aws::ServiceDiscovery
     #
     #   resp = client.create_service({
     #     name: "ServiceName", # required
-    #     namespace_id: "ResourceId",
+    #     namespace_id: "Arn",
     #     creator_request_id: "ResourceId",
     #     description: "ResourceDescription",
     #     dns_config: {
@@ -968,6 +974,7 @@ module Aws::ServiceDiscovery
     #
     #   resp.service.id #=> String
     #   resp.service.arn #=> String
+    #   resp.service.resource_owner #=> String
     #   resp.service.name #=> String
     #   resp.service.namespace_id #=> String
     #   resp.service.description #=> String
@@ -984,6 +991,7 @@ module Aws::ServiceDiscovery
     #   resp.service.health_check_custom_config.failure_threshold #=> Integer
     #   resp.service.create_date #=> Time
     #   resp.service.creator_request_id #=> String
+    #   resp.service.created_by_account #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateService AWS API Documentation
     #
@@ -998,7 +1006,8 @@ module Aws::ServiceDiscovery
     # contains one or more services, the request fails.
     #
     # @option params [required, String] :id
-    #   The ID of the namespace that you want to delete.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want to
+    #   delete.
     #
     # @return [Types::DeleteNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1021,7 +1030,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_namespace({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   })
     #
     # @example Response structure
@@ -1042,7 +1051,15 @@ module Aws::ServiceDiscovery
     # request fails.
     #
     # @option params [required, String] :id
-    #   The ID of the service that you want to delete.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   delete. If the namespace associated with the service is shared with
+    #   your Amazon Web Services account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1062,7 +1079,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_service({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteService AWS API Documentation
@@ -1077,7 +1094,15 @@ module Aws::ServiceDiscovery
     # Deletes specific attributes associated with a service.
     #
     # @option params [required, String] :service_id
-    #   The ID of the service from which the attributes will be deleted.
+    #   The ID or Amazon Resource Name (ARN) of the service from which the
+    #   attributes will be deleted. For services created in a namespace shared
+    #   with your Amazon Web Services account, specify the service ARN. For
+    #   more information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [required, Array<String>] :attributes
     #   A list of keys corresponding to each attribute that you want to
@@ -1104,7 +1129,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_service_attributes({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     attributes: ["ServiceAttributeKey"], # required
     #   })
     #
@@ -1121,7 +1146,15 @@ module Aws::ServiceDiscovery
     # Cloud Map created for the specified instance.
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that the instance is associated with.
+    #   The ID or Amazon Resource Name (ARN) of the service that the instance
+    #   is associated with. If the namespace associated with the service is
+    #   shared with your account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [required, String] :instance_id
     #   The value that you specified for `Id` in the [RegisterInstance][1]
@@ -1153,7 +1186,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_instance({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "ResourceId", # required
     #   })
     #
@@ -1178,7 +1211,7 @@ module Aws::ServiceDiscovery
     # discover instances.
     #
     # @option params [required, String] :namespace_name
-    #   The `HttpName` name of the namespace. It's found in the
+    #   The `HttpName` name of the namespace. The `HttpName` is found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
     #   In most cases, `Name` and `HttpName` match. However, if you reuse
     #   `Name` for namespace creation, a generated hash is added to `HttpName`
@@ -1229,6 +1262,12 @@ module Aws::ServiceDiscovery
     #     state. In that case, return all instances. This is also called
     #     failing open.
     #
+    # @option params [String] :owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the instance, as specified in the namespace
+    #   `ResourceOwner` field. For instances associated with namespaces that
+    #   are shared with your account, you must specify an `OwnerAccount`.
+    #
     # @return [Types::DiscoverInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DiscoverInstancesResponse#instances #instances} => Array&lt;Types::HttpInstanceSummary&gt;
@@ -1275,6 +1314,7 @@ module Aws::ServiceDiscovery
     #       "AttrKey" => "AttrValue",
     #     },
     #     health_status: "HEALTHY", # accepts HEALTHY, UNHEALTHY, ALL, HEALTHY_OR_ELSE_ALL
+    #     owner_account: "AWSAccountId",
     #   })
     #
     # @example Response structure
@@ -1300,12 +1340,24 @@ module Aws::ServiceDiscovery
     # Discovers the increasing revision associated with an instance.
     #
     # @option params [required, String] :namespace_name
-    #   The `HttpName` name of the namespace. It's found in the
+    #   The `HttpName` name of the namespace. The `HttpName` is found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
     #
     # @option params [required, String] :service_name
     #   The name of the service that you specified when you registered the
     #   instance.
+    #
+    # @option params [String] :owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the instance, as specified in the namespace
+    #   `ResourceOwner` field. For instances associated with namespaces that
+    #   are shared with your account, you must specify an `OwnerAccount`. For
+    #   more information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @return [Types::DiscoverInstancesRevisionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1331,6 +1383,7 @@ module Aws::ServiceDiscovery
     #   resp = client.discover_instances_revision({
     #     namespace_name: "NamespaceName", # required
     #     service_name: "ServiceName", # required
+    #     owner_account: "AWSAccountId",
     #   })
     #
     # @example Response structure
@@ -1349,13 +1402,22 @@ module Aws::ServiceDiscovery
     # Gets information about a specified instance.
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that the instance is associated with.
+    #   The ID or Amazon Resource Name (ARN) of the service that the instance
+    #   is associated with. For services created in a shared namespace,
+    #   specify the service ARN. For more information about shared namespaces,
+    #   see [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance that you want to get information about.
     #
     # @return [Types::GetInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetInstanceResponse#resource_owner #resource_owner} => String
     #   * {Types::GetInstanceResponse#instance #instance} => Types::Instance
     #
     #
@@ -1385,16 +1447,18 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_instance({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "ResourceId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.resource_owner #=> String
     #   resp.instance.id #=> String
     #   resp.instance.creator_request_id #=> String
     #   resp.instance.attributes #=> Hash
     #   resp.instance.attributes["AttrKey"] #=> String
+    #   resp.instance.created_by_account #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstance AWS API Documentation
     #
@@ -1414,7 +1478,15 @@ module Aws::ServiceDiscovery
     #  </note>
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that the instance is associated with.
+    #   The ID or Amazon Resource Name (ARN) of the service that the instance
+    #   is associated with. For services created in a shared namespace,
+    #   specify the service ARN. For more information about shared namespaces,
+    #   see [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [Array<String>] :instances
     #   An array that contains the IDs of all the instances that you want to
@@ -1473,7 +1545,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_instances_health_status({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instances: ["ResourceId"],
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1497,7 +1569,15 @@ module Aws::ServiceDiscovery
     # Gets information about a namespace.
     #
     # @option params [required, String] :id
-    #   The ID of the namespace that you want to get information about.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want to
+    #   get information about. For namespaces shared with your Amazon Web
+    #   Services account, specify the namespace ARN. For more information
+    #   about shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @return [Types::GetNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1535,13 +1615,14 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_namespace({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.namespace.id #=> String
     #   resp.namespace.arn #=> String
+    #   resp.namespace.resource_owner #=> String
     #   resp.namespace.name #=> String
     #   resp.namespace.type #=> String, one of "DNS_PUBLIC", "DNS_PRIVATE", "HTTP"
     #   resp.namespace.description #=> String
@@ -1576,6 +1657,12 @@ module Aws::ServiceDiscovery
     # @option params [required, String] :operation_id
     #   The ID of the operation that you want to get more information about.
     #
+    # @option params [String] :owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the operation, as specified in the namespace
+    #   `ResourceOwner` field. For operations associated with namespaces that
+    #   are shared with your account, you must specify an `OwnerAccount`.
+    #
     # @return [Types::GetOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOperationResponse#operation #operation} => Types::Operation
@@ -1606,12 +1693,14 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_operation({
-    #     operation_id: "ResourceId", # required
+    #     operation_id: "OperationId", # required
+    #     owner_account: "AWSAccountId",
     #   })
     #
     # @example Response structure
     #
     #   resp.operation.id #=> String
+    #   resp.operation.owner_account #=> String
     #   resp.operation.type #=> String, one of "CREATE_NAMESPACE", "DELETE_NAMESPACE", "UPDATE_NAMESPACE", "UPDATE_SERVICE", "REGISTER_INSTANCE", "DEREGISTER_INSTANCE"
     #   resp.operation.status #=> String, one of "SUBMITTED", "PENDING", "SUCCESS", "FAIL"
     #   resp.operation.error_message #=> String
@@ -1633,7 +1722,15 @@ module Aws::ServiceDiscovery
     # Gets the settings for a specified service.
     #
     # @option params [required, String] :id
-    #   The ID of the service that you want to get settings for.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   get settings for. For services created by consumers in a shared
+    #   namespace, specify the service ARN. For more information about shared
+    #   namespaces, see [Cross-account Cloud Map namespace sharing][1] in the
+    #   *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @return [Types::GetServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1669,13 +1766,14 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_service({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.service.id #=> String
     #   resp.service.arn #=> String
+    #   resp.service.resource_owner #=> String
     #   resp.service.name #=> String
     #   resp.service.namespace_id #=> String
     #   resp.service.description #=> String
@@ -1692,6 +1790,7 @@ module Aws::ServiceDiscovery
     #   resp.service.health_check_custom_config.failure_threshold #=> Integer
     #   resp.service.create_date #=> Time
     #   resp.service.creator_request_id #=> String
+    #   resp.service.created_by_account #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetService AWS API Documentation
     #
@@ -1705,7 +1804,15 @@ module Aws::ServiceDiscovery
     # Returns the attributes associated with a specified service.
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that you want to get attributes for.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   get attributes for. For services created in a namespace shared with
+    #   your Amazon Web Services account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @return [Types::GetServiceAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1733,12 +1840,13 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_service_attributes({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.service_attributes.service_arn #=> String
+    #   resp.service_attributes.resource_owner #=> String
     #   resp.service_attributes.attributes #=> Hash
     #   resp.service_attributes.attributes["ServiceAttributeKey"] #=> String
     #
@@ -1755,7 +1863,15 @@ module Aws::ServiceDiscovery
     # using a specified service.
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that you want to list instances for.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   list instances for. For services created in a shared namespace,
+    #   specify the service ARN. For more information about shared namespaces,
+    #   see [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [String] :next_token
     #   For the first `ListInstances` request, omit this value.
@@ -1772,6 +1888,7 @@ module Aws::ServiceDiscovery
     #
     # @return [Types::ListInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListInstancesResponse#resource_owner #resource_owner} => String
     #   * {Types::ListInstancesResponse#instances #instances} => Array&lt;Types::InstanceSummary&gt;
     #   * {Types::ListInstancesResponse#next_token #next_token} => String
     #
@@ -1802,17 +1919,19 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instances({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.resource_owner #=> String
     #   resp.instances #=> Array
     #   resp.instances[0].id #=> String
     #   resp.instances[0].attributes #=> Hash
     #   resp.instances[0].attributes["AttrKey"] #=> String
+    #   resp.instances[0].created_by_account #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListInstances AWS API Documentation
@@ -1825,7 +1944,8 @@ module Aws::ServiceDiscovery
     end
 
     # Lists summary information about the namespaces that were created by
-    # the current Amazon Web Services account.
+    # the current Amazon Web Services account and shared with the current
+    # Amazon Web Services account.
     #
     # @option params [String] :next_token
     #   For the first `ListNamespaces` request, omit this value.
@@ -1927,7 +2047,7 @@ module Aws::ServiceDiscovery
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME
+    #         name: "TYPE", # required, accepts TYPE, NAME, HTTP_NAME, RESOURCE_OWNER
     #         values: ["FilterValue"], # required
     #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       },
@@ -1939,6 +2059,7 @@ module Aws::ServiceDiscovery
     #   resp.namespaces #=> Array
     #   resp.namespaces[0].id #=> String
     #   resp.namespaces[0].arn #=> String
+    #   resp.namespaces[0].resource_owner #=> String
     #   resp.namespaces[0].name #=> String
     #   resp.namespaces[0].type #=> String, one of "DNS_PUBLIC", "DNS_PRIVATE", "HTTP"
     #   resp.namespaces[0].description #=> String
@@ -2134,7 +2255,7 @@ module Aws::ServiceDiscovery
     #     max_results: 1,
     #     filters: [
     #       {
-    #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID
+    #         name: "NAMESPACE_ID", # required, accepts NAMESPACE_ID, RESOURCE_OWNER
     #         values: ["FilterValue"], # required
     #         condition: "EQ", # accepts EQ, IN, BETWEEN, BEGINS_WITH
     #       },
@@ -2146,6 +2267,7 @@ module Aws::ServiceDiscovery
     #   resp.services #=> Array
     #   resp.services[0].id #=> String
     #   resp.services[0].arn #=> String
+    #   resp.services[0].resource_owner #=> String
     #   resp.services[0].name #=> String
     #   resp.services[0].type #=> String, one of "HTTP", "DNS_HTTP", "DNS"
     #   resp.services[0].description #=> String
@@ -2160,6 +2282,7 @@ module Aws::ServiceDiscovery
     #   resp.services[0].health_check_config.failure_threshold #=> Integer
     #   resp.services[0].health_check_custom_config.failure_threshold #=> Integer
     #   resp.services[0].create_date #=> Time
+    #   resp.services[0].created_by_account #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListServices AWS API Documentation
@@ -2265,8 +2388,15 @@ module Aws::ServiceDiscovery
     # [2]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that you want to use for settings for the
-    #   instance.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   use for settings for the instance. For services created in a shared
+    #   namespace, specify the service ARN. For more information about shared
+    #   namespaces, see [Cross-account Cloud Map namespace sharing][1] in the
+    #   *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [required, String] :instance_id
     #   An identifier that you want to associate with the instance. Note the
@@ -2459,7 +2589,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_instance({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "InstanceId", # required
     #     creator_request_id: "ResourceId",
     #     attributes: { # required
@@ -2584,7 +2714,8 @@ module Aws::ServiceDiscovery
     # Updates an HTTP namespace.
     #
     # @option params [required, String] :id
-    #   The ID of the namespace that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want to
+    #   update.
     #
     # @option params [String] :updater_request_id
     #   A unique string that identifies the request and that allows failed
@@ -2622,7 +2753,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_http_namespace({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     updater_request_id: "ResourceId",
     #     namespace: { # required
     #       description: "ResourceDescription", # required
@@ -2658,8 +2789,16 @@ module Aws::ServiceDiscovery
     # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that includes the configuration for the custom
-    #   health check that you want to change the status for.
+    #   The ID or Amazon Resource Name (ARN) of the service that includes the
+    #   configuration for the custom health check that you want to change the
+    #   status for. For services created in a shared namespace, specify the
+    #   service ARN. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance that you want to change the health status for.
@@ -2684,7 +2823,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_instance_custom_health_status({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     instance_id: "ResourceId", # required
     #     status: "HEALTHY", # required, accepts HEALTHY, UNHEALTHY
     #   })
@@ -2701,7 +2840,8 @@ module Aws::ServiceDiscovery
     # Updates a private DNS namespace.
     #
     # @option params [required, String] :id
-    #   The ID of the namespace that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want to
+    #   update.
     #
     # @option params [String] :updater_request_id
     #   A unique string that identifies the request and that allows failed
@@ -2720,23 +2860,6 @@ module Aws::ServiceDiscovery
     #   * {Types::UpdatePrivateDnsNamespaceResponse#operation_id #operation_id} => String
     #
     #
-    # @example Example: To update a public DNS namespace
-    #
-    #   # The following example updates the description of a public DNS namespace.
-    #
-    #   resp = client.update_private_dns_namespace({
-    #     id: "ns-bk3aEXAMPLE", 
-    #     namespace: {
-    #       description: "The updated namespace description.", 
-    #     }, 
-    #     updater_request_id: "", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     operation_id: "ft52xe2koxhoeormaceymagglsdjEXAMPLE", 
-    #   }
-    #
     # @example Example: To update a private DNS namespace
     #
     #   # The following example updates the description of a private DNS namespace.
@@ -2754,10 +2877,27 @@ module Aws::ServiceDiscovery
     #     operation_id: "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE", 
     #   }
     #
+    # @example Example: To update a public DNS namespace
+    #
+    #   # The following example updates the description of a public DNS namespace.
+    #
+    #   resp = client.update_private_dns_namespace({
+    #     id: "ns-bk3aEXAMPLE", 
+    #     namespace: {
+    #       description: "The updated namespace description.", 
+    #     }, 
+    #     updater_request_id: "", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     operation_id: "ft52xe2koxhoeormaceymagglsdjEXAMPLE", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_private_dns_namespace({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     updater_request_id: "ResourceId",
     #     namespace: { # required
     #       description: "ResourceDescription",
@@ -2787,7 +2927,7 @@ module Aws::ServiceDiscovery
     # Updates a public DNS namespace.
     #
     # @option params [required, String] :id
-    #   The ID of the namespace being updated.
+    #   The ID or Amazon Resource Name (ARN) of the namespace being updated.
     #
     # @option params [String] :updater_request_id
     #   A unique string that identifies the request and that allows failed
@@ -2808,7 +2948,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_public_dns_namespace({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     updater_request_id: "ResourceId",
     #     namespace: { # required
     #       description: "ResourceDescription",
@@ -2856,12 +2996,31 @@ module Aws::ServiceDiscovery
     #   an `UpdateService` request, the configuration isn't deleted from
     #   the service.
     #
+    # <note markdown="1"> You can't call `UpdateService` and update settings in the following
+    # scenarios:
+    #
+    #  * When the service is associated with an HTTP namespace
+    #
+    # * When the service is associated with a shared namespace and contains
+    #   instances that were registered by Amazon Web Services accounts other
+    #   than the account making the `UpdateService` call
+    #
+    #  </note>
+    #
     # When you update settings for a service, Cloud Map also updates the
     # corresponding settings in all the records and health checks that were
     # created by using the specified service.
     #
     # @option params [required, String] :id
-    #   The ID of the service that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   update. If the namespace associated with the service is shared with
+    #   your Amazon Web Services account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #
     # @option params [required, Types::ServiceChange] :service
     #   A complex type that contains the new settings for the service. You can
@@ -2903,7 +3062,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service({
-    #     id: "ResourceId", # required
+    #     id: "Arn", # required
     #     service: { # required
     #       description: "ResourceDescription",
     #       dns_config: {
@@ -2939,7 +3098,9 @@ module Aws::ServiceDiscovery
     # attributes.
     #
     # @option params [required, String] :service_id
-    #   The ID of the service that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   update. For services created in a namespace shared with your Amazon
+    #   Web Services account, specify the service ARN.
     #
     # @option params [required, Hash<String,String>] :attributes
     #   A string map that contains attribute key-value pairs.
@@ -2965,7 +3126,7 @@ module Aws::ServiceDiscovery
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service_attributes({
-    #     service_id: "ResourceId", # required
+    #     service_id: "Arn", # required
     #     attributes: { # required
     #       "ServiceAttributeKey" => "ServiceAttributeValue",
     #     },
@@ -2998,7 +3159,7 @@ module Aws::ServiceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

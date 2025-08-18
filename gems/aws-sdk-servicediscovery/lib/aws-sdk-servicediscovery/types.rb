@@ -233,9 +233,15 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] namespace_id
-    #   The ID of the namespace that you want to use to create the service.
-    #   The namespace ID must be specified, but it can be specified either
-    #   here or in the `DnsConfig` object.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want
+    #   to use to create the service. For namespaces shared with your Amazon
+    #   Web Services account, specify the namespace ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -343,7 +349,8 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] id
-    #   The ID of the namespace that you want to delete.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want
+    #   to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteNamespaceRequest AWS API Documentation
@@ -373,7 +380,16 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service from which the attributes will be deleted.
+    #   The ID or Amazon Resource Name (ARN) of the service from which the
+    #   attributes will be deleted. For services created in a namespace
+    #   shared with your Amazon Web Services account, specify the service
+    #   ARN. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -395,7 +411,15 @@ module Aws::ServiceDiscovery
     class DeleteServiceAttributesResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
-    #   The ID of the service that you want to delete.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   delete. If the namespace associated with the service is shared with
+    #   your Amazon Web Services account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteServiceRequest AWS API Documentation
@@ -411,7 +435,15 @@ module Aws::ServiceDiscovery
     class DeleteServiceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that the instance is associated with.
+    #   The ID or Amazon Resource Name (ARN) of the service that the
+    #   instance is associated with. If the namespace associated with the
+    #   service is shared with your account, specify the service ARN. For
+    #   more information about shared namespaces, see [Cross-account Cloud
+    #   Map namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -451,7 +483,7 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] namespace_name
-    #   The `HttpName` name of the namespace. It's found in the
+    #   The `HttpName` name of the namespace. The `HttpName` is found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
     #   In most cases, `Name` and `HttpName` match. However, if you reuse
     #   `Name` for namespace creation, a generated hash is added to
@@ -508,6 +540,13 @@ module Aws::ServiceDiscovery
     #     failing open.
     #   @return [String]
     #
+    # @!attribute [rw] owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the instance, as specified in the namespace
+    #   `ResourceOwner` field. For instances associated with namespaces that
+    #   are shared with your account, you must specify an `OwnerAccount`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRequest AWS API Documentation
     #
     class DiscoverInstancesRequest < Struct.new(
@@ -516,7 +555,8 @@ module Aws::ServiceDiscovery
       :max_results,
       :query_parameters,
       :optional_parameters,
-      :health_status)
+      :health_status,
+      :owner_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -543,7 +583,7 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] namespace_name
-    #   The `HttpName` name of the namespace. It's found in the
+    #   The `HttpName` name of the namespace. The `HttpName` is found in the
     #   `HttpProperties` member of the `Properties` member of the namespace.
     #   @return [String]
     #
@@ -552,11 +592,25 @@ module Aws::ServiceDiscovery
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the instance, as specified in the namespace
+    #   `ResourceOwner` field. For instances associated with namespaces that
+    #   are shared with your account, you must specify an `OwnerAccount`.
+    #   For more information about shared namespaces, see [Cross-account
+    #   Cloud Map namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRevisionRequest AWS API Documentation
     #
     class DiscoverInstancesRevisionRequest < Struct.new(
       :namespace_name,
-      :service_name)
+      :service_name,
+      :owner_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -857,7 +911,15 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that the instance is associated with.
+    #   The ID or Amazon Resource Name (ARN) of the service that the
+    #   instance is associated with. For services created in a shared
+    #   namespace, specify the service ARN. For more information about
+    #   shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -873,6 +935,13 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the namespace
+    #   that contains the service that the instance is associated with. If
+    #   this isn't your account ID, it's the ID of the account that shared
+    #   the namespace with your account.
+    #   @return [String]
+    #
     # @!attribute [rw] instance
     #   A complex type that contains information about a specified instance.
     #   @return [Types::Instance]
@@ -880,13 +949,22 @@ module Aws::ServiceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetInstanceResponse AWS API Documentation
     #
     class GetInstanceResponse < Struct.new(
+      :resource_owner,
       :instance)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that the instance is associated with.
+    #   The ID or Amazon Resource Name (ARN) of the service that the
+    #   instance is associated with. For services created in a shared
+    #   namespace, specify the service ARN. For more information about
+    #   shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] instances
@@ -956,7 +1034,15 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] id
-    #   The ID of the namespace that you want to get information about.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want
+    #   to get information about. For namespaces shared with your Amazon Web
+    #   Services account, specify the namespace ARN. For more information
+    #   about shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetNamespaceRequest AWS API Documentation
@@ -984,10 +1070,19 @@ module Aws::ServiceDiscovery
     #   The ID of the operation that you want to get more information about.
     #   @return [String]
     #
+    # @!attribute [rw] owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the operation, as specified in the namespace
+    #   `ResourceOwner` field. For operations associated with namespaces
+    #   that are shared with your account, you must specify an
+    #   `OwnerAccount`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetOperationRequest AWS API Documentation
     #
     class GetOperationRequest < Struct.new(
-      :operation_id)
+      :operation_id,
+      :owner_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1005,7 +1100,15 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that you want to get attributes for.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   get attributes for. For services created in a namespace shared with
+    #   your Amazon Web Services account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetServiceAttributesRequest AWS API Documentation
@@ -1030,7 +1133,15 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] id
-    #   The ID of the service that you want to get settings for.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   get settings for. For services created by consumers in a shared
+    #   namespace, specify the service ARN. For more information about
+    #   shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/GetServiceRequest AWS API Documentation
@@ -1277,9 +1388,8 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] namespace_name
-    #   `   </p> The HttpName name of the namespace. It's found in the
-    #   HttpProperties member of the Properties member of the namespace.
-    #   `
+    #   The `HttpName` name of the namespace. It's found in the
+    #   `HttpProperties` member of the `Properties` member of the namespace.
     #   @return [String]
     #
     # @!attribute [rw] service_name
@@ -1487,12 +1597,26 @@ module Aws::ServiceDiscovery
     #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] created_by_account
+    #   The ID of the Amazon Web Services account that registered the
+    #   instance. If this isn't your account ID, it's the ID of the
+    #   account that shared the namespace with your account or the ID of
+    #   another account with which the namespace has been shared. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Instance AWS API Documentation
     #
     class Instance < Struct.new(
       :id,
       :creator_request_id,
-      :attributes)
+      :attributes,
+      :created_by_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1572,11 +1696,25 @@ module Aws::ServiceDiscovery
     #     on the endpoint that Route 53 sends requests to.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] created_by_account
+    #   The ID of the Amazon Web Services account that registered the
+    #   instance. If this isn't your account ID, it's the ID of the
+    #   account that shared the namespace with your account or the ID of
+    #   another account with which the namespace has been shared. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/InstanceSummary AWS API Documentation
     #
     class InstanceSummary < Struct.new(
       :id,
-      :attributes)
+      :attributes,
+      :created_by_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1597,7 +1735,15 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that you want to list instances for.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   list instances for. For services created in a shared namespace,
+    #   specify the service ARN. For more information about shared
+    #   namespaces, see [Cross-account Cloud Map namespace sharing][1] in
+    #   the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1625,6 +1771,13 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the namespace
+    #   that contains the specified service. If this isn't your account ID,
+    #   it's the ID of the account that shared the namespace with your
+    #   account.
+    #   @return [String]
+    #
     # @!attribute [rw] instances
     #   Summary information about the instances that are associated with the
     #   specified service.
@@ -1640,6 +1793,7 @@ module Aws::ServiceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListInstancesResponse AWS API Documentation
     #
     class ListInstancesResponse < Struct.new(
+      :resource_owner,
       :instances,
       :next_token)
       SENSITIVE = []
@@ -1891,6 +2045,18 @@ module Aws::ServiceDiscovery
     #   namespace when you create it.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the
+    #   namespace. If this isn't your account ID, it's the ID of the
+    #   account that shared the namespace with your account. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the namespace, such as `example.com`.
     #   @return [String]
@@ -1947,6 +2113,7 @@ module Aws::ServiceDiscovery
     class Namespace < Struct.new(
       :id,
       :arn,
+      :resource_owner,
       :name,
       :type,
       :description,
@@ -1993,6 +2160,16 @@ module Aws::ServiceDiscovery
     #   * `NAME`: Gets the namespaces with the specified name.
     #
     #   * `HTTP_NAME`: Gets the namespaces with the specified HTTP name.
+    #
+    #   * `RESOURCE_OWNER`: Gets the namespaces created by your Amazon Web
+    #     Services account or by other accounts. This can be used to filter
+    #     for shared namespaces. For more information about shared
+    #     namespaces, see [Cross-account Cloud Map namespace sharing][1] in
+    #     the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2006,6 +2183,11 @@ module Aws::ServiceDiscovery
     #
     #   * `HTTP_NAME`: Specify the HTTP name of the namespace, which is
     #     found in `Namespace.Properties.HttpProperties.HttpName`.
+    #
+    #   * `RESOURCE_OWNER`: Specify one of `SELF` or `OTHER_ACCOUNTS`.
+    #     `SELF` can be used to filter namespaces created by you and
+    #     `OTHER_ACCOUNTS` can be used to filter namespaces shared with you
+    #     that were created by other accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] condition
@@ -2014,8 +2196,8 @@ module Aws::ServiceDiscovery
     #   are one of the following.
     #
     #   * `EQ`: When you specify `EQ` for `Condition`, you can specify only
-    #     one value. `EQ` is supported for `TYPE`, `NAME`, and `HTTP_NAME`.
-    #     `EQ` is the default condition and can be omitted.
+    #     one value. `EQ` is supported for `TYPE`, `NAME`, `RESOURCE_OWNER`
+    #     and `HTTP_NAME`. `EQ` is the default condition and can be omitted.
     #
     #   * `BEGINS_WITH`: When you specify `BEGINS_WITH` for `Condition`, you
     #     can specify only one value. `BEGINS_WITH` is supported for `TYPE`,
@@ -2077,6 +2259,18 @@ module Aws::ServiceDiscovery
     #   namespace when you create it.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the
+    #   namespace. If this isn't your account ID, it's the ID of the
+    #   account that shared the namespace with your account. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the namespace. When you create a namespace, Cloud Map
     #   automatically creates a Route 53 hosted zone that has the same name
@@ -2108,6 +2302,7 @@ module Aws::ServiceDiscovery
     class NamespaceSummary < Struct.new(
       :id,
       :arn,
+      :resource_owner,
       :name,
       :type,
       :description,
@@ -2122,6 +2317,11 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] id
     #   The ID of the operation that you want to get information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The ID of the Amazon Web Services account that owns the namespace
+    #   associated with the operation.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2209,6 +2409,7 @@ module Aws::ServiceDiscovery
     #
     class Operation < Struct.new(
       :id,
+      :owner_account,
       :type,
       :status,
       :error_message,
@@ -2493,8 +2694,15 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that you want to use for settings for the
-    #   instance.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   use for settings for the instance. For services created in a shared
+    #   namespace, specify the service ARN. For more information about
+    #   shared namespaces, see [Cross-account Cloud Map namespace
+    #   sharing][1] in the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -2797,6 +3005,19 @@ module Aws::ServiceDiscovery
     #   when you create it.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the namespace
+    #   with which the service is associated. If this isn't your account
+    #   ID, it is the ID of the account that shared the namespace with your
+    #   account. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the service.
     #   @return [String]
@@ -2880,11 +3101,25 @@ module Aws::ServiceDiscovery
     #   date/timestamp).
     #   @return [String]
     #
+    # @!attribute [rw] created_by_account
+    #   The ID of the Amazon Web Services account that created the service.
+    #   If this isn't your account ID, it is the ID of account of the
+    #   namespace owner or of another account with which the namespace has
+    #   been shared. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Service AWS API Documentation
     #
     class Service < Struct.new(
       :id,
       :arn,
+      :resource_owner,
       :name,
       :namespace_id,
       :description,
@@ -2894,7 +3129,8 @@ module Aws::ServiceDiscovery
       :health_check_config,
       :health_check_custom_config,
       :create_date,
-      :creator_request_id)
+      :creator_request_id,
+      :created_by_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2913,12 +3149,17 @@ module Aws::ServiceDiscovery
     #   The ID of the existing service.
     #   @return [String]
     #
+    # @!attribute [rw] service_arn
+    #   The ARN of the existing service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceAlreadyExists AWS API Documentation
     #
     class ServiceAlreadyExists < Struct.new(
       :message,
       :creator_request_id,
-      :service_id)
+      :service_id,
+      :service_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2928,6 +3169,19 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] service_arn
     #   The ARN of the service that the attributes are associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the namespace
+    #   with which the service is associated. If this isn't your account
+    #   ID, it is the ID of the account that shared the namespace with your
+    #   account. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2945,6 +3199,7 @@ module Aws::ServiceDiscovery
     #
     class ServiceAttributes < Struct.new(
       :service_arn,
+      :resource_owner,
       :attributes)
       SENSITIVE = []
       include Aws::Structure
@@ -2996,12 +3251,36 @@ module Aws::ServiceDiscovery
     # list services for.
     #
     # @!attribute [rw] name
-    #   Specify `NAMESPACE_ID`.
+    #   Specify the services that you want to get using one of the
+    #   following.
+    #
+    #   * `NAMESPACE_ID`: Gets the services associated with the specified
+    #     namespace.
+    #
+    #   * `RESOURCE_OWNER`: Gets the services associated with the namespaces
+    #     created by your Amazon Web Services account or by other accounts.
+    #     This can be used to filter for services created in a shared
+    #     namespace. For more information about shared namespaces, see
+    #     [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #     Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] values
     #   The values that are applicable to the value that you specify for
     #   `Condition` to filter the list of services.
+    #
+    #   * **NAMESPACE\_ID**: Specify one namespace ID or ARN. Specify the
+    #     namespace ARN for namespaces that are shared with your Amazon Web
+    #     Services account.
+    #
+    #   * **RESOURCE\_OWNER**: Specify one of `SELF` or `OTHER_ACCOUNTS`.
+    #     `SELF` can be used to filter services associated with namespaces
+    #     created by you and `OTHER_ACCOUNTS` can be used to filter services
+    #     associated with namespaces that were shared with you.
     #   @return [Array<String>]
     #
     # @!attribute [rw] condition
@@ -3009,8 +3288,8 @@ module Aws::ServiceDiscovery
     #   returned by `ListServices`. Valid values for `Condition` include the
     #   following:
     #
-    #   * `EQ`: When you specify `EQ`, specify one namespace ID for
-    #     `Values`. `EQ` is the default condition and can be omitted.
+    #   * `EQ`: When you specify `EQ`, specify one value. `EQ` is the
+    #     default condition and can be omitted.
     #
     #   ^
     #   @return [String]
@@ -3047,6 +3326,19 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) that Cloud Map assigns to the service
     #   when you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The ID of the Amazon Web Services account that created the namespace
+    #   with which the service is associated. If this isn't your account
+    #   ID, it is the ID of the account that shared the namespace with your
+    #   account. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3118,11 +3410,25 @@ module Aws::ServiceDiscovery
     #   The date and time that the service was created.
     #   @return [Time]
     #
+    # @!attribute [rw] created_by_account
+    #   The ID of the Amazon Web Services account that created the service.
+    #   If this isn't your account ID, it is the account ID of the
+    #   namespace owner or of another account with which the namespace has
+    #   been shared. For more information about shared namespaces, see
+    #   [Cross-account Cloud Map namespace sharing][1] in the *Cloud Map
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceSummary AWS API Documentation
     #
     class ServiceSummary < Struct.new(
       :id,
       :arn,
+      :resource_owner,
       :name,
       :type,
       :description,
@@ -3130,7 +3436,8 @@ module Aws::ServiceDiscovery
       :dns_config,
       :health_check_config,
       :health_check_custom_config,
-      :create_date)
+      :create_date,
+      :created_by_account)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3222,7 +3529,8 @@ module Aws::ServiceDiscovery
     class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
-    #   The ID of the namespace that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want
+    #   to update.
     #   @return [String]
     #
     # @!attribute [rw] updater_request_id
@@ -3268,8 +3576,16 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that includes the configuration for the custom
-    #   health check that you want to change the status for.
+    #   The ID or Amazon Resource Name (ARN) of the service that includes
+    #   the configuration for the custom health check that you want to
+    #   change the status for. For services created in a shared namespace,
+    #   specify the service ARN. For more information about shared
+    #   namespaces, see [Cross-account Cloud Map namespace sharing][1] in
+    #   the *Cloud Map Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -3292,7 +3608,8 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] id
-    #   The ID of the namespace that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the namespace that you want
+    #   to update.
     #   @return [String]
     #
     # @!attribute [rw] updater_request_id
@@ -3338,7 +3655,7 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] id
-    #   The ID of the namespace being updated.
+    #   The ID or Amazon Resource Name (ARN) of the namespace being updated.
     #   @return [String]
     #
     # @!attribute [rw] updater_request_id
@@ -3384,7 +3701,9 @@ module Aws::ServiceDiscovery
     end
 
     # @!attribute [rw] service_id
-    #   The ID of the service that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   update. For services created in a namespace shared with your Amazon
+    #   Web Services account, specify the service ARN.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -3405,7 +3724,15 @@ module Aws::ServiceDiscovery
     class UpdateServiceAttributesResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] id
-    #   The ID of the service that you want to update.
+    #   The ID or Amazon Resource Name (ARN) of the service that you want to
+    #   update. If the namespace associated with the service is shared with
+    #   your Amazon Web Services account, specify the service ARN. For more
+    #   information about shared namespaces, see [Cross-account Cloud Map
+    #   namespace sharing][1] in the *Cloud Map Developer Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/dg/sharing-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] service

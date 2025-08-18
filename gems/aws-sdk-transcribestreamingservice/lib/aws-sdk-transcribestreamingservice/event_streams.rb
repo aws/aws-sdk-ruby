@@ -173,6 +173,10 @@ module Aws::TranscribeStreamingService
       # @option params [Types::MedicalScribePostStreamAnalyticsSettings] :post_stream_analytics_settings
       #   Specify settings for post-stream analytics.
       #
+      # @option params [Types::MedicalScribeContext] :medical_scribe_context
+      #   The `MedicalScribeContext` object that contains contextual information
+      #   used to generate customized clinical notes.
+      #
       def signal_configuration_event_event(params = {})
         @event_emitter.emit(:configuration_event, params)
       end

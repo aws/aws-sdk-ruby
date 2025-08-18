@@ -1273,6 +1273,26 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes in-depth details about the error. These details include the
+    # possible causes of the error and troubleshooting information.
+    #
+    # @!attribute [rw] error_code
+    #   The error code that is returned for the image import.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The text of the error message that is returned for the image import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CustomWorkspaceImageImportErrorDetails AWS API Documentation
+    #
+    class CustomWorkspaceImageImportErrorDetails < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the data replication settings.
     #
     # @!attribute [rw] data_replication
@@ -1755,12 +1775,17 @@ module Aws::WorkSpaces
     #   The type of linked account.
     #   @return [String]
     #
+    # @!attribute [rw] message
+    #   The text message to describe the status of BYOL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountResult AWS API Documentation
     #
     class DescribeAccountResult < Struct.new(
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range,
-      :dedicated_tenancy_account_type)
+      :dedicated_tenancy_account_type,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2105,6 +2130,67 @@ module Aws::WorkSpaces
     class DescribeConnectionAliasesResult < Struct.new(
       :connection_aliases,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the WorkSpace image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeCustomWorkspaceImageImportRequest AWS API Documentation
+    #
+    class DescribeCustomWorkspaceImageImportRequest < Struct.new(
+      :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] infrastructure_configuration_arn
+    #   The infrastructure configuration ARN that specifies how the
+    #   WorkSpace image is built.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The timestamp when the WorkSpace image import was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the WorkSpace image import was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] image_source
+    #   Describes the image import source.
+    #   @return [Types::ImageSourceIdentifier]
+    #
+    # @!attribute [rw] image_builder_instance_id
+    #   The image builder instance ID of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Describes in-depth details about the error. These details include
+    #   the possible causes of the error and troubleshooting information.
+    #   @return [Array<Types::CustomWorkspaceImageImportErrorDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeCustomWorkspaceImageImportResult AWS API Documentation
+    #
+    class DescribeCustomWorkspaceImageImportResult < Struct.new(
+      :image_id,
+      :infrastructure_configuration_arn,
+      :state,
+      :created,
+      :last_updated_time,
+      :image_source,
+      :image_builder_instance_id,
+      :error_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3026,6 +3112,42 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes the image import source.
+    #
+    # @note ImageSourceIdentifier is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ImageSourceIdentifier is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ImageSourceIdentifier corresponding to the set member.
+    #
+    # @!attribute [rw] ec2_import_task_id
+    #   The EC2 import task ID to import the image from the Amazon EC2 VM
+    #   import process.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_build_version_arn
+    #   The ARN of the EC2 Image Builder image.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_image_id
+    #   The identifier of the EC2 image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImageSourceIdentifier AWS API Documentation
+    #
+    class ImageSourceIdentifier < Struct.new(
+      :ec2_import_task_id,
+      :image_build_version_arn,
+      :ec2_image_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Ec2ImportTaskId < ImageSourceIdentifier; end
+      class ImageBuildVersionArn < ImageSourceIdentifier; end
+      class Ec2ImageId < ImageSourceIdentifier; end
+      class Unknown < ImageSourceIdentifier; end
+    end
+
     # @!attribute [rw] resource_id
     #   The directory identifier of the WorkSpace for which you want to
     #   import client branding.
@@ -3102,6 +3224,78 @@ module Aws::WorkSpaces
       :device_type_ios,
       :device_type_linux,
       :device_type_web)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_name
+    #   The name of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_description
+    #   The description of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   The supported compute type for the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The supported protocol for the WorkSpace image. Windows 11 does not
+    #   support PCOIP protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_source
+    #   The options for image import source.
+    #   @return [Types::ImageSourceIdentifier]
+    #
+    # @!attribute [rw] infrastructure_configuration_arn
+    #   The infrastructure configuration ARN that specifies how the
+    #   WorkSpace image is built.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform for the WorkSpace image source.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The OS version for the WorkSpace image source.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The resource tags. Each WorkSpaces resource can have a maximum of 50
+    #   tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportCustomWorkspaceImageRequest AWS API Documentation
+    #
+    class ImportCustomWorkspaceImageRequest < Struct.new(
+      :image_name,
+      :image_description,
+      :compute_type,
+      :protocol,
+      :image_source,
+      :infrastructure_configuration_arn,
+      :platform,
+      :os_version,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the WorkSpace image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportCustomWorkspaceImageResult AWS API Documentation
+    #
+    class ImportCustomWorkspaceImageResult < Struct.new(
+      :image_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3649,9 +3843,17 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   The text message to describe the status of BYOL modification.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccountResult AWS API Documentation
     #
-    class ModifyAccountResult < Aws::EmptyStructure; end
+    class ModifyAccountResult < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_id
     #   The resource identifiers, in the form of directory IDs.

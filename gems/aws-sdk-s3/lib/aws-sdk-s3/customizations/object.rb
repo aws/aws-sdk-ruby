@@ -398,6 +398,7 @@ module Aws
         end
         true
       end
+      deprecated(:upload_stream, use: 'Aws::S3::TransferManager#upload_stream', version: 'next major version')
 
       # Uploads a file from disk to the current object in S3.
       #
@@ -465,6 +466,7 @@ module Aws
         yield response if block_given?
         true
       end
+      deprecated(:upload_file, use: 'Aws::S3::TransferManager#upload_file', version: 'next major version')
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -534,6 +536,7 @@ module Aws
         end
         true
       end
+      deprecated(:download_file, use: 'Aws::S3::TransferManager#download_file', version: 'next major version')
 
       class Collection < Aws::Resources::Collection
         alias_method :delete, :batch_delete!

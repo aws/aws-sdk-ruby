@@ -2140,6 +2140,42 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Retrieves the session configuration for an application in IAM Identity
+    # Center.
+    #
+    # The session configuration determines how users can access an
+    # application. This includes whether user background sessions are
+    # enabled. User background sessions allow users to start a job on a
+    # supported Amazon Web Services managed application without having to
+    # remain signed in to an active session while the job runs.
+    #
+    # @option params [required, String] :application_arn
+    #   The Amazon Resource Name (ARN) of the application for which to
+    #   retrieve the session configuration.
+    #
+    # @return [Types::GetApplicationSessionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApplicationSessionConfigurationResponse#user_background_session_application_status #user_background_session_application_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_application_session_configuration({
+    #     application_arn: "ApplicationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_background_session_application_status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetApplicationSessionConfiguration AWS API Documentation
+    #
+    # @overload get_application_session_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_application_session_configuration(params = {}, options = {})
+      req = build_request(:get_application_session_configuration, params)
+      req.send_request(options)
+    end
+
     # Obtains the inline policy assigned to the permission set.
     #
     # @option params [required, String] :instance_arn
@@ -3602,6 +3638,40 @@ module Aws::SSOAdmin
       req.send_request(options)
     end
 
+    # Updates the session configuration for an application in IAM Identity
+    # Center.
+    #
+    # The session configuration determines how users can access an
+    # application. This includes whether user background sessions are
+    # enabled. User background sessions allow users to start a job on a
+    # supported Amazon Web Services managed application without having to
+    # remain signed in to an active session while the job runs.
+    #
+    # @option params [required, String] :application_arn
+    #   The Amazon Resource Name (ARN) of the application for which to update
+    #   the session configuration.
+    #
+    # @option params [String] :user_background_session_application_status
+    #   The status of user background sessions for the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_application_session_configuration({
+    #     application_arn: "ApplicationArn", # required
+    #     user_background_session_application_status: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutApplicationSessionConfiguration AWS API Documentation
+    #
+    # @overload put_application_session_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_application_session_configuration(params = {}, options = {})
+      req = build_request(:put_application_session_configuration, params)
+      req.send_request(options)
+    end
+
     # Attaches an inline policy to a permission set.
     #
     # <note markdown="1"> If the permission set is already referenced by one or more account
@@ -3988,7 +4058,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

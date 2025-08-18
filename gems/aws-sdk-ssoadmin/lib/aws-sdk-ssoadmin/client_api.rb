@@ -138,6 +138,8 @@ module Aws::SSOAdmin
     GetApplicationAuthenticationMethodResponse = Shapes::StructureShape.new(name: 'GetApplicationAuthenticationMethodResponse')
     GetApplicationGrantRequest = Shapes::StructureShape.new(name: 'GetApplicationGrantRequest')
     GetApplicationGrantResponse = Shapes::StructureShape.new(name: 'GetApplicationGrantResponse')
+    GetApplicationSessionConfigurationRequest = Shapes::StructureShape.new(name: 'GetApplicationSessionConfigurationRequest')
+    GetApplicationSessionConfigurationResponse = Shapes::StructureShape.new(name: 'GetApplicationSessionConfigurationResponse')
     GetInlinePolicyForPermissionSetRequest = Shapes::StructureShape.new(name: 'GetInlinePolicyForPermissionSetRequest')
     GetInlinePolicyForPermissionSetResponse = Shapes::StructureShape.new(name: 'GetInlinePolicyForPermissionSetResponse')
     GetPermissionsBoundaryForPermissionSetRequest = Shapes::StructureShape.new(name: 'GetPermissionsBoundaryForPermissionSetRequest')
@@ -236,6 +238,8 @@ module Aws::SSOAdmin
     PutApplicationAssignmentConfigurationResponse = Shapes::StructureShape.new(name: 'PutApplicationAssignmentConfigurationResponse')
     PutApplicationAuthenticationMethodRequest = Shapes::StructureShape.new(name: 'PutApplicationAuthenticationMethodRequest')
     PutApplicationGrantRequest = Shapes::StructureShape.new(name: 'PutApplicationGrantRequest')
+    PutApplicationSessionConfigurationRequest = Shapes::StructureShape.new(name: 'PutApplicationSessionConfigurationRequest')
+    PutApplicationSessionConfigurationResponse = Shapes::StructureShape.new(name: 'PutApplicationSessionConfigurationResponse')
     PutInlinePolicyToPermissionSetRequest = Shapes::StructureShape.new(name: 'PutInlinePolicyToPermissionSetRequest')
     PutInlinePolicyToPermissionSetResponse = Shapes::StructureShape.new(name: 'PutInlinePolicyToPermissionSetResponse')
     PutPermissionsBoundaryToPermissionSetRequest = Shapes::StructureShape.new(name: 'PutPermissionsBoundaryToPermissionSetRequest')
@@ -299,6 +303,7 @@ module Aws::SSOAdmin
     UpdatePermissionSetResponse = Shapes::StructureShape.new(name: 'UpdatePermissionSetResponse')
     UpdateTrustedTokenIssuerRequest = Shapes::StructureShape.new(name: 'UpdateTrustedTokenIssuerRequest')
     UpdateTrustedTokenIssuerResponse = Shapes::StructureShape.new(name: 'UpdateTrustedTokenIssuerResponse')
+    UserBackgroundSessionApplicationStatus = Shapes::StringShape.new(name: 'UserBackgroundSessionApplicationStatus')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionMessage = Shapes::StringShape.new(name: 'ValidationExceptionMessage')
 
@@ -354,7 +359,7 @@ module Aws::SSOAdmin
 
     Application.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     Application.add_member(:application_provider_arn, Shapes::ShapeRef.new(shape: ApplicationProviderArn, location_name: "ApplicationProviderArn"))
-    Application.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
+    Application.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationNameType, location_name: "Name"))
     Application.add_member(:application_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "ApplicationAccount"))
     Application.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     Application.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status"))
@@ -610,7 +615,7 @@ module Aws::SSOAdmin
 
     DescribeApplicationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     DescribeApplicationResponse.add_member(:application_provider_arn, Shapes::ShapeRef.new(shape: ApplicationProviderArn, location_name: "ApplicationProviderArn"))
-    DescribeApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameType, location_name: "Name"))
+    DescribeApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationNameType, location_name: "Name"))
     DescribeApplicationResponse.add_member(:application_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "ApplicationAccount"))
     DescribeApplicationResponse.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "InstanceArn"))
     DescribeApplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "Status"))
@@ -707,6 +712,12 @@ module Aws::SSOAdmin
 
     GetApplicationGrantResponse.add_member(:grant, Shapes::ShapeRef.new(shape: Grant, required: true, location_name: "Grant"))
     GetApplicationGrantResponse.struct_class = Types::GetApplicationGrantResponse
+
+    GetApplicationSessionConfigurationRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
+    GetApplicationSessionConfigurationRequest.struct_class = Types::GetApplicationSessionConfigurationRequest
+
+    GetApplicationSessionConfigurationResponse.add_member(:user_background_session_application_status, Shapes::ShapeRef.new(shape: UserBackgroundSessionApplicationStatus, location_name: "UserBackgroundSessionApplicationStatus"))
+    GetApplicationSessionConfigurationResponse.struct_class = Types::GetApplicationSessionConfigurationResponse
 
     GetInlinePolicyForPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     GetInlinePolicyForPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
@@ -1042,6 +1053,12 @@ module Aws::SSOAdmin
     PutApplicationGrantRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: GrantType, required: true, location_name: "GrantType"))
     PutApplicationGrantRequest.add_member(:grant, Shapes::ShapeRef.new(shape: Grant, required: true, location_name: "Grant"))
     PutApplicationGrantRequest.struct_class = Types::PutApplicationGrantRequest
+
+    PutApplicationSessionConfigurationRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, required: true, location_name: "ApplicationArn"))
+    PutApplicationSessionConfigurationRequest.add_member(:user_background_session_application_status, Shapes::ShapeRef.new(shape: UserBackgroundSessionApplicationStatus, location_name: "UserBackgroundSessionApplicationStatus"))
+    PutApplicationSessionConfigurationRequest.struct_class = Types::PutApplicationSessionConfigurationRequest
+
+    PutApplicationSessionConfigurationResponse.struct_class = Types::PutApplicationSessionConfigurationResponse
 
     PutInlinePolicyToPermissionSetRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, required: true, location_name: "InstanceArn"))
     PutInlinePolicyToPermissionSetRequest.add_member(:permission_set_arn, Shapes::ShapeRef.new(shape: PermissionSetArn, required: true, location_name: "PermissionSetArn"))
@@ -1710,6 +1727,19 @@ module Aws::SSOAdmin
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_application_session_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApplicationSessionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetApplicationSessionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApplicationSessionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_inline_policy_for_permission_set, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInlinePolicyForPermissionSet"
         o.http_method = "POST"
@@ -1838,8 +1868,8 @@ module Aws::SSOAdmin
         o.input = Shapes::ShapeRef.new(shape: ListApplicationAccessScopesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationAccessScopesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -1895,8 +1925,8 @@ module Aws::SSOAdmin
         o.input = Shapes::ShapeRef.new(shape: ListApplicationAuthenticationMethodsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationAuthenticationMethodsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -1913,8 +1943,8 @@ module Aws::SSOAdmin
         o.input = Shapes::ShapeRef.new(shape: ListApplicationGrantsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationGrantsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
@@ -2171,6 +2201,20 @@ module Aws::SSOAdmin
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutApplicationGrantRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_application_session_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutApplicationSessionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutApplicationSessionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutApplicationSessionConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

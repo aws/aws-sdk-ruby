@@ -502,6 +502,7 @@ module Aws
         def dedicated_tenancy_support: () -> ("ENABLED" | "DISABLED")
         def dedicated_tenancy_management_cidr_range: () -> ::String
         def dedicated_tenancy_account_type: () -> ("SOURCE_ACCOUNT" | "TARGET_ACCOUNT")
+        def message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_account-instance_method
       def describe_account: (
@@ -626,6 +627,23 @@ module Aws
                                          ?next_token: ::String
                                        ) -> _DescribeConnectionAliasesResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionAliasesResponseSuccess
+
+      interface _DescribeCustomWorkspaceImageImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomWorkspaceImageImportResult]
+        def image_id: () -> ::String
+        def infrastructure_configuration_arn: () -> ::String
+        def state: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+        def created: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def image_source: () -> Types::ImageSourceIdentifier
+        def image_builder_instance_id: () -> ::String
+        def error_details: () -> ::Array[Types::CustomWorkspaceImageImportErrorDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#describe_custom_workspace_image_import-instance_method
+      def describe_custom_workspace_image_import: (
+                                                    image_id: ::String
+                                                  ) -> _DescribeCustomWorkspaceImageImportResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomWorkspaceImageImportResponseSuccess
 
       interface _DescribeImageAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageAssociationsResult]
@@ -907,6 +925,34 @@ module Aws
                                   ) -> _ImportClientBrandingResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportClientBrandingResponseSuccess
 
+      interface _ImportCustomWorkspaceImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportCustomWorkspaceImageResult]
+        def image_id: () -> ::String
+        def state: () -> ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#import_custom_workspace_image-instance_method
+      def import_custom_workspace_image: (
+                                           image_name: ::String,
+                                           image_description: ::String,
+                                           compute_type: ("BASE" | "GRAPHICS_G4DN"),
+                                           protocol: ("PCOIP" | "DCV" | "BYOP"),
+                                           image_source: {
+                                             ec2_import_task_id: ::String?,
+                                             image_build_version_arn: ::String?,
+                                             ec2_image_id: ::String?
+                                           },
+                                           infrastructure_configuration_arn: ::String,
+                                           platform: ("WINDOWS"),
+                                           os_version: ("Windows_10" | "Windows_11"),
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String?
+                                             },
+                                           ]
+                                         ) -> _ImportCustomWorkspaceImageResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCustomWorkspaceImageResponseSuccess
+
       interface _ImportWorkspaceImageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ImportWorkspaceImageResult]
         def image_id: () -> ::String
@@ -967,6 +1013,7 @@ module Aws
 
       interface _ModifyAccountResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyAccountResult]
+        def message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_account-instance_method
       def modify_account: (

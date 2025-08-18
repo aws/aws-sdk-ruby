@@ -277,6 +277,10 @@ module Aws::FSx
     #   that you're copying.
     #   @return [Integer]
     #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeAction AWS API Documentation
     #
     class AdministrativeAction < Struct.new(
@@ -289,7 +293,8 @@ module Aws::FSx
       :target_volume_values,
       :target_snapshot_values,
       :total_transfer_bytes,
-      :remaining_transfer_bytes)
+      :remaining_transfer_bytes,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1802,6 +1807,11 @@ module Aws::FSx
     #   code 400 Bad Request.
     #   @return [Integer]
     #
+    # @!attribute [rw] network_type
+    #   Sets the network type for the Amazon FSx for OpenZFS file system
+    #   that you're creating from a backup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -1816,7 +1826,8 @@ module Aws::FSx
       :kms_key_id,
       :file_system_type_version,
       :open_zfs_configuration,
-      :storage_capacity)
+      :storage_capacity,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2524,6 +2535,16 @@ module Aws::FSx
     #   don't overlap with any subnet.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] route_table_ids
     #   (Multi-AZ only) Specifies the route tables in which Amazon FSx
     #   creates the rules for routing traffic to the correct file server.
@@ -2551,6 +2572,7 @@ module Aws::FSx
       :root_volume_configuration,
       :preferred_subnet_id,
       :endpoint_ip_address_range,
+      :endpoint_ipv_6_address_range,
       :route_table_ids,
       :read_cache_configuration)
       SENSITIVE = []
@@ -2757,6 +2779,14 @@ module Aws::FSx
     #   The OpenZFS configuration for the file system that's being created.
     #   @return [Types::CreateFileSystemOpenZFSConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the Amazon FSx file system that you are
+    #   creating. Valid values are `IPV4` (which supports IPv4 only) and
+    #   `DUAL` (for dual-stack mode, which supports both IPv4 and IPv6). The
+    #   default is `IPV4`. Supported only for Amazon FSx for OpenZFS file
+    #   systems.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
     #
     class CreateFileSystemRequest < Struct.new(
@@ -2772,7 +2802,8 @@ module Aws::FSx
       :lustre_configuration,
       :ontap_configuration,
       :file_system_type_version,
-      :open_zfs_configuration)
+      :open_zfs_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6311,6 +6342,10 @@ module Aws::FSx
     #   The configuration for this Amazon FSx for OpenZFS file system.
     #   @return [Types::OpenZFSFileSystemConfiguration]
     #
+    # @!attribute [rw] network_type
+    #   The network type of the file system.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystem AWS API Documentation
     #
     class FileSystem < Struct.new(
@@ -6334,7 +6369,8 @@ module Aws::FSx
       :administrative_actions,
       :ontap_configuration,
       :file_system_type_version,
-      :open_zfs_configuration)
+      :open_zfs_configuration,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7739,6 +7775,16 @@ module Aws::FSx
     #   systems deployed in the same VPC/route tables.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] route_table_ids
     #   (Multi-AZ only) The VPC route tables in which your file system's
     #   endpoints are created.
@@ -7746,6 +7792,11 @@ module Aws::FSx
     #
     # @!attribute [rw] endpoint_ip_address
     #   The IP address of the endpoint that is used to access data or to
+    #   manage the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_ipv_6_address
+    #   The IPv6 address of the endpoint that is used to access data or to
     #   manage the file system.
     #   @return [String]
     #
@@ -7768,8 +7819,10 @@ module Aws::FSx
       :root_volume_id,
       :preferred_subnet_id,
       :endpoint_ip_address_range,
+      :endpoint_ipv_6_address_range,
       :route_table_ids,
       :endpoint_ip_address,
+      :endpoint_ipv_6_address,
       :read_cache_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -9779,12 +9832,12 @@ module Aws::FSx
     #   per GB of storage. The configuration consists of an IOPS mode
     #   (`AUTOMATIC` or `USER_PROVISIONED`), and in the case of
     #   `USER_PROVISIONED` IOPS, the total number of SSD IOPS provisioned.
-    #   For more information, see [Updating SSD storage capacity and
+    #   For more information, see [File system storage capacity and
     #   IOPS][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html
     #   @return [Types::DiskIopsConfiguration]
     #
     # @!attribute [rw] throughput_capacity
@@ -9968,6 +10021,16 @@ module Aws::FSx
     #   file systems that use the Intelligent-Tiering storage class.
     #   @return [Types::OpenZFSReadCacheConfiguration]
     #
+    # @!attribute [rw] endpoint_ipv_6_address_range
+    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   endpoints to access your file system will be created. By default in
+    #   the Amazon FSx API and Amazon FSx console, Amazon FSx selects an
+    #   available /118 IP address range for you from one of the VPC's CIDR
+    #   ranges. You can have overlapping endpoint IP addresses for file
+    #   systems deployed in the same VPC/route tables, as long as they
+    #   don't overlap with any subnet.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOpenZFSConfiguration AWS API Documentation
     #
     class UpdateFileSystemOpenZFSConfiguration < Struct.new(
@@ -9980,7 +10043,8 @@ module Aws::FSx
       :disk_iops_configuration,
       :add_route_table_ids,
       :remove_route_table_ids,
-      :read_cache_configuration)
+      :read_cache_configuration,
+      :endpoint_ipv_6_address_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10004,9 +10068,10 @@ module Aws::FSx
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an FSx for
     #   Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for
-    #   ONTAP file system. Specifies the storage capacity target value, in
-    #   GiB, to increase the storage capacity for the file system that
-    #   you're updating.
+    #   ONTAP file system. For second-generation FSx for ONTAP file systems,
+    #   you can also decrease the storage capacity. Specifies the storage
+    #   capacity target value, in GiB, for the file system that you're
+    #   updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
@@ -10043,17 +10108,20 @@ module Aws::FSx
     #   storage capacity][3] in the *Amazon FSxfor Windows File Server User
     #   Guide*.
     #
-    #   For ONTAP file systems, the storage capacity target value must be at
-    #   least 10 percent greater than the current storage capacity value.
-    #   For more information, see [Managing storage capacity and provisioned
-    #   IOPS][4] in the *Amazon FSx for NetApp ONTAP User Guide*.
+    #   For ONTAP file systems, when increasing storage capacity, the
+    #   storage capacity target value must be at least 10 percent greater
+    #   than the current storage capacity value. When decreasing storage
+    #   capacity on second-generation file systems, the target value must be
+    #   at least 9 percent smaller than the current SSD storage capacity.
+    #   For more information, see [File system storage capacity and IOPS][4]
+    #   in the Amazon FSx for NetApp ONTAP User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
     #   [3]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
-    #   [4]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
+    #   [4]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/storage-capacity-and-IOPS.html
     #   @return [Integer]
     #
     # @!attribute [rw] windows_configuration
@@ -10085,6 +10153,10 @@ module Aws::FSx
     #   newer than the file system's current Lustre version.
     #   @return [String]
     #
+    # @!attribute [rw] network_type
+    #   Changes the network type of an FSx for OpenZFS file system.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemRequest AWS API Documentation
     #
     class UpdateFileSystemRequest < Struct.new(
@@ -10096,7 +10168,8 @@ module Aws::FSx
       :ontap_configuration,
       :open_zfs_configuration,
       :storage_type,
-      :file_system_type_version)
+      :file_system_type_version,
+      :network_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -252,6 +252,11 @@ module Aws::ServiceDiscovery
       def service_id
         @data[:service_id]
       end
+
+      # @return [String]
+      def service_arn
+        @data[:service_arn]
+      end
     end
 
     class ServiceAttributesLimitExceededException < ServiceError

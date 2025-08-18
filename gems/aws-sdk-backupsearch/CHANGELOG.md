@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2025-08-12)
+------------------
+
+* Feature - Using recommended smithy trait to generate regional endpoints for Backup Search
+
 1.10.0 (2025-08-08)
 ------------------
 

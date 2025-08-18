@@ -422,12 +422,14 @@ module Aws
                                   }?,
                                   preferred_subnet_id: ::String?,
                                   endpoint_ip_address_range: ::String?,
+                                  endpoint_ipv_6_address_range: ::String?,
                                   route_table_ids: Array[::String]?,
                                   read_cache_configuration: {
                                     sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
                                     size_gi_b: ::Integer?
                                   }?
-                                }
+                                },
+                                ?network_type: ("IPV4" | "DUAL")
                               ) -> _CreateFileSystemResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemResponseSuccess
 
@@ -547,13 +549,15 @@ module Aws
                                               }?,
                                               preferred_subnet_id: ::String?,
                                               endpoint_ip_address_range: ::String?,
+                                              endpoint_ipv_6_address_range: ::String?,
                                               route_table_ids: Array[::String]?,
                                               read_cache_configuration: {
                                                 sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
                                                 size_gi_b: ::Integer?
                                               }?
                                             },
-                                            ?storage_capacity: ::Integer
+                                            ?storage_capacity: ::Integer,
+                                            ?network_type: ("IPV4" | "DUAL")
                                           ) -> _CreateFileSystemFromBackupResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemFromBackupResponseSuccess
 
@@ -1295,10 +1299,12 @@ module Aws
                                   read_cache_configuration: {
                                     sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
                                     size_gi_b: ::Integer?
-                                  }?
+                                  }?,
+                                  endpoint_ipv_6_address_range: ::String?
                                 },
                                 ?storage_type: ("SSD" | "HDD" | "INTELLIGENT_TIERING"),
-                                ?file_system_type_version: ::String
+                                ?file_system_type_version: ::String,
+                                ?network_type: ("IPV4" | "DUAL")
                               ) -> _UpdateFileSystemResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileSystemResponseSuccess
 

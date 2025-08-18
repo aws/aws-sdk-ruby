@@ -4990,6 +4990,15 @@
       "input":{"shape":"ModifyInstanceCapacityReservationAttributesRequest"},
       "output":{"shape":"ModifyInstanceCapacityReservationAttributesResult"}
     },
+    "ModifyInstanceConnectEndpoint":{
+      "name":"ModifyInstanceConnectEndpoint",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyInstanceConnectEndpointRequest"},
+      "output":{"shape":"ModifyInstanceConnectEndpointResult"}
+    },
     "ModifyInstanceCpuOptions":{
       "name":"ModifyInstanceCpuOptions",
       "http":{
@@ -7952,6 +7961,7 @@
       "required":["RouteTableId"],
       "members":{
         "GatewayId":{"shape":"RouteGatewayId"},
+        "PublicIpv4Pool":{"shape":"Ipv4PoolEc2Id"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -11936,11 +11946,11 @@
     },
     "CreateDefaultSubnetRequest":{
       "type":"structure",
-      "required":["AvailabilityZone"],
       "members":{
         "AvailabilityZone":{"shape":"AvailabilityZoneName"},
         "DryRun":{"shape":"Boolean"},
-        "Ipv6Native":{"shape":"Boolean"}
+        "Ipv6Native":{"shape":"Boolean"},
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"}
       }
     },
     "CreateDefaultSubnetResult":{
@@ -14399,9 +14409,9 @@
     },
     "CreateVolumeRequest":{
       "type":"structure",
-      "required":["AvailabilityZone"],
       "members":{
         "AvailabilityZone":{"shape":"AvailabilityZoneName"},
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
         "Encrypted":{
           "shape":"Boolean",
           "locationName":"encrypted"
@@ -20768,6 +20778,7 @@
     "DescribeSpotPriceHistoryRequest":{
       "type":"structure",
       "members":{
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -23769,6 +23780,10 @@
         "IpAddressType":{
           "shape":"IpAddressType",
           "locationName":"ipAddressType"
+        },
+        "PublicDnsNames":{
+          "shape":"InstanceConnectEndpointPublicDnsNames",
+          "locationName":"publicDnsNames"
         }
       }
     },
@@ -23780,7 +23795,10 @@
         "create-failed",
         "delete-in-progress",
         "delete-complete",
-        "delete-failed"
+        "delete-failed",
+        "update-in-progress",
+        "update-complete",
+        "update-failed"
       ]
     },
     "EfaInfo":{
@@ -29162,6 +29180,10 @@
           "shape":"String",
           "locationName":"availabilityZone"
         },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
+        },
         "BytesConverted":{
           "shape":"Long",
           "locationName":"bytesConverted"
@@ -29330,11 +29352,11 @@
     "ImportVolumeRequest":{
       "type":"structure",
       "required":[
-        "AvailabilityZone",
         "Image",
         "Volume"
       ],
       "members":{
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"
@@ -29372,6 +29394,10 @@
         "AvailabilityZone":{
           "shape":"String",
           "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
         },
         "BytesConverted":{
           "shape":"Long",
@@ -29922,11 +29948,37 @@
         }
       }
     },
+    "InstanceConnectEndpointDnsNames":{
+      "type":"structure",
+      "members":{
+        "DnsName":{
+          "shape":"String",
+          "locationName":"dnsName"
+        },
+        "FipsDnsName":{
+          "shape":"String",
+          "locationName":"fipsDnsName"
+        }
+      }
+    },
     "InstanceConnectEndpointId":{"type":"string"},
     "InstanceConnectEndpointMaxResults":{
       "type":"integer",
       "max":50,
       "min":1
+    },
+    "InstanceConnectEndpointPublicDnsNames":{
+      "type":"structure",
+      "members":{
+        "Ipv4":{
+          "shape":"InstanceConnectEndpointDnsNames",
+          "locationName":"ipv4"
+        },
+        "Dualstack":{
+          "shape":"InstanceConnectEndpointDnsNames",
+          "locationName":"dualstack"
+        }
+      }
     },
     "InstanceConnectEndpointSet":{
       "type":"list",
@@ -31061,6 +31113,10 @@
         "AvailabilityZone":{
           "shape":"String",
           "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "locationName":"availabilityZoneId"
         },
         "OutpostArn":{
           "shape":"String",
@@ -35071,6 +35127,10 @@
           "shape":"String",
           "locationName":"availabilityZone"
         },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "locationName":"availabilityZoneId"
+        },
         "Affinity":{
           "shape":"String",
           "locationName":"affinity"
@@ -35109,6 +35169,7 @@
       "type":"structure",
       "members":{
         "AvailabilityZone":{"shape":"String"},
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
         "Affinity":{"shape":"String"},
         "GroupName":{"shape":"PlacementGroupName"},
         "HostId":{"shape":"DedicatedHostId"},
@@ -36849,6 +36910,29 @@
       }
     },
     "ModifyInstanceCapacityReservationAttributesResult":{
+      "type":"structure",
+      "members":{
+        "Return":{
+          "shape":"Boolean",
+          "locationName":"return"
+        }
+      }
+    },
+    "ModifyInstanceConnectEndpointRequest":{
+      "type":"structure",
+      "required":["InstanceConnectEndpointId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "InstanceConnectEndpointId":{"shape":"InstanceConnectEndpointId"},
+        "IpAddressType":{"shape":"IpAddressType"},
+        "SecurityGroupIds":{
+          "shape":"SecurityGroupIdStringListRequest",
+          "locationName":"SecurityGroupId"
+        },
+        "PreserveClientIp":{"shape":"Boolean"}
+      }
+    },
+    "ModifyInstanceConnectEndpointResult":{
       "type":"structure",
       "members":{
         "Return":{
@@ -40608,6 +40692,10 @@
     "Placement":{
       "type":"structure",
       "members":{
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "locationName":"availabilityZoneId"
+        },
         "Affinity":{
           "shape":"String",
           "locationName":"affinity"
@@ -44799,6 +44887,10 @@
           "shape":"String",
           "locationName":"gatewayId"
         },
+        "PublicIpv4Pool":{
+          "shape":"String",
+          "locationName":"publicIpv4Pool"
+        },
         "AssociationState":{
           "shape":"RouteTableAssociationState",
           "locationName":"associationState"
@@ -45903,6 +45995,10 @@
           "shape":"ServiceState",
           "locationName":"serviceState"
         },
+        "AvailabilityZoneIds":{
+          "shape":"ValueStringList",
+          "locationName":"availabilityZoneIdSet"
+        },
         "AvailabilityZones":{
           "shape":"ValueStringList",
           "locationName":"availabilityZoneSet"
@@ -45989,6 +46085,10 @@
         "ServiceRegion":{
           "shape":"String",
           "locationName":"serviceRegion"
+        },
+        "AvailabilityZoneIds":{
+          "shape":"ValueStringList",
+          "locationName":"availabilityZoneIdSet"
         },
         "AvailabilityZones":{
           "shape":"ValueStringList",
@@ -46978,6 +47078,10 @@
           "shape":"String",
           "locationName":"launchedAvailabilityZone"
         },
+        "LaunchedAvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"launchedAvailabilityZoneId"
+        },
         "ProductDescription":{
           "shape":"RIProductDescription",
           "locationName":"productDescription"
@@ -47209,6 +47313,10 @@
         "AvailabilityZone":{
           "shape":"String",
           "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -51662,6 +51770,10 @@
     "Volume":{
       "type":"structure",
       "members":{
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
+        },
         "OutpostArn":{
           "shape":"String",
           "locationName":"outpostArn"

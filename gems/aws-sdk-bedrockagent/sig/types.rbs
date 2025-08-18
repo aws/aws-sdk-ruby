@@ -9,14 +9,14 @@ module Aws::BedrockAgent
   module Types
 
     class APISchema
-      attr_accessor payload: ::String
       attr_accessor s3: Types::S3Identifier
+      attr_accessor payload: ::String
       attr_accessor unknown: untyped
       SENSITIVE: [:payload]
 
-      class Payload < APISchema
-      end
       class S3 < APISchema
+      end
+      class Payload < APISchema
       end
       class Unknown < APISchema
       end
@@ -28,14 +28,14 @@ module Aws::BedrockAgent
     end
 
     class ActionGroupExecutor
-      attr_accessor custom_control: ("RETURN_CONTROL")
       attr_accessor lambda: ::String
+      attr_accessor custom_control: ("RETURN_CONTROL")
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class CustomControl < ActionGroupExecutor
-      end
       class Lambda < ActionGroupExecutor
+      end
+      class CustomControl < ActionGroupExecutor
       end
       class Unknown < ActionGroupExecutor
       end
@@ -51,70 +51,70 @@ module Aws::BedrockAgent
     end
 
     class Agent
-      attr_accessor agent_arn: ::String
-      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_name: ::String
-      attr_accessor agent_resource_role_arn: ::String
-      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor agent_arn: ::String
       attr_accessor agent_version: ::String
       attr_accessor client_token: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor custom_orchestration: Types::CustomOrchestration
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor failure_reasons: ::Array[::String]
-      attr_accessor foundation_model: ::String
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
-      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
       attr_accessor orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION")
-      attr_accessor prepared_at: ::Time
-      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
-      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor custom_orchestration: Types::CustomOrchestration
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor prepared_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
     class AgentActionGroup
-      attr_accessor action_group_executor: Types::ActionGroupExecutor
-      attr_accessor action_group_id: ::String
-      attr_accessor action_group_name: ::String
-      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor api_schema: Types::APISchema
+      attr_accessor action_group_id: ::String
+      attr_accessor action_group_name: ::String
       attr_accessor client_token: ::String
-      attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor function_schema: Types::FunctionSchema
-      attr_accessor parent_action_group_signature_params: ::Hash[::String, ::String]
-      attr_accessor parent_action_signature: ("AMAZON.UserInput" | "AMAZON.CodeInterpreter" | "ANTHROPIC.Computer" | "ANTHROPIC.Bash" | "ANTHROPIC.TextEditor")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor parent_action_signature: ("AMAZON.UserInput" | "AMAZON.CodeInterpreter" | "ANTHROPIC.Computer" | "ANTHROPIC.Bash" | "ANTHROPIC.TextEditor")
+      attr_accessor parent_action_group_signature_params: ::Hash[::String, ::String]
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor api_schema: Types::APISchema
+      attr_accessor function_schema: Types::FunctionSchema
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class AgentAlias
-      attr_accessor agent_alias_arn: ::String
-      attr_accessor agent_alias_history_events: ::Array[Types::AgentAliasHistoryEvent]
+      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
-      attr_accessor agent_id: ::String
-      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
+      attr_accessor agent_alias_arn: ::String
       attr_accessor client_token: ::String
-      attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor failure_reasons: ::Array[::String]
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor agent_alias_history_events: ::Array[Types::AgentAliasHistoryEvent]
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       SENSITIVE: []
     end
 
     class AgentAliasHistoryEvent
-      attr_accessor end_date: ::Time
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor end_date: ::Time
       attr_accessor start_date: ::Time
       SENSITIVE: []
     end
@@ -128,39 +128,39 @@ module Aws::BedrockAgent
     class AgentAliasSummary
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
-      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
-      attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       SENSITIVE: []
     end
 
     class AgentCollaborator
-      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor client_token: ::String
-      attr_accessor collaboration_instruction: ::String
+      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor collaborator_id: ::String
+      attr_accessor collaboration_instruction: ::String
       attr_accessor collaborator_name: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor relay_conversation_history: ("TO_COLLABORATOR" | "DISABLED")
+      attr_accessor client_token: ::String
       SENSITIVE: [:collaboration_instruction]
     end
 
     class AgentCollaboratorSummary
-      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor collaboration_instruction: ::String
       attr_accessor collaborator_id: ::String
+      attr_accessor agent_descriptor: Types::AgentDescriptor
+      attr_accessor collaboration_instruction: ::String
+      attr_accessor relay_conversation_history: ("TO_COLLABORATOR" | "DISABLED")
       attr_accessor collaborator_name: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor relay_conversation_history: ("TO_COLLABORATOR" | "DISABLED")
       SENSITIVE: [:collaboration_instruction]
     end
 
@@ -177,17 +177,17 @@ module Aws::BedrockAgent
     class AgentKnowledgeBase
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
-      attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
     class AgentKnowledgeBaseSummary
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -198,32 +198,32 @@ module Aws::BedrockAgent
       attr_accessor agent_name: ::String
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor description: ::String
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor latest_agent_version: ::String
       attr_accessor updated_at: ::Time
+      attr_accessor latest_agent_version: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       SENSITIVE: []
     end
 
     class AgentVersion
-      attr_accessor agent_arn: ::String
-      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_name: ::String
-      attr_accessor agent_resource_role_arn: ::String
-      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
-      attr_accessor created_at: ::Time
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor failure_reasons: ::Array[::String]
-      attr_accessor foundation_model: ::String
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
-      attr_accessor instruction: ::String
-      attr_accessor memory_configuration: Types::MemoryConfiguration
-      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
-      attr_accessor recommended_actions: ::Array[::String]
-      attr_accessor updated_at: ::Time
+      attr_accessor agent_arn: ::String
       attr_accessor version: ::String
+      attr_accessor instruction: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor recommended_actions: ::Array[::String]
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
@@ -232,9 +232,9 @@ module Aws::BedrockAgent
       attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor agent_version: ::String
       attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       attr_accessor description: ::String
       attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -242,13 +242,13 @@ module Aws::BedrockAgent
     end
 
     class AssociateAgentCollaboratorRequest
-      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor client_token: ::String
-      attr_accessor collaboration_instruction: ::String
+      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor collaborator_name: ::String
+      attr_accessor collaboration_instruction: ::String
       attr_accessor relay_conversation_history: ("TO_COLLABORATOR" | "DISABLED")
+      attr_accessor client_token: ::String
       SENSITIVE: [:collaboration_instruction]
     end
 
@@ -260,8 +260,8 @@ module Aws::BedrockAgent
     class AssociateAgentKnowledgeBaseRequest
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
@@ -287,8 +287,8 @@ module Aws::BedrockAgent
 
     class BedrockFoundationModelConfiguration
       attr_accessor model_arn: ::String
-      attr_accessor parsing_modality: ("MULTIMODAL")
       attr_accessor parsing_prompt: Types::ParsingPrompt
+      attr_accessor parsing_modality: ("MULTIMODAL")
       SENSITIVE: []
     end
 
@@ -299,8 +299,8 @@ module Aws::BedrockAgent
     end
 
     class ByteContentDoc
-      attr_accessor data: ::String
       attr_accessor mime_type: ::String
+      attr_accessor data: ::String
       SENSITIVE: [:data]
     end
 
@@ -310,9 +310,9 @@ module Aws::BedrockAgent
     end
 
     class ChatPromptTemplateConfiguration
-      attr_accessor input_variables: ::Array[Types::PromptInputVariable]
       attr_accessor messages: ::Array[Types::Message]
       attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor input_variables: ::Array[Types::PromptInputVariable]
       attr_accessor tool_configuration: Types::ToolConfiguration
       SENSITIVE: [:input_variables]
     end
@@ -344,57 +344,57 @@ module Aws::BedrockAgent
     end
 
     class ConfluenceDataSourceConfiguration
-      attr_accessor crawler_configuration: Types::ConfluenceCrawlerConfiguration
       attr_accessor source_configuration: Types::ConfluenceSourceConfiguration
+      attr_accessor crawler_configuration: Types::ConfluenceCrawlerConfiguration
       SENSITIVE: []
     end
 
     class ConfluenceSourceConfiguration
+      attr_accessor host_url: ::String
+      attr_accessor host_type: ("SAAS")
       attr_accessor auth_type: ("BASIC" | "OAUTH2_CLIENT_CREDENTIALS")
       attr_accessor credentials_secret_arn: ::String
-      attr_accessor host_type: ("SAAS")
-      attr_accessor host_url: ::String
       SENSITIVE: []
     end
 
     class ContentBlock
-      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor text: ::String
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class CachePoint < ContentBlock
-      end
       class Text < ContentBlock
+      end
+      class CachePoint < ContentBlock
       end
       class Unknown < ContentBlock
       end
     end
 
     class ContextEnrichmentConfiguration
-      attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelContextEnrichmentConfiguration
       attr_accessor type: ("BEDROCK_FOUNDATION_MODEL")
+      attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelContextEnrichmentConfiguration
       SENSITIVE: []
     end
 
     class CrawlFilterConfiguration
-      attr_accessor pattern_object_filter: Types::PatternObjectFilterConfiguration
       attr_accessor type: ("PATTERN")
+      attr_accessor pattern_object_filter: Types::PatternObjectFilterConfiguration
       SENSITIVE: []
     end
 
     class CreateAgentActionGroupRequest
-      attr_accessor action_group_executor: Types::ActionGroupExecutor
-      attr_accessor action_group_name: ::String
-      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor api_schema: Types::APISchema
+      attr_accessor action_group_name: ::String
       attr_accessor client_token: ::String
       attr_accessor description: ::String
-      attr_accessor function_schema: Types::FunctionSchema
       attr_accessor parent_action_group_signature: ("AMAZON.UserInput" | "AMAZON.CodeInterpreter" | "ANTHROPIC.Computer" | "ANTHROPIC.Bash" | "ANTHROPIC.TextEditor")
       attr_accessor parent_action_group_signature_params: ::Hash[::String, ::String]
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor api_schema: Types::APISchema
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      attr_accessor function_schema: Types::FunctionSchema
       SENSITIVE: []
     end
 
@@ -404,8 +404,8 @@ module Aws::BedrockAgent
     end
 
     class CreateAgentAliasRequest
-      attr_accessor agent_alias_name: ::String
       attr_accessor agent_id: ::String
+      attr_accessor agent_alias_name: ::String
       attr_accessor client_token: ::String
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
@@ -419,21 +419,21 @@ module Aws::BedrockAgent
     end
 
     class CreateAgentRequest
-      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       attr_accessor agent_name: ::String
-      attr_accessor agent_resource_role_arn: ::String
       attr_accessor client_token: ::String
-      attr_accessor custom_orchestration: Types::CustomOrchestration
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor foundation_model: ::String
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
-      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
       attr_accessor orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION")
-      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor custom_orchestration: Types::CustomOrchestration
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
@@ -443,12 +443,12 @@ module Aws::BedrockAgent
     end
 
     class CreateDataSourceRequest
-      attr_accessor client_token: ::String
-      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
-      attr_accessor data_source_configuration: Types::DataSourceConfiguration
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor client_token: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       SENSITIVE: []
@@ -460,82 +460,82 @@ module Aws::BedrockAgent
     end
 
     class CreateFlowAliasRequest
-      attr_accessor client_token: ::String
-      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
-      attr_accessor description: ::String
-      attr_accessor flow_identifier: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
+      attr_accessor flow_identifier: ::String
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateFlowAliasResponse
-      attr_accessor arn: ::String
-      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor flow_id: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class CreateFlowRequest
-      attr_accessor client_token: ::String
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
-      attr_accessor name: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor definition: Types::FlowDefinition
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:definition]
     end
 
     class CreateFlowResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor version: ::String
+      attr_accessor definition: Types::FlowDefinition
       SENSITIVE: [:definition]
     end
 
     class CreateFlowVersionRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
       attr_accessor flow_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class CreateFlowVersionResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor version: ::String
+      attr_accessor definition: Types::FlowDefinition
       SENSITIVE: [:definition]
     end
 
     class CreateKnowledgeBaseRequest
       attr_accessor client_token: ::String
-      attr_accessor description: ::String
-      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor role_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor storage_configuration: Types::StorageConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -547,49 +547,49 @@ module Aws::BedrockAgent
     end
 
     class CreatePromptRequest
-      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor default_variant: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor variants: ::Array[Types::PromptVariant]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:variants]
     end
 
     class CreatePromptResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor default_variant: ::String
-      attr_accessor description: ::String
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor updated_at: ::Time
       attr_accessor variants: ::Array[Types::PromptVariant]
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
       attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: [:variants]
     end
 
     class CreatePromptVersionRequest
-      attr_accessor client_token: ::String
-      attr_accessor description: ::String
       attr_accessor prompt_identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreatePromptVersionResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor default_variant: ::String
-      attr_accessor description: ::String
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor updated_at: ::Time
       attr_accessor variants: ::Array[Types::PromptVariant]
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
       attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: [:variants]
     end
 
@@ -601,9 +601,9 @@ module Aws::BedrockAgent
 
     class CustomContent
       attr_accessor custom_document_identifier: Types::CustomDocumentIdentifier
-      attr_accessor inline_content: Types::InlineContent
-      attr_accessor s3_location: Types::CustomS3Location
       attr_accessor source_type: ("IN_LINE" | "S3_LOCATION")
+      attr_accessor s3_location: Types::CustomS3Location
+      attr_accessor inline_content: Types::InlineContent
       SENSITIVE: []
     end
 
@@ -618,8 +618,8 @@ module Aws::BedrockAgent
     end
 
     class CustomS3Location
-      attr_accessor bucket_owner_account_id: ::String
       attr_accessor uri: ::String
+      attr_accessor bucket_owner_account_id: ::String
       SENSITIVE: []
     end
 
@@ -635,45 +635,45 @@ module Aws::BedrockAgent
     end
 
     class DataSource
-      attr_accessor created_at: ::Time
-      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
-      attr_accessor data_source_configuration: Types::DataSourceConfiguration
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
-      attr_accessor failure_reasons: ::Array[::String]
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor name: ::String
-      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor status: ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
-      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
+      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
     class DataSourceConfiguration
-      attr_accessor confluence_configuration: Types::ConfluenceDataSourceConfiguration
+      attr_accessor type: ("S3" | "WEB" | "CONFLUENCE" | "SALESFORCE" | "SHAREPOINT" | "CUSTOM" | "REDSHIFT_METADATA")
       attr_accessor s3_configuration: Types::S3DataSourceConfiguration
+      attr_accessor web_configuration: Types::WebDataSourceConfiguration
+      attr_accessor confluence_configuration: Types::ConfluenceDataSourceConfiguration
       attr_accessor salesforce_configuration: Types::SalesforceDataSourceConfiguration
       attr_accessor share_point_configuration: Types::SharePointDataSourceConfiguration
-      attr_accessor type: ("S3" | "WEB" | "CONFLUENCE" | "SALESFORCE" | "SHAREPOINT" | "CUSTOM" | "REDSHIFT_METADATA")
-      attr_accessor web_configuration: Types::WebDataSourceConfiguration
       SENSITIVE: []
     end
 
     class DataSourceSummary
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor name: ::String
       attr_accessor status: ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
+      attr_accessor description: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class DeleteAgentActionGroupRequest
-      attr_accessor action_group_id: ::String
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
+      attr_accessor action_group_id: ::String
       attr_accessor skip_resource_in_use_check: bool
       SENSITIVE: []
     end
@@ -682,15 +682,15 @@ module Aws::BedrockAgent
     end
 
     class DeleteAgentAliasRequest
-      attr_accessor agent_alias_id: ::String
       attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
       SENSITIVE: []
     end
 
     class DeleteAgentAliasResponse
+      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_status: ("CREATING" | "PREPARED" | "FAILED" | "UPDATING" | "DELETING" | "DISSOCIATED")
-      attr_accessor agent_id: ::String
       SENSITIVE: []
     end
 
@@ -715,27 +715,27 @@ module Aws::BedrockAgent
 
     class DeleteAgentVersionResponse
       attr_accessor agent_id: ::String
-      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       attr_accessor agent_version: ::String
+      attr_accessor agent_status: ("CREATING" | "PREPARING" | "PREPARED" | "NOT_PREPARED" | "DELETING" | "FAILED" | "VERSIONING" | "UPDATING")
       SENSITIVE: []
     end
 
     class DeleteDataSourceRequest
-      attr_accessor data_source_id: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
     class DeleteDataSourceResponse
-      attr_accessor data_source_id: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor status: ("AVAILABLE" | "DELETING" | "DELETE_UNSUCCESSFUL")
       SENSITIVE: []
     end
 
     class DeleteFlowAliasRequest
-      attr_accessor alias_identifier: ::String
       attr_accessor flow_identifier: ::String
+      attr_accessor alias_identifier: ::String
       SENSITIVE: []
     end
 
@@ -770,10 +770,10 @@ module Aws::BedrockAgent
     end
 
     class DeleteKnowledgeBaseDocumentsRequest
-      attr_accessor client_token: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor document_identifiers: ::Array[Types::DocumentIdentifier]
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor document_identifiers: ::Array[Types::DocumentIdentifier]
       SENSITIVE: []
     end
 
@@ -826,29 +826,29 @@ module Aws::BedrockAgent
     end
 
     class DocumentContent
-      attr_accessor custom: Types::CustomContent
       attr_accessor data_source_type: ("CUSTOM" | "S3")
+      attr_accessor custom: Types::CustomContent
       attr_accessor s3: Types::S3Content
       SENSITIVE: []
     end
 
     class DocumentIdentifier
-      attr_accessor custom: Types::CustomDocumentIdentifier
       attr_accessor data_source_type: ("CUSTOM" | "S3")
       attr_accessor s3: Types::S3Location
+      attr_accessor custom: Types::CustomDocumentIdentifier
       SENSITIVE: []
     end
 
     class DocumentMetadata
+      attr_accessor type: ("IN_LINE_ATTRIBUTE" | "S3_LOCATION")
       attr_accessor inline_attributes: ::Array[Types::MetadataAttribute]
       attr_accessor s3_location: Types::CustomS3Location
-      attr_accessor type: ("IN_LINE_ATTRIBUTE" | "S3_LOCATION")
       SENSITIVE: []
     end
 
     class DuplicateConditionExpressionFlowValidationDetails
-      attr_accessor expression: ::String
       attr_accessor node: ::String
+      attr_accessor expression: ::String
       SENSITIVE: [:expression]
     end
 
@@ -880,8 +880,8 @@ module Aws::BedrockAgent
     end
 
     class FlowAliasConcurrencyConfiguration
-      attr_accessor max_concurrency: ::Integer
       attr_accessor type: ("Automatic" | "Manual")
+      attr_accessor max_concurrency: ::Integer
       SENSITIVE: []
     end
 
@@ -891,21 +891,21 @@ module Aws::BedrockAgent
     end
 
     class FlowAliasSummary
-      attr_accessor arn: ::String
-      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor flow_id: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class FlowCondition
-      attr_accessor expression: ::String
       attr_accessor name: ::String
+      attr_accessor expression: ::String
       SENSITIVE: [:expression]
     end
 
@@ -915,23 +915,23 @@ module Aws::BedrockAgent
     end
 
     class FlowConnection
-      attr_accessor configuration: Types::FlowConnectionConfiguration
+      attr_accessor type: ("Data" | "Conditional")
       attr_accessor name: ::String
       attr_accessor source: ::String
       attr_accessor target: ::String
-      attr_accessor type: ("Data" | "Conditional")
+      attr_accessor configuration: Types::FlowConnectionConfiguration
       SENSITIVE: []
     end
 
     class FlowConnectionConfiguration
-      attr_accessor conditional: Types::FlowConditionalConnectionConfiguration
       attr_accessor data: Types::FlowDataConnectionConfiguration
+      attr_accessor conditional: Types::FlowConditionalConnectionConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Conditional < FlowConnectionConfiguration
-      end
       class Data < FlowConnectionConfiguration
+      end
+      class Conditional < FlowConnectionConfiguration
       end
       class Unknown < FlowConnectionConfiguration
       end
@@ -944,81 +944,81 @@ module Aws::BedrockAgent
     end
 
     class FlowDefinition
-      attr_accessor connections: ::Array[Types::FlowConnection]
       attr_accessor nodes: ::Array[Types::FlowNode]
+      attr_accessor connections: ::Array[Types::FlowConnection]
       SENSITIVE: []
     end
 
     class FlowNode
+      attr_accessor name: ::String
+      attr_accessor type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController")
       attr_accessor configuration: Types::FlowNodeConfiguration
       attr_accessor inputs: ::Array[Types::FlowNodeInput]
-      attr_accessor name: ::String
       attr_accessor outputs: ::Array[Types::FlowNodeOutput]
-      attr_accessor type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController")
       SENSITIVE: []
     end
 
     class FlowNodeConfiguration
-      attr_accessor agent: Types::AgentFlowNodeConfiguration
-      attr_accessor collector: Types::CollectorFlowNodeConfiguration
-      attr_accessor condition: Types::ConditionFlowNodeConfiguration
-      attr_accessor inline_code: Types::InlineCodeFlowNodeConfiguration
       attr_accessor input: Types::InputFlowNodeConfiguration
-      attr_accessor iterator: Types::IteratorFlowNodeConfiguration
-      attr_accessor knowledge_base: Types::KnowledgeBaseFlowNodeConfiguration
-      attr_accessor lambda_function: Types::LambdaFunctionFlowNodeConfiguration
-      attr_accessor lex: Types::LexFlowNodeConfiguration
-      attr_accessor loop: Types::LoopFlowNodeConfiguration
-      attr_accessor loop_controller: Types::LoopControllerFlowNodeConfiguration
-      attr_accessor loop_input: Types::LoopInputFlowNodeConfiguration
       attr_accessor output: Types::OutputFlowNodeConfiguration
+      attr_accessor knowledge_base: Types::KnowledgeBaseFlowNodeConfiguration
+      attr_accessor condition: Types::ConditionFlowNodeConfiguration
+      attr_accessor lex: Types::LexFlowNodeConfiguration
       attr_accessor prompt: Types::PromptFlowNodeConfiguration
-      attr_accessor retrieval: Types::RetrievalFlowNodeConfiguration
+      attr_accessor lambda_function: Types::LambdaFunctionFlowNodeConfiguration
       attr_accessor storage: Types::StorageFlowNodeConfiguration
+      attr_accessor agent: Types::AgentFlowNodeConfiguration
+      attr_accessor retrieval: Types::RetrievalFlowNodeConfiguration
+      attr_accessor iterator: Types::IteratorFlowNodeConfiguration
+      attr_accessor collector: Types::CollectorFlowNodeConfiguration
+      attr_accessor inline_code: Types::InlineCodeFlowNodeConfiguration
+      attr_accessor loop: Types::LoopFlowNodeConfiguration
+      attr_accessor loop_input: Types::LoopInputFlowNodeConfiguration
+      attr_accessor loop_controller: Types::LoopControllerFlowNodeConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Agent < FlowNodeConfiguration
-      end
-      class Collector < FlowNodeConfiguration
-      end
-      class Condition < FlowNodeConfiguration
-      end
-      class InlineCode < FlowNodeConfiguration
-      end
       class Input < FlowNodeConfiguration
-      end
-      class Iterator < FlowNodeConfiguration
-      end
-      class KnowledgeBase < FlowNodeConfiguration
-      end
-      class LambdaFunction < FlowNodeConfiguration
-      end
-      class Lex < FlowNodeConfiguration
-      end
-      class Loop < FlowNodeConfiguration
-      end
-      class LoopController < FlowNodeConfiguration
-      end
-      class LoopInput < FlowNodeConfiguration
       end
       class Output < FlowNodeConfiguration
       end
+      class KnowledgeBase < FlowNodeConfiguration
+      end
+      class Condition < FlowNodeConfiguration
+      end
+      class Lex < FlowNodeConfiguration
+      end
       class Prompt < FlowNodeConfiguration
+      end
+      class LambdaFunction < FlowNodeConfiguration
+      end
+      class Storage < FlowNodeConfiguration
+      end
+      class Agent < FlowNodeConfiguration
       end
       class Retrieval < FlowNodeConfiguration
       end
-      class Storage < FlowNodeConfiguration
+      class Iterator < FlowNodeConfiguration
+      end
+      class Collector < FlowNodeConfiguration
+      end
+      class InlineCode < FlowNodeConfiguration
+      end
+      class Loop < FlowNodeConfiguration
+      end
+      class LoopInput < FlowNodeConfiguration
+      end
+      class LoopController < FlowNodeConfiguration
       end
       class Unknown < FlowNodeConfiguration
       end
     end
 
     class FlowNodeInput
-      attr_accessor category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")
-      attr_accessor expression: ::String
       attr_accessor name: ::String
       attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+      attr_accessor expression: ::String
+      attr_accessor category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")
       SENSITIVE: [:expression]
     end
 
@@ -1029,109 +1029,69 @@ module Aws::BedrockAgent
     end
 
     class FlowSummary
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor version: ::String
       SENSITIVE: []
     end
 
     class FlowValidation
-      attr_accessor details: Types::FlowValidationDetails
       attr_accessor message: ::String
       attr_accessor severity: ("Warning" | "Error")
+      attr_accessor details: Types::FlowValidationDetails
       attr_accessor type: ("CyclicConnection" | "DuplicateConnections" | "DuplicateConditionExpression" | "UnreachableNode" | "UnknownConnectionSource" | "UnknownConnectionSourceOutput" | "UnknownConnectionTarget" | "UnknownConnectionTargetInput" | "UnknownConnectionCondition" | "MalformedConditionExpression" | "MalformedNodeInputExpression" | "MismatchedNodeInputType" | "MismatchedNodeOutputType" | "IncompatibleConnectionDataType" | "MissingConnectionConfiguration" | "MissingDefaultCondition" | "MissingEndingNodes" | "MissingNodeConfiguration" | "MissingNodeInput" | "MissingNodeOutput" | "MissingStartingNodes" | "MultipleNodeInputConnections" | "UnfulfilledNodeInput" | "UnsatisfiedConnectionConditions" | "Unspecified" | "UnknownNodeInput" | "UnknownNodeOutput" | "MissingLoopInputNode" | "MissingLoopControllerNode" | "MultipleLoopInputNodes" | "MultipleLoopControllerNodes" | "LoopIncompatibleNodeType" | "InvalidLoopBoundary")
       SENSITIVE: []
     end
 
     class FlowValidationDetails
       attr_accessor cyclic_connection: Types::CyclicConnectionFlowValidationDetails
-      attr_accessor duplicate_condition_expression: Types::DuplicateConditionExpressionFlowValidationDetails
       attr_accessor duplicate_connections: Types::DuplicateConnectionsFlowValidationDetails
-      attr_accessor incompatible_connection_data_type: Types::IncompatibleConnectionDataTypeFlowValidationDetails
-      attr_accessor invalid_loop_boundary: Types::InvalidLoopBoundaryFlowValidationDetails
-      attr_accessor loop_incompatible_node_type: Types::LoopIncompatibleNodeTypeFlowValidationDetails
-      attr_accessor malformed_condition_expression: Types::MalformedConditionExpressionFlowValidationDetails
-      attr_accessor malformed_node_input_expression: Types::MalformedNodeInputExpressionFlowValidationDetails
-      attr_accessor mismatched_node_input_type: Types::MismatchedNodeInputTypeFlowValidationDetails
-      attr_accessor mismatched_node_output_type: Types::MismatchedNodeOutputTypeFlowValidationDetails
-      attr_accessor missing_connection_configuration: Types::MissingConnectionConfigurationFlowValidationDetails
-      attr_accessor missing_default_condition: Types::MissingDefaultConditionFlowValidationDetails
-      attr_accessor missing_ending_nodes: Types::MissingEndingNodesFlowValidationDetails
-      attr_accessor missing_loop_controller_node: Types::MissingLoopControllerNodeFlowValidationDetails
-      attr_accessor missing_loop_input_node: Types::MissingLoopInputNodeFlowValidationDetails
-      attr_accessor missing_node_configuration: Types::MissingNodeConfigurationFlowValidationDetails
-      attr_accessor missing_node_input: Types::MissingNodeInputFlowValidationDetails
-      attr_accessor missing_node_output: Types::MissingNodeOutputFlowValidationDetails
-      attr_accessor missing_starting_nodes: Types::MissingStartingNodesFlowValidationDetails
-      attr_accessor multiple_loop_controller_nodes: Types::MultipleLoopControllerNodesFlowValidationDetails
-      attr_accessor multiple_loop_input_nodes: Types::MultipleLoopInputNodesFlowValidationDetails
-      attr_accessor multiple_node_input_connections: Types::MultipleNodeInputConnectionsFlowValidationDetails
-      attr_accessor unfulfilled_node_input: Types::UnfulfilledNodeInputFlowValidationDetails
-      attr_accessor unknown_connection_condition: Types::UnknownConnectionConditionFlowValidationDetails
+      attr_accessor duplicate_condition_expression: Types::DuplicateConditionExpressionFlowValidationDetails
+      attr_accessor unreachable_node: Types::UnreachableNodeFlowValidationDetails
       attr_accessor unknown_connection_source: Types::UnknownConnectionSourceFlowValidationDetails
       attr_accessor unknown_connection_source_output: Types::UnknownConnectionSourceOutputFlowValidationDetails
       attr_accessor unknown_connection_target: Types::UnknownConnectionTargetFlowValidationDetails
       attr_accessor unknown_connection_target_input: Types::UnknownConnectionTargetInputFlowValidationDetails
-      attr_accessor unknown_node_input: Types::UnknownNodeInputFlowValidationDetails
-      attr_accessor unknown_node_output: Types::UnknownNodeOutputFlowValidationDetails
-      attr_accessor unreachable_node: Types::UnreachableNodeFlowValidationDetails
+      attr_accessor unknown_connection_condition: Types::UnknownConnectionConditionFlowValidationDetails
+      attr_accessor malformed_condition_expression: Types::MalformedConditionExpressionFlowValidationDetails
+      attr_accessor malformed_node_input_expression: Types::MalformedNodeInputExpressionFlowValidationDetails
+      attr_accessor mismatched_node_input_type: Types::MismatchedNodeInputTypeFlowValidationDetails
+      attr_accessor mismatched_node_output_type: Types::MismatchedNodeOutputTypeFlowValidationDetails
+      attr_accessor incompatible_connection_data_type: Types::IncompatibleConnectionDataTypeFlowValidationDetails
+      attr_accessor missing_connection_configuration: Types::MissingConnectionConfigurationFlowValidationDetails
+      attr_accessor missing_default_condition: Types::MissingDefaultConditionFlowValidationDetails
+      attr_accessor missing_ending_nodes: Types::MissingEndingNodesFlowValidationDetails
+      attr_accessor missing_node_configuration: Types::MissingNodeConfigurationFlowValidationDetails
+      attr_accessor missing_node_input: Types::MissingNodeInputFlowValidationDetails
+      attr_accessor missing_node_output: Types::MissingNodeOutputFlowValidationDetails
+      attr_accessor missing_starting_nodes: Types::MissingStartingNodesFlowValidationDetails
+      attr_accessor multiple_node_input_connections: Types::MultipleNodeInputConnectionsFlowValidationDetails
+      attr_accessor unfulfilled_node_input: Types::UnfulfilledNodeInputFlowValidationDetails
       attr_accessor unsatisfied_connection_conditions: Types::UnsatisfiedConnectionConditionsFlowValidationDetails
       attr_accessor unspecified: Types::UnspecifiedFlowValidationDetails
+      attr_accessor unknown_node_input: Types::UnknownNodeInputFlowValidationDetails
+      attr_accessor unknown_node_output: Types::UnknownNodeOutputFlowValidationDetails
+      attr_accessor missing_loop_input_node: Types::MissingLoopInputNodeFlowValidationDetails
+      attr_accessor missing_loop_controller_node: Types::MissingLoopControllerNodeFlowValidationDetails
+      attr_accessor multiple_loop_input_nodes: Types::MultipleLoopInputNodesFlowValidationDetails
+      attr_accessor multiple_loop_controller_nodes: Types::MultipleLoopControllerNodesFlowValidationDetails
+      attr_accessor loop_incompatible_node_type: Types::LoopIncompatibleNodeTypeFlowValidationDetails
+      attr_accessor invalid_loop_boundary: Types::InvalidLoopBoundaryFlowValidationDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CyclicConnection < FlowValidationDetails
       end
-      class DuplicateConditionExpression < FlowValidationDetails
-      end
       class DuplicateConnections < FlowValidationDetails
       end
-      class IncompatibleConnectionDataType < FlowValidationDetails
+      class DuplicateConditionExpression < FlowValidationDetails
       end
-      class InvalidLoopBoundary < FlowValidationDetails
-      end
-      class LoopIncompatibleNodeType < FlowValidationDetails
-      end
-      class MalformedConditionExpression < FlowValidationDetails
-      end
-      class MalformedNodeInputExpression < FlowValidationDetails
-      end
-      class MismatchedNodeInputType < FlowValidationDetails
-      end
-      class MismatchedNodeOutputType < FlowValidationDetails
-      end
-      class MissingConnectionConfiguration < FlowValidationDetails
-      end
-      class MissingDefaultCondition < FlowValidationDetails
-      end
-      class MissingEndingNodes < FlowValidationDetails
-      end
-      class MissingLoopControllerNode < FlowValidationDetails
-      end
-      class MissingLoopInputNode < FlowValidationDetails
-      end
-      class MissingNodeConfiguration < FlowValidationDetails
-      end
-      class MissingNodeInput < FlowValidationDetails
-      end
-      class MissingNodeOutput < FlowValidationDetails
-      end
-      class MissingStartingNodes < FlowValidationDetails
-      end
-      class MultipleLoopControllerNodes < FlowValidationDetails
-      end
-      class MultipleLoopInputNodes < FlowValidationDetails
-      end
-      class MultipleNodeInputConnections < FlowValidationDetails
-      end
-      class UnfulfilledNodeInput < FlowValidationDetails
-      end
-      class UnknownConnectionCondition < FlowValidationDetails
+      class UnreachableNode < FlowValidationDetails
       end
       class UnknownConnectionSource < FlowValidationDetails
       end
@@ -1141,32 +1101,72 @@ module Aws::BedrockAgent
       end
       class UnknownConnectionTargetInput < FlowValidationDetails
       end
-      class UnknownNodeInput < FlowValidationDetails
+      class UnknownConnectionCondition < FlowValidationDetails
       end
-      class UnknownNodeOutput < FlowValidationDetails
+      class MalformedConditionExpression < FlowValidationDetails
       end
-      class UnreachableNode < FlowValidationDetails
+      class MalformedNodeInputExpression < FlowValidationDetails
+      end
+      class MismatchedNodeInputType < FlowValidationDetails
+      end
+      class MismatchedNodeOutputType < FlowValidationDetails
+      end
+      class IncompatibleConnectionDataType < FlowValidationDetails
+      end
+      class MissingConnectionConfiguration < FlowValidationDetails
+      end
+      class MissingDefaultCondition < FlowValidationDetails
+      end
+      class MissingEndingNodes < FlowValidationDetails
+      end
+      class MissingNodeConfiguration < FlowValidationDetails
+      end
+      class MissingNodeInput < FlowValidationDetails
+      end
+      class MissingNodeOutput < FlowValidationDetails
+      end
+      class MissingStartingNodes < FlowValidationDetails
+      end
+      class MultipleNodeInputConnections < FlowValidationDetails
+      end
+      class UnfulfilledNodeInput < FlowValidationDetails
       end
       class UnsatisfiedConnectionConditions < FlowValidationDetails
       end
       class Unspecified < FlowValidationDetails
+      end
+      class UnknownNodeInput < FlowValidationDetails
+      end
+      class UnknownNodeOutput < FlowValidationDetails
+      end
+      class MissingLoopInputNode < FlowValidationDetails
+      end
+      class MissingLoopControllerNode < FlowValidationDetails
+      end
+      class MultipleLoopInputNodes < FlowValidationDetails
+      end
+      class MultipleLoopControllerNodes < FlowValidationDetails
+      end
+      class LoopIncompatibleNodeType < FlowValidationDetails
+      end
+      class InvalidLoopBoundary < FlowValidationDetails
       end
       class Unknown < FlowValidationDetails
       end
     end
 
     class FlowVersionSummary
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
       attr_accessor id: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor version: ::String
       SENSITIVE: []
     end
 
     class Function
-      attr_accessor description: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor parameters: ::Hash[::String, Types::ParameterDetail]
       attr_accessor require_confirmation: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -1184,9 +1184,9 @@ module Aws::BedrockAgent
     end
 
     class GetAgentActionGroupRequest
-      attr_accessor action_group_id: ::String
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
+      attr_accessor action_group_id: ::String
       SENSITIVE: []
     end
 
@@ -1196,8 +1196,8 @@ module Aws::BedrockAgent
     end
 
     class GetAgentAliasRequest
-      attr_accessor agent_alias_id: ::String
       attr_accessor agent_id: ::String
+      attr_accessor agent_alias_id: ::String
       SENSITIVE: []
     end
 
@@ -1252,8 +1252,8 @@ module Aws::BedrockAgent
     end
 
     class GetDataSourceRequest
-      attr_accessor data_source_id: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       SENSITIVE: []
     end
 
@@ -1263,20 +1263,20 @@ module Aws::BedrockAgent
     end
 
     class GetFlowAliasRequest
-      attr_accessor alias_identifier: ::String
       attr_accessor flow_identifier: ::String
+      attr_accessor alias_identifier: ::String
       SENSITIVE: []
     end
 
     class GetFlowAliasResponse
-      attr_accessor arn: ::String
-      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor flow_id: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1287,18 +1287,18 @@ module Aws::BedrockAgent
     end
 
     class GetFlowResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor validations: ::Array[Types::FlowValidation]
       attr_accessor version: ::String
+      attr_accessor definition: Types::FlowDefinition
+      attr_accessor validations: ::Array[Types::FlowValidation]
       SENSITIVE: [:definition]
     end
 
@@ -1309,23 +1309,23 @@ module Aws::BedrockAgent
     end
 
     class GetFlowVersionResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor version: ::String
+      attr_accessor definition: Types::FlowDefinition
       SENSITIVE: [:definition]
     end
 
     class GetIngestionJobRequest
+      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor ingestion_job_id: ::String
-      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
@@ -1335,9 +1335,9 @@ module Aws::BedrockAgent
     end
 
     class GetKnowledgeBaseDocumentsRequest
+      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor document_identifiers: ::Array[Types::DocumentIdentifier]
-      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
@@ -1363,16 +1363,16 @@ module Aws::BedrockAgent
     end
 
     class GetPromptResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor default_variant: ::String
-      attr_accessor description: ::String
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor updated_at: ::Time
       attr_accessor variants: ::Array[Types::PromptVariant]
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
       attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: [:variants]
     end
 
@@ -1399,19 +1399,19 @@ module Aws::BedrockAgent
     end
 
     class InferenceConfiguration
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor top_k: ::Integer
       attr_accessor maximum_length: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
-      attr_accessor temperature: ::Float
-      attr_accessor top_k: ::Integer
-      attr_accessor top_p: ::Float
       SENSITIVE: []
     end
 
     class IngestKnowledgeBaseDocumentsRequest
-      attr_accessor client_token: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor documents: ::Array[Types::KnowledgeBaseDocument]
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor documents: ::Array[Types::KnowledgeBaseDocument]
       SENSITIVE: []
     end
 
@@ -1421,14 +1421,14 @@ module Aws::BedrockAgent
     end
 
     class IngestionJob
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
-      attr_accessor failure_reasons: ::Array[::String]
-      attr_accessor ingestion_job_id: ::String
       attr_accessor knowledge_base_id: ::String
-      attr_accessor started_at: ::Time
-      attr_accessor statistics: Types::IngestionJobStatistics
+      attr_accessor data_source_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor description: ::String
       attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor statistics: Types::IngestionJobStatistics
+      attr_accessor failure_reasons: ::Array[::String]
+      attr_accessor started_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
@@ -1447,25 +1447,25 @@ module Aws::BedrockAgent
     end
 
     class IngestionJobStatistics
+      attr_accessor number_of_documents_scanned: ::Integer
+      attr_accessor number_of_metadata_documents_scanned: ::Integer
+      attr_accessor number_of_new_documents_indexed: ::Integer
+      attr_accessor number_of_modified_documents_indexed: ::Integer
+      attr_accessor number_of_metadata_documents_modified: ::Integer
       attr_accessor number_of_documents_deleted: ::Integer
       attr_accessor number_of_documents_failed: ::Integer
-      attr_accessor number_of_documents_scanned: ::Integer
-      attr_accessor number_of_metadata_documents_modified: ::Integer
-      attr_accessor number_of_metadata_documents_scanned: ::Integer
-      attr_accessor number_of_modified_documents_indexed: ::Integer
-      attr_accessor number_of_new_documents_indexed: ::Integer
       SENSITIVE: []
     end
 
     class IngestionJobSummary
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
-      attr_accessor ingestion_job_id: ::String
       attr_accessor knowledge_base_id: ::String
-      attr_accessor started_at: ::Time
-      attr_accessor statistics: Types::IngestionJobStatistics
+      attr_accessor data_source_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor description: ::String
       attr_accessor status: ("STARTING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor started_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor statistics: Types::IngestionJobStatistics
       SENSITIVE: []
     end
 
@@ -1476,9 +1476,9 @@ module Aws::BedrockAgent
     end
 
     class InlineContent
+      attr_accessor type: ("BYTE" | "TEXT")
       attr_accessor byte_content: Types::ByteContentDoc
       attr_accessor text_content: Types::TextContentDoc
-      attr_accessor type: ("BYTE" | "TEXT")
       SENSITIVE: []
     end
 
@@ -1511,61 +1511,61 @@ module Aws::BedrockAgent
     end
 
     class KnowledgeBase
-      attr_accessor created_at: ::Time
-      attr_accessor description: ::String
-      attr_accessor failure_reasons: ::Array[::String]
-      attr_accessor knowledge_base_arn: ::String
-      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
+      attr_accessor knowledge_base_arn: ::String
+      attr_accessor description: ::String
       attr_accessor role_arn: ::String
-      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor storage_configuration: Types::StorageConfiguration
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
     class KnowledgeBaseConfiguration
-      attr_accessor kendra_knowledge_base_configuration: Types::KendraKnowledgeBaseConfiguration
-      attr_accessor sql_knowledge_base_configuration: Types::SqlKnowledgeBaseConfiguration
       attr_accessor type: ("VECTOR" | "KENDRA" | "SQL")
       attr_accessor vector_knowledge_base_configuration: Types::VectorKnowledgeBaseConfiguration
+      attr_accessor kendra_knowledge_base_configuration: Types::KendraKnowledgeBaseConfiguration
+      attr_accessor sql_knowledge_base_configuration: Types::SqlKnowledgeBaseConfiguration
       SENSITIVE: []
     end
 
     class KnowledgeBaseDocument
-      attr_accessor content: Types::DocumentContent
       attr_accessor metadata: Types::DocumentMetadata
+      attr_accessor content: Types::DocumentContent
       SENSITIVE: []
     end
 
     class KnowledgeBaseDocumentDetail
-      attr_accessor data_source_id: ::String
-      attr_accessor identifier: Types::DocumentIdentifier
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor status: ("INDEXED" | "PARTIALLY_INDEXED" | "PENDING" | "FAILED" | "METADATA_PARTIALLY_INDEXED" | "METADATA_UPDATE_FAILED" | "IGNORED" | "NOT_FOUND" | "STARTING" | "IN_PROGRESS" | "DELETING" | "DELETE_IN_PROGRESS")
+      attr_accessor identifier: Types::DocumentIdentifier
       attr_accessor status_reason: ::String
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class KnowledgeBaseFlowNodeConfiguration
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor model_id: ::String
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor number_of_results: ::Integer
-      attr_accessor orchestration_configuration: Types::KnowledgeBaseOrchestrationConfiguration
       attr_accessor prompt_template: Types::KnowledgeBasePromptTemplate
+      attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor reranking_configuration: Types::VectorSearchRerankingConfiguration
+      attr_accessor orchestration_configuration: Types::KnowledgeBaseOrchestrationConfiguration
       SENSITIVE: []
     end
 
     class KnowledgeBaseOrchestrationConfiguration
-      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
-      attr_accessor inference_config: Types::PromptInferenceConfiguration
-      attr_accessor performance_config: Types::PerformanceConfiguration
       attr_accessor prompt_template: Types::KnowledgeBasePromptTemplate
+      attr_accessor inference_config: Types::PromptInferenceConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor performance_config: Types::PerformanceConfiguration
       SENSITIVE: []
     end
 
@@ -1575,9 +1575,9 @@ module Aws::BedrockAgent
     end
 
     class KnowledgeBaseSummary
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "UPDATING" | "FAILED" | "DELETE_UNSUCCESSFUL")
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -1726,12 +1726,12 @@ module Aws::BedrockAgent
     end
 
     class ListIngestionJobsRequest
+      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor filters: ::Array[Types::IngestionJobFilter]
-      attr_accessor knowledge_base_id: ::String
+      attr_accessor sort_by: Types::IngestionJobSortBy
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor sort_by: Types::IngestionJobSortBy
       SENSITIVE: []
     end
 
@@ -1742,8 +1742,8 @@ module Aws::BedrockAgent
     end
 
     class ListKnowledgeBaseDocumentsRequest
-      attr_accessor data_source_id: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1768,15 +1768,15 @@ module Aws::BedrockAgent
     end
 
     class ListPromptsRequest
+      attr_accessor prompt_identifier: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor prompt_identifier: ::String
       SENSITIVE: []
     end
 
     class ListPromptsResponse
-      attr_accessor next_token: ::String
       attr_accessor prompt_summaries: ::Array[Types::PromptSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1802,9 +1802,9 @@ module Aws::BedrockAgent
     end
 
     class LoopIncompatibleNodeTypeFlowValidationDetails
-      attr_accessor incompatible_node_name: ::String
-      attr_accessor incompatible_node_type: ("Input" | "Condition" | "Iterator" | "Collector")
       attr_accessor node: ::String
+      attr_accessor incompatible_node_type: ("Input" | "Condition" | "Iterator" | "Collector")
+      attr_accessor incompatible_node_name: ::String
       SENSITIVE: []
     end
 
@@ -1812,29 +1812,29 @@ module Aws::BedrockAgent
     end
 
     class MalformedConditionExpressionFlowValidationDetails
-      attr_accessor cause: ::String
-      attr_accessor condition: ::String
       attr_accessor node: ::String
+      attr_accessor condition: ::String
+      attr_accessor cause: ::String
       SENSITIVE: []
     end
 
     class MalformedNodeInputExpressionFlowValidationDetails
-      attr_accessor cause: ::String
-      attr_accessor input: ::String
       attr_accessor node: ::String
+      attr_accessor input: ::String
+      attr_accessor cause: ::String
       SENSITIVE: []
     end
 
     class MemoryConfiguration
       attr_accessor enabled_memory_types: ::Array[("SESSION_SUMMARY")]
-      attr_accessor session_summary_configuration: Types::SessionSummaryConfiguration
       attr_accessor storage_days: ::Integer
+      attr_accessor session_summary_configuration: Types::SessionSummaryConfiguration
       SENSITIVE: []
     end
 
     class Message
-      attr_accessor content: ::Array[Types::ContentBlock]
       attr_accessor role: ("user" | "assistant")
+      attr_accessor content: ::Array[Types::ContentBlock]
       SENSITIVE: []
     end
 
@@ -1845,11 +1845,11 @@ module Aws::BedrockAgent
     end
 
     class MetadataAttributeValue
-      attr_accessor boolean_value: bool
-      attr_accessor number_value: ::Float
-      attr_accessor string_list_value: ::Array[::String]
-      attr_accessor string_value: ::String
       attr_accessor type: ("BOOLEAN" | "NUMBER" | "STRING" | "STRING_LIST")
+      attr_accessor number_value: ::Float
+      attr_accessor boolean_value: bool
+      attr_accessor string_value: ::String
+      attr_accessor string_list_value: ::Array[::String]
       SENSITIVE: [:number_value, :string_value]
     end
 
@@ -1860,16 +1860,16 @@ module Aws::BedrockAgent
     end
 
     class MismatchedNodeInputTypeFlowValidationDetails
-      attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
-      attr_accessor input: ::String
       attr_accessor node: ::String
+      attr_accessor input: ::String
+      attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
       SENSITIVE: []
     end
 
     class MismatchedNodeOutputTypeFlowValidationDetails
-      attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
       attr_accessor node: ::String
       attr_accessor output: ::String
+      attr_accessor expected_type: ("String" | "Number" | "Boolean" | "Object" | "Array")
       SENSITIVE: []
     end
 
@@ -1902,8 +1902,8 @@ module Aws::BedrockAgent
     end
 
     class MissingNodeInputFlowValidationDetails
-      attr_accessor input: ::String
       attr_accessor node: ::String
+      attr_accessor input: ::String
       SENSITIVE: []
     end
 
@@ -1917,21 +1917,21 @@ module Aws::BedrockAgent
     end
 
     class MongoDbAtlasConfiguration
-      attr_accessor collection_name: ::String
-      attr_accessor credentials_secret_arn: ::String
-      attr_accessor database_name: ::String
       attr_accessor endpoint: ::String
-      attr_accessor endpoint_service_name: ::String
-      attr_accessor field_mapping: Types::MongoDbAtlasFieldMapping
-      attr_accessor text_index_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor collection_name: ::String
       attr_accessor vector_index_name: ::String
+      attr_accessor credentials_secret_arn: ::String
+      attr_accessor field_mapping: Types::MongoDbAtlasFieldMapping
+      attr_accessor endpoint_service_name: ::String
+      attr_accessor text_index_name: ::String
       SENSITIVE: []
     end
 
     class MongoDbAtlasFieldMapping
-      attr_accessor metadata_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
       SENSITIVE: []
     end
 
@@ -1946,49 +1946,49 @@ module Aws::BedrockAgent
     end
 
     class MultipleNodeInputConnectionsFlowValidationDetails
-      attr_accessor input: ::String
       attr_accessor node: ::String
+      attr_accessor input: ::String
       SENSITIVE: []
     end
 
     class NeptuneAnalyticsConfiguration
-      attr_accessor field_mapping: Types::NeptuneAnalyticsFieldMapping
       attr_accessor graph_arn: ::String
+      attr_accessor field_mapping: Types::NeptuneAnalyticsFieldMapping
       SENSITIVE: [:graph_arn]
     end
 
     class NeptuneAnalyticsFieldMapping
-      attr_accessor metadata_field: ::String
       attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
       SENSITIVE: []
     end
 
     class OpenSearchManagedClusterConfiguration
-      attr_accessor domain_arn: ::String
       attr_accessor domain_endpoint: ::String
-      attr_accessor field_mapping: Types::OpenSearchManagedClusterFieldMapping
+      attr_accessor domain_arn: ::String
       attr_accessor vector_index_name: ::String
+      attr_accessor field_mapping: Types::OpenSearchManagedClusterFieldMapping
       SENSITIVE: [:vector_index_name]
     end
 
     class OpenSearchManagedClusterFieldMapping
-      attr_accessor metadata_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
       SENSITIVE: []
     end
 
     class OpenSearchServerlessConfiguration
       attr_accessor collection_arn: ::String
-      attr_accessor field_mapping: Types::OpenSearchServerlessFieldMapping
       attr_accessor vector_index_name: ::String
+      attr_accessor field_mapping: Types::OpenSearchServerlessFieldMapping
       SENSITIVE: []
     end
 
     class OpenSearchServerlessFieldMapping
-      attr_accessor metadata_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
       SENSITIVE: []
     end
 
@@ -2008,15 +2008,15 @@ module Aws::BedrockAgent
 
     class ParameterDetail
       attr_accessor description: ::String
-      attr_accessor required: bool
       attr_accessor type: ("string" | "number" | "integer" | "boolean" | "array")
+      attr_accessor required: bool
       SENSITIVE: []
     end
 
     class ParsingConfiguration
-      attr_accessor bedrock_data_automation_configuration: Types::BedrockDataAutomationConfiguration
-      attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration
       attr_accessor parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION")
+      attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration
+      attr_accessor bedrock_data_automation_configuration: Types::BedrockDataAutomationConfiguration
       SENSITIVE: []
     end
 
@@ -2026,10 +2026,10 @@ module Aws::BedrockAgent
     end
 
     class PatternObjectFilter
-      attr_accessor exclusion_filters: ::Array[::String]
-      attr_accessor inclusion_filters: ::Array[::String]
       attr_accessor object_type: ::String
-      SENSITIVE: [:exclusion_filters, :inclusion_filters, :object_type]
+      attr_accessor inclusion_filters: ::Array[::String]
+      attr_accessor exclusion_filters: ::Array[::String]
+      SENSITIVE: [:object_type, :inclusion_filters, :exclusion_filters]
     end
 
     class PatternObjectFilterConfiguration
@@ -2045,14 +2045,14 @@ module Aws::BedrockAgent
     class PineconeConfiguration
       attr_accessor connection_string: ::String
       attr_accessor credentials_secret_arn: ::String
-      attr_accessor field_mapping: Types::PineconeFieldMapping
       attr_accessor namespace: ::String
+      attr_accessor field_mapping: Types::PineconeFieldMapping
       SENSITIVE: []
     end
 
     class PineconeFieldMapping
-      attr_accessor metadata_field: ::String
       attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
       SENSITIVE: []
     end
 
@@ -2086,29 +2086,29 @@ module Aws::BedrockAgent
     end
 
     class PromptConfiguration
-      attr_accessor additional_model_request_fields: untyped
-      attr_accessor base_prompt_template: ::String
-      attr_accessor foundation_model: ::String
-      attr_accessor inference_configuration: Types::InferenceConfiguration
-      attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "MEMORY_SUMMARIZATION")
       attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
       attr_accessor prompt_state: ("ENABLED" | "DISABLED")
-      attr_accessor prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "MEMORY_SUMMARIZATION")
+      attr_accessor base_prompt_template: ::String
+      attr_accessor inference_configuration: Types::InferenceConfiguration
+      attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor foundation_model: ::String
+      attr_accessor additional_model_request_fields: untyped
       SENSITIVE: [:base_prompt_template]
     end
 
     class PromptFlowNodeConfiguration
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       attr_accessor source_configuration: Types::PromptFlowNodeSourceConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
       SENSITIVE: []
     end
 
     class PromptFlowNodeInlineConfiguration
-      attr_accessor additional_model_request_fields: untyped
-      attr_accessor inference_configuration: Types::PromptInferenceConfiguration
-      attr_accessor model_id: ::String
-      attr_accessor template_configuration: Types::PromptTemplateConfiguration
       attr_accessor template_type: ("TEXT" | "CHAT")
+      attr_accessor template_configuration: Types::PromptTemplateConfiguration
+      attr_accessor model_id: ::String
+      attr_accessor inference_configuration: Types::PromptInferenceConfiguration
+      attr_accessor additional_model_request_fields: untyped
       SENSITIVE: []
     end
 
@@ -2118,14 +2118,14 @@ module Aws::BedrockAgent
     end
 
     class PromptFlowNodeSourceConfiguration
-      attr_accessor inline: Types::PromptFlowNodeInlineConfiguration
       attr_accessor resource: Types::PromptFlowNodeResourceConfiguration
+      attr_accessor inline: Types::PromptFlowNodeInlineConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Inline < PromptFlowNodeSourceConfiguration
-      end
       class Resource < PromptFlowNodeSourceConfiguration
+      end
+      class Inline < PromptFlowNodeSourceConfiguration
       end
       class Unknown < PromptFlowNodeSourceConfiguration
       end
@@ -2165,60 +2165,60 @@ module Aws::BedrockAgent
     end
 
     class PromptModelInferenceConfiguration
-      attr_accessor max_tokens: ::Integer
-      attr_accessor stop_sequences: ::Array[::String]
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
+      attr_accessor max_tokens: ::Integer
+      attr_accessor stop_sequences: ::Array[::String]
       SENSITIVE: []
     end
 
     class PromptOverrideConfiguration
-      attr_accessor override_lambda: ::String
       attr_accessor prompt_configurations: ::Array[Types::PromptConfiguration]
+      attr_accessor override_lambda: ::String
       SENSITIVE: []
     end
 
     class PromptSummary
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
       attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class PromptTemplateConfiguration
-      attr_accessor chat: Types::ChatPromptTemplateConfiguration
       attr_accessor text: Types::TextPromptTemplateConfiguration
+      attr_accessor chat: Types::ChatPromptTemplateConfiguration
       attr_accessor unknown: untyped
-      SENSITIVE: [:chat, :text]
+      SENSITIVE: [:text, :chat]
 
-      class Chat < PromptTemplateConfiguration
-      end
       class Text < PromptTemplateConfiguration
+      end
+      class Chat < PromptTemplateConfiguration
       end
       class Unknown < PromptTemplateConfiguration
       end
     end
 
     class PromptVariant
-      attr_accessor additional_model_request_fields: untyped
-      attr_accessor gen_ai_resource: Types::PromptGenAiResource
+      attr_accessor name: ::String
+      attr_accessor template_type: ("TEXT" | "CHAT")
+      attr_accessor template_configuration: Types::PromptTemplateConfiguration
+      attr_accessor model_id: ::String
       attr_accessor inference_configuration: Types::PromptInferenceConfiguration
       attr_accessor metadata: ::Array[Types::PromptMetadataEntry]
-      attr_accessor model_id: ::String
-      attr_accessor name: ::String
-      attr_accessor template_configuration: Types::PromptTemplateConfiguration
-      attr_accessor template_type: ("TEXT" | "CHAT")
-      SENSITIVE: [:gen_ai_resource, :metadata]
+      attr_accessor additional_model_request_fields: untyped
+      attr_accessor gen_ai_resource: Types::PromptGenAiResource
+      SENSITIVE: [:metadata, :gen_ai_resource]
     end
 
     class QueryGenerationColumn
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor inclusion: ("INCLUDE" | "EXCLUDE")
-      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -2229,69 +2229,69 @@ module Aws::BedrockAgent
     end
 
     class QueryGenerationContext
-      attr_accessor curated_queries: ::Array[Types::CuratedQuery]
       attr_accessor tables: ::Array[Types::QueryGenerationTable]
+      attr_accessor curated_queries: ::Array[Types::CuratedQuery]
       SENSITIVE: []
     end
 
     class QueryGenerationTable
-      attr_accessor columns: ::Array[Types::QueryGenerationColumn]
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor inclusion: ("INCLUDE" | "EXCLUDE")
-      attr_accessor name: ::String
+      attr_accessor columns: ::Array[Types::QueryGenerationColumn]
       SENSITIVE: []
     end
 
     class RdsConfiguration
+      attr_accessor resource_arn: ::String
       attr_accessor credentials_secret_arn: ::String
       attr_accessor database_name: ::String
-      attr_accessor field_mapping: Types::RdsFieldMapping
-      attr_accessor resource_arn: ::String
       attr_accessor table_name: ::String
+      attr_accessor field_mapping: Types::RdsFieldMapping
       SENSITIVE: []
     end
 
     class RdsFieldMapping
-      attr_accessor custom_metadata_field: ::String
-      attr_accessor metadata_field: ::String
       attr_accessor primary_key_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
+      attr_accessor custom_metadata_field: ::String
       SENSITIVE: []
     end
 
     class RedisEnterpriseCloudConfiguration
-      attr_accessor credentials_secret_arn: ::String
       attr_accessor endpoint: ::String
-      attr_accessor field_mapping: Types::RedisEnterpriseCloudFieldMapping
       attr_accessor vector_index_name: ::String
+      attr_accessor credentials_secret_arn: ::String
+      attr_accessor field_mapping: Types::RedisEnterpriseCloudFieldMapping
       SENSITIVE: []
     end
 
     class RedisEnterpriseCloudFieldMapping
-      attr_accessor metadata_field: ::String
-      attr_accessor text_field: ::String
       attr_accessor vector_field: ::String
+      attr_accessor text_field: ::String
+      attr_accessor metadata_field: ::String
       SENSITIVE: []
     end
 
     class RedshiftConfiguration
+      attr_accessor storage_configurations: ::Array[Types::RedshiftQueryEngineStorageConfiguration]
       attr_accessor query_engine_configuration: Types::RedshiftQueryEngineConfiguration
       attr_accessor query_generation_configuration: Types::QueryGenerationConfiguration
-      attr_accessor storage_configurations: ::Array[Types::RedshiftQueryEngineStorageConfiguration]
       SENSITIVE: []
     end
 
     class RedshiftProvisionedAuthConfiguration
-      attr_accessor database_user: ::String
       attr_accessor type: ("IAM" | "USERNAME_PASSWORD" | "USERNAME")
+      attr_accessor database_user: ::String
       attr_accessor username_password_secret_arn: ::String
       SENSITIVE: []
     end
 
     class RedshiftProvisionedConfiguration
-      attr_accessor auth_configuration: Types::RedshiftProvisionedAuthConfiguration
       attr_accessor cluster_identifier: ::String
+      attr_accessor auth_configuration: Types::RedshiftProvisionedAuthConfiguration
       SENSITIVE: []
     end
 
@@ -2301,9 +2301,9 @@ module Aws::BedrockAgent
     end
 
     class RedshiftQueryEngineConfiguration
-      attr_accessor provisioned_configuration: Types::RedshiftProvisionedConfiguration
-      attr_accessor serverless_configuration: Types::RedshiftServerlessConfiguration
       attr_accessor type: ("SERVERLESS" | "PROVISIONED")
+      attr_accessor serverless_configuration: Types::RedshiftServerlessConfiguration
+      attr_accessor provisioned_configuration: Types::RedshiftProvisionedConfiguration
       SENSITIVE: []
     end
 
@@ -2313,9 +2313,9 @@ module Aws::BedrockAgent
     end
 
     class RedshiftQueryEngineStorageConfiguration
+      attr_accessor type: ("REDSHIFT" | "AWS_DATA_CATALOG")
       attr_accessor aws_data_catalog_configuration: Types::RedshiftQueryEngineAwsDataCatalogStorageConfiguration
       attr_accessor redshift_configuration: Types::RedshiftQueryEngineRedshiftStorageConfiguration
-      attr_accessor type: ("REDSHIFT" | "AWS_DATA_CATALOG")
       SENSITIVE: []
     end
 
@@ -2326,20 +2326,20 @@ module Aws::BedrockAgent
     end
 
     class RedshiftServerlessConfiguration
-      attr_accessor auth_configuration: Types::RedshiftServerlessAuthConfiguration
       attr_accessor workgroup_arn: ::String
+      attr_accessor auth_configuration: Types::RedshiftServerlessAuthConfiguration
       SENSITIVE: []
     end
 
     class RerankingMetadataSelectiveModeConfiguration
-      attr_accessor fields_to_exclude: ::Array[Types::FieldForReranking]
       attr_accessor fields_to_include: ::Array[Types::FieldForReranking]
+      attr_accessor fields_to_exclude: ::Array[Types::FieldForReranking]
       attr_accessor unknown: untyped
-      SENSITIVE: [:fields_to_exclude, :fields_to_include]
+      SENSITIVE: [:fields_to_include, :fields_to_exclude]
 
-      class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration
-      end
       class FieldsToInclude < RerankingMetadataSelectiveModeConfiguration
+      end
+      class FieldsToExclude < RerankingMetadataSelectiveModeConfiguration
       end
       class Unknown < RerankingMetadataSelectiveModeConfiguration
       end
@@ -2378,8 +2378,8 @@ module Aws::BedrockAgent
 
     class S3DataSourceConfiguration
       attr_accessor bucket_arn: ::String
-      attr_accessor bucket_owner_account_id: ::String
       attr_accessor inclusion_prefixes: ::Array[::String]
+      attr_accessor bucket_owner_account_id: ::String
       SENSITIVE: []
     end
 
@@ -2395,10 +2395,10 @@ module Aws::BedrockAgent
     end
 
     class S3VectorsConfiguration
+      attr_accessor vector_bucket_arn: ::String
       attr_accessor index_arn: ::String
       attr_accessor index_name: ::String
-      attr_accessor vector_bucket_arn: ::String
-      SENSITIVE: [:index_arn, :index_name, :vector_bucket_arn]
+      SENSITIVE: [:vector_bucket_arn, :index_arn, :index_name]
     end
 
     class SalesforceCrawlerConfiguration
@@ -2407,15 +2407,15 @@ module Aws::BedrockAgent
     end
 
     class SalesforceDataSourceConfiguration
-      attr_accessor crawler_configuration: Types::SalesforceCrawlerConfiguration
       attr_accessor source_configuration: Types::SalesforceSourceConfiguration
+      attr_accessor crawler_configuration: Types::SalesforceCrawlerConfiguration
       SENSITIVE: []
     end
 
     class SalesforceSourceConfiguration
+      attr_accessor host_url: ::String
       attr_accessor auth_type: ("OAUTH2_CLIENT_CREDENTIALS")
       attr_accessor credentials_secret_arn: ::String
-      attr_accessor host_url: ::String
       SENSITIVE: []
     end
 
@@ -2425,9 +2425,9 @@ module Aws::BedrockAgent
     end
 
     class SemanticChunkingConfiguration
-      attr_accessor breakpoint_percentile_threshold: ::Integer
-      attr_accessor buffer_size: ::Integer
       attr_accessor max_tokens: ::Integer
+      attr_accessor buffer_size: ::Integer
+      attr_accessor breakpoint_percentile_threshold: ::Integer
       SENSITIVE: []
     end
 
@@ -2452,18 +2452,18 @@ module Aws::BedrockAgent
     end
 
     class SharePointDataSourceConfiguration
-      attr_accessor crawler_configuration: Types::SharePointCrawlerConfiguration
       attr_accessor source_configuration: Types::SharePointSourceConfiguration
+      attr_accessor crawler_configuration: Types::SharePointCrawlerConfiguration
       SENSITIVE: []
     end
 
     class SharePointSourceConfiguration
+      attr_accessor tenant_id: ::String
+      attr_accessor domain: ::String
+      attr_accessor site_urls: ::Array[::String]
+      attr_accessor host_type: ("ONLINE")
       attr_accessor auth_type: ("OAUTH2_CLIENT_CREDENTIALS" | "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS")
       attr_accessor credentials_secret_arn: ::String
-      attr_accessor domain: ::String
-      attr_accessor host_type: ("ONLINE")
-      attr_accessor site_urls: ::Array[::String]
-      attr_accessor tenant_id: ::String
       SENSITIVE: []
     end
 
@@ -2473,16 +2473,16 @@ module Aws::BedrockAgent
     end
 
     class SqlKnowledgeBaseConfiguration
-      attr_accessor redshift_configuration: Types::RedshiftConfiguration
       attr_accessor type: ("REDSHIFT")
+      attr_accessor redshift_configuration: Types::RedshiftConfiguration
       SENSITIVE: []
     end
 
     class StartIngestionJobRequest
-      attr_accessor client_token: ::String
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -2492,9 +2492,9 @@ module Aws::BedrockAgent
     end
 
     class StopIngestionJobRequest
+      attr_accessor knowledge_base_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor ingestion_job_id: ::String
-      attr_accessor knowledge_base_id: ::String
       SENSITIVE: []
     end
 
@@ -2504,15 +2504,15 @@ module Aws::BedrockAgent
     end
 
     class StorageConfiguration
+      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER" | "S3_VECTORS")
+      attr_accessor opensearch_serverless_configuration: Types::OpenSearchServerlessConfiguration
+      attr_accessor opensearch_managed_cluster_configuration: Types::OpenSearchManagedClusterConfiguration
+      attr_accessor pinecone_configuration: Types::PineconeConfiguration
+      attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
+      attr_accessor rds_configuration: Types::RdsConfiguration
       attr_accessor mongo_db_atlas_configuration: Types::MongoDbAtlasConfiguration
       attr_accessor neptune_analytics_configuration: Types::NeptuneAnalyticsConfiguration
-      attr_accessor opensearch_managed_cluster_configuration: Types::OpenSearchManagedClusterConfiguration
-      attr_accessor opensearch_serverless_configuration: Types::OpenSearchServerlessConfiguration
-      attr_accessor pinecone_configuration: Types::PineconeConfiguration
-      attr_accessor rds_configuration: Types::RdsConfiguration
-      attr_accessor redis_enterprise_cloud_configuration: Types::RedisEnterpriseCloudConfiguration
       attr_accessor s3_vectors_configuration: Types::S3VectorsConfiguration
-      attr_accessor type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER" | "S3_VECTORS")
       SENSITIVE: []
     end
 
@@ -2543,20 +2543,20 @@ module Aws::BedrockAgent
     end
 
     class SupplementalDataStorageLocation
-      attr_accessor s3_location: Types::S3Location
       attr_accessor type: ("S3")
+      attr_accessor s3_location: Types::S3Location
       SENSITIVE: []
     end
 
     class SystemContentBlock
-      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor text: ::String
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class CachePoint < SystemContentBlock
-      end
       class Text < SystemContentBlock
+      end
+      class CachePoint < SystemContentBlock
       end
       class Unknown < SystemContentBlock
       end
@@ -2577,10 +2577,10 @@ module Aws::BedrockAgent
     end
 
     class TextPromptTemplateConfiguration
+      attr_accessor text: ::String
       attr_accessor cache_point: Types::CachePointBlock
       attr_accessor input_variables: ::Array[Types::PromptInputVariable]
-      attr_accessor text: ::String
-      SENSITIVE: [:input_variables, :text]
+      SENSITIVE: [:text, :input_variables]
     end
 
     class ThrottlingException
@@ -2589,29 +2589,29 @@ module Aws::BedrockAgent
     end
 
     class Tool
-      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor tool_spec: Types::ToolSpecification
+      attr_accessor cache_point: Types::CachePointBlock
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class CachePoint < Tool
-      end
       class ToolSpec < Tool
+      end
+      class CachePoint < Tool
       end
       class Unknown < Tool
       end
     end
 
     class ToolChoice
-      attr_accessor any: Types::AnyToolChoice
       attr_accessor auto: Types::AutoToolChoice
+      attr_accessor any: Types::AnyToolChoice
       attr_accessor tool: Types::SpecificToolChoice
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class Any < ToolChoice
-      end
       class Auto < ToolChoice
+      end
+      class Any < ToolChoice
       end
       class Tool < ToolChoice
       end
@@ -2620,9 +2620,9 @@ module Aws::BedrockAgent
     end
 
     class ToolConfiguration
-      attr_accessor tool_choice: Types::ToolChoice
       attr_accessor tools: ::Array[Types::Tool]
-      SENSITIVE: [:tool_choice, :tools]
+      attr_accessor tool_choice: Types::ToolChoice
+      SENSITIVE: [:tools, :tool_choice]
     end
 
     class ToolInputSchema
@@ -2637,15 +2637,15 @@ module Aws::BedrockAgent
     end
 
     class ToolSpecification
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor input_schema: Types::ToolInputSchema
-      attr_accessor name: ::String
       SENSITIVE: []
     end
 
     class Transformation
-      attr_accessor step_to_apply: ("POST_CHUNKING")
       attr_accessor transformation_function: Types::TransformationFunction
+      attr_accessor step_to_apply: ("POST_CHUNKING")
       SENSITIVE: []
     end
 
@@ -2660,8 +2660,8 @@ module Aws::BedrockAgent
     end
 
     class UnfulfilledNodeInputFlowValidationDetails
-      attr_accessor input: ::String
       attr_accessor node: ::String
+      attr_accessor input: ::String
       SENSITIVE: []
     end
 
@@ -2691,8 +2691,8 @@ module Aws::BedrockAgent
     end
 
     class UnknownNodeInputFlowValidationDetails
-      attr_accessor input: ::String
       attr_accessor node: ::String
+      attr_accessor input: ::String
       SENSITIVE: []
     end
 
@@ -2725,17 +2725,17 @@ module Aws::BedrockAgent
     end
 
     class UpdateAgentActionGroupRequest
-      attr_accessor action_group_executor: Types::ActionGroupExecutor
-      attr_accessor action_group_id: ::String
-      attr_accessor action_group_name: ::String
-      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor api_schema: Types::APISchema
+      attr_accessor action_group_id: ::String
+      attr_accessor action_group_name: ::String
       attr_accessor description: ::String
-      attr_accessor function_schema: Types::FunctionSchema
       attr_accessor parent_action_group_signature: ("AMAZON.UserInput" | "AMAZON.CodeInterpreter" | "ANTHROPIC.Computer" | "ANTHROPIC.Bash" | "ANTHROPIC.TextEditor")
       attr_accessor parent_action_group_signature_params: ::Hash[::String, ::String]
+      attr_accessor action_group_executor: Types::ActionGroupExecutor
+      attr_accessor action_group_state: ("ENABLED" | "DISABLED")
+      attr_accessor api_schema: Types::APISchema
+      attr_accessor function_schema: Types::FunctionSchema
       SENSITIVE: []
     end
 
@@ -2745,12 +2745,12 @@ module Aws::BedrockAgent
     end
 
     class UpdateAgentAliasRequest
+      attr_accessor agent_id: ::String
       attr_accessor agent_alias_id: ::String
       attr_accessor agent_alias_name: ::String
-      attr_accessor agent_id: ::String
-      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::AgentAliasRoutingConfigurationListItem]
+      attr_accessor alias_invocation_state: ("ACCEPT_INVOCATIONS" | "REJECT_INVOCATIONS")
       SENSITIVE: []
     end
 
@@ -2760,12 +2760,12 @@ module Aws::BedrockAgent
     end
 
     class UpdateAgentCollaboratorRequest
-      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor collaboration_instruction: ::String
       attr_accessor collaborator_id: ::String
+      attr_accessor agent_descriptor: Types::AgentDescriptor
       attr_accessor collaborator_name: ::String
+      attr_accessor collaboration_instruction: ::String
       attr_accessor relay_conversation_history: ("TO_COLLABORATOR" | "DISABLED")
       SENSITIVE: [:collaboration_instruction]
     end
@@ -2778,8 +2778,8 @@ module Aws::BedrockAgent
     class UpdateAgentKnowledgeBaseRequest
       attr_accessor agent_id: ::String
       attr_accessor agent_version: ::String
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor description: ::String
       attr_accessor knowledge_base_state: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
@@ -2790,20 +2790,20 @@ module Aws::BedrockAgent
     end
 
     class UpdateAgentRequest
-      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       attr_accessor agent_id: ::String
       attr_accessor agent_name: ::String
-      attr_accessor agent_resource_role_arn: ::String
-      attr_accessor custom_orchestration: Types::CustomOrchestration
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor description: ::String
-      attr_accessor foundation_model: ::String
-      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
-      attr_accessor idle_session_ttl_in_seconds: ::Integer
       attr_accessor instruction: ::String
-      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor foundation_model: ::String
+      attr_accessor description: ::String
       attr_accessor orchestration_type: ("DEFAULT" | "CUSTOM_ORCHESTRATION")
+      attr_accessor custom_orchestration: Types::CustomOrchestration
+      attr_accessor idle_session_ttl_in_seconds: ::Integer
+      attr_accessor agent_resource_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor prompt_override_configuration: Types::PromptOverrideConfiguration
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor memory_configuration: Types::MemoryConfiguration
+      attr_accessor agent_collaboration: ("SUPERVISOR" | "SUPERVISOR_ROUTER" | "DISABLED")
       SENSITIVE: [:instruction, :prompt_override_configuration]
     end
 
@@ -2813,12 +2813,12 @@ module Aws::BedrockAgent
     end
 
     class UpdateDataSourceRequest
-      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
-      attr_accessor data_source_configuration: Types::DataSourceConfiguration
-      attr_accessor data_source_id: ::String
-      attr_accessor description: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor data_source_id: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor data_deletion_policy: ("RETAIN" | "DELETE")
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
       attr_accessor vector_ingestion_configuration: Types::VectorIngestionConfiguration
       SENSITIVE: []
@@ -2830,59 +2830,59 @@ module Aws::BedrockAgent
     end
 
     class UpdateFlowAliasRequest
-      attr_accessor alias_identifier: ::String
-      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
-      attr_accessor description: ::String
-      attr_accessor flow_identifier: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
+      attr_accessor flow_identifier: ::String
+      attr_accessor alias_identifier: ::String
       SENSITIVE: []
     end
 
     class UpdateFlowAliasResponse
-      attr_accessor arn: ::String
-      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor concurrency_configuration: Types::FlowAliasConcurrencyConfiguration
       attr_accessor flow_id: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor routing_configuration: ::Array[Types::FlowAliasRoutingConfigurationListItem]
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
     class UpdateFlowRequest
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor definition: Types::FlowDefinition
       attr_accessor flow_identifier: ::String
-      attr_accessor name: ::String
       SENSITIVE: [:definition]
     end
 
     class UpdateFlowResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor customer_encryption_key_arn: ::String
-      attr_accessor definition: Types::FlowDefinition
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_role_arn: ::String
+      attr_accessor customer_encryption_key_arn: ::String
       attr_accessor id: ::String
-      attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: ("Failed" | "Prepared" | "Preparing" | "NotPrepared")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor version: ::String
+      attr_accessor definition: Types::FlowDefinition
       SENSITIVE: [:definition]
     end
 
     class UpdateKnowledgeBaseRequest
-      attr_accessor description: ::String
-      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor role_arn: ::String
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseConfiguration
       attr_accessor storage_configuration: Types::StorageConfiguration
       SENSITIVE: []
     end
@@ -2893,26 +2893,26 @@ module Aws::BedrockAgent
     end
 
     class UpdatePromptRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor default_variant: ::String
-      attr_accessor description: ::String
-      attr_accessor name: ::String
-      attr_accessor prompt_identifier: ::String
       attr_accessor variants: ::Array[Types::PromptVariant]
+      attr_accessor prompt_identifier: ::String
       SENSITIVE: [:variants]
     end
 
     class UpdatePromptResponse
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor description: ::String
       attr_accessor customer_encryption_key_arn: ::String
       attr_accessor default_variant: ::String
-      attr_accessor description: ::String
-      attr_accessor id: ::String
-      attr_accessor name: ::String
-      attr_accessor updated_at: ::Time
       attr_accessor variants: ::Array[Types::PromptVariant]
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
       attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: [:variants]
     end
 
@@ -2932,22 +2932,22 @@ module Aws::BedrockAgent
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class VectorIngestionConfiguration
       attr_accessor chunking_configuration: Types::ChunkingConfiguration
-      attr_accessor context_enrichment_configuration: Types::ContextEnrichmentConfiguration
       attr_accessor custom_transformation_configuration: Types::CustomTransformationConfiguration
       attr_accessor parsing_configuration: Types::ParsingConfiguration
+      attr_accessor context_enrichment_configuration: Types::ContextEnrichmentConfiguration
       SENSITIVE: []
     end
 
@@ -2959,43 +2959,43 @@ module Aws::BedrockAgent
     end
 
     class VectorSearchBedrockRerankingConfiguration
-      attr_accessor metadata_configuration: Types::MetadataConfigurationForReranking
       attr_accessor model_configuration: Types::VectorSearchBedrockRerankingModelConfiguration
       attr_accessor number_of_reranked_results: ::Integer
+      attr_accessor metadata_configuration: Types::MetadataConfigurationForReranking
       SENSITIVE: []
     end
 
     class VectorSearchBedrockRerankingModelConfiguration
-      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
       attr_accessor model_arn: ::String
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
       SENSITIVE: []
     end
 
     class VectorSearchRerankingConfiguration
-      attr_accessor bedrock_reranking_configuration: Types::VectorSearchBedrockRerankingConfiguration
       attr_accessor type: ("BEDROCK_RERANKING_MODEL")
+      attr_accessor bedrock_reranking_configuration: Types::VectorSearchBedrockRerankingConfiguration
       SENSITIVE: []
     end
 
     class WebCrawlerConfiguration
       attr_accessor crawler_limits: Types::WebCrawlerLimits
-      attr_accessor exclusion_filters: ::Array[::String]
       attr_accessor inclusion_filters: ::Array[::String]
+      attr_accessor exclusion_filters: ::Array[::String]
       attr_accessor scope: ("HOST_ONLY" | "SUBDOMAINS")
       attr_accessor user_agent: ::String
       attr_accessor user_agent_header: ::String
-      SENSITIVE: [:exclusion_filters, :inclusion_filters, :user_agent, :user_agent_header]
+      SENSITIVE: [:inclusion_filters, :exclusion_filters, :user_agent, :user_agent_header]
     end
 
     class WebCrawlerLimits
-      attr_accessor max_pages: ::Integer
       attr_accessor rate_limit: ::Integer
+      attr_accessor max_pages: ::Integer
       SENSITIVE: []
     end
 
     class WebDataSourceConfiguration
-      attr_accessor crawler_configuration: Types::WebCrawlerConfiguration
       attr_accessor source_configuration: Types::WebSourceConfiguration
+      attr_accessor crawler_configuration: Types::WebCrawlerConfiguration
       SENSITIVE: []
     end
 

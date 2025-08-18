@@ -35,6 +35,7 @@ module Aws::MediaLive
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     AccessibilityType = Shapes::StringShape.new(name: 'AccessibilityType')
     AccountConfiguration = Shapes::StructureShape.new(name: 'AccountConfiguration')
+    AdditionalDestinations = Shapes::StructureShape.new(name: 'AdditionalDestinations')
     AfdSignaling = Shapes::StringShape.new(name: 'AfdSignaling')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     AncillarySourceSettings = Shapes::StructureShape.new(name: 'AncillarySourceSettings')
@@ -1090,8 +1091,8 @@ module Aws::MediaLive
     __integerMin32Max8191 = Shapes::IntegerShape.new(name: '__integerMin32Max8191')
     __integerMin40Max16000 = Shapes::IntegerShape.new(name: '__integerMin40Max16000')
     __integerMin4Max20 = Shapes::IntegerShape.new(name: '__integerMin4Max20')
-    __integerMin50000Max16000000 = Shapes::IntegerShape.new(name: '__integerMin50000Max16000000')
-    __integerMin50000Max8000000 = Shapes::IntegerShape.new(name: '__integerMin50000Max8000000')
+    __integerMin50000Max12000000 = Shapes::IntegerShape.new(name: '__integerMin50000Max12000000')
+    __integerMin50000Max24000000 = Shapes::IntegerShape.new(name: '__integerMin50000Max24000000')
     __integerMin64Max2160 = Shapes::IntegerShape.new(name: '__integerMin64Max2160')
     __integerMin800Max3000 = Shapes::IntegerShape.new(name: '__integerMin800Max3000')
     __integerMin80Max800 = Shapes::IntegerShape.new(name: '__integerMin80Max800')
@@ -1100,6 +1101,7 @@ module Aws::MediaLive
     __integerMinNegative5Max5 = Shapes::IntegerShape.new(name: '__integerMinNegative5Max5')
     __integerMinNegative60Max6 = Shapes::IntegerShape.new(name: '__integerMinNegative60Max6')
     __integerMinNegative60Max60 = Shapes::IntegerShape.new(name: '__integerMinNegative60Max60')
+    __listOfAdditionalDestinations = Shapes::ListShape.new(name: '__listOfAdditionalDestinations')
     __listOfAudioChannelMapping = Shapes::ListShape.new(name: '__listOfAudioChannelMapping')
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
     __listOfAudioSelector = Shapes::ListShape.new(name: '__listOfAudioSelector')
@@ -1266,6 +1268,9 @@ module Aws::MediaLive
     AccountConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "kmsKeyId"))
     AccountConfiguration.struct_class = Types::AccountConfiguration
 
+    AdditionalDestinations.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    AdditionalDestinations.struct_class = Types::AdditionalDestinations
+
     AncillarySourceSettings.add_member(:source_ancillary_channel_number, Shapes::ShapeRef.new(shape: __integerMin1Max4, location_name: "sourceAncillaryChannelNumber"))
     AncillarySourceSettings.struct_class = Types::AncillarySourceSettings
 
@@ -1387,7 +1392,7 @@ module Aws::MediaLive
     Av1ColorSpaceSettings.struct_class = Types::Av1ColorSpaceSettings
 
     Av1Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
-    Av1Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin50000Max16000000, location_name: "bufSize"))
+    Av1Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin50000Max24000000, location_name: "bufSize"))
     Av1Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: Av1ColorSpaceSettings, location_name: "colorSpaceSettings"))
     Av1Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     Av1Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max3003, required: true, location_name: "framerateDenominator"))
@@ -1396,14 +1401,14 @@ module Aws::MediaLive
     Av1Settings.add_member(:gop_size_units, Shapes::ShapeRef.new(shape: Av1GopSizeUnits, location_name: "gopSizeUnits"))
     Av1Settings.add_member(:level, Shapes::ShapeRef.new(shape: Av1Level, location_name: "level"))
     Av1Settings.add_member(:look_ahead_rate_control, Shapes::ShapeRef.new(shape: Av1LookAheadRateControl, location_name: "lookAheadRateControl"))
-    Av1Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max8000000, location_name: "maxBitrate"))
+    Av1Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max12000000, location_name: "maxBitrate"))
     Av1Settings.add_member(:min_i_interval, Shapes::ShapeRef.new(shape: __integerMin0Max30, location_name: "minIInterval"))
     Av1Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
     Av1Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parNumerator"))
     Av1Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
     Av1Settings.add_member(:scene_change_detect, Shapes::ShapeRef.new(shape: Av1SceneChangeDetect, location_name: "sceneChangeDetect"))
     Av1Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
-    Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max8000000, location_name: "bitrate"))
+    Av1Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin50000Max12000000, location_name: "bitrate"))
     Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
     Av1Settings.struct_class = Types::Av1Settings
 
@@ -1728,6 +1733,7 @@ module Aws::MediaLive
     CmafIngestGroupSettings.add_member(:timed_metadata_id_3_frame, Shapes::ShapeRef.new(shape: CmafTimedMetadataId3Frame, location_name: "timedMetadataId3Frame"))
     CmafIngestGroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "timedMetadataId3Period"))
     CmafIngestGroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
+    CmafIngestGroupSettings.add_member(:additional_destinations, Shapes::ShapeRef.new(shape: __listOfAdditionalDestinations, location_name: "additionalDestinations"))
     CmafIngestGroupSettings.struct_class = Types::CmafIngestGroupSettings
 
     CmafIngestOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
@@ -5593,6 +5599,8 @@ module Aws::MediaLive
 
     WebvttDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: WebvttDestinationStyleControl, location_name: "styleControl"))
     WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
+
+    __listOfAdditionalDestinations.member = Shapes::ShapeRef.new(shape: AdditionalDestinations)
 
     __listOfAudioChannelMapping.member = Shapes::ShapeRef.new(shape: AudioChannelMapping)
 

@@ -49,12 +49,13 @@ module Aws::BedrockAgent
   end
   autoload :Client, 'aws-sdk-bedrockagent/client'
   autoload :Errors, 'aws-sdk-bedrockagent/errors'
+  autoload :Waiters, 'aws-sdk-bedrockagent/waiters'
   autoload :Resource, 'aws-sdk-bedrockagent/resource'
   autoload :EndpointParameters, 'aws-sdk-bedrockagent/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-bedrockagent/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-bedrockagent/endpoints'
 
-  GEM_VERSION = '1.62.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

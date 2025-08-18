@@ -834,7 +834,14 @@ module Aws
                                       ]?,
                                       timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
                                       timed_metadata_id_3_period: ::Integer?,
-                                      timed_metadata_passthrough: ("DISABLED" | "ENABLED")?
+                                      timed_metadata_passthrough: ("DISABLED" | "ENABLED")?,
+                                      additional_destinations: Array[
+                                        {
+                                          destination: {
+                                            destination_ref_id: ::String?
+                                          }
+                                        },
+                                      ]?
                                     }?,
                                     srt_group_settings: {
                                       input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?
@@ -2935,7 +2942,14 @@ module Aws
                                       ]?,
                                       timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
                                       timed_metadata_id_3_period: ::Integer?,
-                                      timed_metadata_passthrough: ("DISABLED" | "ENABLED")?
+                                      timed_metadata_passthrough: ("DISABLED" | "ENABLED")?,
+                                      additional_destinations: Array[
+                                        {
+                                          destination: {
+                                            destination_ref_id: ::String?
+                                          }
+                                        },
+                                      ]?
                                     }?,
                                     srt_group_settings: {
                                       input_loss_action: ("DROP_PROGRAM" | "DROP_TS" | "EMIT_PROGRAM")?

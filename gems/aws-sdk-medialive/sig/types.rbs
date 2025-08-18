@@ -3610,6 +3610,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")
       attr_accessor timed_metadata_id_3_period: ::Integer
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
+      attr_accessor additional_destinations: ::Array[Types::AdditionalDestinations]
       SENSITIVE: []
     end
 
@@ -5655,6 +5656,11 @@ module Aws::MediaLive
     class CmafIngestCaptionLanguageMapping
       attr_accessor caption_channel: ::Integer
       attr_accessor language_code: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalDestinations
+      attr_accessor destination: Types::OutputLocationRef
       SENSITIVE: []
     end
   end

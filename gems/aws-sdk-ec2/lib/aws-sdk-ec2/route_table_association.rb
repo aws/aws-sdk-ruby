@@ -60,6 +60,13 @@ module Aws::EC2
       data[:gateway_id]
     end
 
+    # The ID of a public IPv4 pool. A public IPv4 pool is a pool of IPv4
+    # addresses that you've brought to Amazon Web Services with BYOIP.
+    # @return [String]
+    def public_ipv_4_pool
+      data[:public_ipv_4_pool]
+    end
+
     # The state of the association.
     # @return [Types::RouteTableAssociationState]
     def association_state

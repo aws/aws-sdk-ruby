@@ -102,6 +102,8 @@ module Aws::Organizations
     EffectivePolicy = Shapes::StructureShape.new(name: 'EffectivePolicy')
     EffectivePolicyNotFoundException = Shapes::StructureShape.new(name: 'EffectivePolicyNotFoundException')
     EffectivePolicyType = Shapes::StringShape.new(name: 'EffectivePolicyType')
+    EffectivePolicyValidationError = Shapes::StructureShape.new(name: 'EffectivePolicyValidationError')
+    EffectivePolicyValidationErrors = Shapes::ListShape.new(name: 'EffectivePolicyValidationErrors')
     Email = Shapes::StringShape.new(name: 'Email')
     EnableAWSServiceAccessRequest = Shapes::StructureShape.new(name: 'EnableAWSServiceAccessRequest')
     EnableAllFeaturesRequest = Shapes::StructureShape.new(name: 'EnableAllFeaturesRequest')
@@ -110,6 +112,8 @@ module Aws::Organizations
     EnablePolicyTypeResponse = Shapes::StructureShape.new(name: 'EnablePolicyTypeResponse')
     EnabledServicePrincipal = Shapes::StructureShape.new(name: 'EnabledServicePrincipal')
     EnabledServicePrincipals = Shapes::ListShape.new(name: 'EnabledServicePrincipals')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExceptionType = Shapes::StringShape.new(name: 'ExceptionType')
     FinalizingOrganizationException = Shapes::StructureShape.new(name: 'FinalizingOrganizationException')
@@ -145,6 +149,8 @@ module Aws::Organizations
     ListAccountsForParentResponse = Shapes::StructureShape.new(name: 'ListAccountsForParentResponse')
     ListAccountsRequest = Shapes::StructureShape.new(name: 'ListAccountsRequest')
     ListAccountsResponse = Shapes::StructureShape.new(name: 'ListAccountsResponse')
+    ListAccountsWithInvalidEffectivePolicyRequest = Shapes::StructureShape.new(name: 'ListAccountsWithInvalidEffectivePolicyRequest')
+    ListAccountsWithInvalidEffectivePolicyResponse = Shapes::StructureShape.new(name: 'ListAccountsWithInvalidEffectivePolicyResponse')
     ListChildrenRequest = Shapes::StructureShape.new(name: 'ListChildrenRequest')
     ListChildrenResponse = Shapes::StructureShape.new(name: 'ListChildrenResponse')
     ListCreateAccountStatusRequest = Shapes::StructureShape.new(name: 'ListCreateAccountStatusRequest')
@@ -153,6 +159,8 @@ module Aws::Organizations
     ListDelegatedAdministratorsResponse = Shapes::StructureShape.new(name: 'ListDelegatedAdministratorsResponse')
     ListDelegatedServicesForAccountRequest = Shapes::StructureShape.new(name: 'ListDelegatedServicesForAccountRequest')
     ListDelegatedServicesForAccountResponse = Shapes::StructureShape.new(name: 'ListDelegatedServicesForAccountResponse')
+    ListEffectivePolicyValidationErrorsRequest = Shapes::StructureShape.new(name: 'ListEffectivePolicyValidationErrorsRequest')
+    ListEffectivePolicyValidationErrorsResponse = Shapes::StructureShape.new(name: 'ListEffectivePolicyValidationErrorsResponse')
     ListHandshakesForAccountRequest = Shapes::StructureShape.new(name: 'ListHandshakesForAccountRequest')
     ListHandshakesForAccountResponse = Shapes::StructureShape.new(name: 'ListHandshakesForAccountResponse')
     ListHandshakesForOrganizationRequest = Shapes::StructureShape.new(name: 'ListHandshakesForOrganizationRequest')
@@ -193,6 +201,8 @@ module Aws::Organizations
     ParentNotFoundException = Shapes::StructureShape.new(name: 'ParentNotFoundException')
     ParentType = Shapes::StringShape.new(name: 'ParentType')
     Parents = Shapes::ListShape.new(name: 'Parents')
+    Path = Shapes::StringShape.new(name: 'Path')
+    PathToError = Shapes::StringShape.new(name: 'PathToError')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
@@ -200,6 +210,7 @@ module Aws::Organizations
     PolicyContent = Shapes::StringShape.new(name: 'PolicyContent')
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
+    PolicyIds = Shapes::ListShape.new(name: 'PolicyIds')
     PolicyInUseException = Shapes::StructureShape.new(name: 'PolicyInUseException')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyNotAttachedException = Shapes::StructureShape.new(name: 'PolicyNotAttachedException')
@@ -510,6 +521,14 @@ module Aws::Organizations
     EffectivePolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     EffectivePolicyNotFoundException.struct_class = Types::EffectivePolicyNotFoundException
 
+    EffectivePolicyValidationError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    EffectivePolicyValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    EffectivePolicyValidationError.add_member(:path_to_error, Shapes::ShapeRef.new(shape: PathToError, location_name: "PathToError"))
+    EffectivePolicyValidationError.add_member(:contributing_policies, Shapes::ShapeRef.new(shape: PolicyIds, location_name: "ContributingPolicies"))
+    EffectivePolicyValidationError.struct_class = Types::EffectivePolicyValidationError
+
+    EffectivePolicyValidationErrors.member = Shapes::ShapeRef.new(shape: EffectivePolicyValidationError)
+
     EnableAWSServiceAccessRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
     EnableAWSServiceAccessRequest.struct_class = Types::EnableAWSServiceAccessRequest
 
@@ -613,6 +632,16 @@ module Aws::Organizations
     ListAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAccountsResponse.struct_class = Types::ListAccountsResponse
 
+    ListAccountsWithInvalidEffectivePolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: EffectivePolicyType, required: true, location_name: "PolicyType"))
+    ListAccountsWithInvalidEffectivePolicyRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAccountsWithInvalidEffectivePolicyRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAccountsWithInvalidEffectivePolicyRequest.struct_class = Types::ListAccountsWithInvalidEffectivePolicyRequest
+
+    ListAccountsWithInvalidEffectivePolicyResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: Accounts, location_name: "Accounts"))
+    ListAccountsWithInvalidEffectivePolicyResponse.add_member(:policy_type, Shapes::ShapeRef.new(shape: EffectivePolicyType, location_name: "PolicyType"))
+    ListAccountsWithInvalidEffectivePolicyResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAccountsWithInvalidEffectivePolicyResponse.struct_class = Types::ListAccountsWithInvalidEffectivePolicyResponse
+
     ListChildrenRequest.add_member(:parent_id, Shapes::ShapeRef.new(shape: ParentId, required: true, location_name: "ParentId"))
     ListChildrenRequest.add_member(:child_type, Shapes::ShapeRef.new(shape: ChildType, required: true, location_name: "ChildType"))
     ListChildrenRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -649,6 +678,20 @@ module Aws::Organizations
     ListDelegatedServicesForAccountResponse.add_member(:delegated_services, Shapes::ShapeRef.new(shape: DelegatedServices, location_name: "DelegatedServices"))
     ListDelegatedServicesForAccountResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDelegatedServicesForAccountResponse.struct_class = Types::ListDelegatedServicesForAccountResponse
+
+    ListEffectivePolicyValidationErrorsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    ListEffectivePolicyValidationErrorsRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: EffectivePolicyType, required: true, location_name: "PolicyType"))
+    ListEffectivePolicyValidationErrorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEffectivePolicyValidationErrorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListEffectivePolicyValidationErrorsRequest.struct_class = Types::ListEffectivePolicyValidationErrorsRequest
+
+    ListEffectivePolicyValidationErrorsResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ListEffectivePolicyValidationErrorsResponse.add_member(:policy_type, Shapes::ShapeRef.new(shape: EffectivePolicyType, location_name: "PolicyType"))
+    ListEffectivePolicyValidationErrorsResponse.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    ListEffectivePolicyValidationErrorsResponse.add_member(:evaluation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EvaluationTimestamp"))
+    ListEffectivePolicyValidationErrorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEffectivePolicyValidationErrorsResponse.add_member(:effective_policy_validation_errors, Shapes::ShapeRef.new(shape: EffectivePolicyValidationErrors, location_name: "EffectivePolicyValidationErrors"))
+    ListEffectivePolicyValidationErrorsResponse.struct_class = Types::ListEffectivePolicyValidationErrorsResponse
 
     ListHandshakesForAccountRequest.add_member(:filter, Shapes::ShapeRef.new(shape: HandshakeFilter, location_name: "Filter"))
     ListHandshakesForAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -783,6 +826,8 @@ module Aws::Organizations
 
     PolicyChangesInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     PolicyChangesInProgressException.struct_class = Types::PolicyChangesInProgressException
+
+    PolicyIds.member = Shapes::ShapeRef.new(shape: PolicyId)
 
     PolicyInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     PolicyInUseException.struct_class = Types::PolicyInUseException
@@ -1508,6 +1553,28 @@ module Aws::Organizations
         )
       end)
 
+      api.add_operation(:list_accounts_with_invalid_effective_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccountsWithInvalidEffectivePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAccountsWithInvalidEffectivePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccountsWithInvalidEffectivePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: EffectivePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_children, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListChildren"
         o.http_method = "POST"
@@ -1583,6 +1650,29 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_effective_policy_validation_errors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEffectivePolicyValidationErrors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEffectivePolicyValidationErrorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEffectivePolicyValidationErrorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: EffectivePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

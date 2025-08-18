@@ -14,10 +14,10 @@ module Aws::PrometheusService
     end
 
     class AlertManagerDefinitionDescription
-      attr_accessor created_at: ::Time
-      attr_accessor data: ::String
-      attr_accessor modified_at: ::Time
       attr_accessor status: Types::AlertManagerDefinitionStatus
+      attr_accessor data: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
       SENSITIVE: []
     end
 
@@ -45,9 +45,9 @@ module Aws::PrometheusService
     end
 
     class CreateAlertManagerDefinitionRequest
-      attr_accessor client_token: ::String
-      attr_accessor data: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor data: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -57,9 +57,9 @@ module Aws::PrometheusService
     end
 
     class CreateLoggingConfigurationRequest
-      attr_accessor client_token: ::String
-      attr_accessor log_group_arn: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -69,9 +69,9 @@ module Aws::PrometheusService
     end
 
     class CreateQueryLoggingConfigurationRequest
-      attr_accessor client_token: ::String
-      attr_accessor destinations: ::Array[Types::LoggingDestination]
       attr_accessor workspace_id: ::String
+      attr_accessor destinations: ::Array[Types::LoggingDestination]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -81,17 +81,17 @@ module Aws::PrometheusService
     end
 
     class CreateRuleGroupsNamespaceRequest
-      attr_accessor client_token: ::String
-      attr_accessor data: ::String
-      attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor workspace_id: ::String
+      attr_accessor name: ::String
+      attr_accessor data: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateRuleGroupsNamespaceResponse
-      attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: Types::RuleGroupsNamespaceStatus
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -99,18 +99,18 @@ module Aws::PrometheusService
 
     class CreateScraperRequest
       attr_accessor alias: ::String
-      attr_accessor client_token: ::String
-      attr_accessor destination: Types::Destination
-      attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor scrape_configuration: Types::ScrapeConfiguration
       attr_accessor source: Types::Source
+      attr_accessor destination: Types::Destination
+      attr_accessor role_configuration: Types::RoleConfiguration
+      attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateScraperResponse
-      attr_accessor arn: ::String
       attr_accessor scraper_id: ::String
+      attr_accessor arn: ::String
       attr_accessor status: Types::ScraperStatus
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -119,48 +119,55 @@ module Aws::PrometheusService
     class CreateWorkspaceRequest
       attr_accessor alias: ::String
       attr_accessor client_token: ::String
-      attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
     class CreateWorkspaceResponse
+      attr_accessor workspace_id: ::String
       attr_accessor arn: ::String
-      attr_accessor kms_key_arn: ::String
       attr_accessor status: Types::WorkspaceStatus
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor workspace_id: ::String
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
     class DeleteAlertManagerDefinitionRequest
-      attr_accessor client_token: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class DeleteLoggingConfigurationRequest
-      attr_accessor client_token: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class DeleteQueryLoggingConfigurationRequest
-      attr_accessor client_token: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor revision_id: ::String
       SENSITIVE: []
     end
 
     class DeleteRuleGroupsNamespaceRequest
-      attr_accessor client_token: ::String
-      attr_accessor name: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor name: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class DeleteScraperRequest
-      attr_accessor client_token: ::String
       attr_accessor scraper_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -171,8 +178,8 @@ module Aws::PrometheusService
     end
 
     class DeleteWorkspaceRequest
-      attr_accessor client_token: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -206,9 +213,21 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
-    class DescribeRuleGroupsNamespaceRequest
-      attr_accessor name: ::String
+    class DescribeResourcePolicyRequest
       attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyResponse
+      attr_accessor policy_document: ::String
+      attr_accessor policy_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRuleGroupsNamespaceRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -280,8 +299,8 @@ module Aws::PrometheusService
     end
 
     class LimitsPerLabelSet
-      attr_accessor label_set: ::Hash[::String, ::String]
       attr_accessor limits: Types::LimitsPerLabelSetEntry
+      attr_accessor label_set: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -291,29 +310,29 @@ module Aws::PrometheusService
     end
 
     class ListRuleGroupsNamespacesRequest
-      attr_accessor max_results: ::Integer
+      attr_accessor workspace_id: ::String
       attr_accessor name: ::String
       attr_accessor next_token: ::String
-      attr_accessor workspace_id: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListRuleGroupsNamespacesResponse
-      attr_accessor next_token: ::String
       attr_accessor rule_groups_namespaces: ::Array[Types::RuleGroupsNamespaceSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListScrapersRequest
       attr_accessor filters: ::Hash[::String, ::Array[::String]]
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListScrapersResponse
-      attr_accessor next_token: ::String
       attr_accessor scrapers: ::Array[Types::ScraperSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -328,24 +347,24 @@ module Aws::PrometheusService
     end
 
     class ListWorkspacesRequest
+      attr_accessor next_token: ::String
       attr_accessor alias: ::String
       attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListWorkspacesResponse
-      attr_accessor next_token: ::String
       attr_accessor workspaces: ::Array[Types::WorkspaceSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class LoggingConfigurationMetadata
-      attr_accessor created_at: ::Time
-      attr_accessor log_group_arn: ::String
-      attr_accessor modified_at: ::Time
       attr_accessor status: Types::LoggingConfigurationStatus
       attr_accessor workspace: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
       SENSITIVE: []
     end
 
@@ -367,9 +386,9 @@ module Aws::PrometheusService
     end
 
     class PutAlertManagerDefinitionRequest
-      attr_accessor client_token: ::String
-      attr_accessor data: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor data: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -378,28 +397,42 @@ module Aws::PrometheusService
       SENSITIVE: []
     end
 
-    class PutRuleGroupsNamespaceRequest
-      attr_accessor client_token: ::String
-      attr_accessor data: ::String
-      attr_accessor name: ::String
+    class PutResourcePolicyRequest
       attr_accessor workspace_id: ::String
+      attr_accessor policy_document: ::String
+      attr_accessor client_token: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy_status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING")
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutRuleGroupsNamespaceRequest
+      attr_accessor workspace_id: ::String
+      attr_accessor name: ::String
+      attr_accessor data: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class PutRuleGroupsNamespaceResponse
-      attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor status: Types::RuleGroupsNamespaceStatus
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class QueryLoggingConfigurationMetadata
-      attr_accessor created_at: ::Time
-      attr_accessor destinations: ::Array[Types::LoggingDestination]
-      attr_accessor modified_at: ::Time
       attr_accessor status: Types::QueryLoggingConfigurationStatus
       attr_accessor workspace: ::String
+      attr_accessor destinations: ::Array[Types::LoggingDestination]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
       SENSITIVE: []
     end
 
@@ -424,11 +457,11 @@ module Aws::PrometheusService
 
     class RuleGroupsNamespaceDescription
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor data: ::String
-      attr_accessor modified_at: ::Time
       attr_accessor name: ::String
       attr_accessor status: Types::RuleGroupsNamespaceStatus
+      attr_accessor data: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -441,10 +474,10 @@ module Aws::PrometheusService
 
     class RuleGroupsNamespaceSummary
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor modified_at: ::Time
       attr_accessor name: ::String
       attr_accessor status: Types::RuleGroupsNamespaceStatus
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -462,18 +495,18 @@ module Aws::PrometheusService
 
     class ScraperDescription
       attr_accessor alias: ::String
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor destination: Types::Destination
-      attr_accessor last_modified_at: ::Time
-      attr_accessor role_arn: ::String
-      attr_accessor role_configuration: Types::RoleConfiguration
-      attr_accessor scrape_configuration: Types::ScrapeConfiguration
       attr_accessor scraper_id: ::String
-      attr_accessor source: Types::Source
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
       attr_accessor status: Types::ScraperStatus
-      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status_reason: ::String
+      attr_accessor scrape_configuration: Types::ScrapeConfiguration
+      attr_accessor source: Types::Source
+      attr_accessor destination: Types::Destination
+      attr_accessor role_configuration: Types::RoleConfiguration
       SENSITIVE: []
     end
 
@@ -484,26 +517,26 @@ module Aws::PrometheusService
 
     class ScraperSummary
       attr_accessor alias: ::String
-      attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor destination: Types::Destination
-      attr_accessor last_modified_at: ::Time
-      attr_accessor role_arn: ::String
-      attr_accessor role_configuration: Types::RoleConfiguration
       attr_accessor scraper_id: ::String
-      attr_accessor source: Types::Source
+      attr_accessor arn: ::String
+      attr_accessor role_arn: ::String
       attr_accessor status: Types::ScraperStatus
-      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor status_reason: ::String
+      attr_accessor source: Types::Source
+      attr_accessor destination: Types::Destination
+      attr_accessor role_configuration: Types::RoleConfiguration
       SENSITIVE: []
     end
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
@@ -529,9 +562,9 @@ module Aws::PrometheusService
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -545,9 +578,9 @@ module Aws::PrometheusService
     end
 
     class UpdateLoggingConfigurationRequest
-      attr_accessor client_token: ::String
-      attr_accessor log_group_arn: ::String
       attr_accessor workspace_id: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -557,9 +590,9 @@ module Aws::PrometheusService
     end
 
     class UpdateQueryLoggingConfigurationRequest
-      attr_accessor client_token: ::String
-      attr_accessor destinations: ::Array[Types::LoggingDestination]
       attr_accessor workspace_id: ::String
+      attr_accessor destinations: ::Array[Types::LoggingDestination]
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
@@ -569,35 +602,35 @@ module Aws::PrometheusService
     end
 
     class UpdateScraperRequest
+      attr_accessor scraper_id: ::String
       attr_accessor alias: ::String
-      attr_accessor client_token: ::String
+      attr_accessor scrape_configuration: Types::ScrapeConfiguration
       attr_accessor destination: Types::Destination
       attr_accessor role_configuration: Types::RoleConfiguration
-      attr_accessor scrape_configuration: Types::ScrapeConfiguration
-      attr_accessor scraper_id: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class UpdateScraperResponse
-      attr_accessor arn: ::String
       attr_accessor scraper_id: ::String
+      attr_accessor arn: ::String
       attr_accessor status: Types::ScraperStatus
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class UpdateWorkspaceAliasRequest
+      attr_accessor workspace_id: ::String
       attr_accessor alias: ::String
       attr_accessor client_token: ::String
-      attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
 
     class UpdateWorkspaceConfigurationRequest
+      attr_accessor workspace_id: ::String
       attr_accessor client_token: ::String
       attr_accessor limits_per_label_set: ::Array[Types::LimitsPerLabelSet]
       attr_accessor retention_period_in_days: ::Integer
-      attr_accessor workspace_id: ::String
       SENSITIVE: []
     end
 
@@ -607,22 +640,22 @@ module Aws::PrometheusService
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class WorkspaceConfigurationDescription
+      attr_accessor status: Types::WorkspaceConfigurationStatus
       attr_accessor limits_per_label_set: ::Array[Types::LimitsPerLabelSet]
       attr_accessor retention_period_in_days: ::Integer
-      attr_accessor status: Types::WorkspaceConfigurationStatus
       SENSITIVE: []
     end
 
@@ -633,14 +666,14 @@ module Aws::PrometheusService
     end
 
     class WorkspaceDescription
+      attr_accessor workspace_id: ::String
       attr_accessor alias: ::String
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor kms_key_arn: ::String
-      attr_accessor prometheus_endpoint: ::String
       attr_accessor status: Types::WorkspaceStatus
+      attr_accessor prometheus_endpoint: ::String
+      attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor workspace_id: ::String
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
 
@@ -650,13 +683,13 @@ module Aws::PrometheusService
     end
 
     class WorkspaceSummary
+      attr_accessor workspace_id: ::String
       attr_accessor alias: ::String
       attr_accessor arn: ::String
-      attr_accessor created_at: ::Time
-      attr_accessor kms_key_arn: ::String
       attr_accessor status: Types::WorkspaceStatus
+      attr_accessor created_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor workspace_id: ::String
+      attr_accessor kms_key_arn: ::String
       SENSITIVE: []
     end
   end

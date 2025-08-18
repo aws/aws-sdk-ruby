@@ -36,6 +36,7 @@ module Aws::DynamoDB
     AutoScalingSettingsUpdate = Shapes::StructureShape.new(name: 'AutoScalingSettingsUpdate')
     AutoScalingTargetTrackingScalingPolicyConfigurationDescription = Shapes::StructureShape.new(name: 'AutoScalingTargetTrackingScalingPolicyConfigurationDescription')
     AutoScalingTargetTrackingScalingPolicyConfigurationUpdate = Shapes::StructureShape.new(name: 'AutoScalingTargetTrackingScalingPolicyConfigurationUpdate')
+    AvailabilityErrorMessage = Shapes::StringShape.new(name: 'AvailabilityErrorMessage')
     Backfilling = Shapes::BooleanShape.new(name: 'Backfilling')
     BackupArn = Shapes::StringShape.new(name: 'BackupArn')
     BackupCreationDateTime = Shapes::TimestampShape.new(name: 'BackupCreationDateTime')
@@ -93,6 +94,7 @@ module Aws::DynamoDB
     ContinuousBackupsStatus = Shapes::StringShape.new(name: 'ContinuousBackupsStatus')
     ContinuousBackupsUnavailableException = Shapes::StructureShape.new(name: 'ContinuousBackupsUnavailableException')
     ContributorInsightsAction = Shapes::StringShape.new(name: 'ContributorInsightsAction')
+    ContributorInsightsMode = Shapes::StringShape.new(name: 'ContributorInsightsMode')
     ContributorInsightsRule = Shapes::StringShape.new(name: 'ContributorInsightsRule')
     ContributorInsightsRuleList = Shapes::ListShape.new(name: 'ContributorInsightsRuleList')
     ContributorInsightsStatus = Shapes::StringShape.new(name: 'ContributorInsightsStatus')
@@ -350,6 +352,7 @@ module Aws::DynamoDB
     PutResourcePolicyOutput = Shapes::StructureShape.new(name: 'PutResourcePolicyOutput')
     QueryInput = Shapes::StructureShape.new(name: 'QueryInput')
     QueryOutput = Shapes::StructureShape.new(name: 'QueryOutput')
+    Reason = Shapes::StringShape.new(name: 'Reason')
     RecoveryPeriodInDays = Shapes::IntegerShape.new(name: 'RecoveryPeriodInDays')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
     Replica = Shapes::StructureShape.new(name: 'Replica')
@@ -387,6 +390,7 @@ module Aws::DynamoDB
     ReplicationGroupUpdate = Shapes::StructureShape.new(name: 'ReplicationGroupUpdate')
     ReplicationGroupUpdateList = Shapes::ListShape.new(name: 'ReplicationGroupUpdateList')
     RequestLimitExceeded = Shapes::StructureShape.new(name: 'RequestLimitExceeded')
+    Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceArnString = Shapes::StringShape.new(name: 'ResourceArnString')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -449,6 +453,9 @@ module Aws::DynamoDB
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValueString = Shapes::StringShape.new(name: 'TagValueString')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    ThrottlingReason = Shapes::StructureShape.new(name: 'ThrottlingReason')
+    ThrottlingReasonList = Shapes::ListShape.new(name: 'ThrottlingReasonList')
     TimeRangeLowerBound = Shapes::TimestampShape.new(name: 'TimeRangeLowerBound')
     TimeRangeUpperBound = Shapes::TimestampShape.new(name: 'TimeRangeUpperBound')
     TimeToLiveAttributeName = Shapes::StringShape.new(name: 'TimeToLiveAttributeName')
@@ -714,6 +721,7 @@ module Aws::DynamoDB
     ContributorInsightsSummary.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
     ContributorInsightsSummary.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     ContributorInsightsSummary.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
+    ContributorInsightsSummary.add_member(:contributor_insights_mode, Shapes::ShapeRef.new(shape: ContributorInsightsMode, location_name: "ContributorInsightsMode"))
     ContributorInsightsSummary.struct_class = Types::ContributorInsightsSummary
 
     CreateBackupInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
@@ -860,6 +868,7 @@ module Aws::DynamoDB
     DescribeContributorInsightsOutput.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
     DescribeContributorInsightsOutput.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
     DescribeContributorInsightsOutput.add_member(:failure_exception, Shapes::ShapeRef.new(shape: FailureException, location_name: "FailureException"))
+    DescribeContributorInsightsOutput.add_member(:contributor_insights_mode, Shapes::ShapeRef.new(shape: ContributorInsightsMode, location_name: "ContributorInsightsMode"))
     DescribeContributorInsightsOutput.struct_class = Types::DescribeContributorInsightsOutput
 
     DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
@@ -1440,6 +1449,7 @@ module Aws::DynamoDB
     ProvisionedThroughputDescription.struct_class = Types::ProvisionedThroughputDescription
 
     ProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ProvisionedThroughputExceededException.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "ThrottlingReasons"))
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     ProvisionedThroughputOverride.add_member(:read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReadCapacityUnits"))
@@ -1639,6 +1649,7 @@ module Aws::DynamoDB
     ReplicationGroupUpdateList.member = Shapes::ShapeRef.new(shape: ReplicationGroupUpdate)
 
     RequestLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    RequestLimitExceeded.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "ThrottlingReasons"))
     RequestLimitExceeded.struct_class = Types::RequestLimitExceeded
 
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1827,6 +1838,16 @@ module Aws::DynamoDB
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: AvailabilityErrorMessage, location_name: "message"))
+    ThrottlingException.add_member(:throttling_reasons, Shapes::ShapeRef.new(shape: ThrottlingReasonList, location_name: "throttlingReasons"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    ThrottlingReason.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
+    ThrottlingReason.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
+    ThrottlingReason.struct_class = Types::ThrottlingReason
+
+    ThrottlingReasonList.member = Shapes::ShapeRef.new(shape: ThrottlingReason)
+
     TimeToLiveDescription.add_member(:time_to_live_status, Shapes::ShapeRef.new(shape: TimeToLiveStatus, location_name: "TimeToLiveStatus"))
     TimeToLiveDescription.add_member(:attribute_name, Shapes::ShapeRef.new(shape: TimeToLiveAttributeName, location_name: "AttributeName"))
     TimeToLiveDescription.struct_class = Types::TimeToLiveDescription
@@ -1899,11 +1920,13 @@ module Aws::DynamoDB
     UpdateContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     UpdateContributorInsightsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     UpdateContributorInsightsInput.add_member(:contributor_insights_action, Shapes::ShapeRef.new(shape: ContributorInsightsAction, required: true, location_name: "ContributorInsightsAction"))
+    UpdateContributorInsightsInput.add_member(:contributor_insights_mode, Shapes::ShapeRef.new(shape: ContributorInsightsMode, location_name: "ContributorInsightsMode"))
     UpdateContributorInsightsInput.struct_class = Types::UpdateContributorInsightsInput
 
     UpdateContributorInsightsOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
     UpdateContributorInsightsOutput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     UpdateContributorInsightsOutput.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
+    UpdateContributorInsightsOutput.add_member(:contributor_insights_mode, Shapes::ShapeRef.new(shape: ContributorInsightsMode, location_name: "ContributorInsightsMode"))
     UpdateContributorInsightsOutput.struct_class = Types::UpdateContributorInsightsOutput
 
     UpdateGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
@@ -2048,6 +2071,7 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: BatchExecuteStatementOutput)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:batch_get_item, Seahorse::Model::Operation.new.tap do |o|
@@ -2062,6 +2086,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "unprocessed_keys" => "request_items"
@@ -2083,6 +2108,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ReplicatedWriteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_backup, Seahorse::Model::Operation.new.tap do |o|
@@ -2158,6 +2184,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ReplicatedWriteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2375,6 +2402,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateItemException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:execute_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -2390,6 +2418,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:export_table_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -2418,6 +2447,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2558,6 +2588,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ReplicatedWriteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2587,6 +2618,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2640,6 +2672,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2675,6 +2708,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:transact_write_items, Seahorse::Model::Operation.new.tap do |o|
@@ -2692,6 +2726,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2778,6 +2813,7 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ReplicatedWriteConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_kinesis_streaming_destination, Seahorse::Model::Operation.new.tap do |o|

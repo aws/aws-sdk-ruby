@@ -118,6 +118,7 @@ module Aws::ServiceDiscovery
       attr_accessor query_parameters: ::Hash[::String, ::String]
       attr_accessor optional_parameters: ::Hash[::String, ::String]
       attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "ALL" | "HEALTHY_OR_ELSE_ALL")
+      attr_accessor owner_account: ::String
       SENSITIVE: []
     end
 
@@ -130,6 +131,7 @@ module Aws::ServiceDiscovery
     class DiscoverInstancesRevisionRequest
       attr_accessor namespace_name: ::String
       attr_accessor service_name: ::String
+      attr_accessor owner_account: ::String
       SENSITIVE: []
     end
 
@@ -175,6 +177,7 @@ module Aws::ServiceDiscovery
     end
 
     class GetInstanceResponse
+      attr_accessor resource_owner: ::String
       attr_accessor instance: Types::Instance
       SENSITIVE: []
     end
@@ -205,6 +208,7 @@ module Aws::ServiceDiscovery
 
     class GetOperationRequest
       attr_accessor operation_id: ::String
+      attr_accessor owner_account: ::String
       SENSITIVE: []
     end
 
@@ -268,6 +272,7 @@ module Aws::ServiceDiscovery
       attr_accessor id: ::String
       attr_accessor creator_request_id: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor created_by_account: ::String
       SENSITIVE: []
     end
 
@@ -279,6 +284,7 @@ module Aws::ServiceDiscovery
     class InstanceSummary
       attr_accessor id: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor created_by_account: ::String
       SENSITIVE: []
     end
 
@@ -295,6 +301,7 @@ module Aws::ServiceDiscovery
     end
 
     class ListInstancesResponse
+      attr_accessor resource_owner: ::String
       attr_accessor instances: ::Array[Types::InstanceSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -352,6 +359,7 @@ module Aws::ServiceDiscovery
     class Namespace
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      attr_accessor resource_owner: ::String
       attr_accessor name: ::String
       attr_accessor type: ("DNS_PUBLIC" | "DNS_PRIVATE" | "HTTP")
       attr_accessor description: ::String
@@ -370,7 +378,7 @@ module Aws::ServiceDiscovery
     end
 
     class NamespaceFilter
-      attr_accessor name: ("TYPE" | "NAME" | "HTTP_NAME")
+      attr_accessor name: ("TYPE" | "NAME" | "HTTP_NAME" | "RESOURCE_OWNER")
       attr_accessor values: ::Array[::String]
       attr_accessor condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")
       SENSITIVE: []
@@ -390,6 +398,7 @@ module Aws::ServiceDiscovery
     class NamespaceSummary
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      attr_accessor resource_owner: ::String
       attr_accessor name: ::String
       attr_accessor type: ("DNS_PUBLIC" | "DNS_PRIVATE" | "HTTP")
       attr_accessor description: ::String
@@ -401,6 +410,7 @@ module Aws::ServiceDiscovery
 
     class Operation
       attr_accessor id: ::String
+      attr_accessor owner_account: ::String
       attr_accessor type: ("CREATE_NAMESPACE" | "DELETE_NAMESPACE" | "UPDATE_NAMESPACE" | "UPDATE_SERVICE" | "REGISTER_INSTANCE" | "DEREGISTER_INSTANCE")
       attr_accessor status: ("SUBMITTED" | "PENDING" | "SUCCESS" | "FAIL")
       attr_accessor error_message: ::String
@@ -527,6 +537,7 @@ module Aws::ServiceDiscovery
     class Service
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      attr_accessor resource_owner: ::String
       attr_accessor name: ::String
       attr_accessor namespace_id: ::String
       attr_accessor description: ::String
@@ -537,6 +548,7 @@ module Aws::ServiceDiscovery
       attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig
       attr_accessor create_date: ::Time
       attr_accessor creator_request_id: ::String
+      attr_accessor created_by_account: ::String
       SENSITIVE: []
     end
 
@@ -544,11 +556,13 @@ module Aws::ServiceDiscovery
       attr_accessor message: ::String
       attr_accessor creator_request_id: ::String
       attr_accessor service_id: ::String
+      attr_accessor service_arn: ::String
       SENSITIVE: []
     end
 
     class ServiceAttributes
       attr_accessor service_arn: ::String
+      attr_accessor resource_owner: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -566,7 +580,7 @@ module Aws::ServiceDiscovery
     end
 
     class ServiceFilter
-      attr_accessor name: ("NAMESPACE_ID")
+      attr_accessor name: ("NAMESPACE_ID" | "RESOURCE_OWNER")
       attr_accessor values: ::Array[::String]
       attr_accessor condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")
       SENSITIVE: []
@@ -580,6 +594,7 @@ module Aws::ServiceDiscovery
     class ServiceSummary
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      attr_accessor resource_owner: ::String
       attr_accessor name: ::String
       attr_accessor type: ("HTTP" | "DNS_HTTP" | "DNS")
       attr_accessor description: ::String
@@ -588,6 +603,7 @@ module Aws::ServiceDiscovery
       attr_accessor health_check_config: Types::HealthCheckConfig
       attr_accessor health_check_custom_config: Types::HealthCheckCustomConfig
       attr_accessor create_date: ::Time
+      attr_accessor created_by_account: ::String
       SENSITIVE: []
     end
 

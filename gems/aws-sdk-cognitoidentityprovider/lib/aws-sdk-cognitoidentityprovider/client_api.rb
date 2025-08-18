@@ -3491,6 +3491,8 @@ module Aws::CognitoIdentityProvider
         o.name = "GetTokensFromRefreshToken"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
         o.input = Shapes::ShapeRef.new(shape: GetTokensFromRefreshTokenRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTokensFromRefreshTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

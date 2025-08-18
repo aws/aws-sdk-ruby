@@ -49,12 +49,13 @@ module Aws::PartnerCentralSelling
   end
   autoload :Client, 'aws-sdk-partnercentralselling/client'
   autoload :Errors, 'aws-sdk-partnercentralselling/errors'
+  autoload :Waiters, 'aws-sdk-partnercentralselling/waiters'
   autoload :Resource, 'aws-sdk-partnercentralselling/resource'
   autoload :EndpointParameters, 'aws-sdk-partnercentralselling/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-partnercentralselling/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-partnercentralselling/endpoints'
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end
 

@@ -30,6 +30,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#gateway_id-instance_method
       def gateway_id: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#public_ipv_4_pool-instance_method
+      def public_ipv_4_pool: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/RouteTableAssociation.html#association_state-instance_method
       def association_state: () -> Types::RouteTableAssociationState
 

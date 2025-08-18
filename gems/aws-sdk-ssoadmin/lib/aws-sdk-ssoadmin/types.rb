@@ -1948,6 +1948,31 @@ module Aws::SSOAdmin
       include Aws::Structure
     end
 
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application for which to
+    #   retrieve the session configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetApplicationSessionConfigurationRequest AWS API Documentation
+    #
+    class GetApplicationSessionConfigurationRequest < Struct.new(
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_background_session_application_status
+    #   The status of user background sessions for the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetApplicationSessionConfigurationResponse AWS API Documentation
+    #
+    class GetApplicationSessionConfigurationResponse < Struct.new(
+      :user_background_session_application_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the
     #   operation will be executed. For more information about ARNs, see
@@ -3727,6 +3752,28 @@ module Aws::SSOAdmin
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application for which to
+    #   update the session configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_background_session_application_status
+    #   The status of user background sessions for the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutApplicationSessionConfigurationRequest AWS API Documentation
+    #
+    class PutApplicationSessionConfigurationRequest < Struct.new(
+      :application_arn,
+      :user_background_session_application_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutApplicationSessionConfigurationResponse AWS API Documentation
+    #
+    class PutApplicationSessionConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_arn
     #   The ARN of the IAM Identity Center instance under which the

@@ -110,6 +110,10 @@ module Aws::SecurityIR
     Long = Shapes::IntegerShape.new(name: 'Long')
     MembershipAccountRelationshipStatus = Shapes::StringShape.new(name: 'MembershipAccountRelationshipStatus')
     MembershipAccountRelationshipType = Shapes::StringShape.new(name: 'MembershipAccountRelationshipType')
+    MembershipAccountsConfigurations = Shapes::StructureShape.new(name: 'MembershipAccountsConfigurations')
+    MembershipAccountsConfigurationsUpdate = Shapes::StructureShape.new(name: 'MembershipAccountsConfigurationsUpdate')
+    MembershipAccountsConfigurationsUpdateOrganizationalUnitsToAddList = Shapes::ListShape.new(name: 'MembershipAccountsConfigurationsUpdateOrganizationalUnitsToAddList')
+    MembershipAccountsConfigurationsUpdateOrganizationalUnitsToRemoveList = Shapes::ListShape.new(name: 'MembershipAccountsConfigurationsUpdateOrganizationalUnitsToRemoveList')
     MembershipArn = Shapes::StringShape.new(name: 'MembershipArn')
     MembershipId = Shapes::StringShape.new(name: 'MembershipId')
     MembershipName = Shapes::StringShape.new(name: 'MembershipName')
@@ -117,6 +121,8 @@ module Aws::SecurityIR
     OptInFeature = Shapes::StructureShape.new(name: 'OptInFeature')
     OptInFeatureName = Shapes::StringShape.new(name: 'OptInFeatureName')
     OptInFeatures = Shapes::ListShape.new(name: 'OptInFeatures')
+    OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnits = Shapes::ListShape.new(name: 'OrganizationalUnits')
     PendingAction = Shapes::StringShape.new(name: 'PendingAction')
     PersonName = Shapes::StringShape.new(name: 'PersonName')
     PrincipalId = Shapes::StringShape.new(name: 'PrincipalId')
@@ -235,6 +241,7 @@ module Aws::SecurityIR
     CreateMembershipRequest.add_member(:incident_response_team, Shapes::ShapeRef.new(shape: IncidentResponseTeam, required: true, location_name: "incidentResponseTeam"))
     CreateMembershipRequest.add_member(:opt_in_features, Shapes::ShapeRef.new(shape: OptInFeatures, location_name: "optInFeatures"))
     CreateMembershipRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateMembershipRequest.add_member(:cover_entire_organization, Shapes::ShapeRef.new(shape: Boolean, location_name: "coverEntireOrganization"))
     CreateMembershipRequest.struct_class = Types::CreateMembershipRequest
 
     CreateMembershipResponse.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipId, required: true, location_name: "membershipId"))
@@ -309,6 +316,7 @@ module Aws::SecurityIR
     GetMembershipResponse.add_member(:number_of_accounts_covered, Shapes::ShapeRef.new(shape: Long, location_name: "numberOfAccountsCovered"))
     GetMembershipResponse.add_member(:incident_response_team, Shapes::ShapeRef.new(shape: IncidentResponseTeam, location_name: "incidentResponseTeam"))
     GetMembershipResponse.add_member(:opt_in_features, Shapes::ShapeRef.new(shape: OptInFeatures, location_name: "optInFeatures"))
+    GetMembershipResponse.add_member(:membership_accounts_configurations, Shapes::ShapeRef.new(shape: MembershipAccountsConfigurations, location_name: "membershipAccountsConfigurations"))
     GetMembershipResponse.struct_class = Types::GetMembershipResponse
 
     ImpactedAccounts.member = Shapes::ShapeRef.new(shape: AWSAccountId)
@@ -410,11 +418,26 @@ module Aws::SecurityIR
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    MembershipAccountsConfigurations.add_member(:cover_entire_organization, Shapes::ShapeRef.new(shape: Boolean, location_name: "coverEntireOrganization"))
+    MembershipAccountsConfigurations.add_member(:organizational_units, Shapes::ShapeRef.new(shape: OrganizationalUnits, location_name: "organizationalUnits"))
+    MembershipAccountsConfigurations.struct_class = Types::MembershipAccountsConfigurations
+
+    MembershipAccountsConfigurationsUpdate.add_member(:cover_entire_organization, Shapes::ShapeRef.new(shape: Boolean, location_name: "coverEntireOrganization"))
+    MembershipAccountsConfigurationsUpdate.add_member(:organizational_units_to_add, Shapes::ShapeRef.new(shape: MembershipAccountsConfigurationsUpdateOrganizationalUnitsToAddList, location_name: "organizationalUnitsToAdd"))
+    MembershipAccountsConfigurationsUpdate.add_member(:organizational_units_to_remove, Shapes::ShapeRef.new(shape: MembershipAccountsConfigurationsUpdateOrganizationalUnitsToRemoveList, location_name: "organizationalUnitsToRemove"))
+    MembershipAccountsConfigurationsUpdate.struct_class = Types::MembershipAccountsConfigurationsUpdate
+
+    MembershipAccountsConfigurationsUpdateOrganizationalUnitsToAddList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
+    MembershipAccountsConfigurationsUpdateOrganizationalUnitsToRemoveList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
     OptInFeature.add_member(:feature_name, Shapes::ShapeRef.new(shape: OptInFeatureName, required: true, location_name: "featureName"))
     OptInFeature.add_member(:is_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isEnabled"))
     OptInFeature.struct_class = Types::OptInFeature
 
     OptInFeatures.member = Shapes::ShapeRef.new(shape: OptInFeature)
+
+    OrganizationalUnits.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -498,6 +521,8 @@ module Aws::SecurityIR
     UpdateMembershipRequest.add_member(:membership_name, Shapes::ShapeRef.new(shape: MembershipName, location_name: "membershipName"))
     UpdateMembershipRequest.add_member(:incident_response_team, Shapes::ShapeRef.new(shape: IncidentResponseTeam, location_name: "incidentResponseTeam"))
     UpdateMembershipRequest.add_member(:opt_in_features, Shapes::ShapeRef.new(shape: OptInFeatures, location_name: "optInFeatures"))
+    UpdateMembershipRequest.add_member(:membership_accounts_configurations_update, Shapes::ShapeRef.new(shape: MembershipAccountsConfigurationsUpdate, location_name: "membershipAccountsConfigurationsUpdate"))
+    UpdateMembershipRequest.add_member(:undo_membership_cancellation, Shapes::ShapeRef.new(shape: Boolean, location_name: "undoMembershipCancellation"))
     UpdateMembershipRequest.struct_class = Types::UpdateMembershipRequest
 
     UpdateMembershipResponse.struct_class = Types::UpdateMembershipResponse

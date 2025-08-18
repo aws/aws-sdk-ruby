@@ -1,0 +1,76 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BCMRecommendedActions
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActionFilter
+      attr_accessor key: ("FEATURE" | "SEVERITY" | "TYPE")
+      attr_accessor match_option: ("EQUALS" | "NOT_EQUALS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedActionsRequest
+      attr_accessor filter: Types::RequestFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendedActionsResponse
+      attr_accessor recommended_actions: ::Array[Types::RecommendedAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendedAction
+      attr_accessor id: ::String
+      attr_accessor type: ("ADD_ALTERNATE_BILLING_CONTACT" | "CREATE_ANOMALY_MONITOR" | "CREATE_BUDGET" | "ENABLE_COST_OPTIMIZATION_HUB" | "MIGRATE_TO_GRANULAR_PERMISSIONS" | "PAYMENTS_DUE" | "PAYMENTS_PAST_DUE" | "REVIEW_ANOMALIES" | "REVIEW_BUDGET_ALERTS" | "REVIEW_BUDGETS_EXCEEDED" | "REVIEW_EXPIRING_RI" | "REVIEW_EXPIRING_SP" | "REVIEW_FREETIER_USAGE_ALERTS" | "REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS" | "UPDATE_EXPIRED_PAYMENT_METHOD" | "UPDATE_INVALID_PAYMENT_METHOD" | "UPDATE_TAX_EXEMPTION_CERTIFICATE" | "UPDATE_TAX_REGISTRATION_NUMBER")
+      attr_accessor account_id: ::String
+      attr_accessor severity: ("INFO" | "WARNING" | "CRITICAL")
+      attr_accessor feature: ("ACCOUNT" | "BUDGETS" | "COST_ANOMALY_DETECTION" | "COST_OPTIMIZATION_HUB" | "FREE_TIER" | "IAM" | "PAYMENTS" | "RESERVATIONS" | "SAVINGS_PLANS" | "TAX_SETTINGS")
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor next_steps: ::Array[::String]
+      attr_accessor last_updated_time_stamp: ::String
+      SENSITIVE: []
+    end
+
+    class RequestFilter
+      attr_accessor actions: ::Array[Types::ActionFilter]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

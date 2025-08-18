@@ -964,6 +964,91 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Creates an account pool.
+    #
+    # @option params [required, Types::AccountSource] :account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #
+    # @option params [String] :description
+    #   The description of the account pool.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the account pool is created.
+    #
+    # @option params [required, String] :name
+    #   The name of the account pool.
+    #
+    # @option params [required, String] :resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #
+    # @return [Types::CreateAccountPoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccountPoolOutput#account_source #account_source} => Types::AccountSource
+    #   * {Types::CreateAccountPoolOutput#created_at #created_at} => Time
+    #   * {Types::CreateAccountPoolOutput#created_by #created_by} => String
+    #   * {Types::CreateAccountPoolOutput#description #description} => String
+    #   * {Types::CreateAccountPoolOutput#domain_id #domain_id} => String
+    #   * {Types::CreateAccountPoolOutput#domain_unit_id #domain_unit_id} => String
+    #   * {Types::CreateAccountPoolOutput#id #id} => String
+    #   * {Types::CreateAccountPoolOutput#last_updated_at #last_updated_at} => Time
+    #   * {Types::CreateAccountPoolOutput#name #name} => String
+    #   * {Types::CreateAccountPoolOutput#resolution_strategy #resolution_strategy} => String
+    #   * {Types::CreateAccountPoolOutput#updated_by #updated_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_account_pool({
+    #     account_source: { # required
+    #       accounts: [
+    #         {
+    #           aws_account_id: "AwsAccountId", # required
+    #           aws_account_name: "AwsAccountName",
+    #           supported_regions: ["AwsRegion"], # required
+    #         },
+    #       ],
+    #       custom_account_pool_handler: {
+    #         lambda_execution_role_arn: "LambdaExecutionRoleArn",
+    #         lambda_function_arn: "LambdaFunctionArn", # required
+    #       },
+    #     },
+    #     description: "Description",
+    #     domain_identifier: "DomainId", # required
+    #     name: "AccountPoolName", # required
+    #     resolution_strategy: "MANUAL", # required, accepts MANUAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_source.accounts #=> Array
+    #   resp.account_source.accounts[0].aws_account_id #=> String
+    #   resp.account_source.accounts[0].aws_account_name #=> String
+    #   resp.account_source.accounts[0].supported_regions #=> Array
+    #   resp.account_source.accounts[0].supported_regions[0] #=> String
+    #   resp.account_source.custom_account_pool_handler.lambda_execution_role_arn #=> String
+    #   resp.account_source.custom_account_pool_handler.lambda_function_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.domain_unit_id #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.name #=> String
+    #   resp.resolution_strategy #=> String, one of "MANUAL"
+    #   resp.updated_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateAccountPool AWS API Documentation
+    #
+    # @overload create_account_pool(params = {})
+    # @param [Hash] params ({})
+    def create_account_pool(params = {}, options = {})
+      req = build_request(:create_account_pool, params)
+      req.send_request(options)
+    end
+
     # Creates an asset in Amazon DataZone catalog.
     #
     # @option params [String] :client_token
@@ -3067,6 +3152,11 @@ module Aws::DataZone
     #             value: "String",
     #           },
     #         ],
+    #         environment_resolved_account: {
+    #           aws_account_id: "AwsAccountId", # required
+    #           region_name: "AwsRegion", # required
+    #           source_account_pool_id: "AccountPoolId",
+    #         },
     #       },
     #     ],
     #   })
@@ -3099,6 +3189,9 @@ module Aws::DataZone
     #   resp.user_parameters[0].environment_parameters #=> Array
     #   resp.user_parameters[0].environment_parameters[0].name #=> String
     #   resp.user_parameters[0].environment_parameters[0].value #=> String
+    #   resp.user_parameters[0].environment_resolved_account.aws_account_id #=> String
+    #   resp.user_parameters[0].environment_resolved_account.region_name #=> String
+    #   resp.user_parameters[0].environment_resolved_account.source_account_pool_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProject AWS API Documentation
     #
@@ -3188,11 +3281,12 @@ module Aws::DataZone
     #     domain_unit_identifier: "DomainUnitId",
     #     environment_configurations: [
     #       {
-    #         aws_account: { # required
+    #         account_pools: ["AccountPoolId"],
+    #         aws_account: {
     #           aws_account_id: "AwsAccountId",
     #           aws_account_id_path: "ParameterStorePath",
     #         },
-    #         aws_region: { # required
+    #         aws_region: {
     #           region_name: "RegionName",
     #           region_name_path: "ParameterStorePath",
     #         },
@@ -3233,6 +3327,8 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.domain_unit_id #=> String
     #   resp.environment_configurations #=> Array
+    #   resp.environment_configurations[0].account_pools #=> Array
+    #   resp.environment_configurations[0].account_pools[0] #=> String
     #   resp.environment_configurations[0].aws_account.aws_account_id #=> String
     #   resp.environment_configurations[0].aws_account.aws_account_id_path #=> String
     #   resp.environment_configurations[0].aws_region.region_name #=> String
@@ -3775,6 +3871,32 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def create_user_profile(params = {}, options = {})
       req = build_request(:create_user_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes an account pool.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where the account pool is deleted.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the account pool to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_pool({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "AccountPoolId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteAccountPool AWS API Documentation
+    #
+    # @overload delete_account_pool(params = {})
+    # @param [Hash] params ({})
+    def delete_account_pool(params = {}, options = {})
+      req = build_request(:delete_account_pool, params)
       req.send_request(options)
     end
 
@@ -4663,6 +4785,65 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def disassociate_environment_role(params = {}, options = {})
       req = build_request(:disassociate_environment_role, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of the account pool.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain in which the account pool lives whose details are
+    #   to be displayed.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the account pool whose details are to be displayed.
+    #
+    # @return [Types::GetAccountPoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountPoolOutput#account_source #account_source} => Types::AccountSource
+    #   * {Types::GetAccountPoolOutput#created_at #created_at} => Time
+    #   * {Types::GetAccountPoolOutput#created_by #created_by} => String
+    #   * {Types::GetAccountPoolOutput#description #description} => String
+    #   * {Types::GetAccountPoolOutput#domain_id #domain_id} => String
+    #   * {Types::GetAccountPoolOutput#domain_unit_id #domain_unit_id} => String
+    #   * {Types::GetAccountPoolOutput#id #id} => String
+    #   * {Types::GetAccountPoolOutput#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetAccountPoolOutput#name #name} => String
+    #   * {Types::GetAccountPoolOutput#resolution_strategy #resolution_strategy} => String
+    #   * {Types::GetAccountPoolOutput#updated_by #updated_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_pool({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "AccountPoolId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_source.accounts #=> Array
+    #   resp.account_source.accounts[0].aws_account_id #=> String
+    #   resp.account_source.accounts[0].aws_account_name #=> String
+    #   resp.account_source.accounts[0].supported_regions #=> Array
+    #   resp.account_source.accounts[0].supported_regions[0] #=> String
+    #   resp.account_source.custom_account_pool_handler.lambda_execution_role_arn #=> String
+    #   resp.account_source.custom_account_pool_handler.lambda_function_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.domain_unit_id #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.name #=> String
+    #   resp.resolution_strategy #=> String, one of "MANUAL"
+    #   resp.updated_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetAccountPool AWS API Documentation
+    #
+    # @overload get_account_pool(params = {})
+    # @param [Hash] params ({})
+    def get_account_pool(params = {}, options = {})
+      req = build_request(:get_account_pool, params)
       req.send_request(options)
     end
 
@@ -6405,6 +6586,9 @@ module Aws::DataZone
     #   resp.user_parameters[0].environment_parameters #=> Array
     #   resp.user_parameters[0].environment_parameters[0].name #=> String
     #   resp.user_parameters[0].environment_parameters[0].value #=> String
+    #   resp.user_parameters[0].environment_resolved_account.aws_account_id #=> String
+    #   resp.user_parameters[0].environment_resolved_account.region_name #=> String
+    #   resp.user_parameters[0].environment_resolved_account.source_account_pool_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProject AWS API Documentation
     #
@@ -6451,6 +6635,8 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.domain_unit_id #=> String
     #   resp.environment_configurations #=> Array
+    #   resp.environment_configurations[0].account_pools #=> Array
+    #   resp.environment_configurations[0].account_pools[0] #=> String
     #   resp.environment_configurations[0].aws_account.aws_account_id #=> String
     #   resp.environment_configurations[0].aws_account.aws_account_id_path #=> String
     #   resp.environment_configurations[0].aws_region.region_name #=> String
@@ -6978,6 +7164,133 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_user_profile(params = {}, options = {})
       req = build_request(:get_user_profile, params)
+      req.send_request(options)
+    end
+
+    # Lists existing account pools.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where exsting account pools are to be listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of account pools to return in a single call to
+    #   ListAccountPools. When the number of account pools to be listed is
+    #   greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListAccountPools to list the next set of account pools.
+    #
+    # @option params [String] :name
+    #   The name of the account pool to be listed.
+    #
+    # @option params [String] :next_token
+    #   When the number of account pools is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of account pools, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListAccountPools to list the
+    #   next set of account pools.
+    #
+    # @option params [String] :sort_by
+    #   The sort by mechanism in which the existing account pools are to be
+    #   listed.
+    #
+    # @option params [String] :sort_order
+    #   The sort order in which the existing account pools are to be listed.
+    #
+    # @return [Types::ListAccountPoolsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountPoolsOutput#items #items} => Array&lt;Types::AccountPoolSummary&gt;
+    #   * {Types::ListAccountPoolsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_account_pools({
+    #     domain_identifier: "DomainId", # required
+    #     max_results: 1,
+    #     name: "AccountPoolName",
+    #     next_token: "PaginationToken",
+    #     sort_by: "NAME", # accepts NAME
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].domain_unit_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].resolution_strategy #=> String, one of "MANUAL"
+    #   resp.items[0].updated_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAccountPools AWS API Documentation
+    #
+    # @overload list_account_pools(params = {})
+    # @param [Hash] params ({})
+    def list_account_pools(params = {}, options = {})
+      req = build_request(:list_account_pools, params)
+      req.send_request(options)
+    end
+
+    # Lists the accounts in the specified account pool.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain in which the accounts in the specified account
+    #   pool are to be listed.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the account pool whose accounts are to be listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of accounts to return in a single call to
+    #   ListAccountsInAccountPool. When the number of accounts to be listed is
+    #   greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListAccountsInAccountPool to list the next set of accounts.
+    #
+    # @option params [String] :next_token
+    #   When the number of accounts is greater than the default value for the
+    #   MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of accounts, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListAccountsInAccountPool to
+    #   list the next set of accounts.
+    #
+    # @return [Types::ListAccountsInAccountPoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountsInAccountPoolOutput#items #items} => Array&lt;Types::AccountInfo&gt;
+    #   * {Types::ListAccountsInAccountPoolOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_accounts_in_account_pool({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "AccountPoolId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].aws_account_id #=> String
+    #   resp.items[0].aws_account_name #=> String
+    #   resp.items[0].supported_regions #=> Array
+    #   resp.items[0].supported_regions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListAccountsInAccountPool AWS API Documentation
+    #
+    # @overload list_accounts_in_account_pool(params = {})
+    # @param [Hash] params ({})
+    def list_accounts_in_account_pool(params = {}, options = {})
+      req = build_request(:list_accounts_in_account_pool, params)
       req.send_request(options)
     end
 
@@ -10870,6 +11183,95 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Updates the account pool.
+    #
+    # @option params [Types::AccountSource] :account_source
+    #   The source of accounts for the account pool. In the current release,
+    #   it's either a static list of accounts provided by the customer or a
+    #   custom Amazon Web Services Lambda handler.
+    #
+    # @option params [String] :description
+    #   The description of the account pool that is to be udpated.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID where the account pool that is to be updated lives.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the account pool that is to be updated.
+    #
+    # @option params [String] :name
+    #   The name of the account pool that is to be updated.
+    #
+    # @option params [String] :resolution_strategy
+    #   The mechanism used to resolve the account selection from the account
+    #   pool.
+    #
+    # @return [Types::UpdateAccountPoolOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAccountPoolOutput#account_source #account_source} => Types::AccountSource
+    #   * {Types::UpdateAccountPoolOutput#created_at #created_at} => Time
+    #   * {Types::UpdateAccountPoolOutput#created_by #created_by} => String
+    #   * {Types::UpdateAccountPoolOutput#description #description} => String
+    #   * {Types::UpdateAccountPoolOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateAccountPoolOutput#domain_unit_id #domain_unit_id} => String
+    #   * {Types::UpdateAccountPoolOutput#id #id} => String
+    #   * {Types::UpdateAccountPoolOutput#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdateAccountPoolOutput#name #name} => String
+    #   * {Types::UpdateAccountPoolOutput#resolution_strategy #resolution_strategy} => String
+    #   * {Types::UpdateAccountPoolOutput#updated_by #updated_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_account_pool({
+    #     account_source: {
+    #       accounts: [
+    #         {
+    #           aws_account_id: "AwsAccountId", # required
+    #           aws_account_name: "AwsAccountName",
+    #           supported_regions: ["AwsRegion"], # required
+    #         },
+    #       ],
+    #       custom_account_pool_handler: {
+    #         lambda_execution_role_arn: "LambdaExecutionRoleArn",
+    #         lambda_function_arn: "LambdaFunctionArn", # required
+    #       },
+    #     },
+    #     description: "Description",
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "AccountPoolId", # required
+    #     name: "AccountPoolName",
+    #     resolution_strategy: "MANUAL", # accepts MANUAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_source.accounts #=> Array
+    #   resp.account_source.accounts[0].aws_account_id #=> String
+    #   resp.account_source.accounts[0].aws_account_name #=> String
+    #   resp.account_source.accounts[0].supported_regions #=> Array
+    #   resp.account_source.accounts[0].supported_regions[0] #=> String
+    #   resp.account_source.custom_account_pool_handler.lambda_execution_role_arn #=> String
+    #   resp.account_source.custom_account_pool_handler.lambda_function_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.domain_unit_id #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.name #=> String
+    #   resp.resolution_strategy #=> String, one of "MANUAL"
+    #   resp.updated_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateAccountPool AWS API Documentation
+    #
+    # @overload update_account_pool(params = {})
+    # @param [Hash] params ({})
+    def update_account_pool(params = {}, options = {})
+      req = build_request(:update_account_pool, params)
+      req.send_request(options)
+    end
+
     # Updates an asset filter.
     #
     # @option params [required, String] :asset_identifier
@@ -12166,6 +12568,11 @@ module Aws::DataZone
     #             value: "String",
     #           },
     #         ],
+    #         environment_resolved_account: {
+    #           aws_account_id: "AwsAccountId", # required
+    #           region_name: "AwsRegion", # required
+    #           source_account_pool_id: "AccountPoolId",
+    #         },
     #       },
     #     ],
     #   })
@@ -12198,6 +12605,9 @@ module Aws::DataZone
     #   resp.user_parameters[0].environment_parameters #=> Array
     #   resp.user_parameters[0].environment_parameters[0].name #=> String
     #   resp.user_parameters[0].environment_parameters[0].value #=> String
+    #   resp.user_parameters[0].environment_resolved_account.aws_account_id #=> String
+    #   resp.user_parameters[0].environment_resolved_account.region_name #=> String
+    #   resp.user_parameters[0].environment_resolved_account.source_account_pool_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProject AWS API Documentation
     #
@@ -12252,11 +12662,12 @@ module Aws::DataZone
     #     domain_unit_identifier: "DomainUnitId",
     #     environment_configurations: [
     #       {
-    #         aws_account: { # required
+    #         account_pools: ["AccountPoolId"],
+    #         aws_account: {
     #           aws_account_id: "AwsAccountId",
     #           aws_account_id_path: "ParameterStorePath",
     #         },
-    #         aws_region: { # required
+    #         aws_region: {
     #           region_name: "RegionName",
     #           region_name_path: "ParameterStorePath",
     #         },
@@ -12298,6 +12709,8 @@ module Aws::DataZone
     #   resp.domain_id #=> String
     #   resp.domain_unit_id #=> String
     #   resp.environment_configurations #=> Array
+    #   resp.environment_configurations[0].account_pools #=> Array
+    #   resp.environment_configurations[0].account_pools[0] #=> String
     #   resp.environment_configurations[0].aws_account.aws_account_id #=> String
     #   resp.environment_configurations[0].aws_account.aws_account_id_path #=> String
     #   resp.environment_configurations[0].aws_region.region_name #=> String
@@ -12806,7 +13219,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

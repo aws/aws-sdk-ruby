@@ -184,6 +184,7 @@ module Aws
         def virtual_interface_name: () -> ::String
         def vlan: () -> ::Integer
         def asn: () -> ::Integer
+        def asn_long: () -> ::Integer
         def amazon_side_asn: () -> ::Integer
         def auth_key: () -> ::String
         def amazon_address: () -> ::String
@@ -210,7 +211,8 @@ module Aws
                                                 new_private_virtual_interface_allocation: {
                                                   virtual_interface_name: ::String,
                                                   vlan: ::Integer,
-                                                  asn: ::Integer,
+                                                  asn: ::Integer?,
+                                                  asn_long: ::Integer?,
                                                   mtu: ::Integer?,
                                                   auth_key: ::String?,
                                                   amazon_address: ::String?,
@@ -236,6 +238,7 @@ module Aws
         def virtual_interface_name: () -> ::String
         def vlan: () -> ::Integer
         def asn: () -> ::Integer
+        def asn_long: () -> ::Integer
         def amazon_side_asn: () -> ::Integer
         def auth_key: () -> ::String
         def amazon_address: () -> ::String
@@ -262,7 +265,8 @@ module Aws
                                                new_public_virtual_interface_allocation: {
                                                  virtual_interface_name: ::String,
                                                  vlan: ::Integer,
-                                                 asn: ::Integer,
+                                                 asn: ::Integer?,
+                                                 asn_long: ::Integer?,
                                                  auth_key: ::String?,
                                                  amazon_address: ::String?,
                                                  customer_address: ::String?,
@@ -294,6 +298,7 @@ module Aws
                                                   virtual_interface_name: ::String?,
                                                   vlan: ::Integer?,
                                                   asn: ::Integer?,
+                                                  asn_long: ::Integer?,
                                                   mtu: ::Integer?,
                                                   auth_key: ::String?,
                                                   amazon_address: ::String?,
@@ -399,6 +404,7 @@ module Aws
         def virtual_interface_name: () -> ::String
         def vlan: () -> ::Integer
         def asn: () -> ::Integer
+        def asn_long: () -> ::Integer
         def amazon_side_asn: () -> ::Integer
         def auth_key: () -> ::String
         def amazon_address: () -> ::String
@@ -487,6 +493,7 @@ module Aws
                              ?virtual_interface_id: ::String,
                              ?new_bgp_peer: {
                                asn: ::Integer?,
+                               asn_long: ::Integer?,
                                auth_key: ::String?,
                                address_family: ("ipv4" | "ipv6")?,
                                amazon_address: ::String?,
@@ -691,6 +698,7 @@ module Aws
         def virtual_interface_name: () -> ::String
         def vlan: () -> ::Integer
         def asn: () -> ::Integer
+        def asn_long: () -> ::Integer
         def amazon_side_asn: () -> ::Integer
         def auth_key: () -> ::String
         def amazon_address: () -> ::String
@@ -716,7 +724,8 @@ module Aws
                                               new_private_virtual_interface: {
                                                 virtual_interface_name: ::String,
                                                 vlan: ::Integer,
-                                                asn: ::Integer,
+                                                asn: ::Integer?,
+                                                asn_long: ::Integer?,
                                                 mtu: ::Integer?,
                                                 auth_key: ::String?,
                                                 amazon_address: ::String?,
@@ -745,6 +754,7 @@ module Aws
         def virtual_interface_name: () -> ::String
         def vlan: () -> ::Integer
         def asn: () -> ::Integer
+        def asn_long: () -> ::Integer
         def amazon_side_asn: () -> ::Integer
         def auth_key: () -> ::String
         def amazon_address: () -> ::String
@@ -770,7 +780,8 @@ module Aws
                                              new_public_virtual_interface: {
                                                virtual_interface_name: ::String,
                                                vlan: ::Integer,
-                                               asn: ::Integer,
+                                               asn: ::Integer?,
+                                               asn_long: ::Integer?,
                                                auth_key: ::String?,
                                                amazon_address: ::String?,
                                                customer_address: ::String?,
@@ -801,6 +812,7 @@ module Aws
                                                 virtual_interface_name: ::String?,
                                                 vlan: ::Integer?,
                                                 asn: ::Integer?,
+                                                asn_long: ::Integer?,
                                                 mtu: ::Integer?,
                                                 auth_key: ::String?,
                                                 amazon_address: ::String?,
@@ -826,6 +838,7 @@ module Aws
       def delete_bgp_peer: (
                              ?virtual_interface_id: ::String,
                              ?asn: ::Integer,
+                             ?asn_long: ::Integer,
                              ?customer_address: ::String,
                              ?bgp_peer_id: ::String
                            ) -> _DeleteBGPPeerResponseSuccess
@@ -960,16 +973,20 @@ module Aws
       interface _DescribeConnectionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Connections]
         def connections: () -> ::Array[Types::Connection]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_connections-instance_method
       def describe_connections: (
-                                  ?connection_id: ::String
+                                  ?connection_id: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
                                 ) -> _DescribeConnectionsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionsResponseSuccess
 
       interface _DescribeConnectionsOnInterconnectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Connections]
         def connections: () -> ::Array[Types::Connection]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_connections_on_interconnect-instance_method
       def describe_connections_on_interconnect: (
@@ -1047,10 +1064,13 @@ module Aws
       interface _DescribeHostedConnectionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Connections]
         def connections: () -> ::Array[Types::Connection]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_hosted_connections-instance_method
       def describe_hosted_connections: (
-                                         connection_id: ::String
+                                         connection_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
                                        ) -> _DescribeHostedConnectionsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHostedConnectionsResponseSuccess
 
@@ -1069,20 +1089,26 @@ module Aws
       interface _DescribeInterconnectsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Interconnects]
         def interconnects: () -> ::Array[Types::Interconnect]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_interconnects-instance_method
       def describe_interconnects: (
-                                    ?interconnect_id: ::String
+                                    ?interconnect_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
                                   ) -> _DescribeInterconnectsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInterconnectsResponseSuccess
 
       interface _DescribeLagsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::Lags]
         def lags: () -> ::Array[Types::Lag]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_lags-instance_method
       def describe_lags: (
-                           ?lag_id: ::String
+                           ?lag_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
                          ) -> _DescribeLagsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLagsResponseSuccess
 
@@ -1142,11 +1168,14 @@ module Aws
       interface _DescribeVirtualInterfacesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterfaces]
         def virtual_interfaces: () -> ::Array[Types::VirtualInterface]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_virtual_interfaces-instance_method
       def describe_virtual_interfaces: (
                                          ?connection_id: ::String,
-                                         ?virtual_interface_id: ::String
+                                         ?virtual_interface_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
                                        ) -> _DescribeVirtualInterfacesResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualInterfacesResponseSuccess
 
@@ -1366,6 +1395,7 @@ module Aws
         def virtual_interface_name: () -> ::String
         def vlan: () -> ::Integer
         def asn: () -> ::Integer
+        def asn_long: () -> ::Integer
         def amazon_side_asn: () -> ::Integer
         def auth_key: () -> ::String
         def amazon_address: () -> ::String

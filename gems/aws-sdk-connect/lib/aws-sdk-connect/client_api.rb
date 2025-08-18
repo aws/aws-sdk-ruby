@@ -2037,7 +2037,6 @@ module Aws::Connect
     ClaimedPhoneNumberSummary.struct_class = Types::ClaimedPhoneNumberSummary
 
     CommonAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
-    CommonAttributeAndCondition.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
     CommonAttributeAndCondition.struct_class = Types::CommonAttributeAndCondition
 
     CommonAttributeOrConditionList.member = Shapes::ShapeRef.new(shape: CommonAttributeAndCondition)
@@ -6543,7 +6542,6 @@ module Aws::Connect
     UserHierarchyGroupSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchConditionList, location_name: "OrConditions"))
     UserHierarchyGroupSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: UserHierarchyGroupSearchConditionList, location_name: "AndConditions"))
     UserHierarchyGroupSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
-    UserHierarchyGroupSearchCriteria.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
     UserHierarchyGroupSearchCriteria.struct_class = Types::UserHierarchyGroupSearchCriteria
 
     UserHierarchyGroupSearchFilter.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: ControlPlaneAttributeFilter, location_name: "AttributeFilter"))

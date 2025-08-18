@@ -120,6 +120,7 @@ module Aws::EC2
     #       enabled: false, # required
     #     },
     #     placement: {
+    #       availability_zone_id: "AvailabilityZoneId",
     #       affinity: "String",
     #       group_name: "PlacementGroupName",
     #       partition_number: 1,
@@ -1447,7 +1448,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   volume = ec2.create_volume({
-    #     availability_zone: "AvailabilityZoneName", # required
+    #     availability_zone: "AvailabilityZoneName",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     encrypted: false,
     #     iops: 1,
     #     kms_key_id: "KmsKeyId",
@@ -1476,9 +1478,18 @@ module Aws::EC2
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
-    # @option options [required, String] :availability_zone
+    # @option options [String] :availability_zone
     #   The ID of the Availability Zone in which to create the volume. For
     #   example, `us-east-1a`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
+    # @option options [String] :availability_zone_id
+    #   The ID of the Availability Zone in which to create the volume. For
+    #   example, `use1-az1`.
+    #
+    #   Either `AvailabilityZone` or `AvailabilityZoneId` must be specified,
+    #   but not both.
     # @option options [Boolean] :encrypted
     #   Indicates whether the volume should be encrypted. The effect of
     #   setting the encryption state to `true` depends on the volume origin
@@ -2521,6 +2532,9 @@ module Aws::EC2
     #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone of the
+    #     instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
     #     volume mapped to the instance, for example,
@@ -4136,6 +4150,9 @@ module Aws::EC2
     #
     #   * `availability-zone` - The Availability Zone in which the volume was
     #     created.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone in which
+    #     the volume was created.
     #
     #   * `create-time` - The time stamp when the volume was created.
     #

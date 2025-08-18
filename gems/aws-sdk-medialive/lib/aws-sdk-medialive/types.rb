@@ -14054,6 +14054,11 @@ module Aws::MediaLive
     #   Set to enabled to pass through ID3 metadata from the input sources.
     #   @return [String]
     #
+    # @!attribute [rw] additional_destinations
+    #   Optional an array of additional destinational HTTP destinations for
+    #   the OutputGroup outputs
+    #   @return [Array<Types::AdditionalDestinations>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestGroupSettings AWS API Documentation
     #
     class CmafIngestGroupSettings < Struct.new(
@@ -14072,7 +14077,8 @@ module Aws::MediaLive
       :caption_language_mappings,
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
-      :timed_metadata_passthrough)
+      :timed_metadata_passthrough,
+      :additional_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21707,6 +21713,20 @@ module Aws::MediaLive
     class CmafIngestCaptionLanguageMapping < Struct.new(
       :caption_channel,
       :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional output destinations for a CMAF Ingest output group
+    #
+    # @!attribute [rw] destination
+    #   The destination location
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AdditionalDestinations AWS API Documentation
+    #
+    class AdditionalDestinations < Struct.new(
+      :destination)
       SENSITIVE = []
       include Aws::Structure
     end

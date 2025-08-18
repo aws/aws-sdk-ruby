@@ -835,7 +835,8 @@ module Aws::Deadline
       attr_accessor fleet_id: ::String
       attr_accessor farm_id: ::String
       attr_accessor display_name: ::String
-      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "SUSPENDED")
+      attr_accessor status_message: ::String
       attr_accessor auto_scaling_status: ("GROWING" | "STEADY" | "SHRINKING")
       attr_accessor target_worker_count: ::Integer
       attr_accessor worker_count: ::Integer
@@ -901,7 +902,8 @@ module Aws::Deadline
       attr_accessor farm_id: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "SUSPENDED")
+      attr_accessor status_message: ::String
       attr_accessor auto_scaling_status: ("GROWING" | "STEADY" | "SHRINKING")
       attr_accessor target_worker_count: ::Integer
       attr_accessor worker_count: ::Integer
@@ -1582,7 +1584,7 @@ module Aws::Deadline
       attr_accessor farm_id: ::String
       attr_accessor principal_id: ::String
       attr_accessor display_name: ::String
-      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED")
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "SUSPENDED")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -2230,7 +2232,7 @@ module Aws::Deadline
     end
 
     class ServiceManagedEc2InstanceMarketOptions
-      attr_accessor type: ("on-demand" | "spot")
+      attr_accessor type: ("on-demand" | "spot" | "wait-and-save")
       SENSITIVE: []
     end
 

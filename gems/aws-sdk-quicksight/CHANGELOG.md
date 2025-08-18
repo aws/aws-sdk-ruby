@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2025-08-11)
+------------------
+
+* Feature - Add RowAxisDisplayOptions and ColumnAxisDisplayOptions to HeatMapConfiguration, add Actions to PluginVisual, increase limit for CalculatedFields list
+
 1.154.0 (2025-08-04)
 ------------------
 

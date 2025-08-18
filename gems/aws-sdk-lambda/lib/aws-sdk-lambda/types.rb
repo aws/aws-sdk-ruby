@@ -1231,12 +1231,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfigRequest AWS API Documentation
@@ -1300,12 +1295,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfigResponse AWS API Documentation
@@ -2728,12 +2718,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionUrlConfig AWS API Documentation
@@ -3189,12 +3174,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfigResponse AWS API Documentation
@@ -7224,12 +7204,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfigRequest AWS API Documentation
@@ -7302,12 +7277,7 @@ module Aws::Lambda
     #   * `RESPONSE_STREAM` – Your function streams payload results as they
     #     become available. Lambda invokes your function using the
     #     `InvokeWithResponseStream` API operation. The maximum response
-    #     payload size is 20 MB, however, you can [request a quota
-    #     increase][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+    #     payload size is 200 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfigResponse AWS API Documentation

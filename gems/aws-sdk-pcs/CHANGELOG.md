@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2025-08-14)
+------------------
+
+* Feature - Updated the regex pattern and description of iamInstanceProfileArn in the CreateComputeNodeGroup and UpdateComputeNodeGroup API actions. Name and path requirements apply to the ARN of the IAM role associated with the instance profile and not the ARN of the instance profile.
+
 1.26.0 (2025-08-04)
 ------------------
 

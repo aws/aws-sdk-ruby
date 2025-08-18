@@ -6156,7 +6156,9 @@ module Aws::QuickSight
 
     HeatMapConfiguration.add_member(:field_wells, Shapes::ShapeRef.new(shape: HeatMapFieldWells, location_name: "FieldWells"))
     HeatMapConfiguration.add_member(:sort_configuration, Shapes::ShapeRef.new(shape: HeatMapSortConfiguration, location_name: "SortConfiguration"))
+    HeatMapConfiguration.add_member(:row_axis_display_options, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "RowAxisDisplayOptions"))
     HeatMapConfiguration.add_member(:row_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "RowLabelOptions"))
+    HeatMapConfiguration.add_member(:column_axis_display_options, Shapes::ShapeRef.new(shape: AxisDisplayOptions, location_name: "ColumnAxisDisplayOptions"))
     HeatMapConfiguration.add_member(:column_label_options, Shapes::ShapeRef.new(shape: ChartAxisLabelOptions, location_name: "ColumnLabelOptions"))
     HeatMapConfiguration.add_member(:color_scale, Shapes::ShapeRef.new(shape: ColorScale, location_name: "ColorScale"))
     HeatMapConfiguration.add_member(:legend, Shapes::ShapeRef.new(shape: LegendOptions, location_name: "Legend"))
@@ -7623,6 +7625,7 @@ module Aws::QuickSight
     PluginVisual.add_member(:title, Shapes::ShapeRef.new(shape: VisualTitleLabelOptions, location_name: "Title"))
     PluginVisual.add_member(:subtitle, Shapes::ShapeRef.new(shape: VisualSubtitleLabelOptions, location_name: "Subtitle"))
     PluginVisual.add_member(:chart_configuration, Shapes::ShapeRef.new(shape: PluginVisualConfiguration, location_name: "ChartConfiguration"))
+    PluginVisual.add_member(:actions, Shapes::ShapeRef.new(shape: VisualCustomActionList, location_name: "Actions"))
     PluginVisual.add_member(:visual_content_alt_text, Shapes::ShapeRef.new(shape: LongPlainText, location_name: "VisualContentAltText"))
     PluginVisual.struct_class = Types::PluginVisual
 

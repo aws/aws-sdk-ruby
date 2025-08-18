@@ -1,0 +1,21 @@
+{
+  "version" : 2,
+  "testCases" : [ {
+    "id" : "ListOpportunitiesError",
+    "operationName" : "ListOpportunities",
+    "input" : {
+      "Catalog" : null
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ValidationException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  } ]
+}

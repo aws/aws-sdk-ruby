@@ -176,6 +176,16 @@ module Aws::Braket
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
+      def program_set_validation_failures
+        @data[:program_set_validation_failures]
+      end
     end
 
   end

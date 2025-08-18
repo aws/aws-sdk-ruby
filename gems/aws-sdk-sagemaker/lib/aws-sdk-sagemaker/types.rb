@@ -6108,11 +6108,40 @@ module Aws::SageMaker
     #   HyperPod cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] accelerators
+    #   The number of accelerators to allocate. If you don't specify a
+    #   value for vCPU and MemoryInGiB, SageMaker AI automatically allocates
+    #   ratio-based values for those parameters based on the number of
+    #   accelerators you provide. For example, if you allocate 16 out of 32
+    #   total accelerators, SageMaker AI uses the ratio of 0.5 and allocates
+    #   values to vCPU and MemoryInGiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] v_cpu
+    #   The number of vCPU to allocate. If you specify a value only for
+    #   vCPU, SageMaker AI automatically allocates ratio-based values for
+    #   MemoryInGiB based on this vCPU parameter. For example, if you
+    #   allocate 20 out of 40 total vCPU, SageMaker AI uses the ratio of 0.5
+    #   and allocates values to MemoryInGiB. Accelerators are set to 0.
+    #   @return [Float]
+    #
+    # @!attribute [rw] memory_in_gi_b
+    #   The amount of memory in GiB to allocate. If you specify a value only
+    #   for this parameter, SageMaker AI automatically allocates a
+    #   ratio-based value for vCPU based on this memory that you provide.
+    #   For example, if you allocate 200 out of 400 total memory in GiB,
+    #   SageMaker AI uses the ratio of 0.5 and allocates values to vCPU.
+    #   Accelerators are set to 0.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ComputeQuotaResourceConfig AWS API Documentation
     #
     class ComputeQuotaResourceConfig < Struct.new(
       :instance_type,
-      :count)
+      :count,
+      :accelerators,
+      :v_cpu,
+      :memory_in_gi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9290,10 +9319,8 @@ module Aws::SageMaker
     #     are using is not listed below, the attribute name *must not* end
     #     with "-ref".
     #
-    #     * Image semantic segmentation (`SemanticSegmentation)`, and
-    #       adjustment (`AdjustmentSemanticSegmentation`) and verification
-    #       (`VerificationSemanticSegmentation`) labeling jobs for this task
-    #       type.
+    #     * Verification (`VerificationSemanticSegmentation`) labeling jobs
+    #       for this task type.
     #
     #     * Video frame object detection (`VideoObjectDetection`), and
     #       adjustment and verification (`AdjustmentVideoObjectDetection`)
@@ -14403,6 +14430,14 @@ module Aws::SageMaker
     #   The status.
     #   @return [String]
     #
+    # @!attribute [rw] effective_trusted_identity_propagation_status
+    #   The effective status of Trusted Identity Propagation (TIP) for this
+    #   application. When enabled, user identities from IAM Identity Center
+    #   are being propagated through the application to TIP enabled Amazon
+    #   Web Services services. When disabled, standard IAM role-based access
+    #   is used.
+    #   @return [String]
+    #
     # @!attribute [rw] recovery_mode
     #   Indicates whether the application is launched in recovery mode.
     #   @return [Boolean]
@@ -14455,6 +14490,7 @@ module Aws::SageMaker
       :user_profile_name,
       :space_name,
       :status,
+      :effective_trusted_identity_propagation_status,
       :recovery_mode,
       :last_health_check_timestamp,
       :last_user_activity_timestamp,
@@ -21484,6 +21520,13 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #   @return [String]
     #
+    # @!attribute [rw] trusted_identity_propagation_settings
+    #   The Trusted Identity Propagation (TIP) settings for the SageMaker
+    #   domain. These settings determine how user identities from IAM
+    #   Identity Center are propagated through the domain to TIP enabled
+    #   Amazon Web Services services.
+    #   @return [Types::TrustedIdentityPropagationSettings]
+    #
     # @!attribute [rw] docker_settings
     #   A collection of settings that configure the domain's Docker
     #   interaction.
@@ -21506,6 +21549,7 @@ module Aws::SageMaker
       :security_group_ids,
       :r_studio_server_pro_domain_settings,
       :execution_role_identity_config,
+      :trusted_identity_propagation_settings,
       :docker_settings,
       :amazon_q_settings,
       :unified_studio_settings)
@@ -21538,6 +21582,13 @@ module Aws::SageMaker
     #   apps.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] trusted_identity_propagation_settings
+    #   The Trusted Identity Propagation (TIP) settings for the SageMaker
+    #   domain. These settings determine how user identities from IAM
+    #   Identity Center are propagated through the domain to TIP enabled
+    #   Amazon Web Services services.
+    #   @return [Types::TrustedIdentityPropagationSettings]
+    #
     # @!attribute [rw] docker_settings
     #   A collection of settings that configure the domain's Docker
     #   interaction.
@@ -21559,6 +21610,7 @@ module Aws::SageMaker
       :r_studio_server_pro_domain_settings_for_update,
       :execution_role_identity_config,
       :security_group_ids,
+      :trusted_identity_propagation_settings,
       :docker_settings,
       :amazon_q_settings,
       :unified_studio_settings)
@@ -49864,6 +49916,34 @@ module Aws::SageMaker
       :trial_source,
       :creation_time,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Trusted Identity Propagation (TIP) settings for the SageMaker
+    # domain. These settings determine how user identities from IAM Identity
+    # Center are propagated through the domain to TIP enabled Amazon Web
+    # Services services.
+    #
+    # @!attribute [rw] status
+    #   The status of Trusted Identity Propagation (TIP) at the SageMaker
+    #   domain level.
+    #
+    #   When disabled, standard IAM role-based access is used.
+    #
+    #   When enabled:
+    #
+    #   * User identities from IAM Identity Center are propagated through
+    #     the application to TIP enabled Amazon Web Services services.
+    #
+    #   * New applications or existing applications that are automatically
+    #     patched, will use the domain level configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrustedIdentityPropagationSettings AWS API Documentation
+    #
+    class TrustedIdentityPropagationSettings < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

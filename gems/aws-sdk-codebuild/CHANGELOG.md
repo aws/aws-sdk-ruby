@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2025-08-12)
+------------------
+
+* Feature - AWS CodeBuild now supports PullRequestBuildPolicy in webhook object.
+
 1.161.0 (2025-08-07)
 ------------------
 

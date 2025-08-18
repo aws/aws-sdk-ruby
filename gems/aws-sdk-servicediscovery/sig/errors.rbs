@@ -51,6 +51,7 @@ module Aws
         def message: () -> ::String
         def creator_request_id: () -> ::String
         def service_id: () -> ::String
+        def service_arn: () -> ::String
       end
       class ServiceAttributesLimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String

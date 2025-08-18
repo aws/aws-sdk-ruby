@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2025-08-12)
+------------------
+
+* Feature - AWS HealthScribe now supports specifying preferred patient pronouns through the MedicalScribeContext parameter for use in the generated clinical notes.
+
 1.86.0 (2025-08-04)
 ------------------
 

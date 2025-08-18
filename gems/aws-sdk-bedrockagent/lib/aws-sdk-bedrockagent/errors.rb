@@ -141,13 +141,13 @@ module Aws::BedrockAgent
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def field_list
+        @data[:field_list]
       end
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2025-08-14)
+------------------
+
+* Feature - Endpoint rule test and documentation update.
+
 1.1.0 (2025-08-04)
 ------------------
 

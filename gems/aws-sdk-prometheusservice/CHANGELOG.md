@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2025-08-15)
+------------------
+
+* Feature - Add Resource-based Policy APIs for Amazon Prometheus
+
 1.56.0 (2025-08-04)
 ------------------
 

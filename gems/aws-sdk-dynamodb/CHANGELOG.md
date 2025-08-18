@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2025-08-14)
+------------------
+
+* Feature - This release 1/ Adds support for throttled keys mode for CloudWatch Contributor Insights, 2/ Adds throttling reasons to exceptions across dataplane APIs. 3/ Explicitly models ThrottlingException as a class in statically typed languages. Refer to the launch day blog post for more details.
+
 1.149.0 (2025-08-04)
 ------------------
 

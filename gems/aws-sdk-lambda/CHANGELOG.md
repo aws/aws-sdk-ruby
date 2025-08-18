@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2025-08-11)
+------------------
+
+* Feature - Doc-only update for Lambda that updates the maximum payload size for response streaming invocations to 200 MB.
+
 1.157.0 (2025-08-04)
 ------------------
 

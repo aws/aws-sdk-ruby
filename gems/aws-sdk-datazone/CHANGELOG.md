@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-08-13)
+------------------
+
+* Feature - Adds support for account pools and project profile account decoupling
+
 1.46.0 (2025-08-04)
 ------------------
 

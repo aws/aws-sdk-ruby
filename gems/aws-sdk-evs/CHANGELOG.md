@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2025-08-11)
+------------------
+
+* Feature - Update for general availability of Amazon Elastic VMware Service (EVS).
+
 1.3.0 (2025-08-04)
 ------------------
 

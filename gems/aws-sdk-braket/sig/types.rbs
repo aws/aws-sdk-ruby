@@ -13,9 +13,16 @@ module Aws::Braket
       SENSITIVE: []
     end
 
+    class ActionMetadata
+      attr_accessor action_type: ::String
+      attr_accessor program_count: ::Integer
+      attr_accessor executable_count: ::Integer
+      SENSITIVE: []
+    end
+
     class AlgorithmSpecification
-      attr_accessor container_image: Types::ContainerImage
       attr_accessor script_mode_config: Types::ScriptModeConfig
+      attr_accessor container_image: Types::ContainerImage
       SENSITIVE: []
     end
 
@@ -31,20 +38,20 @@ module Aws::Braket
     end
 
     class CancelJobResponse
-      attr_accessor cancellation_status: ("CANCELLING" | "CANCELLED")
       attr_accessor job_arn: ::String
+      attr_accessor cancellation_status: ("CANCELLING" | "CANCELLED")
       SENSITIVE: []
     end
 
     class CancelQuantumTaskRequest
-      attr_accessor client_token: ::String
       attr_accessor quantum_task_arn: ::String
+      attr_accessor client_token: ::String
       SENSITIVE: []
     end
 
     class CancelQuantumTaskResponse
-      attr_accessor cancellation_status: ("CANCELLING" | "CANCELLED")
       attr_accessor quantum_task_arn: ::String
+      attr_accessor cancellation_status: ("CANCELLING" | "CANCELLED")
       SENSITIVE: []
     end
 
@@ -59,19 +66,19 @@ module Aws::Braket
     end
 
     class CreateJobRequest
-      attr_accessor algorithm_specification: Types::AlgorithmSpecification
-      attr_accessor associations: ::Array[Types::Association]
-      attr_accessor checkpoint_config: Types::JobCheckpointConfig
       attr_accessor client_token: ::String
-      attr_accessor device_config: Types::DeviceConfig
-      attr_accessor hyper_parameters: ::Hash[::String, ::String]
+      attr_accessor algorithm_specification: Types::AlgorithmSpecification
       attr_accessor input_data_config: ::Array[Types::InputFileConfig]
-      attr_accessor instance_config: Types::InstanceConfig
-      attr_accessor job_name: ::String
       attr_accessor output_data_config: Types::JobOutputDataConfig
+      attr_accessor checkpoint_config: Types::JobCheckpointConfig
+      attr_accessor job_name: ::String
       attr_accessor role_arn: ::String
       attr_accessor stopping_condition: Types::JobStoppingCondition
+      attr_accessor instance_config: Types::InstanceConfig
+      attr_accessor hyper_parameters: ::Hash[::String, ::String]
+      attr_accessor device_config: Types::DeviceConfig
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor associations: ::Array[Types::Association]
       SENSITIVE: []
     end
 
@@ -81,16 +88,16 @@ module Aws::Braket
     end
 
     class CreateQuantumTaskRequest
-      attr_accessor action: ::String
-      attr_accessor associations: ::Array[Types::Association]
       attr_accessor client_token: ::String
       attr_accessor device_arn: ::String
       attr_accessor device_parameters: ::String
-      attr_accessor job_token: ::String
+      attr_accessor shots: ::Integer
       attr_accessor output_s3_bucket: ::String
       attr_accessor output_s3_key_prefix: ::String
-      attr_accessor shots: ::Integer
+      attr_accessor action: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_token: ::String
+      attr_accessor associations: ::Array[Types::Association]
       SENSITIVE: []
     end
 
@@ -116,8 +123,8 @@ module Aws::Braket
 
     class DeviceQueueInfo
       attr_accessor queue: ("QUANTUM_TASKS_QUEUE" | "JOBS_QUEUE")
-      attr_accessor queue_priority: ("Normal" | "Priority")
       attr_accessor queue_size: ::String
+      attr_accessor queue_priority: ("Normal" | "Priority")
       SENSITIVE: []
     end
 
@@ -129,9 +136,9 @@ module Aws::Braket
     class DeviceSummary
       attr_accessor device_arn: ::String
       attr_accessor device_name: ::String
-      attr_accessor device_status: ("ONLINE" | "OFFLINE" | "RETIRED")
-      attr_accessor device_type: ("QPU" | "SIMULATOR")
       attr_accessor provider_name: ::String
+      attr_accessor device_type: ("QPU" | "SIMULATOR")
+      attr_accessor device_status: ("ONLINE" | "OFFLINE" | "RETIRED")
       SENSITIVE: []
     end
 
@@ -142,74 +149,76 @@ module Aws::Braket
 
     class GetDeviceResponse
       attr_accessor device_arn: ::String
-      attr_accessor device_capabilities: ::String
       attr_accessor device_name: ::String
-      attr_accessor device_queue_info: ::Array[Types::DeviceQueueInfo]
-      attr_accessor device_status: ("ONLINE" | "OFFLINE" | "RETIRED")
-      attr_accessor device_type: ("QPU" | "SIMULATOR")
       attr_accessor provider_name: ::String
+      attr_accessor device_type: ("QPU" | "SIMULATOR")
+      attr_accessor device_status: ("ONLINE" | "OFFLINE" | "RETIRED")
+      attr_accessor device_capabilities: ::String
+      attr_accessor device_queue_info: ::Array[Types::DeviceQueueInfo]
       SENSITIVE: []
     end
 
     class GetJobRequest
-      attr_accessor additional_attribute_names: ::Array[("QueueInfo")]
       attr_accessor job_arn: ::String
+      attr_accessor additional_attribute_names: ::Array[("QueueInfo")]
       SENSITIVE: []
     end
 
     class GetJobResponse
-      attr_accessor algorithm_specification: Types::AlgorithmSpecification
-      attr_accessor associations: ::Array[Types::Association]
-      attr_accessor billable_duration: ::Integer
-      attr_accessor checkpoint_config: Types::JobCheckpointConfig
-      attr_accessor created_at: ::Time
-      attr_accessor device_config: Types::DeviceConfig
-      attr_accessor ended_at: ::Time
-      attr_accessor events: ::Array[Types::JobEventDetails]
+      attr_accessor status: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor job_arn: ::String
+      attr_accessor role_arn: ::String
       attr_accessor failure_reason: ::String
+      attr_accessor job_name: ::String
       attr_accessor hyper_parameters: ::Hash[::String, ::String]
       attr_accessor input_data_config: ::Array[Types::InputFileConfig]
-      attr_accessor instance_config: Types::InstanceConfig
-      attr_accessor job_arn: ::String
-      attr_accessor job_name: ::String
       attr_accessor output_data_config: Types::JobOutputDataConfig
-      attr_accessor queue_info: Types::HybridJobQueueInfo
-      attr_accessor role_arn: ::String
-      attr_accessor started_at: ::Time
-      attr_accessor status: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
       attr_accessor stopping_condition: Types::JobStoppingCondition
+      attr_accessor checkpoint_config: Types::JobCheckpointConfig
+      attr_accessor algorithm_specification: Types::AlgorithmSpecification
+      attr_accessor instance_config: Types::InstanceConfig
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor billable_duration: ::Integer
+      attr_accessor device_config: Types::DeviceConfig
+      attr_accessor events: ::Array[Types::JobEventDetails]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor queue_info: Types::HybridJobQueueInfo
+      attr_accessor associations: ::Array[Types::Association]
       SENSITIVE: []
     end
 
     class GetQuantumTaskRequest
-      attr_accessor additional_attribute_names: ::Array[("QueueInfo")]
       attr_accessor quantum_task_arn: ::String
+      attr_accessor additional_attribute_names: ::Array[("QueueInfo")]
       SENSITIVE: []
     end
 
     class GetQuantumTaskResponse
-      attr_accessor associations: ::Array[Types::Association]
-      attr_accessor created_at: ::Time
+      attr_accessor quantum_task_arn: ::String
+      attr_accessor status: ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor failure_reason: ::String
       attr_accessor device_arn: ::String
       attr_accessor device_parameters: ::String
-      attr_accessor ended_at: ::Time
-      attr_accessor failure_reason: ::String
-      attr_accessor job_arn: ::String
+      attr_accessor shots: ::Integer
       attr_accessor output_s3_bucket: ::String
       attr_accessor output_s3_directory: ::String
-      attr_accessor quantum_task_arn: ::String
-      attr_accessor queue_info: Types::QuantumTaskQueueInfo
-      attr_accessor shots: ::Integer
-      attr_accessor status: ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_arn: ::String
+      attr_accessor queue_info: Types::QuantumTaskQueueInfo
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor num_successful_shots: ::Integer
+      attr_accessor action_metadata: Types::ActionMetadata
       SENSITIVE: []
     end
 
     class HybridJobQueueInfo
-      attr_accessor message: ::String
-      attr_accessor position: ::String
       attr_accessor queue: ("QUANTUM_TASKS_QUEUE" | "JOBS_QUEUE")
+      attr_accessor position: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -221,9 +230,9 @@ module Aws::Braket
     end
 
     class InstanceConfig
-      attr_accessor instance_count: ::Integer
       attr_accessor instance_type: ("ml.m4.xlarge" | "ml.m4.2xlarge" | "ml.m4.4xlarge" | "ml.m4.10xlarge" | "ml.m4.16xlarge" | "ml.g4dn.xlarge" | "ml.g4dn.2xlarge" | "ml.g4dn.4xlarge" | "ml.g4dn.8xlarge" | "ml.g4dn.12xlarge" | "ml.g4dn.16xlarge" | "ml.m5.large" | "ml.m5.xlarge" | "ml.m5.2xlarge" | "ml.m5.4xlarge" | "ml.m5.12xlarge" | "ml.m5.24xlarge" | "ml.c4.xlarge" | "ml.c4.2xlarge" | "ml.c4.4xlarge" | "ml.c4.8xlarge" | "ml.p2.xlarge" | "ml.p2.8xlarge" | "ml.p2.16xlarge" | "ml.p3.2xlarge" | "ml.p3.8xlarge" | "ml.p3.16xlarge" | "ml.p3dn.24xlarge" | "ml.p4d.24xlarge" | "ml.c5.xlarge" | "ml.c5.2xlarge" | "ml.c5.4xlarge" | "ml.c5.9xlarge" | "ml.c5.18xlarge" | "ml.c5n.xlarge" | "ml.c5n.2xlarge" | "ml.c5n.4xlarge" | "ml.c5n.9xlarge" | "ml.c5n.18xlarge")
       attr_accessor volume_size_in_gb: ::Integer
+      attr_accessor instance_count: ::Integer
       SENSITIVE: []
     end
 
@@ -240,8 +249,8 @@ module Aws::Braket
 
     class JobEventDetails
       attr_accessor event_type: ("WAITING_FOR_PRIORITY" | "QUEUED_FOR_EXECUTION" | "STARTING_INSTANCE" | "DOWNLOADING_DATA" | "RUNNING" | "DEPRIORITIZED_DUE_TO_INACTIVITY" | "UPLOADING_RESULTS" | "COMPLETED" | "FAILED" | "MAX_RUNTIME_EXCEEDED" | "CANCELLED")
-      attr_accessor message: ::String
       attr_accessor time_of_event: ::Time
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -257,13 +266,13 @@ module Aws::Braket
     end
 
     class JobSummary
-      attr_accessor created_at: ::Time
-      attr_accessor device: ::String
-      attr_accessor ended_at: ::Time
+      attr_accessor status: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
       attr_accessor job_arn: ::String
       attr_accessor job_name: ::String
+      attr_accessor device: ::String
+      attr_accessor created_at: ::Time
       attr_accessor started_at: ::Time
-      attr_accessor status: ("QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor ended_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -278,23 +287,30 @@ module Aws::Braket
       SENSITIVE: []
     end
 
+    class ProgramSetValidationFailure
+      attr_accessor program_index: ::Integer
+      attr_accessor inputs_index: ::Integer
+      attr_accessor errors: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class QuantumTaskQueueInfo
-      attr_accessor message: ::String
-      attr_accessor position: ::String
       attr_accessor queue: ("QUANTUM_TASKS_QUEUE" | "JOBS_QUEUE")
+      attr_accessor position: ::String
       attr_accessor queue_priority: ("Normal" | "Priority")
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class QuantumTaskSummary
-      attr_accessor created_at: ::Time
+      attr_accessor quantum_task_arn: ::String
+      attr_accessor status: ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
       attr_accessor device_arn: ::String
-      attr_accessor ended_at: ::Time
+      attr_accessor shots: ::Integer
       attr_accessor output_s3_bucket: ::String
       attr_accessor output_s3_directory: ::String
-      attr_accessor quantum_task_arn: ::String
-      attr_accessor shots: ::Integer
-      attr_accessor status: ("CREATED" | "QUEUED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+      attr_accessor created_at: ::Time
+      attr_accessor ended_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -310,9 +326,9 @@ module Aws::Braket
     end
 
     class ScriptModeConfig
-      attr_accessor compression_type: ("NONE" | "GZIP")
       attr_accessor entry_point: ::String
       attr_accessor s3_uri: ::String
+      attr_accessor compression_type: ("NONE" | "GZIP")
       SENSITIVE: []
     end
 
@@ -323,9 +339,9 @@ module Aws::Braket
     end
 
     class SearchDevicesRequest
-      attr_accessor filters: ::Array[Types::SearchDevicesFilter]
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::SearchDevicesFilter]
       SENSITIVE: []
     end
 
@@ -337,15 +353,15 @@ module Aws::Braket
 
     class SearchJobsFilter
       attr_accessor name: ::String
-      attr_accessor operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN" | "CONTAINS")
       attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN" | "CONTAINS")
       SENSITIVE: []
     end
 
     class SearchJobsRequest
-      attr_accessor filters: ::Array[Types::SearchJobsFilter]
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::SearchJobsFilter]
       SENSITIVE: []
     end
 
@@ -357,21 +373,21 @@ module Aws::Braket
 
     class SearchQuantumTasksFilter
       attr_accessor name: ::String
-      attr_accessor operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN")
       attr_accessor values: ::Array[::String]
+      attr_accessor operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN")
       SENSITIVE: []
     end
 
     class SearchQuantumTasksRequest
-      attr_accessor filters: ::Array[Types::SearchQuantumTasksFilter]
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::SearchQuantumTasksFilter]
       SENSITIVE: []
     end
 
     class SearchQuantumTasksResponse
-      attr_accessor next_token: ::String
       attr_accessor quantum_tasks: ::Array[Types::QuantumTaskSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -405,6 +421,8 @@ module Aws::Braket
 
     class ValidationException
       attr_accessor message: ::String
+      attr_accessor reason: ("ProgramSetValidationFailed")
+      attr_accessor program_set_validation_failures: ::Array[Types::ProgramSetValidationFailure]
       SENSITIVE: []
     end
   end
