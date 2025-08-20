@@ -105,6 +105,17 @@ module Seahorse
             session.continue_timeout = http_continue_timeout if
               session.respond_to?(:continue_timeout=)
             yield(session)
+          rescue Net::OpenTimeout, Timeout::Error => error
+            session.finish if session
+            # For timeout errors, clear the entire pool for this endpoint
+            # to force fresh connections on subsequent requests
+            @pool_mutex.synchronize do
+              if @pool.key?(endpoint)
+                @pool[endpoint].each(&:finish)
+                @pool[endpoint].clear
+              end
+            end
+            raise
           rescue
             session.finish if session
             raise
@@ -143,6 +154,22 @@ module Seahorse
           @pool_mutex.synchronize do
             @pool.values.flatten.map(&:finish)
             @pool.clear
+          end
+          nil
+        end
+
+        # Closes and removes all sessions for a specific endpoint from the pool.
+        # This is useful for clearing potentially stale connections after 
+        # timeout errors.
+        # @param [URI::HTTP, URI::HTTPS] endpoint The endpoint to clear
+        # @return [nil]
+        def clear_endpoint!(endpoint)
+          endpoint = remove_path_and_query(endpoint)
+          @pool_mutex.synchronize do
+            if @pool.key?(endpoint)
+              @pool[endpoint].each(&:finish)
+              @pool[endpoint].clear
+            end
           end
           nil
         end
