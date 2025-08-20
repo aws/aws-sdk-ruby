@@ -64,7 +64,7 @@ jobs:
           bundler-cache: true
 
       - name: Sync Protocol Tests
-        run: bundle exec rake sync-protocol-tests
+        run: bundle exec rake sync:protocol-tests
 
       - name: Test
         run: bundle exec rake test:protocols

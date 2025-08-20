@@ -2,7 +2,37 @@
 
 require 'aws-sdk-code-generator'
 
-desc 'build aws-sdk-lambda'
-task 'build:aws-sdk-lambda' do
-  AwsSdkCodeGenerator.generate_aws_sdk_lambda
+task 'build' do
+  # TODO: These result in various errors:
+  #   aws-sdk-cloudfrontkeyvaluestore => ArgumentError: No endpoint function binding registered for aws.parseArn
+  #   aws-sdk-dynamodb => ArgumentError: Endpoint built-in not available for AWS::Auth::AccountId
+  #   aws-sdk-iotmanagedintegrations => NoMethodError: undefined method 'each_pair' for nil
+  #     (from #structures in operation_examples.rb)
+  #   aws-sdk-kinesis => ArgumentError: No endpoint function binding registered for aws.parseArn
+  #   aws-sdk-s3control => ArgumentError: Endpoint built-in not available for AWS::S3Control::UseArnRegion
+  #   aws-sdk-s3 => ArgumentError: Endpoint built-in not available for AWS::S3::ForcePathStyle
+  #   aws-sdk-sts => ArgumentError: Endpoint built-in not available for AWS::STS::UseGlobalEndpoint
+  skip = %w[
+    aws-sdk-cloudfrontkeyvaluestore
+    aws-sdk-dynamodb
+    aws-sdk-iotmanagedintegrations
+    aws-sdk-kinesis
+    aws-sdk-s3control
+    aws-sdk-s3
+    aws-sdk-sts
+  ]
+
+  AwsSdkCodeGenerator::SERVICES.each do |service|
+    next if skip.include? service.gem_name
+
+    Rake::Task["build:#{service.gem_name}"].invoke
+  end
+end
+
+desc 'Generates the code for one service, e.g. `rake build:aws-sdk-dynamodb`'
+task 'build:aws-sdk-*'
+rule(/^build:aws-sdk-\w+$/) do |task|
+  identifier = task.name.split('-').last
+  plan = AwsSdkCodeGenerator::SERVICES[identifier]
+  Smithy.generate(plan)
 end
