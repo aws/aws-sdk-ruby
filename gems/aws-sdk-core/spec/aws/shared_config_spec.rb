@@ -473,5 +473,55 @@ module Aws
           .to eq('http://localhost:8000')
       end
     end
+
+    context 'credentials_from_source' do
+      let(:config) { SharedConfig.new }
+
+      context 'with Environment credential source' do
+        before do
+          stub_const('ENV', {
+            'AWS_ACCESS_KEY_ID' => 'test_access_key',
+            'AWS_SECRET_ACCESS_KEY' => 'test_secret_key',
+            'AWS_SESSION_TOKEN' => 'test_session_token'
+          })
+        end
+
+        it 'returns Credentials with environment variables' do
+          credentials = config.send(:credentials_from_source, 'Environment', nil)
+
+          expect(credentials).to be_a(Aws::Credentials)
+          expect(credentials.access_key_id).to eq('test_access_key')
+          expect(credentials.secret_access_key).to eq('test_secret_key')
+          expect(credentials.session_token).to eq('test_session_token')
+        end
+
+        context 'without session token' do
+          before do
+            stub_const('ENV', {
+              'AWS_ACCESS_KEY_ID' => 'test_access_key',
+              'AWS_SECRET_ACCESS_KEY' => 'test_secret_key'
+            })
+          end
+
+          it 'returns Credentials with nil session token' do
+            credentials = config.send(:credentials_from_source, 'Environment', nil)
+
+            expect(credentials).to be_a(Aws::Credentials)
+            expect(credentials.access_key_id).to eq('test_access_key')
+            expect(credentials.secret_access_key).to eq('test_secret_key')
+            expect(credentials.session_token).to be_nil
+          end
+        end
+      end
+
+      context 'with unsupported credential source' do
+        it 'raises InvalidCredentialSourceError' do
+          expect {
+            config.send(:credentials_from_source, 'UnsupportedSource', nil)
+          }.to raise_error(Aws::Errors::InvalidCredentialSourceError,
+                           'Unsupported credential_source: UnsupportedSource')
+        end
+      end
+    end
   end
 end
