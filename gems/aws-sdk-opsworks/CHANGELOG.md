@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - OpsWorks has been removed from the SDK because it has been discontinued.
+
 1.78.0 (2025-08-04)
 ------------------
 
