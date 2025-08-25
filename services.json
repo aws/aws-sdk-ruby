@@ -917,14 +917,6 @@
   "OpenSearchService": {
     "models": "opensearch/2021-01-01"
   },
-  "OpsWorks": {
-    "models": "opsworks/2013-02-18",
-    "deprecated": true
-  },
-  "OpsWorksCM": {
-    "models": "opsworkscm/2016-11-01",
-    "deprecated": true
-  },
   "Organizations": {
     "models": "organizations/2016-11-28"
   },
