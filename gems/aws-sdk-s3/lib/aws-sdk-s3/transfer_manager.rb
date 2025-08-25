@@ -45,8 +45,10 @@ module Aws
       #     end
       #     tm.download_file('/path/to/file', bucket: 'bucket', key: 'key', progress_callback: progress)
       #
-      # @param [String] destination
-      #   Where to download the file to.
+      # @param [String, Pathname, File, Tempfile] destination
+      #   Where to download the file to. This can either be a String or Pathname to the file, an open File object,
+      #   or an open Tempfile object. If you pass an open File or Tempfile object, then you are responsible for
+      #   closing it after the download completes.
       #
       # @param [String] bucket
       #   The name of the S3 bucket to upload to.

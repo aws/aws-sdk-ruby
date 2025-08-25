@@ -488,7 +488,10 @@ module Aws
       #     end
       #     obj.download_file('/path/to/file', progress_callback: progress)
       #
-      # @param [String] destination Where to download the file to.
+      # @param [String, Pathname, File, Tempfile] destination
+      #   Where to download the file to. This can either be a String or Pathname to the file, an open File object,
+      #   or an open Tempfile object. If you pass an open File or Tempfile object, then you are responsible for
+      #   closing it after the download completes.
       #
       # @param [Hash] options
       #   Additional options for {Client#get_object} and #{Client#head_object} may be provided.
