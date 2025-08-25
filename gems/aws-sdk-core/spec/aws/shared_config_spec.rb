@@ -482,7 +482,8 @@ module Aws
           stub_const('ENV', {
             'AWS_ACCESS_KEY_ID' => 'test_access_key',
             'AWS_SECRET_ACCESS_KEY' => 'test_secret_key',
-            'AWS_SESSION_TOKEN' => 'test_session_token'
+            'AWS_SESSION_TOKEN' => 'test_session_token',
+            'AWS_ACCOUNT_ID' => 'test_account_id'
           })
         end
 
@@ -493,9 +494,10 @@ module Aws
           expect(credentials.access_key_id).to eq('test_access_key')
           expect(credentials.secret_access_key).to eq('test_secret_key')
           expect(credentials.session_token).to eq('test_session_token')
+          expect(credentials.account_id).to eq('test_account_id')
         end
 
-        context 'without session token' do
+        context 'minimum inputs required' do
           before do
             stub_const('ENV', {
               'AWS_ACCESS_KEY_ID' => 'test_access_key',
@@ -503,12 +505,13 @@ module Aws
             })
           end
 
-          it 'returns Credentials with nil session token' do
+          it 'returns Credentials with minimum inputs' do
             credentials = config.send(:credentials_from_source, 'Environment', nil)
 
             expect(credentials).to be_a(Aws::Credentials)
             expect(credentials.access_key_id).to eq('test_access_key')
             expect(credentials.secret_access_key).to eq('test_secret_key')
+            expect(credentials.session_token).to be_nil
             expect(credentials.session_token).to be_nil
           end
         end

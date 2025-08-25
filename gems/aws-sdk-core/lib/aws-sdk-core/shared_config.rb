@@ -370,11 +370,14 @@ module Aws
       when 'EcsContainer'
         ECSCredentials.new
       when 'Environment'
-        Credentials.new(
+        creds = Credentials.new(
           ENV['AWS_ACCESS_KEY_ID'],
           ENV['AWS_SECRET_ACCESS_KEY'],
-          ENV['AWS_SESSION_TOKEN']
+          ENV['AWS_SESSION_TOKEN'],
+          account_id: ENV['AWS_ACCOUNT_ID']
         )
+        creds.metrics = ['CREDENTIALS_ENV_VARS']
+        creds
       else
         raise Errors::InvalidCredentialSourceError, "Unsupported credential_source: #{credential_source}"
       end
