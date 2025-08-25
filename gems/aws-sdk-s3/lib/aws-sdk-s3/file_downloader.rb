@@ -20,7 +20,12 @@ module Aws
       attr_reader :client
 
       def download(destination, options = {})
-        @path = destination
+        valid_types = [String, Pathname, File, Tempfile]
+        unless valid_types.include?(destination.class)
+          raise ArgumentError, "Invalid destination, expected #{valid_types.join(', ')} but got: #{destination.class}"
+        end
+
+        @destination = destination
         @mode = options.delete(:mode) || 'auto'
         @thread_count = options.delete(:thread_count) || 10
         @chunk_size = options.delete(:chunk_size)
@@ -42,7 +47,7 @@ module Aws
             raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
           end
         end
-        File.rename(@temp_path, @path) if @temp_path
+        File.rename(@temp_path, @destination) if @temp_path
       ensure
         File.delete(@temp_path) if @temp_path && File.exist?(@temp_path)
       end
@@ -118,7 +123,9 @@ module Aws
       def download_in_threads(pending, total_size)
         threads = []
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
-        @temp_path = "#{@path}.s3tmp.#{SecureRandom.alphanumeric(8)}" unless [File, Tempfile].include?(@path.class)
+        unless [File, Tempfile].include?(@destination.class)
+          @temp_path = "#{@destination}.s3tmp.#{SecureRandom.alphanumeric(8)}"
+        end
         @thread_count.times do
           thread = Thread.new do
             begin
@@ -159,12 +166,12 @@ module Aws
       end
 
       def write(body, range)
-        path = @temp_path || @path
+        path = @temp_path || @destination
         File.write(path, body.read, range.split('-').first.to_i)
       end
 
       def single_request
-        params = @params.merge(response_target: @path)
+        params = @params.merge(response_target: @destination)
         params[:on_chunk_received] = single_part_progress if @progress_callback
         resp = @client.get_object(params)
         return resp unless @on_checksum_validated
