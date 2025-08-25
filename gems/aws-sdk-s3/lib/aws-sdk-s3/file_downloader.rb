@@ -118,7 +118,7 @@ module Aws
       def download_in_threads(pending, total_size)
         threads = []
         progress = MultipartProgress.new(pending, total_size, @progress_callback) if @progress_callback
-        @temp_path = "#{@path}.s3tmp.#{SecureRandom.alphanumeric(8)}"
+        @temp_path = "#{@path}.s3tmp.#{SecureRandom.alphanumeric(8)}" unless [File, Tempfile].include?(@path.class)
         @thread_count.times do
           thread = Thread.new do
             begin
@@ -159,7 +159,8 @@ module Aws
       end
 
       def write(body, range)
-        File.write(@temp_path, body.read, range.split('-').first.to_i)
+        path = @temp_path || @path
+        File.write(path, body.read, range.split('-').first.to_i)
       end
 
       def single_request

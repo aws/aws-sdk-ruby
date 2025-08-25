@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix multipart `download_file` to support `File` and `Tempfile` objects as download destinations.
+
 1.197.0 (2025-08-19)
 ------------------
 
