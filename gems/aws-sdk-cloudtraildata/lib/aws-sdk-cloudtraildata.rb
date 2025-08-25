@@ -54,7 +54,7 @@ module Aws::CloudTrailData
   autoload :EndpointProvider, 'aws-sdk-cloudtraildata/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudtraildata/endpoints'
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end
 

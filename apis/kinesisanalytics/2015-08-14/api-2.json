@@ -339,8 +339,7 @@
     },
     "AddApplicationCloudWatchLoggingOptionResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AddApplicationInputProcessingConfigurationRequest":{
       "type":"structure",
@@ -359,8 +358,7 @@
     },
     "AddApplicationInputProcessingConfigurationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AddApplicationInputRequest":{
       "type":"structure",
@@ -377,8 +375,7 @@
     },
     "AddApplicationInputResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AddApplicationOutputRequest":{
       "type":"structure",
@@ -395,8 +392,7 @@
     },
     "AddApplicationOutputResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AddApplicationReferenceDataSourceRequest":{
       "type":"structure",
@@ -413,8 +409,7 @@
     },
     "AddApplicationReferenceDataSourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "ApplicationCode":{
       "type":"string",
@@ -609,8 +604,7 @@
     },
     "DeleteApplicationCloudWatchLoggingOptionResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteApplicationInputProcessingConfigurationRequest":{
       "type":"structure",
@@ -627,8 +621,7 @@
     },
     "DeleteApplicationInputProcessingConfigurationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteApplicationOutputRequest":{
       "type":"structure",
@@ -645,8 +638,7 @@
     },
     "DeleteApplicationOutputResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteApplicationReferenceDataSourceRequest":{
       "type":"structure",
@@ -663,8 +655,7 @@
     },
     "DeleteApplicationReferenceDataSourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteApplicationRequest":{
       "type":"structure",
@@ -679,8 +670,7 @@
     },
     "DeleteApplicationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeApplicationRequest":{
       "type":"structure",
@@ -1389,8 +1379,7 @@
     },
     "StartApplicationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "StopApplicationRequest":{
       "type":"structure",
@@ -1401,8 +1390,7 @@
     },
     "StopApplicationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "Tag":{
       "type":"structure",
@@ -1436,8 +1424,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -1487,8 +1474,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateApplicationRequest":{
       "type":"structure",
@@ -1505,8 +1491,7 @@
     },
     "UpdateApplicationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     }
   }
 }

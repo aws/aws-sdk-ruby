@@ -6539,6 +6539,13 @@ module Aws::EC2
     #   The IP address of the client.
     #   @return [String]
     #
+    # @!attribute [rw] client_ipv_6_address
+    #   The IPv6 address assigned to the client connection when using a
+    #   dual-stack Client VPN endpoint. This field is only populated when
+    #   the endpoint is configured for dual-stack addressing, and the client
+    #   is using IPv6 for connectivity.
+    #   @return [String]
+    #
     # @!attribute [rw] common_name
     #   The common name associated with the client. This is either the name
     #   of the client certificate, or the Active Directory user name.
@@ -6570,6 +6577,7 @@ module Aws::EC2
       :ingress_packets,
       :egress_packets,
       :client_ip,
+      :client_ipv_6_address,
       :common_name,
       :status,
       :connection_end_time,
@@ -6733,6 +6741,18 @@ module Aws::EC2
     #   reconnect automatically. The default value is `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] endpoint_ip_address_type
+    #   The IP address type of the Client VPN endpoint. Possible values are
+    #   `ipv4` for IPv4 addressing only, `ipv6` for IPv6 addressing only, or
+    #   `dual-stack `for both IPv4 and IPv6 addressing.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_ip_address_type
+    #   The IP address type of the Client VPN endpoint. Possible values are
+    #   either `ipv4` for IPv4 addressing only, `ipv6` for IPv6 addressing
+    #   only, or `dual-stack` for both IPv4 and IPv6 addressing.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -6760,7 +6780,9 @@ module Aws::EC2
       :session_timeout_hours,
       :client_login_banner_options,
       :client_route_enforcement_options,
-      :disconnect_on_session_timeout)
+      :disconnect_on_session_timeout,
+      :endpoint_ip_address_type,
+      :traffic_ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8600,6 +8622,22 @@ module Aws::EC2
     #   `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] endpoint_ip_address_type
+    #   The IP address type for the Client VPN endpoint. Valid values are
+    #   `ipv4` (default) for IPv4 addressing only, `ipv6` for IPv6
+    #   addressing only, or `dual-stack` for both IPv4 and IPv6 addressing.
+    #   When set to `dual-stack,` clients can connect to the endpoint using
+    #   either IPv4 or IPv6 addresses..
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_ip_address_type
+    #   The IP address type for traffic within the Client VPN tunnel. Valid
+    #   values are `ipv4` (default) for IPv4 traffic only, `ipv6` for IPv6
+    #   addressing only, or `dual-stack` for both IPv4 and IPv6 traffic.
+    #   When set to `dual-stack`, clients can access both IPv4 and IPv6
+    #   resources through the VPN .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -8622,7 +8660,9 @@ module Aws::EC2
       :session_timeout_hours,
       :client_login_banner_options,
       :client_route_enforcement_options,
-      :disconnect_on_session_timeout)
+      :disconnect_on_session_timeout,
+      :endpoint_ip_address_type,
+      :traffic_ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

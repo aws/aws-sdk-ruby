@@ -545,6 +545,15 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class CreateResourceShareRequest
+      attr_accessor job_id: ::String
+      attr_accessor support_case_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceShareResponse < Aws::EmptyStructure
+    end
+
     class DashAdditionalManifest
       attr_accessor manifest_name_modifier: ::String
       attr_accessor selected_outputs: ::Array[::String]
@@ -1173,7 +1182,7 @@ module Aws::MediaConvert
       attr_accessor audio_rendition_sets: ::String
       attr_accessor audio_track_type: ("ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" | "ALTERNATE_AUDIO_AUTO_SELECT" | "ALTERNATE_AUDIO_NOT_AUTO_SELECT" | "AUDIO_ONLY_VARIANT_STREAM")
       attr_accessor descriptive_video_service_flag: ("DONT_FLAG" | "FLAG")
-      attr_accessor i_frame_only_manifest: ("INCLUDE" | "EXCLUDE")
+      attr_accessor i_frame_only_manifest: ("INCLUDE" | "INCLUDE_AS_TS" | "EXCLUDE")
       attr_accessor segment_modifier: ::String
       SENSITIVE: []
     end
@@ -1327,6 +1336,7 @@ module Aws::MediaConvert
       attr_accessor job_engine_version_used: ::String
       attr_accessor job_percent_complete: ::Integer
       attr_accessor job_template: ::String
+      attr_accessor last_share_details: ::String
       attr_accessor messages: Types::JobMessages
       attr_accessor output_group_details: ::Array[Types::OutputGroupDetail]
       attr_accessor priority: ::Integer
@@ -1335,6 +1345,7 @@ module Aws::MediaConvert
       attr_accessor retry_count: ::Integer
       attr_accessor role: ::String
       attr_accessor settings: Types::JobSettings
+      attr_accessor share_status: ("NOT_SHARED" | "INITIATED" | "SHARED")
       attr_accessor simulate_reserved_queue: ("DISABLED" | "ENABLED")
       attr_accessor status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "CANCELED" | "ERROR")
       attr_accessor status_update_interval: ("SECONDS_10" | "SECONDS_12" | "SECONDS_15" | "SECONDS_20" | "SECONDS_30" | "SECONDS_60" | "SECONDS_120" | "SECONDS_180" | "SECONDS_240" | "SECONDS_300" | "SECONDS_360" | "SECONDS_420" | "SECONDS_480" | "SECONDS_540" | "SECONDS_600")
@@ -1639,6 +1650,7 @@ module Aws::MediaConvert
     end
 
     class Mp2Settings
+      attr_accessor audio_description_mix: ("BROADCASTER_MIXED_AD" | "NONE")
       attr_accessor bitrate: ::Integer
       attr_accessor channels: ::Integer
       attr_accessor sample_rate: ::Integer
@@ -2397,6 +2409,8 @@ module Aws::MediaConvert
       attr_accessor program_number: ::Integer
       attr_accessor rotate: ("DEGREE_0" | "DEGREES_90" | "DEGREES_180" | "DEGREES_270" | "AUTO")
       attr_accessor sample_range: ("FOLLOW" | "FULL_RANGE" | "LIMITED_RANGE")
+      attr_accessor selector_type: ("AUTO" | "STREAM")
+      attr_accessor streams: ::Array[::Integer]
       SENSITIVE: []
     end
 

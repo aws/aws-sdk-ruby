@@ -63,10 +63,13 @@ module Aws::DataZone
     AssetInDataProductListingItems = Shapes::ListShape.new(name: 'AssetInDataProductListingItems')
     AssetItem = Shapes::StructureShape.new(name: 'AssetItem')
     AssetItemAdditionalAttributes = Shapes::StructureShape.new(name: 'AssetItemAdditionalAttributes')
+    AssetItemGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'AssetItemGovernedGlossaryTermsList')
     AssetListing = Shapes::StructureShape.new(name: 'AssetListing')
     AssetListingDetails = Shapes::StructureShape.new(name: 'AssetListingDetails')
+    AssetListingGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'AssetListingGovernedGlossaryTermsList')
     AssetListingItem = Shapes::StructureShape.new(name: 'AssetListingItem')
     AssetListingItemAdditionalAttributes = Shapes::StructureShape.new(name: 'AssetListingItemAdditionalAttributes')
+    AssetListingItemGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'AssetListingItemGovernedGlossaryTermsList')
     AssetName = Shapes::StringShape.new(name: 'AssetName')
     AssetRevision = Shapes::StructureShape.new(name: 'AssetRevision')
     AssetRevisions = Shapes::ListShape.new(name: 'AssetRevisions')
@@ -79,6 +82,9 @@ module Aws::DataZone
     AssetTypesForRule = Shapes::StructureShape.new(name: 'AssetTypesForRule')
     AssociateEnvironmentRoleInput = Shapes::StructureShape.new(name: 'AssociateEnvironmentRoleInput')
     AssociateEnvironmentRoleOutput = Shapes::StructureShape.new(name: 'AssociateEnvironmentRoleOutput')
+    AssociateGovernedTermsInput = Shapes::StructureShape.new(name: 'AssociateGovernedTermsInput')
+    AssociateGovernedTermsInputGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'AssociateGovernedTermsInputGovernedGlossaryTermsList')
+    AssociateGovernedTermsOutput = Shapes::StructureShape.new(name: 'AssociateGovernedTermsOutput')
     AthenaPropertiesInput = Shapes::StructureShape.new(name: 'AthenaPropertiesInput')
     AthenaPropertiesInputWorkgroupNameString = Shapes::StringShape.new(name: 'AthenaPropertiesInputWorkgroupNameString')
     AthenaPropertiesOutput = Shapes::StructureShape.new(name: 'AthenaPropertiesOutput')
@@ -147,8 +153,10 @@ module Aws::DataZone
     CreateAssetFilterOutput = Shapes::StructureShape.new(name: 'CreateAssetFilterOutput')
     CreateAssetInput = Shapes::StructureShape.new(name: 'CreateAssetInput')
     CreateAssetOutput = Shapes::StructureShape.new(name: 'CreateAssetOutput')
+    CreateAssetOutputGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'CreateAssetOutputGovernedGlossaryTermsList')
     CreateAssetRevisionInput = Shapes::StructureShape.new(name: 'CreateAssetRevisionInput')
     CreateAssetRevisionOutput = Shapes::StructureShape.new(name: 'CreateAssetRevisionOutput')
+    CreateAssetRevisionOutputGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'CreateAssetRevisionOutputGovernedGlossaryTermsList')
     CreateAssetTypeInput = Shapes::StructureShape.new(name: 'CreateAssetTypeInput')
     CreateAssetTypeOutput = Shapes::StructureShape.new(name: 'CreateAssetTypeOutput')
     CreateAssetTypePolicyGrantDetail = Shapes::StructureShape.new(name: 'CreateAssetTypePolicyGrantDetail')
@@ -313,6 +321,9 @@ module Aws::DataZone
     DetailedGlossaryTerms = Shapes::ListShape.new(name: 'DetailedGlossaryTerms')
     DisassociateEnvironmentRoleInput = Shapes::StructureShape.new(name: 'DisassociateEnvironmentRoleInput')
     DisassociateEnvironmentRoleOutput = Shapes::StructureShape.new(name: 'DisassociateEnvironmentRoleOutput')
+    DisassociateGovernedTermsInput = Shapes::StructureShape.new(name: 'DisassociateGovernedTermsInput')
+    DisassociateGovernedTermsInputGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'DisassociateGovernedTermsInputGovernedGlossaryTermsList')
+    DisassociateGovernedTermsOutput = Shapes::StructureShape.new(name: 'DisassociateGovernedTermsOutput')
     DomainDescription = Shapes::StringShape.new(name: 'DomainDescription')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -420,6 +431,7 @@ module Aws::DataZone
     GetAssetFilterOutput = Shapes::StructureShape.new(name: 'GetAssetFilterOutput')
     GetAssetInput = Shapes::StructureShape.new(name: 'GetAssetInput')
     GetAssetOutput = Shapes::StructureShape.new(name: 'GetAssetOutput')
+    GetAssetOutputGovernedGlossaryTermsList = Shapes::ListShape.new(name: 'GetAssetOutputGovernedGlossaryTermsList')
     GetAssetTypeInput = Shapes::StructureShape.new(name: 'GetAssetTypeInput')
     GetAssetTypeOutput = Shapes::StructureShape.new(name: 'GetAssetTypeOutput')
     GetConnectionInput = Shapes::StructureShape.new(name: 'GetConnectionInput')
@@ -498,6 +510,8 @@ module Aws::DataZone
     GlossaryTermName = Shapes::StringShape.new(name: 'GlossaryTermName')
     GlossaryTermStatus = Shapes::StringShape.new(name: 'GlossaryTermStatus')
     GlossaryTerms = Shapes::ListShape.new(name: 'GlossaryTerms')
+    GlossaryUsageRestriction = Shapes::StringShape.new(name: 'GlossaryUsageRestriction')
+    GlossaryUsageRestrictions = Shapes::ListShape.new(name: 'GlossaryUsageRestrictions')
     GlueConnection = Shapes::StructureShape.new(name: 'GlueConnection')
     GlueConnectionConnectionSchemaVersionInteger = Shapes::IntegerShape.new(name: 'GlueConnectionConnectionSchemaVersionInteger')
     GlueConnectionDescriptionString = Shapes::StringShape.new(name: 'GlueConnectionDescriptionString')
@@ -525,6 +539,7 @@ module Aws::DataZone
     GlueRunConfigurationOutputRegionString = Shapes::StringShape.new(name: 'GlueRunConfigurationOutputRegionString')
     GlueSelfGrantStatusOutput = Shapes::StructureShape.new(name: 'GlueSelfGrantStatusOutput')
     GovernanceType = Shapes::StringShape.new(name: 'GovernanceType')
+    GovernedEntityType = Shapes::StringShape.new(name: 'GovernedEntityType')
     GrantIdentifier = Shapes::StringShape.new(name: 'GrantIdentifier')
     GrantedEntity = Shapes::UnionShape.new(name: 'GrantedEntity')
     GrantedEntityInput = Shapes::UnionShape.new(name: 'GrantedEntityInput')
@@ -1265,6 +1280,7 @@ module Aws::DataZone
     AssetItem.add_member(:first_revision_created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "firstRevisionCreatedAt"))
     AssetItem.add_member(:first_revision_created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "firstRevisionCreatedBy"))
     AssetItem.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    AssetItem.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: AssetItemGovernedGlossaryTermsList, location_name: "governedGlossaryTerms"))
     AssetItem.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetIdentifier, required: true, location_name: "identifier"))
     AssetItem.add_member(:name, Shapes::ShapeRef.new(shape: AssetName, required: true, location_name: "name"))
     AssetItem.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
@@ -1278,12 +1294,15 @@ module Aws::DataZone
     AssetItemAdditionalAttributes.add_member(:read_only_forms_output, Shapes::ShapeRef.new(shape: FormOutputList, location_name: "readOnlyFormsOutput"))
     AssetItemAdditionalAttributes.struct_class = Types::AssetItemAdditionalAttributes
 
+    AssetItemGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
+
     AssetListing.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "assetId"))
     AssetListing.add_member(:asset_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "assetRevision"))
     AssetListing.add_member(:asset_type, Shapes::ShapeRef.new(shape: TypeName, location_name: "assetType"))
     AssetListing.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     AssetListing.add_member(:forms, Shapes::ShapeRef.new(shape: Forms, location_name: "forms"))
     AssetListing.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: "glossaryTerms"))
+    AssetListing.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: AssetListingGovernedGlossaryTermsList, location_name: "governedGlossaryTerms"))
     AssetListing.add_member(:latest_time_series_data_point_forms, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointForms"))
     AssetListing.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
     AssetListing.struct_class = Types::AssetListing
@@ -1292,6 +1311,8 @@ module Aws::DataZone
     AssetListingDetails.add_member(:listing_status, Shapes::ShapeRef.new(shape: ListingStatus, required: true, location_name: "listingStatus"))
     AssetListingDetails.struct_class = Types::AssetListingDetails
 
+    AssetListingGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: DetailedGlossaryTerm)
+
     AssetListingItem.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: AssetListingItemAdditionalAttributes, location_name: "additionalAttributes"))
     AssetListingItem.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     AssetListingItem.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1299,6 +1320,7 @@ module Aws::DataZone
     AssetListingItem.add_member(:entity_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "entityRevision"))
     AssetListingItem.add_member(:entity_type, Shapes::ShapeRef.new(shape: TypeName, location_name: "entityType"))
     AssetListingItem.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: DetailedGlossaryTerms, location_name: "glossaryTerms"))
+    AssetListingItem.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: AssetListingItemGovernedGlossaryTermsList, location_name: "governedGlossaryTerms"))
     AssetListingItem.add_member(:listing_created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "listingCreatedBy"))
     AssetListingItem.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, location_name: "listingId"))
     AssetListingItem.add_member(:listing_revision, Shapes::ShapeRef.new(shape: Revision, location_name: "listingRevision"))
@@ -1311,6 +1333,8 @@ module Aws::DataZone
     AssetListingItemAdditionalAttributes.add_member(:latest_time_series_data_point_forms, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointForms"))
     AssetListingItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
     AssetListingItemAdditionalAttributes.struct_class = Types::AssetListingItemAdditionalAttributes
+
+    AssetListingItemGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: DetailedGlossaryTerm)
 
     AssetRevision.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
     AssetRevision.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
@@ -1359,6 +1383,16 @@ module Aws::DataZone
     AssociateEnvironmentRoleInput.struct_class = Types::AssociateEnvironmentRoleInput
 
     AssociateEnvironmentRoleOutput.struct_class = Types::AssociateEnvironmentRoleOutput
+
+    AssociateGovernedTermsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    AssociateGovernedTermsInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location: "uri", location_name: "entityIdentifier"))
+    AssociateGovernedTermsInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: GovernedEntityType, required: true, location: "uri", location_name: "entityType"))
+    AssociateGovernedTermsInput.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: AssociateGovernedTermsInputGovernedGlossaryTermsList, required: true, location_name: "governedGlossaryTerms"))
+    AssociateGovernedTermsInput.struct_class = Types::AssociateGovernedTermsInput
+
+    AssociateGovernedTermsInputGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
+
+    AssociateGovernedTermsOutput.struct_class = Types::AssociateGovernedTermsOutput
 
     AthenaPropertiesInput.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: AthenaPropertiesInputWorkgroupNameString, location_name: "workgroupName"))
     AthenaPropertiesInput.struct_class = Types::AthenaPropertiesInput
@@ -1606,6 +1640,7 @@ module Aws::DataZone
     CreateAssetOutput.add_member(:first_revision_created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "firstRevisionCreatedBy"))
     CreateAssetOutput.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormOutputList, required: true, location_name: "formsOutput"))
     CreateAssetOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    CreateAssetOutput.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: CreateAssetOutputGovernedGlossaryTermsList, location_name: "governedGlossaryTerms"))
     CreateAssetOutput.add_member(:id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "id"))
     CreateAssetOutput.add_member(:latest_time_series_data_point_forms_output, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointFormsOutput"))
     CreateAssetOutput.add_member(:listing, Shapes::ShapeRef.new(shape: AssetListingDetails, location_name: "listing"))
@@ -1617,6 +1652,8 @@ module Aws::DataZone
     CreateAssetOutput.add_member(:type_identifier, Shapes::ShapeRef.new(shape: AssetTypeIdentifier, required: true, location_name: "typeIdentifier"))
     CreateAssetOutput.add_member(:type_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "typeRevision"))
     CreateAssetOutput.struct_class = Types::CreateAssetOutput
+
+    CreateAssetOutputGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
 
     CreateAssetRevisionInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateAssetRevisionInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1638,6 +1675,7 @@ module Aws::DataZone
     CreateAssetRevisionOutput.add_member(:first_revision_created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "firstRevisionCreatedBy"))
     CreateAssetRevisionOutput.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormOutputList, required: true, location_name: "formsOutput"))
     CreateAssetRevisionOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    CreateAssetRevisionOutput.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: CreateAssetRevisionOutputGovernedGlossaryTermsList, location_name: "governedGlossaryTerms"))
     CreateAssetRevisionOutput.add_member(:id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "id"))
     CreateAssetRevisionOutput.add_member(:latest_time_series_data_point_forms_output, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointFormsOutput"))
     CreateAssetRevisionOutput.add_member(:listing, Shapes::ShapeRef.new(shape: AssetListingDetails, location_name: "listing"))
@@ -1649,6 +1687,8 @@ module Aws::DataZone
     CreateAssetRevisionOutput.add_member(:type_identifier, Shapes::ShapeRef.new(shape: AssetTypeIdentifier, required: true, location_name: "typeIdentifier"))
     CreateAssetRevisionOutput.add_member(:type_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "typeRevision"))
     CreateAssetRevisionOutput.struct_class = Types::CreateAssetRevisionOutput
+
+    CreateAssetRevisionOutputGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
 
     CreateAssetTypeInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateAssetTypeInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -1939,6 +1979,7 @@ module Aws::DataZone
     CreateGlossaryInput.add_member(:name, Shapes::ShapeRef.new(shape: GlossaryName, required: true, location_name: "name"))
     CreateGlossaryInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
     CreateGlossaryInput.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: "status"))
+    CreateGlossaryInput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     CreateGlossaryInput.struct_class = Types::CreateGlossaryInput
 
     CreateGlossaryOutput.add_member(:description, Shapes::ShapeRef.new(shape: GlossaryDescription, location_name: "description"))
@@ -1947,6 +1988,7 @@ module Aws::DataZone
     CreateGlossaryOutput.add_member(:name, Shapes::ShapeRef.new(shape: GlossaryName, required: true, location_name: "name"))
     CreateGlossaryOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
     CreateGlossaryOutput.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: "status"))
+    CreateGlossaryOutput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     CreateGlossaryOutput.struct_class = Types::CreateGlossaryOutput
 
     CreateGlossaryPolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
@@ -1970,6 +2012,7 @@ module Aws::DataZone
     CreateGlossaryTermOutput.add_member(:short_description, Shapes::ShapeRef.new(shape: ShortDescription, location_name: "shortDescription"))
     CreateGlossaryTermOutput.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryTermStatus, required: true, location_name: "status"))
     CreateGlossaryTermOutput.add_member(:term_relations, Shapes::ShapeRef.new(shape: TermRelations, location_name: "termRelations"))
+    CreateGlossaryTermOutput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     CreateGlossaryTermOutput.struct_class = Types::CreateGlossaryTermOutput
 
     CreateGroupProfileInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -2537,6 +2580,16 @@ module Aws::DataZone
 
     DisassociateEnvironmentRoleOutput.struct_class = Types::DisassociateEnvironmentRoleOutput
 
+    DisassociateGovernedTermsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DisassociateGovernedTermsInput.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, required: true, location: "uri", location_name: "entityIdentifier"))
+    DisassociateGovernedTermsInput.add_member(:entity_type, Shapes::ShapeRef.new(shape: GovernedEntityType, required: true, location: "uri", location_name: "entityType"))
+    DisassociateGovernedTermsInput.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: DisassociateGovernedTermsInputGovernedGlossaryTermsList, required: true, location_name: "governedGlossaryTerms"))
+    DisassociateGovernedTermsInput.struct_class = Types::DisassociateGovernedTermsInput
+
+    DisassociateGovernedTermsInputGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
+
+    DisassociateGovernedTermsOutput.struct_class = Types::DisassociateGovernedTermsOutput
+
     DomainSummaries.member = Shapes::ShapeRef.new(shape: DomainSummary)
 
     DomainSummary.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
@@ -2860,6 +2913,7 @@ module Aws::DataZone
     GetAssetOutput.add_member(:first_revision_created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "firstRevisionCreatedBy"))
     GetAssetOutput.add_member(:forms_output, Shapes::ShapeRef.new(shape: FormOutputList, required: true, location_name: "formsOutput"))
     GetAssetOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
+    GetAssetOutput.add_member(:governed_glossary_terms, Shapes::ShapeRef.new(shape: GetAssetOutputGovernedGlossaryTermsList, location_name: "governedGlossaryTerms"))
     GetAssetOutput.add_member(:id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "id"))
     GetAssetOutput.add_member(:latest_time_series_data_point_forms_output, Shapes::ShapeRef.new(shape: TimeSeriesDataPointSummaryFormOutputList, location_name: "latestTimeSeriesDataPointFormsOutput"))
     GetAssetOutput.add_member(:listing, Shapes::ShapeRef.new(shape: AssetListingDetails, location_name: "listing"))
@@ -2870,6 +2924,8 @@ module Aws::DataZone
     GetAssetOutput.add_member(:type_identifier, Shapes::ShapeRef.new(shape: AssetTypeIdentifier, required: true, location_name: "typeIdentifier"))
     GetAssetOutput.add_member(:type_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "typeRevision"))
     GetAssetOutput.struct_class = Types::GetAssetOutput
+
+    GetAssetOutputGovernedGlossaryTermsList.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
 
     GetAssetTypeInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetAssetTypeInput.add_member(:identifier, Shapes::ShapeRef.new(shape: AssetTypeIdentifier, required: true, location: "uri", location_name: "identifier"))
@@ -3149,6 +3205,7 @@ module Aws::DataZone
     GetGlossaryOutput.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryStatus, required: true, location_name: "status"))
     GetGlossaryOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GetGlossaryOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetGlossaryOutput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     GetGlossaryOutput.struct_class = Types::GetGlossaryOutput
 
     GetGlossaryTermInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -3167,6 +3224,7 @@ module Aws::DataZone
     GetGlossaryTermOutput.add_member(:term_relations, Shapes::ShapeRef.new(shape: TermRelations, location_name: "termRelations"))
     GetGlossaryTermOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GetGlossaryTermOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetGlossaryTermOutput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     GetGlossaryTermOutput.struct_class = Types::GetGlossaryTermOutput
 
     GetGroupProfileInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -3447,6 +3505,7 @@ module Aws::DataZone
     GlossaryItem.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryStatus, required: true, location_name: "status"))
     GlossaryItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GlossaryItem.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GlossaryItem.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     GlossaryItem.struct_class = Types::GlossaryItem
 
     GlossaryItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
@@ -3465,12 +3524,15 @@ module Aws::DataZone
     GlossaryTermItem.add_member(:term_relations, Shapes::ShapeRef.new(shape: TermRelations, location_name: "termRelations"))
     GlossaryTermItem.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GlossaryTermItem.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GlossaryTermItem.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     GlossaryTermItem.struct_class = Types::GlossaryTermItem
 
     GlossaryTermItemAdditionalAttributes.add_member(:match_rationale, Shapes::ShapeRef.new(shape: MatchRationale, location_name: "matchRationale"))
     GlossaryTermItemAdditionalAttributes.struct_class = Types::GlossaryTermItemAdditionalAttributes
 
     GlossaryTerms.member = Shapes::ShapeRef.new(shape: GlossaryTermId)
+
+    GlossaryUsageRestrictions.member = Shapes::ShapeRef.new(shape: GlossaryUsageRestriction)
 
     GlueConnection.add_member(:athena_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "athenaProperties"))
     GlueConnection.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfiguration, location_name: "authenticationConfiguration"))
@@ -5543,6 +5605,7 @@ module Aws::DataZone
     UpdateGlossaryOutput.add_member(:name, Shapes::ShapeRef.new(shape: GlossaryName, required: true, location_name: "name"))
     UpdateGlossaryOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
     UpdateGlossaryOutput.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryStatus, location_name: "status"))
+    UpdateGlossaryOutput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     UpdateGlossaryOutput.struct_class = Types::UpdateGlossaryOutput
 
     UpdateGlossaryTermInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -5563,6 +5626,7 @@ module Aws::DataZone
     UpdateGlossaryTermOutput.add_member(:short_description, Shapes::ShapeRef.new(shape: ShortDescription, location_name: "shortDescription"))
     UpdateGlossaryTermOutput.add_member(:status, Shapes::ShapeRef.new(shape: GlossaryTermStatus, required: true, location_name: "status"))
     UpdateGlossaryTermOutput.add_member(:term_relations, Shapes::ShapeRef.new(shape: TermRelations, location_name: "termRelations"))
+    UpdateGlossaryTermOutput.add_member(:usage_restrictions, Shapes::ShapeRef.new(shape: GlossaryUsageRestrictions, location_name: "usageRestrictions"))
     UpdateGlossaryTermOutput.struct_class = Types::UpdateGlossaryTermOutput
 
     UpdateGroupProfileInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -5860,6 +5924,21 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/roles/{environmentRoleArn}"
         o.input = Shapes::ShapeRef.new(shape: AssociateEnvironmentRoleInput)
         o.output = Shapes::ShapeRef.new(shape: AssociateEnvironmentRoleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:associate_governed_terms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateGovernedTerms"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/associate-governed-terms"
+        o.input = Shapes::ShapeRef.new(shape: AssociateGovernedTermsInput)
+        o.output = Shapes::ShapeRef.new(shape: AssociateGovernedTermsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -6687,6 +6766,21 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/environments/{environmentIdentifier}/roles/{environmentRoleArn}"
         o.input = Shapes::ShapeRef.new(shape: DisassociateEnvironmentRoleInput)
         o.output = Shapes::ShapeRef.new(shape: DisassociateEnvironmentRoleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:disassociate_governed_terms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateGovernedTerms"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/disassociate-governed-terms"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateGovernedTermsInput)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateGovernedTermsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

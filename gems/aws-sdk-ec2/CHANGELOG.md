@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.551.0 (2025-08-25)
+------------------
+
+* Feature - Added IPv6 support for AWS Client VPN.
+
 1.550.0 (2025-08-19)
 ------------------
 

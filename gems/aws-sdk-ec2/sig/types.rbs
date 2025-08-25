@@ -1555,6 +1555,7 @@ module Aws::EC2
       attr_accessor ingress_packets: ::String
       attr_accessor egress_packets: ::String
       attr_accessor client_ip: ::String
+      attr_accessor client_ipv_6_address: ::String
       attr_accessor common_name: ::String
       attr_accessor status: Types::ClientVpnConnectionStatus
       attr_accessor connection_end_time: ::String
@@ -1594,6 +1595,8 @@ module Aws::EC2
       attr_accessor client_login_banner_options: Types::ClientLoginBannerResponseOptions
       attr_accessor client_route_enforcement_options: Types::ClientRouteEnforcementResponseOptions
       attr_accessor disconnect_on_session_timeout: bool
+      attr_accessor endpoint_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
+      attr_accessor traffic_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
       SENSITIVE: []
     end
 
@@ -1929,6 +1932,8 @@ module Aws::EC2
       attr_accessor client_login_banner_options: Types::ClientLoginBannerOptions
       attr_accessor client_route_enforcement_options: Types::ClientRouteEnforcementOptions
       attr_accessor disconnect_on_session_timeout: bool
+      attr_accessor endpoint_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
+      attr_accessor traffic_ip_address_type: ("ipv4" | "ipv6" | "dual-stack")
       SENSITIVE: []
     end
 

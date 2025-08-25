@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2025-08-25)
+------------------
+
+* Feature - Updated APIs to support custom validation rules.
+
 1.36.0 (2025-08-22)
 ------------------
 

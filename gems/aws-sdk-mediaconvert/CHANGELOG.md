@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.169.0 (2025-08-25)
+------------------
+
+* Feature - This release adds support for input rendition selection for HLS input, adds new Share API to enable sharing jobs with AWS Support for support investigations, and adds INCLUDE_AS_TS to iFrameOnlyManifest setting for HLS outputs.
+
 1.168.0 (2025-08-21)
 ------------------
 

@@ -277,8 +277,7 @@
     },
     "DeleteTargetResult":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeNotificationRuleRequest":{
       "type":"structure",
@@ -712,8 +711,7 @@
     },
     "UntagResourceResult":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateNotificationRuleRequest":{
       "type":"structure",
@@ -729,8 +727,7 @@
     },
     "UpdateNotificationRuleResult":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "ValidationException":{
       "type":"structure",

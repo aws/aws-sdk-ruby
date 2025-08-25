@@ -80,15 +80,15 @@ module Aws
 
       interface _BatchGetFindingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFindingsResponse]
-        def failed_findings: () -> ::Array[Types::BatchGetFindingsError]
         def findings: () -> ::Array[Types::Finding]
+        def failed_findings: () -> ::Array[Types::BatchGetFindingsError]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#batch_get_findings-instance_method
       def batch_get_findings: (
                                 finding_identifiers: Array[
                                   {
-                                    finding_id: ::String,
-                                    scan_name: ::String
+                                    scan_name: ::String,
+                                    finding_id: ::String
                                   },
                                 ]
                               ) -> _BatchGetFindingsResponseSuccess
@@ -96,30 +96,30 @@ module Aws
 
       interface _CreateScanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateScanResponse]
-        def resource_id: () -> Types::ResourceId
-        def run_id: () -> ::String
         def scan_name: () -> ::String
-        def scan_name_arn: () -> ::String
+        def run_id: () -> ::String
+        def resource_id: () -> Types::ResourceId
         def scan_state: () -> ("InProgress" | "Successful" | "Failed")
+        def scan_name_arn: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#create_scan-instance_method
       def create_scan: (
-                         ?analysis_type: ("Security" | "All"),
                          ?client_token: ::String,
                          resource_id: {
                            code_artifact_id: ::String?
                          },
                          scan_name: ::String,
                          ?scan_type: ("Standard" | "Express"),
+                         ?analysis_type: ("Security" | "All"),
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateScanResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScanResponseSuccess
 
       interface _CreateUploadUrlResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateUploadUrlResponse]
-        def code_artifact_id: () -> ::String
-        def request_headers: () -> ::Hash[::String, ::String]
         def s3_url: () -> ::String
+        def request_headers: () -> ::Hash[::String, ::String]
+        def code_artifact_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#create_upload_url-instance_method
       def create_upload_url: (
@@ -143,9 +143,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#get_findings-instance_method
       def get_findings: (
-                          ?max_results: ::Integer,
-                          ?next_token: ::String,
                           scan_name: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
                           ?status: ("Closed" | "Open" | "All")
                         ) -> _GetFindingsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsResponseSuccess
@@ -162,20 +162,20 @@ module Aws
 
       interface _GetScanResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetScanResponse]
-        def analysis_type: () -> ("Security" | "All")
-        def created_at: () -> ::Time
-        def error_message: () -> ::String
-        def number_of_revisions: () -> ::Integer
-        def run_id: () -> ::String
         def scan_name: () -> ::String
-        def scan_name_arn: () -> ::String
+        def run_id: () -> ::String
         def scan_state: () -> ("InProgress" | "Successful" | "Failed")
+        def created_at: () -> ::Time
+        def analysis_type: () -> ("Security" | "All")
         def updated_at: () -> ::Time
+        def number_of_revisions: () -> ::Integer
+        def scan_name_arn: () -> ::String
+        def error_message: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#get_scan-instance_method
       def get_scan: (
-                      ?run_id: ::String,
-                      scan_name: ::String
+                      scan_name: ::String,
+                      ?run_id: ::String
                     ) -> _GetScanResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScanResponseSuccess
 
@@ -186,22 +186,22 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#list_findings_metrics-instance_method
       def list_findings_metrics: (
-                                   end_date: ::Time,
-                                   ?max_results: ::Integer,
                                    ?next_token: ::String,
-                                   start_date: ::Time
+                                   ?max_results: ::Integer,
+                                   start_date: ::Time,
+                                   end_date: ::Time
                                  ) -> _ListFindingsMetricsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsMetricsResponseSuccess
 
       interface _ListScansResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListScansResponse]
-        def next_token: () -> ::String
         def summaries: () -> ::Array[Types::ScanSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeGuruSecurity/Client.html#list_scans-instance_method
       def list_scans: (
-                        ?max_results: ::Integer,
-                        ?next_token: ::String
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
                       ) -> _ListScansResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScansResponseSuccess
 

@@ -1106,6 +1106,10 @@ module Aws::QBusiness
     #
     # @!attribute [rw] documents
     #   One or more documents to add to the index.
+    #
+    #   Ensure that the name of your document doesn't contain any
+    #   confidential information. Amazon Q Business returns document names
+    #   in chat responses and citations when relevant.
     #   @return [Array<Types::Document>]
     #
     # @!attribute [rw] role_arn
@@ -1151,6 +1155,11 @@ module Aws::QBusiness
     # @!attribute [rw] blocked_phrases
     #   A list of phrases blocked from a Amazon Q Business web experience
     #   chat.
+    #
+    #   <note markdown="1"> Each phrase can contain a maximum of 36 characters. The list can
+    #   contain a maximum of 20 phrases.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] system_message_override
@@ -2281,7 +2290,9 @@ module Aws::QBusiness
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
-    #   access the data source and required resources.
+    #   access the data source and required resources. This field is
+    #   required for all connector types except custom connectors, where it
+    #   is optional.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -2703,10 +2714,9 @@ module Aws::QBusiness
     #   The Amazon Resource Name (ARN) of the service role attached to your
     #   web experience.
     #
-    #   <note markdown="1"> You must provide this value if you're using IAM Identity Center to
-    #   manage end user access to your application. If you're using legacy
-    #   identity management to manage user access, you don't need to
-    #   provide this value.
+    #   <note markdown="1"> The `roleArn` parameter is required when your Amazon Q Business
+    #   application is created with IAM Identity Center. It is not required
+    #   for SAML-based applications.
     #
     #    </note>
     #   @return [String]
@@ -4834,7 +4844,7 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] output_format
-    #   Raw document outputFormat.
+    #   Document outputFormat. Defaults to RAW if not selected.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetDocumentContentRequest AWS API Documentation
@@ -4857,9 +4867,12 @@ module Aws::QBusiness
     #   @return [String]
     #
     # @!attribute [rw] mime_type
-    #   The MIME type of the document content (e.g., application/pdf,
-    #   text/plain,
+    #   The MIME type of the document content. When outputFormat is RAW,
+    #   this corresponds to the original document's MIME type (e.g.,
+    #   application/pdf, text/plain,
     #   application/vnd.openxmlformats-officedocument.wordprocessingml.document).
+    #   When outputFormat is EXTRACTED, the MIME type is always
+    #   application/json.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qbusiness-2023-11-27/GetDocumentContentResponse AWS API Documentation

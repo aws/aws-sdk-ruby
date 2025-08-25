@@ -2192,7 +2192,7 @@ module Aws::QBusiness
     SearchRelevantContentRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "queryText"))
     SearchRelevantContentRequest.add_member(:content_source, Shapes::ShapeRef.new(shape: ContentSource, required: true, location_name: "contentSource"))
     SearchRelevantContentRequest.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "attributeFilter"))
-    SearchRelevantContentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    SearchRelevantContentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box" => true}))
     SearchRelevantContentRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     SearchRelevantContentRequest.struct_class = Types::SearchRelevantContentRequest
 
@@ -2863,6 +2863,7 @@ module Aws::QBusiness
         o.output = Shapes::ShapeRef.new(shape: DeleteConversationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LicenseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2025-08-25)
+------------------
+
+* Feature - Documentation update for Amazon SQS Supports Large Payload Message feature
+
 1.101.0 (2025-08-22)
 ------------------
 

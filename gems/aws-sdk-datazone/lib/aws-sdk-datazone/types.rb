@@ -748,6 +748,10 @@ module Aws::DataZone
     #   The glossary terms attached to the Amazon DataZone inventory asset.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] governed_glossary_terms
+    #   The restricted glossary terms accociated with an asset.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] identifier
     #   the identifier of the Amazon DataZone inventory asset.
     #   @return [String]
@@ -782,6 +786,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       :glossary_terms,
+      :governed_glossary_terms,
       :identifier,
       :name,
       :owning_project_id,
@@ -852,6 +857,10 @@ module Aws::DataZone
     #   DataZone catalog.
     #   @return [Array<Types::DetailedGlossaryTerm>]
     #
+    # @!attribute [rw] governed_glossary_terms
+    #   The restricted glossary terms associated with an asset.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
     # @!attribute [rw] latest_time_series_data_point_forms
     #   The latest time series data points forms included in the additional
     #   attributes of an asset.
@@ -871,6 +880,7 @@ module Aws::DataZone
       :created_at,
       :forms,
       :glossary_terms,
+      :governed_glossary_terms,
       :latest_time_series_data_point_forms,
       :owning_project_id)
       SENSITIVE = []
@@ -928,6 +938,10 @@ module Aws::DataZone
     #   Glossary terms attached to the inventory asset.
     #   @return [Array<Types::DetailedGlossaryTerm>]
     #
+    # @!attribute [rw] governed_glossary_terms
+    #   The restricted glossary terms associated with an asset.
+    #   @return [Array<Types::DetailedGlossaryTerm>]
+    #
     # @!attribute [rw] listing_created_by
     #   The Amazon DataZone user who created the listing.
     #   @return [String]
@@ -964,6 +978,7 @@ module Aws::DataZone
       :entity_revision,
       :entity_type,
       :glossary_terms,
+      :governed_glossary_terms,
       :listing_created_by,
       :listing_id,
       :listing_revision,
@@ -1200,6 +1215,40 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRoleOutput AWS API Documentation
     #
     class AssociateEnvironmentRoleOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where governed terms are to be associated with
+    #   an asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset with which you want to associate a governed
+    #   term.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset with which you want to associate a governed
+    #   term.
+    #   @return [String]
+    #
+    # @!attribute [rw] governed_glossary_terms
+    #   The glossary terms in a restricted glossary.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateGovernedTermsInput AWS API Documentation
+    #
+    class AssociateGovernedTermsInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :governed_glossary_terms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateGovernedTermsOutput AWS API Documentation
+    #
+    class AssociateGovernedTermsOutput < Aws::EmptyStructure; end
 
     # The Amazon Athena properties of a connection.
     #
@@ -2217,6 +2266,10 @@ module Aws::DataZone
     #   The glossary terms that are attached to the created asset.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] governed_glossary_terms
+    #   The glossary terms in a restricted glossary.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] id
     #   The unique identifier of the created asset.
     #   @return [String]
@@ -2271,6 +2324,7 @@ module Aws::DataZone
       :first_revision_created_by,
       :forms_output,
       :glossary_terms,
+      :governed_glossary_terms,
       :id,
       :latest_time_series_data_point_forms_output,
       :listing,
@@ -2384,6 +2438,10 @@ module Aws::DataZone
     #   revision.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] governed_glossary_terms
+    #   The glossary terms in a restricted glossary.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] id
     #   The unique identifier of the asset revision.
     #   @return [String]
@@ -2439,6 +2497,7 @@ module Aws::DataZone
       :first_revision_created_by,
       :forms_output,
       :glossary_terms,
+      :governed_glossary_terms,
       :id,
       :latest_time_series_data_point_forms_output,
       :listing,
@@ -3918,6 +3977,10 @@ module Aws::DataZone
     #   The status of this business glossary.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of the restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateGlossaryInput AWS API Documentation
     #
     class CreateGlossaryInput < Struct.new(
@@ -3926,7 +3989,8 @@ module Aws::DataZone
       :domain_identifier,
       :name,
       :owning_project_identifier,
-      :status)
+      :status,
+      :usage_restrictions)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -3956,6 +4020,10 @@ module Aws::DataZone
     #   The status of this business glossary.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of the restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateGlossaryOutput AWS API Documentation
     #
     class CreateGlossaryOutput < Struct.new(
@@ -3964,7 +4032,8 @@ module Aws::DataZone
       :id,
       :name,
       :owning_project_id,
-      :status)
+      :status,
+      :usage_restrictions)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -4068,6 +4137,10 @@ module Aws::DataZone
     #   The term relations of this business glossary term.
     #   @return [Types::TermRelations]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of the restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateGlossaryTermOutput AWS API Documentation
     #
     class CreateGlossaryTermOutput < Struct.new(
@@ -4078,7 +4151,8 @@ module Aws::DataZone
       :name,
       :short_description,
       :status,
-      :term_relations)
+      :term_relations,
+      :usage_restrictions)
       SENSITIVE = [:long_description, :name, :short_description]
       include Aws::Structure
     end
@@ -6614,6 +6688,41 @@ module Aws::DataZone
     #
     class DisassociateEnvironmentRoleOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the domain where you want to disassociate restricted terms
+    #   from an asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of an asset from which you want to disassociate restricted
+    #   terms.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset from which you want to disassociate restricted
+    #   terms.
+    #   @return [String]
+    #
+    # @!attribute [rw] governed_glossary_terms
+    #   The restricted glossary terms that you want to disassociate from an
+    #   asset.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateGovernedTermsInput AWS API Documentation
+    #
+    class DisassociateGovernedTermsInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :governed_glossary_terms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateGovernedTermsOutput AWS API Documentation
+    #
+    class DisassociateGovernedTermsOutput < Aws::EmptyStructure; end
+
     # A summary of a Amazon DataZone domain.
     #
     # @!attribute [rw] arn
@@ -7891,6 +8000,10 @@ module Aws::DataZone
     #   The business glossary terms attached to the asset.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] governed_glossary_terms
+    #   The restricted glossary terms attached to an asset.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] id
     #   The ID of the asset.
     #   @return [String]
@@ -7940,6 +8053,7 @@ module Aws::DataZone
       :first_revision_created_by,
       :forms_output,
       :glossary_terms,
+      :governed_glossary_terms,
       :id,
       :latest_time_series_data_point_forms_output,
       :listing,
@@ -9281,6 +9395,10 @@ module Aws::DataZone
     #   The Amazon DataZone user who updated the business glossary.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of the restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetGlossaryOutput AWS API Documentation
     #
     class GetGlossaryOutput < Struct.new(
@@ -9293,7 +9411,8 @@ module Aws::DataZone
       :owning_project_id,
       :status,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :usage_restrictions)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -9365,6 +9484,10 @@ module Aws::DataZone
     #   The Amazon DataZone user who updated the business glossary term.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of a term within a restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetGlossaryTermOutput AWS API Documentation
     #
     class GetGlossaryTermOutput < Struct.new(
@@ -9379,7 +9502,8 @@ module Aws::DataZone
       :status,
       :term_relations,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :usage_restrictions)
       SENSITIVE = [:long_description, :name, :short_description]
       include Aws::Structure
     end
@@ -10674,6 +10798,10 @@ module Aws::DataZone
     #   The Amazon DataZone user who updated the business glossary.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restrictions associated with a goverened glossary term.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryItem AWS API Documentation
     #
     class GlossaryItem < Struct.new(
@@ -10687,7 +10815,8 @@ module Aws::DataZone
       :owning_project_id,
       :status,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :usage_restrictions)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -10761,6 +10890,10 @@ module Aws::DataZone
     #   The Amazon DataZone user who updated the business glossary term.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restrictions associated with a goverened glossary term.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlossaryTermItem AWS API Documentation
     #
     class GlossaryTermItem < Struct.new(
@@ -10776,7 +10909,8 @@ module Aws::DataZone
       :status,
       :term_relations,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :usage_restrictions)
       SENSITIVE = [:long_description, :name, :short_description]
       include Aws::Structure
     end
@@ -20266,6 +20400,10 @@ module Aws::DataZone
     #   The status to be updated as part of the `UpdateGlossary` action.
     #   @return [String]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of the restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateGlossaryOutput AWS API Documentation
     #
     class UpdateGlossaryOutput < Struct.new(
@@ -20274,7 +20412,8 @@ module Aws::DataZone
       :id,
       :name,
       :owning_project_id,
-      :status)
+      :status,
+      :usage_restrictions)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -20368,6 +20507,10 @@ module Aws::DataZone
     #   action.
     #   @return [Types::TermRelations]
     #
+    # @!attribute [rw] usage_restrictions
+    #   The usage restriction of a term within a restricted glossary.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateGlossaryTermOutput AWS API Documentation
     #
     class UpdateGlossaryTermOutput < Struct.new(
@@ -20378,7 +20521,8 @@ module Aws::DataZone
       :name,
       :short_description,
       :status,
-      :term_relations)
+      :term_relations,
+      :usage_restrictions)
       SENSITIVE = [:long_description, :name, :short_description]
       include Aws::Structure
     end

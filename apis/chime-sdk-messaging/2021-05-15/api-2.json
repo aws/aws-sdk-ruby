@@ -2124,8 +2124,7 @@
     },
     "GetMessagingSessionEndpointRequest":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "GetMessagingSessionEndpointResponse":{
       "type":"structure",

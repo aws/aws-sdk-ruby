@@ -55,7 +55,7 @@ module Aws::SageMakerRuntime
   autoload :Endpoints, 'aws-sdk-sagemakerruntime/endpoints'
   autoload :EventStreams, 'aws-sdk-sagemakerruntime/event_streams'
 
-  GEM_VERSION = '1.86.0'
+  GEM_VERSION = '1.87.0'
 
 end
 

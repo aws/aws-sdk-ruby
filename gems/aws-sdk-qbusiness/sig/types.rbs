@@ -1206,7 +1206,7 @@ module Aws::QBusiness
       attr_accessor index_id: ::String
       attr_accessor data_source_id: ::String
       attr_accessor document_id: ::String
-      attr_accessor output_format: ("RAW")
+      attr_accessor output_format: ("RAW" | "EXTRACTED")
       SENSITIVE: []
     end
 

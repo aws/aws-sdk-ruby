@@ -512,6 +512,7 @@ module Aws::MediaPackageVod
 
       api.metadata = {
         "apiVersion" => "2018-11-07",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediapackage-vod",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

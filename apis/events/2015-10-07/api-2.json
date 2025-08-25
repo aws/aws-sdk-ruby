@@ -964,8 +964,7 @@
     },
     "ConcurrentModificationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Condition":{
@@ -1348,8 +1347,7 @@
     },
     "DeleteApiDestinationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteArchiveRequest":{
       "type":"structure",
@@ -1360,8 +1358,7 @@
     },
     "DeleteArchiveResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteConnectionRequest":{
       "type":"structure",
@@ -1710,8 +1707,7 @@
     },
     "IllegalStatusException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InputTransformer":{
@@ -1731,21 +1727,18 @@
     "Integer":{"type":"integer"},
     "InternalException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true,
       "fault":true
     },
     "InvalidEventPatternException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidStateException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "KinesisParameters":{
@@ -1765,8 +1758,7 @@
     },
     "LimitExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "LimitMax100":{
@@ -1977,8 +1969,7 @@
     },
     "ManagedRuleException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "MaximumEventAgeInSeconds":{
@@ -2017,8 +2008,7 @@
     },
     "OperationDisabledException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "PartnerEventSource":{
@@ -2108,8 +2098,7 @@
     },
     "PolicyLengthExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Principal":{
@@ -2421,8 +2410,7 @@
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ResourceArn":{
@@ -2432,8 +2420,7 @@
     },
     "ResourceNotFoundException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "RetentionDays":{
@@ -2675,8 +2662,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -2790,8 +2776,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateApiDestinationRequest":{
       "type":"structure",

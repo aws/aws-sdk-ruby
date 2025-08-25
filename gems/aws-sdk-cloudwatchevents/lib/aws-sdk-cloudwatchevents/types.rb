@@ -3659,17 +3659,17 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Name/Value pair of a parameter to start execution of a SageMaker Model
-    # Building Pipeline.
+    # Name/Value pair of a parameter to start execution of a SageMaker AI
+    # Model Building Pipeline.
     #
     # @!attribute [rw] name
-    #   Name of parameter to start execution of a SageMaker Model Building
-    #   Pipeline.
+    #   Name of parameter to start execution of a SageMaker AI Model
+    #   Building Pipeline.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value of parameter to start execution of a SageMaker Model Building
-    #   Pipeline.
+    #   Value of parameter to start execution of a SageMaker AI Model
+    #   Building Pipeline.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SageMakerPipelineParameter AWS API Documentation
@@ -3681,11 +3681,11 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # These are custom parameters to use when the target is a SageMaker
+    # These are custom parameters to use when the target is a SageMaker AI
     # Model Building Pipeline that starts based on EventBridge events.
     #
     # @!attribute [rw] pipeline_parameter_list
-    #   List of Parameter names and values for SageMaker Model Building
+    #   List of Parameter names and values for SageMaker AI Model Building
     #   Pipeline execution.
     #   @return [Array<Types::SageMakerPipelineParameter>]
     #
@@ -3945,11 +3945,11 @@ module Aws::CloudWatchEvents
     #   @return [Types::RedshiftDataParameters]
     #
     # @!attribute [rw] sage_maker_pipeline_parameters
-    #   Contains the SageMaker Model Building Pipeline parameters to start
-    #   execution of a SageMaker Model Building Pipeline.
+    #   Contains the SageMaker AI Model Building Pipeline parameters to
+    #   start execution of a SageMaker AI Model Building Pipeline.
     #
-    #   If you specify a SageMaker Model Building Pipeline as a target, you
-    #   can use this to specify parameters to start a pipeline execution
+    #   If you specify a SageMaker AI Model Building Pipeline as a target,
+    #   you can use this to specify parameters to start a pipeline execution
     #   based on EventBridge events.
     #   @return [Types::SageMakerPipelineParameters]
     #

@@ -506,7 +506,7 @@ module Aws::SQS
     # @param [Hash] options ({})
     # @option options [required, String] :message_body
     #   The message to send. The minimum size is one character. The maximum
-    #   size is 256 KiB.
+    #   size is 1 MiB or 1,048,576 bytes
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed. For more information, see
@@ -737,8 +737,8 @@ module Aws::SQS
     #
     #   * `MaximumMessageSize` – The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer from
-    #     1,024 bytes (1 KiB) up to 262,144 bytes (256 KiB). Default: 262,144
-    #     (256 KiB).
+    #     1,024 bytes (1 KiB) up to 1,048,576 bytes (1 MiB). Default:
+    #     1,048,576 bytes (1 MiB).
     #
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for which
     #     Amazon SQS retains a message. Valid values: An integer representing

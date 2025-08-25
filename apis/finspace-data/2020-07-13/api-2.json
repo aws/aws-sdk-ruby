@@ -1896,8 +1896,7 @@
     },
     "ThrottlingException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{"httpStatusCode":429},
       "exception":true
     },

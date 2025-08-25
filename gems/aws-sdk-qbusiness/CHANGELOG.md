@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2025-08-25)
+------------------
+
+* Feature - The Amazon Q Business GetDocumentContent operation now supports retrieval of the extracted text content in JSON format.
+
 1.46.0 (2025-08-06)
 ------------------
 

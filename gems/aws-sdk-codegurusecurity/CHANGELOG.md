@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2025-08-25)
+------------------
+
+* Feature - Documentation update to notify users of the discontinuation of Amazon CodeGuru Security.
+
 1.33.0 (2025-08-04)
 ------------------
 

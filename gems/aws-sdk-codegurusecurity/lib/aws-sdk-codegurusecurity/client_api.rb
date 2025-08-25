@@ -116,17 +116,17 @@ module Aws::CodeGuruSecurity
     AccessDeniedException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AccountFindingsMetric.add_member(:closed_findings, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "closedFindings"))
     AccountFindingsMetric.add_member(:date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "date"))
-    AccountFindingsMetric.add_member(:mean_time_to_close, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "meanTimeToClose"))
     AccountFindingsMetric.add_member(:new_findings, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "newFindings"))
+    AccountFindingsMetric.add_member(:closed_findings, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "closedFindings"))
     AccountFindingsMetric.add_member(:open_findings, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "openFindings"))
+    AccountFindingsMetric.add_member(:mean_time_to_close, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "meanTimeToClose"))
     AccountFindingsMetric.struct_class = Types::AccountFindingsMetric
 
-    BatchGetFindingsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "errorCode"))
-    BatchGetFindingsError.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
-    BatchGetFindingsError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     BatchGetFindingsError.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
+    BatchGetFindingsError.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
+    BatchGetFindingsError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "errorCode"))
+    BatchGetFindingsError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     BatchGetFindingsError.struct_class = Types::BatchGetFindingsError
 
     BatchGetFindingsErrors.member = Shapes::ShapeRef.new(shape: BatchGetFindingsError)
@@ -134,8 +134,8 @@ module Aws::CodeGuruSecurity
     BatchGetFindingsRequest.add_member(:finding_identifiers, Shapes::ShapeRef.new(shape: FindingIdentifiers, required: true, location_name: "findingIdentifiers"))
     BatchGetFindingsRequest.struct_class = Types::BatchGetFindingsRequest
 
-    BatchGetFindingsResponse.add_member(:failed_findings, Shapes::ShapeRef.new(shape: BatchGetFindingsErrors, required: true, location_name: "failedFindings"))
     BatchGetFindingsResponse.add_member(:findings, Shapes::ShapeRef.new(shape: Findings, required: true, location_name: "findings"))
+    BatchGetFindingsResponse.add_member(:failed_findings, Shapes::ShapeRef.new(shape: BatchGetFindingsErrors, required: true, location_name: "failedFindings"))
     BatchGetFindingsResponse.struct_class = Types::BatchGetFindingsResponse
 
     CategoriesWithMostFindings.member = Shapes::ShapeRef.new(shape: CategoryWithFindingNum)
@@ -144,8 +144,8 @@ module Aws::CodeGuruSecurity
     CategoryWithFindingNum.add_member(:finding_number, Shapes::ShapeRef.new(shape: Integer, location_name: "findingNumber"))
     CategoryWithFindingNum.struct_class = Types::CategoryWithFindingNum
 
-    CodeLine.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "content"))
     CodeLine.add_member(:number, Shapes::ShapeRef.new(shape: Integer, location_name: "number"))
+    CodeLine.add_member(:content, Shapes::ShapeRef.new(shape: String, location_name: "content"))
     CodeLine.struct_class = Types::CodeLine
 
     CodeSnippet.member = Shapes::ShapeRef.new(shape: CodeLine)
@@ -156,27 +156,27 @@ module Aws::CodeGuruSecurity
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateScanRequest.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, location_name: "analysisType"))
     CreateScanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateScanRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     CreateScanRequest.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
     CreateScanRequest.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "scanType"))
+    CreateScanRequest.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, location_name: "analysisType"))
     CreateScanRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateScanRequest.struct_class = Types::CreateScanRequest
 
-    CreateScanResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
-    CreateScanResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
     CreateScanResponse.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
-    CreateScanResponse.add_member(:scan_name_arn, Shapes::ShapeRef.new(shape: ScanNameArn, location_name: "scanNameArn"))
+    CreateScanResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
+    CreateScanResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
     CreateScanResponse.add_member(:scan_state, Shapes::ShapeRef.new(shape: ScanState, required: true, location_name: "scanState"))
+    CreateScanResponse.add_member(:scan_name_arn, Shapes::ShapeRef.new(shape: ScanNameArn, location_name: "scanNameArn"))
     CreateScanResponse.struct_class = Types::CreateScanResponse
 
     CreateUploadUrlRequest.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
     CreateUploadUrlRequest.struct_class = Types::CreateUploadUrlRequest
 
-    CreateUploadUrlResponse.add_member(:code_artifact_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "codeArtifactId"))
-    CreateUploadUrlResponse.add_member(:request_headers, Shapes::ShapeRef.new(shape: RequestHeaderMap, required: true, location_name: "requestHeaders"))
     CreateUploadUrlResponse.add_member(:s3_url, Shapes::ShapeRef.new(shape: S3Url, required: true, location_name: "s3Url"))
+    CreateUploadUrlResponse.add_member(:request_headers, Shapes::ShapeRef.new(shape: RequestHeaderMap, required: true, location_name: "requestHeaders"))
+    CreateUploadUrlResponse.add_member(:code_artifact_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "codeArtifactId"))
     CreateUploadUrlResponse.struct_class = Types::CreateUploadUrlResponse
 
     DetectorTags.member = Shapes::ShapeRef.new(shape: String)
@@ -184,42 +184,42 @@ module Aws::CodeGuruSecurity
     EncryptionConfig.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
-    FilePath.add_member(:code_snippet, Shapes::ShapeRef.new(shape: CodeSnippet, location_name: "codeSnippet"))
-    FilePath.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, location_name: "endLine"))
     FilePath.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     FilePath.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
     FilePath.add_member(:start_line, Shapes::ShapeRef.new(shape: Integer, location_name: "startLine"))
+    FilePath.add_member(:end_line, Shapes::ShapeRef.new(shape: Integer, location_name: "endLine"))
+    FilePath.add_member(:code_snippet, Shapes::ShapeRef.new(shape: CodeSnippet, location_name: "codeSnippet"))
     FilePath.struct_class = Types::FilePath
 
     Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Finding.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    Finding.add_member(:detector_id, Shapes::ShapeRef.new(shape: String, location_name: "detectorId"))
-    Finding.add_member(:detector_name, Shapes::ShapeRef.new(shape: String, location_name: "detectorName"))
-    Finding.add_member(:detector_tags, Shapes::ShapeRef.new(shape: DetectorTags, location_name: "detectorTags"))
     Finding.add_member(:generator_id, Shapes::ShapeRef.new(shape: String, location_name: "generatorId"))
     Finding.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
-    Finding.add_member(:remediation, Shapes::ShapeRef.new(shape: Remediation, location_name: "remediation"))
-    Finding.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
-    Finding.add_member(:rule_id, Shapes::ShapeRef.new(shape: String, location_name: "ruleId"))
-    Finding.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
-    Finding.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
-    Finding.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
-    Finding.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    Finding.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    Finding.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    Finding.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
     Finding.add_member(:vulnerability, Shapes::ShapeRef.new(shape: Vulnerability, location_name: "vulnerability"))
+    Finding.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
+    Finding.add_member(:remediation, Shapes::ShapeRef.new(shape: Remediation, location_name: "remediation"))
+    Finding.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    Finding.add_member(:detector_tags, Shapes::ShapeRef.new(shape: DetectorTags, location_name: "detectorTags"))
+    Finding.add_member(:detector_id, Shapes::ShapeRef.new(shape: String, location_name: "detectorId"))
+    Finding.add_member(:detector_name, Shapes::ShapeRef.new(shape: String, location_name: "detectorName"))
+    Finding.add_member(:rule_id, Shapes::ShapeRef.new(shape: String, location_name: "ruleId"))
     Finding.struct_class = Types::Finding
 
-    FindingIdentifier.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
     FindingIdentifier.add_member(:scan_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "scanName"))
+    FindingIdentifier.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
     FindingIdentifier.struct_class = Types::FindingIdentifier
 
     FindingIdentifiers.member = Shapes::ShapeRef.new(shape: FindingIdentifier)
 
-    FindingMetricsValuePerSeverity.add_member(:critical, Shapes::ShapeRef.new(shape: Double, location_name: "critical"))
-    FindingMetricsValuePerSeverity.add_member(:high, Shapes::ShapeRef.new(shape: Double, location_name: "high"))
     FindingMetricsValuePerSeverity.add_member(:info, Shapes::ShapeRef.new(shape: Double, location_name: "info"))
     FindingMetricsValuePerSeverity.add_member(:low, Shapes::ShapeRef.new(shape: Double, location_name: "low"))
     FindingMetricsValuePerSeverity.add_member(:medium, Shapes::ShapeRef.new(shape: Double, location_name: "medium"))
+    FindingMetricsValuePerSeverity.add_member(:high, Shapes::ShapeRef.new(shape: Double, location_name: "high"))
+    FindingMetricsValuePerSeverity.add_member(:critical, Shapes::ShapeRef.new(shape: Double, location_name: "critical"))
     FindingMetricsValuePerSeverity.struct_class = Types::FindingMetricsValuePerSeverity
 
     Findings.member = Shapes::ShapeRef.new(shape: Finding)
@@ -231,9 +231,9 @@ module Aws::CodeGuruSecurity
     GetAccountConfigurationResponse.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, required: true, location_name: "encryptionConfig"))
     GetAccountConfigurationResponse.struct_class = Types::GetAccountConfigurationResponse
 
-    GetFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetFindingsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
-    GetFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     GetFindingsRequest.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location: "uri", location_name: "scanName"))
+    GetFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    GetFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetFindingsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     GetFindingsRequest.add_member(:status, Shapes::ShapeRef.new(shape: Status, location: "querystring", location_name: "status"))
     GetFindingsRequest.struct_class = Types::GetFindingsRequest
 
@@ -247,41 +247,41 @@ module Aws::CodeGuruSecurity
     GetMetricsSummaryResponse.add_member(:metrics_summary, Shapes::ShapeRef.new(shape: MetricsSummary, location_name: "metricsSummary"))
     GetMetricsSummaryResponse.struct_class = Types::GetMetricsSummaryResponse
 
-    GetScanRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, location: "querystring", location_name: "runId"))
     GetScanRequest.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location: "uri", location_name: "scanName"))
+    GetScanRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, location: "querystring", location_name: "runId"))
     GetScanRequest.struct_class = Types::GetScanRequest
 
-    GetScanResponse.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, required: true, location_name: "analysisType"))
-    GetScanResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    GetScanResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
-    GetScanResponse.add_member(:number_of_revisions, Shapes::ShapeRef.new(shape: Long, location_name: "numberOfRevisions"))
-    GetScanResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
     GetScanResponse.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
-    GetScanResponse.add_member(:scan_name_arn, Shapes::ShapeRef.new(shape: ScanNameArn, location_name: "scanNameArn"))
+    GetScanResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
     GetScanResponse.add_member(:scan_state, Shapes::ShapeRef.new(shape: ScanState, required: true, location_name: "scanState"))
+    GetScanResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetScanResponse.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, required: true, location_name: "analysisType"))
     GetScanResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetScanResponse.add_member(:number_of_revisions, Shapes::ShapeRef.new(shape: Long, location_name: "numberOfRevisions"))
+    GetScanResponse.add_member(:scan_name_arn, Shapes::ShapeRef.new(shape: ScanNameArn, location_name: "scanNameArn"))
+    GetScanResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     GetScanResponse.struct_class = Types::GetScanResponse
 
     InternalServerException.add_member(:error, Shapes::ShapeRef.new(shape: String, location_name: "error"))
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListFindingsMetricsRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endDate"))
-    ListFindingsMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFindingsMetricsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListFindingsMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListFindingsMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFindingsMetricsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListFindingsMetricsRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "startDate"))
+    ListFindingsMetricsRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endDate"))
     ListFindingsMetricsRequest.struct_class = Types::ListFindingsMetricsRequest
 
     ListFindingsMetricsResponse.add_member(:findings_metrics, Shapes::ShapeRef.new(shape: FindingsMetricList, location_name: "findingsMetrics"))
     ListFindingsMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFindingsMetricsResponse.struct_class = Types::ListFindingsMetricsResponse
 
-    ListScansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListScansRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListScansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListScansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListScansRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListScansRequest.struct_class = Types::ListScansRequest
 
-    ListScansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListScansResponse.add_member(:summaries, Shapes::ShapeRef.new(shape: ScanSummaries, location_name: "summaries"))
+    ListScansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListScansResponse.struct_class = Types::ListScansResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ScanNameArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -290,11 +290,11 @@ module Aws::CodeGuruSecurity
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    MetricsSummary.add_member(:categories_with_most_findings, Shapes::ShapeRef.new(shape: CategoriesWithMostFindings, location_name: "categoriesWithMostFindings"))
     MetricsSummary.add_member(:date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "date"))
     MetricsSummary.add_member(:open_findings, Shapes::ShapeRef.new(shape: FindingMetricsValuePerSeverity, location_name: "openFindings"))
-    MetricsSummary.add_member(:scans_with_most_open_critical_findings, Shapes::ShapeRef.new(shape: ScansWithMostOpenCriticalFindings, location_name: "scansWithMostOpenCriticalFindings"))
+    MetricsSummary.add_member(:categories_with_most_findings, Shapes::ShapeRef.new(shape: CategoriesWithMostFindings, location_name: "categoriesWithMostFindings"))
     MetricsSummary.add_member(:scans_with_most_open_findings, Shapes::ShapeRef.new(shape: ScansWithMostOpenFindings, location_name: "scansWithMostOpenFindings"))
+    MetricsSummary.add_member(:scans_with_most_open_critical_findings, Shapes::ShapeRef.new(shape: ScansWithMostOpenCriticalFindings, location_name: "scansWithMostOpenCriticalFindings"))
     MetricsSummary.struct_class = Types::MetricsSummary
 
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
@@ -328,26 +328,26 @@ module Aws::CodeGuruSecurity
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ScanNameWithFindingNum.add_member(:finding_number, Shapes::ShapeRef.new(shape: Integer, location_name: "findingNumber"))
     ScanNameWithFindingNum.add_member(:scan_name, Shapes::ShapeRef.new(shape: String, location_name: "scanName"))
+    ScanNameWithFindingNum.add_member(:finding_number, Shapes::ShapeRef.new(shape: Integer, location_name: "findingNumber"))
     ScanNameWithFindingNum.struct_class = Types::ScanNameWithFindingNum
 
     ScanSummaries.member = Shapes::ShapeRef.new(shape: ScanSummary)
 
-    ScanSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
-    ScanSummary.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
-    ScanSummary.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
-    ScanSummary.add_member(:scan_name_arn, Shapes::ShapeRef.new(shape: ScanNameArn, location_name: "scanNameArn"))
     ScanSummary.add_member(:scan_state, Shapes::ShapeRef.new(shape: ScanState, required: true, location_name: "scanState"))
+    ScanSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ScanSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    ScanSummary.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
+    ScanSummary.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
+    ScanSummary.add_member(:scan_name_arn, Shapes::ShapeRef.new(shape: ScanNameArn, location_name: "scanNameArn"))
     ScanSummary.struct_class = Types::ScanSummary
 
     ScansWithMostOpenCriticalFindings.member = Shapes::ShapeRef.new(shape: ScanNameWithFindingNum)
 
     ScansWithMostOpenFindings.member = Shapes::ShapeRef.new(shape: ScanNameWithFindingNum)
 
-    SuggestedFix.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     SuggestedFix.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SuggestedFix.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     SuggestedFix.struct_class = Types::SuggestedFix
 
     SuggestedFixes.member = Shapes::ShapeRef.new(shape: SuggestedFix)
@@ -365,8 +365,8 @@ module Aws::CodeGuruSecurity
 
     ThrottlingException.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorCode"))
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
+    ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ScanNameArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -382,22 +382,22 @@ module Aws::CodeGuruSecurity
     UpdateAccountConfigurationResponse.struct_class = Types::UpdateAccountConfigurationResponse
 
     ValidationException.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorCode"))
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, required: true, location_name: "reason"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
-    Vulnerability.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "filePath"))
-    Vulnerability.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
-    Vulnerability.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "itemCount", metadata: {"deprecatedMessage" => "This shape is not used."}))
     Vulnerability.add_member(:reference_urls, Shapes::ShapeRef.new(shape: ReferenceUrls, location_name: "referenceUrls"))
     Vulnerability.add_member(:related_vulnerabilities, Shapes::ShapeRef.new(shape: RelatedVulnerabilities, location_name: "relatedVulnerabilities"))
+    Vulnerability.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    Vulnerability.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "filePath"))
+    Vulnerability.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "itemCount", metadata: {"deprecatedMessage" => "This shape is not used."}))
     Vulnerability.struct_class = Types::Vulnerability
 
 
@@ -408,8 +408,8 @@ module Aws::CodeGuruSecurity
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codeguru-security",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon CodeGuru Security",
@@ -427,8 +427,8 @@ module Aws::CodeGuruSecurity
         o.output = Shapes::ShapeRef.new(shape: BatchGetFindingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_scan, Seahorse::Model::Operation.new.tap do |o|
@@ -441,8 +441,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_upload_url, Seahorse::Model::Operation.new.tap do |o|
@@ -453,8 +453,8 @@ module Aws::CodeGuruSecurity
         o.output = Shapes::ShapeRef.new(shape: CreateUploadUrlResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_account_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -465,8 +465,8 @@ module Aws::CodeGuruSecurity
         o.output = Shapes::ShapeRef.new(shape: GetAccountConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -479,8 +479,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -497,8 +497,8 @@ module Aws::CodeGuruSecurity
         o.output = Shapes::ShapeRef.new(shape: GetMetricsSummaryResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_scan, Seahorse::Model::Operation.new.tap do |o|
@@ -510,8 +510,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:list_findings_metrics, Seahorse::Model::Operation.new.tap do |o|
@@ -522,8 +522,8 @@ module Aws::CodeGuruSecurity
         o.output = Shapes::ShapeRef.new(shape: ListFindingsMetricsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -540,8 +540,8 @@ module Aws::CodeGuruSecurity
         o.output = Shapes::ShapeRef.new(shape: ListScansResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -560,8 +560,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -574,8 +574,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -588,8 +588,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_account_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -601,8 +601,8 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end
 

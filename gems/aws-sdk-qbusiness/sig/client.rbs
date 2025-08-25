@@ -1152,7 +1152,7 @@ module Aws
                                   index_id: ::String,
                                   ?data_source_id: ::String,
                                   document_id: ::String,
-                                  ?output_format: ("RAW")
+                                  ?output_format: ("RAW" | "EXTRACTED")
                                 ) -> _GetDocumentContentResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentContentResponseSuccess
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2025-08-25)
+------------------
+
+* Feature - Releasing the following features - Asset classification that lets users use restricted terms for classifying assets if they have the right permissions. Also adding a new enum value "Moving" to project status.
+
 1.48.0 (2025-08-20)
 ------------------
 

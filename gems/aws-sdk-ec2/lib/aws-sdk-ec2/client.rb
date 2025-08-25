@@ -5994,7 +5994,7 @@ module Aws::EC2
     # is the destination endpoint at which all client VPN sessions are
     # terminated.
     #
-    # @option params [required, String] :client_cidr_block
+    # @option params [String] :client_cidr_block
     #   The IPv4 address range, in CIDR notation, from which to assign client
     #   IP addresses. The address range cannot overlap with the local CIDR of
     #   the VPC in which the associated subnet is located, or the routes that
@@ -6135,6 +6135,20 @@ module Aws::EC2
     #   `true`, users are prompted to reconnect client VPN. If `false`, client
     #   VPN attempts to reconnect automatically. The default value is `true`.
     #
+    # @option params [String] :endpoint_ip_address_type
+    #   The IP address type for the Client VPN endpoint. Valid values are
+    #   `ipv4` (default) for IPv4 addressing only, `ipv6` for IPv6 addressing
+    #   only, or `dual-stack` for both IPv4 and IPv6 addressing. When set to
+    #   `dual-stack,` clients can connect to the endpoint using either IPv4 or
+    #   IPv6 addresses..
+    #
+    # @option params [String] :traffic_ip_address_type
+    #   The IP address type for traffic within the Client VPN tunnel. Valid
+    #   values are `ipv4` (default) for IPv4 traffic only, `ipv6` for IPv6
+    #   addressing only, or `dual-stack` for both IPv4 and IPv6 traffic. When
+    #   set to `dual-stack`, clients can access both IPv4 and IPv6 resources
+    #   through the VPN .
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -6144,7 +6158,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_client_vpn_endpoint({
-    #     client_cidr_block: "String", # required
+    #     client_cidr_block: "String",
     #     server_certificate_arn: "String", # required
     #     authentication_options: [ # required
     #       {
@@ -6200,6 +6214,8 @@ module Aws::EC2
     #       enforced: false,
     #     },
     #     disconnect_on_session_timeout: false,
+    #     endpoint_ip_address_type: "ipv4", # accepts ipv4, ipv6, dual-stack
+    #     traffic_ip_address_type: "ipv4", # accepts ipv4, ipv6, dual-stack
     #   })
     #
     # @example Response structure
@@ -24045,6 +24061,7 @@ module Aws::EC2
     #   resp.connections[0].ingress_packets #=> String
     #   resp.connections[0].egress_packets #=> String
     #   resp.connections[0].client_ip #=> String
+    #   resp.connections[0].client_ipv_6_address #=> String
     #   resp.connections[0].common_name #=> String
     #   resp.connections[0].status.code #=> String, one of "active", "failed-to-terminate", "terminating", "terminated"
     #   resp.connections[0].status.message #=> String
@@ -24156,6 +24173,8 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].client_login_banner_options.banner_text #=> String
     #   resp.client_vpn_endpoints[0].client_route_enforcement_options.enforced #=> Boolean
     #   resp.client_vpn_endpoints[0].disconnect_on_session_timeout #=> Boolean
+    #   resp.client_vpn_endpoints[0].endpoint_ip_address_type #=> String, one of "ipv4", "ipv6", "dual-stack"
+    #   resp.client_vpn_endpoints[0].traffic_ip_address_type #=> String, one of "ipv4", "ipv6", "dual-stack"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -66598,7 +66617,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.550.0'
+      context[:gem_version] = '1.551.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -766,7 +766,7 @@ module Aws::SageMakerFeatureStoreRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerfeaturestoreruntime'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -82,7 +82,7 @@ module Aws
       interface _CreateDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDbClusterOutput]
         def db_cluster_id: () -> ::String
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#create_db_cluster-instance_method
       def create_db_cluster: (
@@ -117,7 +117,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -243,7 +243,7 @@ module Aws
 
       interface _DeleteDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#delete_db_cluster-instance_method
       def delete_db_cluster: (
@@ -256,7 +256,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -286,7 +286,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED")
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
         def endpoint: () -> ::String
         def reader_endpoint: () -> ::String
         def port: () -> ::Integer
@@ -314,7 +314,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")
@@ -428,7 +428,7 @@ module Aws
 
       interface _UpdateDbClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDbClusterOutput]
-        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED")
+        def db_cluster_status: () -> ("CREATING" | "UPDATING" | "DELETING" | "AVAILABLE" | "FAILED" | "DELETED" | "MAINTENANCE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TimestreamInfluxDB/Client.html#update_db_cluster-instance_method
       def update_db_cluster: (
@@ -451,7 +451,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "MODIFYING" | "UPDATING" | "DELETED" | "FAILED" | "UPDATING_DEPLOYMENT_TYPE" | "UPDATING_INSTANCE_TYPE" | "MAINTENANCE")
         def endpoint: () -> ::String
         def port: () -> ::Integer
         def network_type: () -> ("IPV4" | "DUAL")

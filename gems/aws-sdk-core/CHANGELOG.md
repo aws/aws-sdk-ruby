@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for ENV as credential source for `AssumeRoleCredentials`.
+
 3.230.0 (2025-08-21)
 ------------------
 

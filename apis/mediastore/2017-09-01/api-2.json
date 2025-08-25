@@ -456,8 +456,7 @@
     },
     "DeleteContainerOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteContainerPolicyInput":{
       "type":"structure",
@@ -468,8 +467,7 @@
     },
     "DeleteContainerPolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteCorsPolicyInput":{
       "type":"structure",
@@ -480,8 +478,7 @@
     },
     "DeleteCorsPolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteLifecyclePolicyInput":{
       "type":"structure",
@@ -492,8 +489,7 @@
     },
     "DeleteLifecyclePolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DeleteMetricPolicyInput":{
       "type":"structure",
@@ -504,8 +500,7 @@
     },
     "DeleteMetricPolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeContainerInput":{
       "type":"structure",
@@ -731,8 +726,7 @@
     },
     "PutContainerPolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "PutCorsPolicyInput":{
       "type":"structure",
@@ -747,8 +741,7 @@
     },
     "PutCorsPolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "PutLifecyclePolicyInput":{
       "type":"structure",
@@ -763,8 +756,7 @@
     },
     "PutLifecyclePolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "PutMetricPolicyInput":{
       "type":"structure",
@@ -779,8 +771,7 @@
     },
     "PutMetricPolicyOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "StartAccessLoggingInput":{
       "type":"structure",
@@ -791,8 +782,7 @@
     },
     "StartAccessLoggingOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "StopAccessLoggingInput":{
       "type":"structure",
@@ -803,8 +793,7 @@
     },
     "StopAccessLoggingOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "Tag":{
       "type":"structure",
@@ -843,8 +832,7 @@
     },
     "TagResourceOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -866,8 +854,7 @@
     },
     "UntagResourceOutput":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     }
   }
 }

@@ -54,7 +54,7 @@ module Aws::ControlTower
   autoload :EndpointProvider, 'aws-sdk-controltower/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-controltower/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

@@ -622,7 +622,7 @@ module Aws::TimestreamInfluxDB
     # @example Response structure
     #
     #   resp.db_cluster_id #=> String
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbCluster AWS API Documentation
     #
@@ -787,7 +787,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -989,7 +989,7 @@ module Aws::TimestreamInfluxDB
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbCluster AWS API Documentation
     #
@@ -1040,7 +1040,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1109,7 +1109,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
     #   resp.endpoint #=> String
     #   resp.reader_endpoint #=> String
     #   resp.port #=> Integer
@@ -1178,7 +1178,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1318,7 +1318,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"
+    #   resp.items[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].reader_endpoint #=> String
     #   resp.items[0].port #=> Integer
@@ -1370,7 +1370,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].port #=> Integer
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
@@ -1425,7 +1425,7 @@ module Aws::TimestreamInfluxDB
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
     #   resp.items[0].arn #=> String
-    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
     #   resp.items[0].endpoint #=> String
     #   resp.items[0].port #=> Integer
     #   resp.items[0].network_type #=> String, one of "IPV4", "DUAL"
@@ -1615,7 +1615,7 @@ module Aws::TimestreamInfluxDB
     #
     # @example Response structure
     #
-    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED"
+    #   resp.db_cluster_status #=> String, one of "CREATING", "UPDATING", "DELETING", "AVAILABLE", "FAILED", "DELETED", "MAINTENANCE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbCluster AWS API Documentation
     #
@@ -1714,7 +1714,7 @@ module Aws::TimestreamInfluxDB
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED", "UPDATING_DEPLOYMENT_TYPE", "UPDATING_INSTANCE_TYPE", "MAINTENANCE"
     #   resp.endpoint #=> String
     #   resp.port #=> Integer
     #   resp.network_type #=> String, one of "IPV4", "DUAL"
@@ -1763,7 +1763,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

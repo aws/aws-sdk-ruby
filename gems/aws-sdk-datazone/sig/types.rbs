@@ -222,6 +222,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_at: ::Time
       attr_accessor first_revision_created_by: ::String
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor governed_glossary_terms: ::Array[::String]
       attr_accessor identifier: ::String
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
@@ -245,6 +246,7 @@ module Aws::DataZone
       attr_accessor created_at: ::Time
       attr_accessor forms: ::String
       attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor governed_glossary_terms: ::Array[Types::DetailedGlossaryTerm]
       attr_accessor latest_time_series_data_point_forms: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor owning_project_id: ::String
       SENSITIVE: []
@@ -264,6 +266,7 @@ module Aws::DataZone
       attr_accessor entity_revision: ::String
       attr_accessor entity_type: ::String
       attr_accessor glossary_terms: ::Array[Types::DetailedGlossaryTerm]
+      attr_accessor governed_glossary_terms: ::Array[Types::DetailedGlossaryTerm]
       attr_accessor listing_created_by: ::String
       attr_accessor listing_id: ::String
       attr_accessor listing_revision: ::String
@@ -333,6 +336,17 @@ module Aws::DataZone
     end
 
     class AssociateEnvironmentRoleOutput < Aws::EmptyStructure
+    end
+
+    class AssociateGovernedTermsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET")
+      attr_accessor governed_glossary_terms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateGovernedTermsOutput < Aws::EmptyStructure
     end
 
     class AthenaPropertiesInput
@@ -660,6 +674,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_by: ::String
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor governed_glossary_terms: ::Array[::String]
       attr_accessor id: ::String
       attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor listing: Types::AssetListingDetails
@@ -696,6 +711,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_by: ::String
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor governed_glossary_terms: ::Array[::String]
       attr_accessor id: ::String
       attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor listing: Types::AssetListingDetails
@@ -1051,6 +1067,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor owning_project_identifier: ::String
       attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:description, :name]
     end
 
@@ -1061,6 +1078,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
       attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:description, :name]
     end
 
@@ -1090,6 +1108,7 @@ module Aws::DataZone
       attr_accessor short_description: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor term_relations: Types::TermRelations
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:long_description, :name, :short_description]
     end
 
@@ -1166,7 +1185,7 @@ module Aws::DataZone
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor project_profile_id: ::String
-      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "MOVING")
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       SENSITIVE: [:description, :name]
     end
@@ -1802,6 +1821,17 @@ module Aws::DataZone
     class DisassociateEnvironmentRoleOutput < Aws::EmptyStructure
     end
 
+    class DisassociateGovernedTermsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_type: ("ASSET")
+      attr_accessor governed_glossary_terms: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateGovernedTermsOutput < Aws::EmptyStructure
+    end
+
     class DomainSummary
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
@@ -2162,6 +2192,7 @@ module Aws::DataZone
       attr_accessor first_revision_created_by: ::String
       attr_accessor forms_output: ::Array[Types::FormOutput]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor governed_glossary_terms: ::Array[::String]
       attr_accessor id: ::String
       attr_accessor latest_time_series_data_point_forms_output: ::Array[Types::TimeSeriesDataPointSummaryFormOutput]
       attr_accessor listing: Types::AssetListingDetails
@@ -2511,6 +2542,7 @@ module Aws::DataZone
       attr_accessor status: ("DISABLED" | "ENABLED")
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:description, :name]
     end
 
@@ -2533,6 +2565,7 @@ module Aws::DataZone
       attr_accessor term_relations: Types::TermRelations
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:long_description, :name, :short_description]
     end
 
@@ -2685,7 +2718,7 @@ module Aws::DataZone
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor project_profile_id: ::String
-      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "MOVING")
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       SENSITIVE: [:description, :name]
     end
@@ -2873,6 +2906,7 @@ module Aws::DataZone
       attr_accessor status: ("DISABLED" | "ENABLED")
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:description, :name]
     end
 
@@ -2895,6 +2929,7 @@ module Aws::DataZone
       attr_accessor term_relations: Types::TermRelations
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:long_description, :name, :short_description]
     end
 
@@ -4223,7 +4258,7 @@ module Aws::DataZone
       attr_accessor failure_reasons: ::Array[Types::ProjectDeletionError]
       attr_accessor id: ::String
       attr_accessor name: ::String
-      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "MOVING")
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description, :name]
     end
@@ -5520,6 +5555,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor owning_project_id: ::String
       attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:description, :name]
     end
 
@@ -5544,6 +5580,7 @@ module Aws::DataZone
       attr_accessor short_description: ::String
       attr_accessor status: ("ENABLED" | "DISABLED")
       attr_accessor term_relations: Types::TermRelations
+      attr_accessor usage_restrictions: ::Array[("ASSET_GOVERNED_TERMS")]
       SENSITIVE: [:long_description, :name, :short_description]
     end
 
@@ -5588,7 +5625,7 @@ module Aws::DataZone
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor project_profile_id: ::String
-      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor project_status: ("ACTIVE" | "DELETING" | "DELETE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "MOVING")
       attr_accessor user_parameters: ::Array[Types::EnvironmentConfigurationUserParameter]
       SENSITIVE: [:description, :name]
     end

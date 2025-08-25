@@ -41,22 +41,17 @@ module Aws::CodeGuruSecurity
 
     # A summary of findings metrics for an account on a specified date.
     #
-    # @!attribute [rw] closed_findings
-    #   The number of closed findings of each severity on the specified
-    #   date.
-    #   @return [Types::FindingMetricsValuePerSeverity]
-    #
     # @!attribute [rw] date
     #   The date from which the findings metrics were retrieved.
     #   @return [Time]
     #
-    # @!attribute [rw] mean_time_to_close
-    #   The average time in days it takes to close findings of each severity
-    #   as of a specified date.
-    #   @return [Types::FindingMetricsValuePerSeverity]
-    #
     # @!attribute [rw] new_findings
     #   The number of new findings of each severity on the specified date.
+    #   @return [Types::FindingMetricsValuePerSeverity]
+    #
+    # @!attribute [rw] closed_findings
+    #   The number of closed findings of each severity on the specified
+    #   date.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
     # @!attribute [rw] open_findings
@@ -64,14 +59,19 @@ module Aws::CodeGuruSecurity
     #   date.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
+    # @!attribute [rw] mean_time_to_close
+    #   The average time in days it takes to close findings of each severity
+    #   as of a specified date.
+    #   @return [Types::FindingMetricsValuePerSeverity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/AccountFindingsMetric AWS API Documentation
     #
     class AccountFindingsMetric < Struct.new(
-      :closed_findings,
       :date,
-      :mean_time_to_close,
       :new_findings,
-      :open_findings)
+      :closed_findings,
+      :open_findings,
+      :mean_time_to_close)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -79,29 +79,29 @@ module Aws::CodeGuruSecurity
     # Contains information about the error that caused a finding to fail to
     # be retrieved.
     #
-    # @!attribute [rw] error_code
-    #   A code associated with the type of error.
+    # @!attribute [rw] scan_name
+    #   The name of the scan that generated the finding.
     #   @return [String]
     #
     # @!attribute [rw] finding_id
     #   The finding ID of the finding that was not fetched.
     #   @return [String]
     #
-    # @!attribute [rw] message
-    #   Describes the error.
+    # @!attribute [rw] error_code
+    #   A code associated with the type of error.
     #   @return [String]
     #
-    # @!attribute [rw] scan_name
-    #   The name of the scan that generated the finding.
+    # @!attribute [rw] message
+    #   Describes the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/BatchGetFindingsError AWS API Documentation
     #
     class BatchGetFindingsError < Struct.new(
-      :error_code,
+      :scan_name,
       :finding_id,
-      :message,
-      :scan_name)
+      :error_code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -120,21 +120,21 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
+    # @!attribute [rw] findings
+    #   A list of all findings which were successfully fetched.
+    #   @return [Array<Types::Finding>]
+    #
     # @!attribute [rw] failed_findings
     #   A list of errors for individual findings which were not fetched.
     #   Each BatchGetFindingsError contains the `scanName`, `findingId`,
     #   `errorCode` and error `message`.
     #   @return [Array<Types::BatchGetFindingsError>]
     #
-    # @!attribute [rw] findings
-    #   A list of all findings which were successfully fetched.
-    #   @return [Array<Types::Finding>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/BatchGetFindingsResponse AWS API Documentation
     #
     class BatchGetFindingsResponse < Struct.new(
-      :failed_findings,
-      :findings)
+      :findings,
+      :failed_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -161,19 +161,19 @@ module Aws::CodeGuruSecurity
 
     # The line of code where a finding was detected.
     #
-    # @!attribute [rw] content
-    #   The code that contains a vulnerability.
-    #   @return [String]
-    #
     # @!attribute [rw] number
     #   The code line number.
     #   @return [Integer]
     #
+    # @!attribute [rw] content
+    #   The code that contains a vulnerability.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/CodeLine AWS API Documentation
     #
     class CodeLine < Struct.new(
-      :content,
-      :number)
+      :number,
+      :content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -209,14 +209,6 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # @!attribute [rw] analysis_type
-    #   The type of analysis you want CodeGuru Security to perform in the
-    #   scan, either `Security` or `All`. The `Security` type only generates
-    #   findings related to security. The `All` type generates both security
-    #   findings and quality findings. Defaults to `Security` type if
-    #   missing.
-    #   @return [String]
-    #
     # @!attribute [rw] client_token
     #   The idempotency token for the request. Amazon CodeGuru Security uses
     #   this value to prevent the accidental creation of duplicate scans if
@@ -246,6 +238,14 @@ module Aws::CodeGuruSecurity
     #   analyze your code.
     #   @return [String]
     #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis you want CodeGuru Security to perform in the
+    #   scan, either `Security` or `All`. The `Security` type only generates
+    #   findings related to security. The `All` type generates both security
+    #   findings and quality findings. Defaults to `Security` type if
+    #   missing.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs used to tag a scan. A tag is a custom
     #   attribute label with two parts:
@@ -261,46 +261,46 @@ module Aws::CodeGuruSecurity
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/CreateScanRequest AWS API Documentation
     #
     class CreateScanRequest < Struct.new(
-      :analysis_type,
       :client_token,
       :resource_id,
       :scan_name,
       :scan_type,
+      :analysis_type,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] resource_id
-    #   The identifier for the resource object that contains resources that
-    #   were scanned.
-    #   @return [Types::ResourceId]
+    # @!attribute [rw] scan_name
+    #   The name of the scan.
+    #   @return [String]
     #
     # @!attribute [rw] run_id
     #   UUID that identifies the individual scan run.
     #   @return [String]
     #
-    # @!attribute [rw] scan_name
-    #   The name of the scan.
-    #   @return [String]
-    #
-    # @!attribute [rw] scan_name_arn
-    #   The ARN for the scan name.
-    #   @return [String]
+    # @!attribute [rw] resource_id
+    #   The identifier for the resource object that contains resources that
+    #   were scanned.
+    #   @return [Types::ResourceId]
     #
     # @!attribute [rw] scan_state
     #   The current state of the scan. Returns either `InProgress`,
     #   `Successful`, or `Failed`.
     #   @return [String]
     #
+    # @!attribute [rw] scan_name_arn
+    #   The ARN for the scan name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/CreateScanResponse AWS API Documentation
     #
     class CreateScanResponse < Struct.new(
-      :resource_id,
-      :run_id,
       :scan_name,
-      :scan_name_arn,
-      :scan_state)
+      :run_id,
+      :resource_id,
+      :scan_state,
+      :scan_name_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -320,9 +320,9 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # @!attribute [rw] code_artifact_id
-    #   The identifier for the uploaded code resource. Pass this to
-    #   `CreateScan` to use the uploaded resources.
+    # @!attribute [rw] s3_url
+    #   A pre-signed S3 URL. You can upload the code file you want to scan
+    #   with the required `requestHeaders` using any HTTP client.
     #   @return [String]
     #
     # @!attribute [rw] request_headers
@@ -330,18 +330,18 @@ module Aws::CodeGuruSecurity
     #   uploading your resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] s3_url
-    #   A pre-signed S3 URL. You can upload the code file you want to scan
-    #   with the required `requestHeaders` using any HTTP client.
+    # @!attribute [rw] code_artifact_id
+    #   The identifier for the uploaded code resource. Pass this to
+    #   `CreateScan` to use the uploaded resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/CreateUploadUrlResponse AWS API Documentation
     #
     class CreateUploadUrlResponse < Struct.new(
-      :code_artifact_id,
+      :s3_url,
       :request_headers,
-      :s3_url)
-      SENSITIVE = [:request_headers, :s3_url]
+      :code_artifact_id)
+      SENSITIVE = [:s3_url, :request_headers]
       include Aws::Structure
     end
 
@@ -364,16 +364,6 @@ module Aws::CodeGuruSecurity
     # Information about the location of security vulnerabilities that Amazon
     # CodeGuru Security detected in your code.
     #
-    # @!attribute [rw] code_snippet
-    #   A list of `CodeLine` objects that describe where the security
-    #   vulnerability appears in your code.
-    #   @return [Array<Types::CodeLine>]
-    #
-    # @!attribute [rw] end_line
-    #   The last line number of the code snippet where the security
-    #   vulnerability appears in your code.
-    #   @return [Integer]
-    #
     # @!attribute [rw] name
     #   The name of the file.
     #   @return [String]
@@ -387,14 +377,24 @@ module Aws::CodeGuruSecurity
     #   vulnerability appears in your code.
     #   @return [Integer]
     #
+    # @!attribute [rw] end_line
+    #   The last line number of the code snippet where the security
+    #   vulnerability appears in your code.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code_snippet
+    #   A list of `CodeLine` objects that describe where the security
+    #   vulnerability appears in your code.
+    #   @return [Array<Types::CodeLine>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/FilePath AWS API Documentation
     #
     class FilePath < Struct.new(
-      :code_snippet,
-      :end_line,
       :name,
       :path,
-      :start_line)
+      :start_line,
+      :end_line,
+      :code_snippet)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -409,23 +409,6 @@ module Aws::CodeGuruSecurity
     #   A description of the finding.
     #   @return [String]
     #
-    # @!attribute [rw] detector_id
-    #   The identifier for the detector that detected the finding in your
-    #   code. A detector is a defined rule based on industry standards and
-    #   AWS best practices.
-    #   @return [String]
-    #
-    # @!attribute [rw] detector_name
-    #   The name of the detector that identified the security vulnerability
-    #   in your code.
-    #   @return [String]
-    #
-    # @!attribute [rw] detector_tags
-    #   One or more tags or categorizations that are associated with a
-    #   detector. These tags are defined by type, programming language, or
-    #   other classification such as maintainability or consistency.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] generator_id
     #   The identifier for the component that generated a finding such as
     #   AmazonCodeGuruSecurity.
@@ -435,18 +418,26 @@ module Aws::CodeGuruSecurity
     #   The identifier for a finding.
     #   @return [String]
     #
-    # @!attribute [rw] remediation
-    #   An object that contains the details about how to remediate a
-    #   finding.
-    #   @return [Types::Remediation]
+    # @!attribute [rw] updated_at
+    #   The time when the finding was last updated. Findings are updated
+    #   when you remediate them or when the finding code location changes.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   The type of finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the finding. A finding status can be open or closed.
+    #   @return [String]
     #
     # @!attribute [rw] resource
     #   The resource where Amazon CodeGuru Security detected a finding.
     #   @return [Types::Resource]
     #
-    # @!attribute [rw] rule_id
-    #   The identifier for the rule that generated the finding.
-    #   @return [String]
+    # @!attribute [rw] vulnerability
+    #   An object that describes the detected security vulnerability.
+    #   @return [Types::Vulnerability]
     #
     # @!attribute [rw] severity
     #   The severity of the finding. Severity can be critical, high, medium,
@@ -458,46 +449,55 @@ module Aws::CodeGuruSecurity
     #   [1]: https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution
     #   @return [String]
     #
-    # @!attribute [rw] status
-    #   The status of the finding. A finding status can be open or closed.
-    #   @return [String]
+    # @!attribute [rw] remediation
+    #   An object that contains the details about how to remediate a
+    #   finding.
+    #   @return [Types::Remediation]
     #
     # @!attribute [rw] title
     #   The title of the finding.
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The type of finding.
+    # @!attribute [rw] detector_tags
+    #   One or more tags or categorizations that are associated with a
+    #   detector. These tags are defined by type, programming language, or
+    #   other classification such as maintainability or consistency.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] detector_id
+    #   The identifier for the detector that detected the finding in your
+    #   code. A detector is a defined rule based on industry standards and
+    #   AWS best practices.
     #   @return [String]
     #
-    # @!attribute [rw] updated_at
-    #   The time when the finding was last updated. Findings are updated
-    #   when you remediate them or when the finding code location changes.
-    #   @return [Time]
+    # @!attribute [rw] detector_name
+    #   The name of the detector that identified the security vulnerability
+    #   in your code.
+    #   @return [String]
     #
-    # @!attribute [rw] vulnerability
-    #   An object that describes the detected security vulnerability.
-    #   @return [Types::Vulnerability]
+    # @!attribute [rw] rule_id
+    #   The identifier for the rule that generated the finding.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/Finding AWS API Documentation
     #
     class Finding < Struct.new(
       :created_at,
       :description,
-      :detector_id,
-      :detector_name,
-      :detector_tags,
       :generator_id,
       :id,
-      :remediation,
-      :resource,
-      :rule_id,
-      :severity,
-      :status,
-      :title,
-      :type,
       :updated_at,
-      :vulnerability)
+      :type,
+      :status,
+      :resource,
+      :vulnerability,
+      :severity,
+      :remediation,
+      :title,
+      :detector_tags,
+      :detector_id,
+      :detector_name,
+      :rule_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -505,19 +505,19 @@ module Aws::CodeGuruSecurity
     # An object that contains information about a finding and the scan that
     # generated it.
     #
-    # @!attribute [rw] finding_id
-    #   The identifier for a finding.
-    #   @return [String]
-    #
     # @!attribute [rw] scan_name
     #   The name of the scan that generated the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   The identifier for a finding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/FindingIdentifier AWS API Documentation
     #
     class FindingIdentifier < Struct.new(
-      :finding_id,
-      :scan_name)
+      :scan_name,
+      :finding_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -525,14 +525,6 @@ module Aws::CodeGuruSecurity
     # A numeric value corresponding to the severity of a finding, such as
     # the number of open findings or the average time it takes to close
     # findings of a given severity.
-    #
-    # @!attribute [rw] critical
-    #   A numeric value corresponding to a critical finding.
-    #   @return [Float]
-    #
-    # @!attribute [rw] high
-    #   A numeric value corresponding to a high severity finding.
-    #   @return [Float]
     #
     # @!attribute [rw] info
     #   A numeric value corresponding to an informational finding.
@@ -546,14 +538,22 @@ module Aws::CodeGuruSecurity
     #   A numeric value corresponding to a medium severity finding.
     #   @return [Float]
     #
+    # @!attribute [rw] high
+    #   A numeric value corresponding to a high severity finding.
+    #   @return [Float]
+    #
+    # @!attribute [rw] critical
+    #   A numeric value corresponding to a critical finding.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/FindingMetricsValuePerSeverity AWS API Documentation
     #
     class FindingMetricsValuePerSeverity < Struct.new(
-      :critical,
-      :high,
       :info,
       :low,
-      :medium)
+      :medium,
+      :high,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -580,13 +580,9 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return in the response. Use this
-    #   parameter when paginating results. If additional results exist
-    #   beyond the number you specify, the `nextToken` element is returned
-    #   in the response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results. If not specified, returns 1000 results.
-    #   @return [Integer]
+    # @!attribute [rw] scan_name
+    #   The name of the scan you want to retrieve findings from.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   A token to use for paginating results that are returned in the
@@ -596,9 +592,13 @@ module Aws::CodeGuruSecurity
     #   first page.
     #   @return [String]
     #
-    # @!attribute [rw] scan_name
-    #   The name of the scan you want to retrieve findings from.
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. Use this
+    #   parameter when paginating results. If additional results exist
+    #   beyond the number you specify, the `nextToken` element is returned
+    #   in the response. Use `nextToken` in a subsequent request to retrieve
+    #   additional results. If not specified, returns 1000 results.
+    #   @return [Integer]
     #
     # @!attribute [rw] status
     #   The status of the findings you want to get. Pass either `Open`,
@@ -608,9 +608,9 @@ module Aws::CodeGuruSecurity
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/GetFindingsRequest AWS API Documentation
     #
     class GetFindingsRequest < Struct.new(
-      :max_results,
-      :next_token,
       :scan_name,
+      :next_token,
+      :max_results,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -659,54 +659,31 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
+    # @!attribute [rw] scan_name
+    #   The name of the scan you want to view details about.
+    #   @return [String]
+    #
     # @!attribute [rw] run_id
     #   UUID that identifies the individual scan run you want to view
     #   details about. You retrieve this when you call the `CreateScan`
     #   operation. Defaults to the latest scan run if missing.
     #   @return [String]
     #
-    # @!attribute [rw] scan_name
-    #   The name of the scan you want to view details about.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/GetScanRequest AWS API Documentation
     #
     class GetScanRequest < Struct.new(
-      :run_id,
-      :scan_name)
+      :scan_name,
+      :run_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] analysis_type
-    #   The type of analysis CodeGuru Security performed in the scan, either
-    #   `Security` or `All`. The `Security` type only generates findings
-    #   related to security. The `All` type generates both security findings
-    #   and quality findings.
-    #   @return [String]
-    #
-    # @!attribute [rw] created_at
-    #   The time the scan was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] error_message
-    #   Details about the error that causes a scan to fail to be retrieved.
-    #   @return [String]
-    #
-    # @!attribute [rw] number_of_revisions
-    #   The number of times a scan has been re-run on a revised resource.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] run_id
-    #   UUID that identifies the individual scan run.
-    #   @return [String]
-    #
     # @!attribute [rw] scan_name
     #   The name of the scan.
     #   @return [String]
     #
-    # @!attribute [rw] scan_name_arn
-    #   The ARN for the scan name.
+    # @!attribute [rw] run_id
+    #   UUID that identifies the individual scan run.
     #   @return [String]
     #
     # @!attribute [rw] scan_state
@@ -714,23 +691,46 @@ module Aws::CodeGuruSecurity
     #   `Successful`, or `Failed`.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The time the scan was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of analysis CodeGuru Security performed in the scan, either
+    #   `Security` or `All`. The `Security` type only generates findings
+    #   related to security. The `All` type generates both security findings
+    #   and quality findings.
+    #   @return [String]
+    #
     # @!attribute [rw] updated_at
     #   The time when the scan was last updated. Only available for
     #   `STANDARD` scan types.
     #   @return [Time]
     #
+    # @!attribute [rw] number_of_revisions
+    #   The number of times a scan has been re-run on a revised resource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_name_arn
+    #   The ARN for the scan name.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Details about the error that causes a scan to fail to be retrieved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/GetScanResponse AWS API Documentation
     #
     class GetScanResponse < Struct.new(
-      :analysis_type,
-      :created_at,
-      :error_message,
-      :number_of_revisions,
-      :run_id,
       :scan_name,
-      :scan_name_arn,
+      :run_id,
       :scan_state,
-      :updated_at)
+      :created_at,
+      :analysis_type,
+      :updated_at,
+      :number_of_revisions,
+      :scan_name_arn,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -755,10 +755,13 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # @!attribute [rw] end_date
-    #   The end date of the interval which you want to retrieve metrics
-    #   from. Round to the nearest day.
-    #   @return [Time]
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the `nextToken` value returned
+    #   from the previous request to continue listing results after the
+    #   first page.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response. Use this
@@ -768,26 +771,23 @@ module Aws::CodeGuruSecurity
     #   additional results. If not specified, returns 1000 results.
     #   @return [Integer]
     #
-    # @!attribute [rw] next_token
-    #   A token to use for paginating results that are returned in the
-    #   response. Set the value of this parameter to null for the first
-    #   request. For subsequent calls, use the `nextToken` value returned
-    #   from the previous request to continue listing results after the
-    #   first page.
-    #   @return [String]
-    #
     # @!attribute [rw] start_date
     #   The start date of the interval which you want to retrieve metrics
     #   from. Rounds to the nearest day.
     #   @return [Time]
     #
+    # @!attribute [rw] end_date
+    #   The end date of the interval which you want to retrieve metrics
+    #   from. Round to the nearest day.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ListFindingsMetricsRequest AWS API Documentation
     #
     class ListFindingsMetricsRequest < Struct.new(
-      :end_date,
-      :max_results,
       :next_token,
-      :start_date)
+      :max_results,
+      :start_date,
+      :end_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -812,14 +812,6 @@ module Aws::CodeGuruSecurity
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   The maximum number of results to return in the response. Use this
-    #   parameter when paginating results. If additional results exist
-    #   beyond the number you specify, the `nextToken` element is returned
-    #   in the response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results. If not specified, returns 100 results.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   A token to use for paginating results that are returned in the
     #   response. Set the value of this parameter to null for the first
@@ -828,30 +820,38 @@ module Aws::CodeGuruSecurity
     #   first page.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. Use this
+    #   parameter when paginating results. If additional results exist
+    #   beyond the number you specify, the `nextToken` element is returned
+    #   in the response. Use `nextToken` in a subsequent request to retrieve
+    #   additional results. If not specified, returns 100 results.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ListScansRequest AWS API Documentation
     #
     class ListScansRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] next_token
-    #   A pagination token. You can use this in future calls to `ListScans`
-    #   to continue listing results after the current page.
-    #   @return [String]
-    #
     # @!attribute [rw] summaries
     #   A list of `ScanSummary` objects with information about all scans in
     #   an account.
     #   @return [Array<Types::ScanSummary>]
     #
+    # @!attribute [rw] next_token
+    #   A pagination token. You can use this in future calls to `ListScans`
+    #   to continue listing results after the current page.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ListScansResponse AWS API Documentation
     #
     class ListScansResponse < Struct.new(
-      :next_token,
-      :summaries)
+      :summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -891,11 +891,6 @@ module Aws::CodeGuruSecurity
 
     # A summary of metrics for an account as of a specified date.
     #
-    # @!attribute [rw] categories_with_most_findings
-    #   A list of `CategoryWithFindingNum` objects for the top 5 finding
-    #   categories with the most findings.
-    #   @return [Array<Types::CategoryWithFindingNum>]
-    #
     # @!attribute [rw] date
     #   The date from which the metrics summary information was retrieved.
     #   @return [Time]
@@ -904,24 +899,29 @@ module Aws::CodeGuruSecurity
     #   The number of open findings of each severity.
     #   @return [Types::FindingMetricsValuePerSeverity]
     #
-    # @!attribute [rw] scans_with_most_open_critical_findings
-    #   A list of `ScanNameWithFindingNum` objects for the top 3 scans with
-    #   the most number of open critical findings.
-    #   @return [Array<Types::ScanNameWithFindingNum>]
+    # @!attribute [rw] categories_with_most_findings
+    #   A list of `CategoryWithFindingNum` objects for the top 5 finding
+    #   categories with the most findings.
+    #   @return [Array<Types::CategoryWithFindingNum>]
     #
     # @!attribute [rw] scans_with_most_open_findings
     #   A list of `ScanNameWithFindingNum` objects for the top 3 scans with
     #   the most number of open findings.
     #   @return [Array<Types::ScanNameWithFindingNum>]
     #
+    # @!attribute [rw] scans_with_most_open_critical_findings
+    #   A list of `ScanNameWithFindingNum` objects for the top 3 scans with
+    #   the most number of open critical findings.
+    #   @return [Array<Types::ScanNameWithFindingNum>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/MetricsSummary AWS API Documentation
     #
     class MetricsSummary < Struct.new(
-      :categories_with_most_findings,
       :date,
       :open_findings,
-      :scans_with_most_open_critical_findings,
-      :scans_with_most_open_findings)
+      :categories_with_most_findings,
+      :scans_with_most_open_findings,
+      :scans_with_most_open_critical_findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1043,81 +1043,81 @@ module Aws::CodeGuruSecurity
 
     # Information about the number of findings generated by a scan.
     #
-    # @!attribute [rw] finding_number
-    #   The number of findings generated by a scan.
-    #   @return [Integer]
-    #
     # @!attribute [rw] scan_name
     #   The name of the scan.
     #   @return [String]
     #
+    # @!attribute [rw] finding_number
+    #   The number of findings generated by a scan.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ScanNameWithFindingNum AWS API Documentation
     #
     class ScanNameWithFindingNum < Struct.new(
-      :finding_number,
-      :scan_name)
+      :scan_name,
+      :finding_number)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Information about a scan.
     #
-    # @!attribute [rw] created_at
-    #   The time when the scan was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] run_id
-    #   The identifier for the scan run.
-    #   @return [String]
-    #
-    # @!attribute [rw] scan_name
-    #   The name of the scan.
-    #   @return [String]
-    #
-    # @!attribute [rw] scan_name_arn
-    #   The ARN for the scan name.
-    #   @return [String]
-    #
     # @!attribute [rw] scan_state
     #   The state of the scan. A scan can be `In Progress`, `Complete`, or
     #   `Failed`.
     #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the scan was created.
+    #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   The time the scan was last updated. A scan is updated when it is
     #   re-run.
     #   @return [Time]
     #
+    # @!attribute [rw] scan_name
+    #   The name of the scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The identifier for the scan run.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_name_arn
+    #   The ARN for the scan name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ScanSummary AWS API Documentation
     #
     class ScanSummary < Struct.new(
-      :created_at,
-      :run_id,
-      :scan_name,
-      :scan_name_arn,
       :scan_state,
-      :updated_at)
+      :created_at,
+      :updated_at,
+      :scan_name,
+      :run_id,
+      :scan_name_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Information about the suggested code fix to remediate a finding.
     #
-    # @!attribute [rw] code
-    #   The suggested code fix. If applicable, includes code patch to
-    #   replace your source code.
-    #   @return [String]
-    #
     # @!attribute [rw] description
     #   A description of the suggested code fix and why it is being
     #   suggested.
     #   @return [String]
     #
+    # @!attribute [rw] code
+    #   The suggested code fix. If applicable, includes code patch to
+    #   replace your source code.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/SuggestedFix AWS API Documentation
     #
     class SuggestedFix < Struct.new(
-      :code,
-      :description)
+      :description,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1162,12 +1162,12 @@ module Aws::CodeGuruSecurity
     #   Description of the error.
     #   @return [String]
     #
-    # @!attribute [rw] quota_code
-    #   The identifier for the originating quota.
-    #   @return [String]
-    #
     # @!attribute [rw] service_code
     #   The identifier for the originating service.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The identifier for the originating quota.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ThrottlingException AWS API Documentation
@@ -1175,8 +1175,8 @@ module Aws::CodeGuruSecurity
     class ThrottlingException < Struct.new(
       :error_code,
       :message,
-      :quota_code,
-      :service_code)
+      :service_code,
+      :quota_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1239,10 +1239,6 @@ module Aws::CodeGuruSecurity
     #   The identifier for the error.
     #   @return [String]
     #
-    # @!attribute [rw] field_list
-    #   The field that caused the error, if applicable.
-    #   @return [Array<Types::ValidationExceptionField>]
-    #
     # @!attribute [rw] message
     #   Description of the error.
     #   @return [String]
@@ -1251,51 +1247,42 @@ module Aws::CodeGuruSecurity
     #   The reason the request failed validation.
     #   @return [String]
     #
+    # @!attribute [rw] field_list
+    #   The field that caused the error, if applicable.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
       :error_code,
-      :field_list,
       :message,
-      :reason)
+      :reason,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Information about a validation exception.
     #
-    # @!attribute [rw] message
-    #   Describes the exception.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Describes the exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Information about a security vulnerability that Amazon CodeGuru
     # Security detected.
-    #
-    # @!attribute [rw] file_path
-    #   An object that describes the location of the detected security
-    #   vulnerability in your code.
-    #   @return [Types::FilePath]
-    #
-    # @!attribute [rw] id
-    #   The identifier for the vulnerability.
-    #   @return [String]
-    #
-    # @!attribute [rw] item_count
-    #   The number of times the vulnerability appears in your code.
-    #   @return [Integer]
     #
     # @!attribute [rw] reference_urls
     #   One or more URL addresses that contain details about a
@@ -1307,14 +1294,27 @@ module Aws::CodeGuruSecurity
     #   being described.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] id
+    #   The identifier for the vulnerability.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   An object that describes the location of the detected security
+    #   vulnerability in your code.
+    #   @return [Types::FilePath]
+    #
+    # @!attribute [rw] item_count
+    #   The number of times the vulnerability appears in your code.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-security-2018-05-10/Vulnerability AWS API Documentation
     #
     class Vulnerability < Struct.new(
-      :file_path,
-      :id,
-      :item_count,
       :reference_urls,
-      :related_vulnerabilities)
+      :related_vulnerabilities,
+      :id,
+      :file_path,
+      :item_count)
       SENSITIVE = []
       include Aws::Structure
     end

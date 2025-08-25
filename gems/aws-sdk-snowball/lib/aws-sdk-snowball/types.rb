@@ -230,7 +230,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of Snowcone device to use for this cluster.
+    #   The type of Snowball Edge device to use for this cluster.
     #
     #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
     #   only the `EDGE` device type.
@@ -717,7 +717,7 @@ module Aws::Snowball
     #   @return [Types::TaxDocuments]
     #
     # @!attribute [rw] device_configuration
-    #   Defines the device configuration for an Snowcone job.
+    #   Defines the device configuration for an Snowball Edge job.
     #
     #   For more information, see
     #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
@@ -1079,8 +1079,8 @@ module Aws::Snowball
     # The container for `SnowconeDeviceConfiguration`.
     #
     # @!attribute [rw] snowcone_device_configuration
-    #   Returns information about the device configuration for an Snowcone
-    #   job.
+    #   Returns information about the device configuration for an Snowball
+    #   Edge job.
     #   @return [Types::SnowconeDeviceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DeviceConfiguration AWS API Documentation
@@ -2423,10 +2423,10 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Specifies the device configuration for an Snowcone job.
+    # Specifies the device configuration for an Snowball Edge job.
     #
     # @!attribute [rw] wireless_connection
-    #   Configures the wireless connection for the Snowcone device.
+    #   Configures the wireless connection for the Snowball Edge device.
     #   @return [Types::WirelessConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/SnowconeDeviceConfiguration AWS API Documentation
@@ -2724,10 +2724,10 @@ module Aws::Snowball
     #
     class UpdateLongTermPricingResult < Aws::EmptyStructure; end
 
-    # Configures the wireless connection on an Snowcone device.
+    # Configures the wireless connection on an Snowball Edge device.
     #
     # @!attribute [rw] is_wifi_enabled
-    #   Enables the Wi-Fi adapter on an Snowcone device.
+    #   Enables the Wi-Fi adapter on an Snowball Edge device.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/WirelessConnection AWS API Documentation

@@ -174,13 +174,13 @@ module Aws::CodeGuruSecurity
       end
 
       # @return [String]
-      def quota_code
-        @data[:quota_code]
+      def service_code
+        @data[:service_code]
       end
 
       # @return [String]
-      def service_code
-        @data[:service_code]
+      def quota_code
+        @data[:quota_code]
       end
 
       def retryable?
@@ -207,11 +207,6 @@ module Aws::CodeGuruSecurity
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -219,6 +214,11 @@ module Aws::CodeGuruSecurity
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def field_list
+        @data[:field_list]
       end
     end
 

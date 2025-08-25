@@ -1501,6 +1501,7 @@ module Aws::EC2
     EnclaveOptionsRequest = Shapes::StructureShape.new(name: 'EnclaveOptionsRequest')
     EncryptionInTransitSupported = Shapes::BooleanShape.new(name: 'EncryptionInTransitSupported')
     EndDateType = Shapes::StringShape.new(name: 'EndDateType')
+    EndpointIpAddressType = Shapes::StringShape.new(name: 'EndpointIpAddressType')
     EndpointSet = Shapes::ListShape.new(name: 'EndpointSet')
     EphemeralNvmeSupport = Shapes::StringShape.new(name: 'EphemeralNvmeSupport')
     ErrorSet = Shapes::ListShape.new(name: 'ErrorSet')
@@ -3227,6 +3228,7 @@ module Aws::EC2
     TotalNeuronMemory = Shapes::IntegerShape.new(name: 'TotalNeuronMemory')
     TpmSupportValues = Shapes::StringShape.new(name: 'TpmSupportValues')
     TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
+    TrafficIpAddressType = Shapes::StringShape.new(name: 'TrafficIpAddressType')
     TrafficMirrorFilter = Shapes::StructureShape.new(name: 'TrafficMirrorFilter')
     TrafficMirrorFilterId = Shapes::StringShape.new(name: 'TrafficMirrorFilterId')
     TrafficMirrorFilterIdList = Shapes::ListShape.new(name: 'TrafficMirrorFilterIdList')
@@ -4874,6 +4876,7 @@ module Aws::EC2
     ClientVpnConnection.add_member(:ingress_packets, Shapes::ShapeRef.new(shape: String, location_name: "ingressPackets"))
     ClientVpnConnection.add_member(:egress_packets, Shapes::ShapeRef.new(shape: String, location_name: "egressPackets"))
     ClientVpnConnection.add_member(:client_ip, Shapes::ShapeRef.new(shape: String, location_name: "clientIp"))
+    ClientVpnConnection.add_member(:client_ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "clientIpv6Address"))
     ClientVpnConnection.add_member(:common_name, Shapes::ShapeRef.new(shape: String, location_name: "commonName"))
     ClientVpnConnection.add_member(:status, Shapes::ShapeRef.new(shape: ClientVpnConnectionStatus, location_name: "status"))
     ClientVpnConnection.add_member(:connection_end_time, Shapes::ShapeRef.new(shape: String, location_name: "connectionEndTime"))
@@ -4911,6 +4914,8 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:client_login_banner_options, Shapes::ShapeRef.new(shape: ClientLoginBannerResponseOptions, location_name: "clientLoginBannerOptions"))
     ClientVpnEndpoint.add_member(:client_route_enforcement_options, Shapes::ShapeRef.new(shape: ClientRouteEnforcementResponseOptions, location_name: "clientRouteEnforcementOptions"))
     ClientVpnEndpoint.add_member(:disconnect_on_session_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "disconnectOnSessionTimeout"))
+    ClientVpnEndpoint.add_member(:endpoint_ip_address_type, Shapes::ShapeRef.new(shape: EndpointIpAddressType, location_name: "endpointIpAddressType"))
+    ClientVpnEndpoint.add_member(:traffic_ip_address_type, Shapes::ShapeRef.new(shape: TrafficIpAddressType, location_name: "trafficIpAddressType"))
     ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
 
     ClientVpnEndpointAttributeStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnEndpointAttributeStatusCode, location_name: "code"))
@@ -5172,7 +5177,7 @@ module Aws::EC2
     CreateCarrierGatewayResult.add_member(:carrier_gateway, Shapes::ShapeRef.new(shape: CarrierGateway, location_name: "carrierGateway"))
     CreateCarrierGatewayResult.struct_class = Types::CreateCarrierGatewayResult
 
-    CreateClientVpnEndpointRequest.add_member(:client_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClientCidrBlock"))
+    CreateClientVpnEndpointRequest.add_member(:client_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ClientCidrBlock"))
     CreateClientVpnEndpointRequest.add_member(:server_certificate_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerCertificateArn"))
     CreateClientVpnEndpointRequest.add_member(:authentication_options, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationRequestList, required: true, location_name: "Authentication"))
     CreateClientVpnEndpointRequest.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogOptions, required: true, location_name: "ConnectionLogOptions"))
@@ -5192,6 +5197,8 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:client_login_banner_options, Shapes::ShapeRef.new(shape: ClientLoginBannerOptions, location_name: "ClientLoginBannerOptions"))
     CreateClientVpnEndpointRequest.add_member(:client_route_enforcement_options, Shapes::ShapeRef.new(shape: ClientRouteEnforcementOptions, location_name: "ClientRouteEnforcementOptions"))
     CreateClientVpnEndpointRequest.add_member(:disconnect_on_session_timeout, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisconnectOnSessionTimeout"))
+    CreateClientVpnEndpointRequest.add_member(:endpoint_ip_address_type, Shapes::ShapeRef.new(shape: EndpointIpAddressType, location_name: "EndpointIpAddressType"))
+    CreateClientVpnEndpointRequest.add_member(:traffic_ip_address_type, Shapes::ShapeRef.new(shape: TrafficIpAddressType, location_name: "TrafficIpAddressType"))
     CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
 
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))

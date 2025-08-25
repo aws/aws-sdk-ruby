@@ -55,7 +55,7 @@ module Aws::B2bi
   autoload :EndpointProvider, 'aws-sdk-b2bi/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-b2bi/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

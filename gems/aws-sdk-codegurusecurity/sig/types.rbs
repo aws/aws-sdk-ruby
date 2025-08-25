@@ -17,19 +17,19 @@ module Aws::CodeGuruSecurity
     end
 
     class AccountFindingsMetric
-      attr_accessor closed_findings: Types::FindingMetricsValuePerSeverity
       attr_accessor date: ::Time
-      attr_accessor mean_time_to_close: Types::FindingMetricsValuePerSeverity
       attr_accessor new_findings: Types::FindingMetricsValuePerSeverity
+      attr_accessor closed_findings: Types::FindingMetricsValuePerSeverity
       attr_accessor open_findings: Types::FindingMetricsValuePerSeverity
+      attr_accessor mean_time_to_close: Types::FindingMetricsValuePerSeverity
       SENSITIVE: []
     end
 
     class BatchGetFindingsError
-      attr_accessor error_code: ("DUPLICATE_IDENTIFIER" | "ITEM_DOES_NOT_EXIST" | "INTERNAL_ERROR" | "INVALID_FINDING_ID" | "INVALID_SCAN_NAME")
-      attr_accessor finding_id: ::String
-      attr_accessor message: ::String
       attr_accessor scan_name: ::String
+      attr_accessor finding_id: ::String
+      attr_accessor error_code: ("DUPLICATE_IDENTIFIER" | "ITEM_DOES_NOT_EXIST" | "INTERNAL_ERROR" | "INVALID_FINDING_ID" | "INVALID_SCAN_NAME")
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
@@ -39,8 +39,8 @@ module Aws::CodeGuruSecurity
     end
 
     class BatchGetFindingsResponse
-      attr_accessor failed_findings: ::Array[Types::BatchGetFindingsError]
       attr_accessor findings: ::Array[Types::Finding]
+      attr_accessor failed_findings: ::Array[Types::BatchGetFindingsError]
       SENSITIVE: []
     end
 
@@ -51,8 +51,8 @@ module Aws::CodeGuruSecurity
     end
 
     class CodeLine
-      attr_accessor content: ::String
       attr_accessor number: ::Integer
+      attr_accessor content: ::String
       SENSITIVE: []
     end
 
@@ -65,21 +65,21 @@ module Aws::CodeGuruSecurity
     end
 
     class CreateScanRequest
-      attr_accessor analysis_type: ("Security" | "All")
       attr_accessor client_token: ::String
       attr_accessor resource_id: Types::ResourceId
       attr_accessor scan_name: ::String
       attr_accessor scan_type: ("Standard" | "Express")
+      attr_accessor analysis_type: ("Security" | "All")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class CreateScanResponse
-      attr_accessor resource_id: Types::ResourceId
-      attr_accessor run_id: ::String
       attr_accessor scan_name: ::String
-      attr_accessor scan_name_arn: ::String
+      attr_accessor run_id: ::String
+      attr_accessor resource_id: Types::ResourceId
       attr_accessor scan_state: ("InProgress" | "Successful" | "Failed")
+      attr_accessor scan_name_arn: ::String
       SENSITIVE: []
     end
 
@@ -89,10 +89,10 @@ module Aws::CodeGuruSecurity
     end
 
     class CreateUploadUrlResponse
-      attr_accessor code_artifact_id: ::String
-      attr_accessor request_headers: ::Hash[::String, ::String]
       attr_accessor s3_url: ::String
-      SENSITIVE: [:request_headers, :s3_url]
+      attr_accessor request_headers: ::Hash[::String, ::String]
+      attr_accessor code_artifact_id: ::String
+      SENSITIVE: [:s3_url, :request_headers]
     end
 
     class EncryptionConfig
@@ -101,46 +101,46 @@ module Aws::CodeGuruSecurity
     end
 
     class FilePath
-      attr_accessor code_snippet: ::Array[Types::CodeLine]
-      attr_accessor end_line: ::Integer
       attr_accessor name: ::String
       attr_accessor path: ::String
       attr_accessor start_line: ::Integer
+      attr_accessor end_line: ::Integer
+      attr_accessor code_snippet: ::Array[Types::CodeLine]
       SENSITIVE: []
     end
 
     class Finding
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
-      attr_accessor detector_id: ::String
-      attr_accessor detector_name: ::String
-      attr_accessor detector_tags: ::Array[::String]
       attr_accessor generator_id: ::String
       attr_accessor id: ::String
-      attr_accessor remediation: Types::Remediation
-      attr_accessor resource: Types::Resource
-      attr_accessor rule_id: ::String
-      attr_accessor severity: ("Critical" | "High" | "Medium" | "Low" | "Info")
-      attr_accessor status: ("Closed" | "Open" | "All")
-      attr_accessor title: ::String
-      attr_accessor type: ::String
       attr_accessor updated_at: ::Time
+      attr_accessor type: ::String
+      attr_accessor status: ("Closed" | "Open" | "All")
+      attr_accessor resource: Types::Resource
       attr_accessor vulnerability: Types::Vulnerability
+      attr_accessor severity: ("Critical" | "High" | "Medium" | "Low" | "Info")
+      attr_accessor remediation: Types::Remediation
+      attr_accessor title: ::String
+      attr_accessor detector_tags: ::Array[::String]
+      attr_accessor detector_id: ::String
+      attr_accessor detector_name: ::String
+      attr_accessor rule_id: ::String
       SENSITIVE: []
     end
 
     class FindingIdentifier
-      attr_accessor finding_id: ::String
       attr_accessor scan_name: ::String
+      attr_accessor finding_id: ::String
       SENSITIVE: []
     end
 
     class FindingMetricsValuePerSeverity
-      attr_accessor critical: ::Float
-      attr_accessor high: ::Float
       attr_accessor info: ::Float
       attr_accessor low: ::Float
       attr_accessor medium: ::Float
+      attr_accessor high: ::Float
+      attr_accessor critical: ::Float
       SENSITIVE: []
     end
 
@@ -153,9 +153,9 @@ module Aws::CodeGuruSecurity
     end
 
     class GetFindingsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor scan_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       attr_accessor status: ("Closed" | "Open" | "All")
       SENSITIVE: []
     end
@@ -177,21 +177,21 @@ module Aws::CodeGuruSecurity
     end
 
     class GetScanRequest
-      attr_accessor run_id: ::String
       attr_accessor scan_name: ::String
+      attr_accessor run_id: ::String
       SENSITIVE: []
     end
 
     class GetScanResponse
-      attr_accessor analysis_type: ("Security" | "All")
-      attr_accessor created_at: ::Time
-      attr_accessor error_message: ::String
-      attr_accessor number_of_revisions: ::Integer
-      attr_accessor run_id: ::String
       attr_accessor scan_name: ::String
-      attr_accessor scan_name_arn: ::String
+      attr_accessor run_id: ::String
       attr_accessor scan_state: ("InProgress" | "Successful" | "Failed")
+      attr_accessor created_at: ::Time
+      attr_accessor analysis_type: ("Security" | "All")
       attr_accessor updated_at: ::Time
+      attr_accessor number_of_revisions: ::Integer
+      attr_accessor scan_name_arn: ::String
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -202,10 +202,10 @@ module Aws::CodeGuruSecurity
     end
 
     class ListFindingsMetricsRequest
-      attr_accessor end_date: ::Time
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
       SENSITIVE: []
     end
 
@@ -216,14 +216,14 @@ module Aws::CodeGuruSecurity
     end
 
     class ListScansRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListScansResponse
-      attr_accessor next_token: ::String
       attr_accessor summaries: ::Array[Types::ScanSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -238,11 +238,11 @@ module Aws::CodeGuruSecurity
     end
 
     class MetricsSummary
-      attr_accessor categories_with_most_findings: ::Array[Types::CategoryWithFindingNum]
       attr_accessor date: ::Time
       attr_accessor open_findings: Types::FindingMetricsValuePerSeverity
-      attr_accessor scans_with_most_open_critical_findings: ::Array[Types::ScanNameWithFindingNum]
+      attr_accessor categories_with_most_findings: ::Array[Types::CategoryWithFindingNum]
       attr_accessor scans_with_most_open_findings: ::Array[Types::ScanNameWithFindingNum]
+      attr_accessor scans_with_most_open_critical_findings: ::Array[Types::ScanNameWithFindingNum]
       SENSITIVE: []
     end
 
@@ -284,24 +284,24 @@ module Aws::CodeGuruSecurity
     end
 
     class ScanNameWithFindingNum
-      attr_accessor finding_number: ::Integer
       attr_accessor scan_name: ::String
+      attr_accessor finding_number: ::Integer
       SENSITIVE: []
     end
 
     class ScanSummary
-      attr_accessor created_at: ::Time
-      attr_accessor run_id: ::String
-      attr_accessor scan_name: ::String
-      attr_accessor scan_name_arn: ::String
       attr_accessor scan_state: ("InProgress" | "Successful" | "Failed")
+      attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor scan_name: ::String
+      attr_accessor run_id: ::String
+      attr_accessor scan_name_arn: ::String
       SENSITIVE: []
     end
 
     class SuggestedFix
-      attr_accessor code: ::String
       attr_accessor description: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 
@@ -317,8 +317,8 @@ module Aws::CodeGuruSecurity
     class ThrottlingException
       attr_accessor error_code: ::String
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
       SENSITIVE: []
     end
 
@@ -343,24 +343,24 @@ module Aws::CodeGuruSecurity
 
     class ValidationException
       attr_accessor error_code: ::String
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
       attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other" | "lambdaCodeShaMisMatch")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
     class Vulnerability
-      attr_accessor file_path: Types::FilePath
-      attr_accessor id: ::String
-      attr_accessor item_count: ::Integer
       attr_accessor reference_urls: ::Array[::String]
       attr_accessor related_vulnerabilities: ::Array[::String]
+      attr_accessor id: ::String
+      attr_accessor file_path: Types::FilePath
+      attr_accessor item_count: ::Integer
       SENSITIVE: []
     end
   end

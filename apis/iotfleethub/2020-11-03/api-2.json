@@ -236,8 +236,7 @@
     },
     "DeleteApplicationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeApplicationRequest":{
       "type":"structure",
@@ -405,8 +404,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -443,8 +441,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateApplicationRequest":{
       "type":"structure",
@@ -465,8 +462,7 @@
     },
     "UpdateApplicationResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "Url":{
       "type":"string",

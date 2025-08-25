@@ -402,8 +402,7 @@
     },
     "ClusterAlreadyExistsFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ClusterEndpointEncryptionType":{
@@ -423,14 +422,12 @@
     },
     "ClusterNotFoundFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ClusterQuotaForCustomerExceededFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "CreateClusterRequest":{
@@ -690,22 +687,19 @@
     },
     "InsufficientClusterCapacityFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Integer":{"type":"integer"},
     "IntegerOptional":{"type":"integer"},
     "InvalidARNFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidClusterStateFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidParameterCombinationException":{
@@ -718,8 +712,7 @@
     },
     "InvalidParameterGroupStateFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidParameterValueException":{
@@ -732,14 +725,12 @@
     },
     "InvalidSubnet":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "InvalidVPCNetworkStateFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "IsModifiable":{
@@ -790,20 +781,17 @@
     },
     "NodeNotFoundFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "NodeQuotaForClusterExceededFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "NodeQuotaForCustomerExceededFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "NodeTypeSpecificValue":{
@@ -848,8 +836,7 @@
     },
     "ParameterGroupAlreadyExistsFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ParameterGroupList":{
@@ -862,14 +849,12 @@
     },
     "ParameterGroupNotFoundFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ParameterGroupQuotaExceededFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ParameterGroupStatus":{
@@ -959,14 +944,12 @@
     },
     "ServiceLinkedRoleNotFoundFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "ServiceQuotaExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "SourceType":{
@@ -996,14 +979,12 @@
     },
     "SubnetGroupAlreadyExistsFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "SubnetGroupInUseFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "SubnetGroupList":{
@@ -1016,14 +997,12 @@
     },
     "SubnetGroupNotFoundFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "SubnetGroupQuotaExceededFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "SubnetIdentifierList":{
@@ -1032,8 +1011,7 @@
     },
     "SubnetInUse":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "SubnetList":{
@@ -1042,8 +1020,7 @@
     },
     "SubnetQuotaExceededFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "TStamp":{"type":"timestamp"},
@@ -1060,14 +1037,12 @@
     },
     "TagNotFoundFault":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "TagQuotaPerResourceExceeded":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "TagResourceRequest":{

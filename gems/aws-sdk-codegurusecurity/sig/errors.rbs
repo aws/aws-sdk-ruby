@@ -36,14 +36,14 @@ module Aws
       class ThrottlingException < ::Aws::Errors::ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
-        def quota_code: () -> ::String
         def service_code: () -> ::String
+        def quota_code: () -> ::String
       end
       class ValidationException < ::Aws::Errors::ServiceError
         def error_code: () -> ::String
-        def field_list: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
+        def field_list: () -> ::String
       end
     end
   end

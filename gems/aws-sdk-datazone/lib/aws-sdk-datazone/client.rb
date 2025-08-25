@@ -861,6 +861,42 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Associates governed terms with an asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where governed terms are to be associated with an
+    #   asset.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset with which you want to associate a governed term.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset with which you want to associate a governed
+    #   term.
+    #
+    # @option params [required, Array<String>] :governed_glossary_terms
+    #   The glossary terms in a restricted glossary.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_governed_terms({
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET
+    #     governed_glossary_terms: ["GlossaryTermId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateGovernedTerms AWS API Documentation
+    #
+    # @overload associate_governed_terms(params = {})
+    # @param [Hash] params ({})
+    def associate_governed_terms(params = {}, options = {})
+      req = build_request(:associate_governed_terms, params)
+      req.send_request(options)
+    end
+
     # Cancels the metadata generation run.
     #
     # @option params [required, String] :domain_identifier
@@ -1109,6 +1145,7 @@ module Aws::DataZone
     #   * {Types::CreateAssetOutput#first_revision_created_by #first_revision_created_by} => String
     #   * {Types::CreateAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::CreateAssetOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::CreateAssetOutput#governed_glossary_terms #governed_glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateAssetOutput#id #id} => String
     #   * {Types::CreateAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::CreateAssetOutput#listing #listing} => Types::AssetListingDetails
@@ -1163,6 +1200,8 @@ module Aws::DataZone
     #   resp.forms_output[0].type_revision #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.governed_glossary_terms #=> Array
+    #   resp.governed_glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.latest_time_series_data_point_forms_output #=> Array
     #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
@@ -1411,6 +1450,7 @@ module Aws::DataZone
     #   * {Types::CreateAssetRevisionOutput#first_revision_created_by #first_revision_created_by} => String
     #   * {Types::CreateAssetRevisionOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::CreateAssetRevisionOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::CreateAssetRevisionOutput#governed_glossary_terms #governed_glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateAssetRevisionOutput#id #id} => String
     #   * {Types::CreateAssetRevisionOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::CreateAssetRevisionOutput#listing #listing} => Types::AssetListingDetails
@@ -1463,6 +1503,8 @@ module Aws::DataZone
     #   resp.forms_output[0].type_revision #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.governed_glossary_terms #=> Array
+    #   resp.governed_glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.latest_time_series_data_point_forms_output #=> Array
     #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
@@ -2874,6 +2916,9 @@ module Aws::DataZone
     # @option params [String] :status
     #   The status of this business glossary.
     #
+    # @option params [Array<String>] :usage_restrictions
+    #   The usage restriction of the restricted glossary.
+    #
     # @return [Types::CreateGlossaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGlossaryOutput#description #description} => String
@@ -2882,6 +2927,7 @@ module Aws::DataZone
     #   * {Types::CreateGlossaryOutput#name #name} => String
     #   * {Types::CreateGlossaryOutput#owning_project_id #owning_project_id} => String
     #   * {Types::CreateGlossaryOutput#status #status} => String
+    #   * {Types::CreateGlossaryOutput#usage_restrictions #usage_restrictions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2892,6 +2938,7 @@ module Aws::DataZone
     #     name: "GlossaryName", # required
     #     owning_project_identifier: "ProjectId", # required
     #     status: "DISABLED", # accepts DISABLED, ENABLED
+    #     usage_restrictions: ["ASSET_GOVERNED_TERMS"], # accepts ASSET_GOVERNED_TERMS
     #   })
     #
     # @example Response structure
@@ -2902,6 +2949,8 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.owning_project_id #=> String
     #   resp.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.usage_restrictions #=> Array
+    #   resp.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateGlossary AWS API Documentation
     #
@@ -2953,6 +3002,7 @@ module Aws::DataZone
     #   * {Types::CreateGlossaryTermOutput#short_description #short_description} => String
     #   * {Types::CreateGlossaryTermOutput#status #status} => String
     #   * {Types::CreateGlossaryTermOutput#term_relations #term_relations} => Types::TermRelations
+    #   * {Types::CreateGlossaryTermOutput#usage_restrictions #usage_restrictions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2983,6 +3033,8 @@ module Aws::DataZone
     #   resp.term_relations.classifies[0] #=> String
     #   resp.term_relations.is_a #=> Array
     #   resp.term_relations.is_a[0] #=> String
+    #   resp.usage_restrictions #=> Array
+    #   resp.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateGlossaryTerm AWS API Documentation
     #
@@ -3188,7 +3240,7 @@ module Aws::DataZone
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
     #   resp.project_profile_id #=> String
-    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_configuration_name #=> String
     #   resp.user_parameters[0].environment_id #=> String
@@ -4794,6 +4846,44 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Disassociates restricted terms from an asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the domain where you want to disassociate restricted terms
+    #   from an asset.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of an asset from which you want to disassociate restricted
+    #   terms.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset from which you want to disassociate restricted
+    #   terms.
+    #
+    # @option params [required, Array<String>] :governed_glossary_terms
+    #   The restricted glossary terms that you want to disassociate from an
+    #   asset.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_governed_terms({
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET
+    #     governed_glossary_terms: ["GlossaryTermId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateGovernedTerms AWS API Documentation
+    #
+    # @overload disassociate_governed_terms(params = {})
+    # @param [Hash] params ({})
+    def disassociate_governed_terms(params = {}, options = {})
+      req = build_request(:disassociate_governed_terms, params)
+      req.send_request(options)
+    end
+
     # Gets the details of the account pool.
     #
     # @option params [required, String] :domain_identifier
@@ -4880,6 +4970,7 @@ module Aws::DataZone
     #   * {Types::GetAssetOutput#first_revision_created_by #first_revision_created_by} => String
     #   * {Types::GetAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::GetAssetOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
+    #   * {Types::GetAssetOutput#governed_glossary_terms #governed_glossary_terms} => Array&lt;String&gt;
     #   * {Types::GetAssetOutput#id #id} => String
     #   * {Types::GetAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::GetAssetOutput#listing #listing} => Types::AssetListingDetails
@@ -4914,6 +5005,8 @@ module Aws::DataZone
     #   resp.forms_output[0].type_revision #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
+    #   resp.governed_glossary_terms #=> Array
+    #   resp.governed_glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.latest_time_series_data_point_forms_output #=> Array
     #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
@@ -6057,6 +6150,7 @@ module Aws::DataZone
     #   * {Types::GetGlossaryOutput#status #status} => String
     #   * {Types::GetGlossaryOutput#updated_at #updated_at} => Time
     #   * {Types::GetGlossaryOutput#updated_by #updated_by} => String
+    #   * {Types::GetGlossaryOutput#usage_restrictions #usage_restrictions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6077,6 +6171,8 @@ module Aws::DataZone
     #   resp.status #=> String, one of "DISABLED", "ENABLED"
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
+    #   resp.usage_restrictions #=> Array
+    #   resp.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetGlossary AWS API Documentation
     #
@@ -6110,6 +6206,7 @@ module Aws::DataZone
     #   * {Types::GetGlossaryTermOutput#term_relations #term_relations} => Types::TermRelations
     #   * {Types::GetGlossaryTermOutput#updated_at #updated_at} => Time
     #   * {Types::GetGlossaryTermOutput#updated_by #updated_by} => String
+    #   * {Types::GetGlossaryTermOutput#usage_restrictions #usage_restrictions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6135,6 +6232,8 @@ module Aws::DataZone
     #   resp.term_relations.is_a[0] #=> String
     #   resp.updated_at #=> Time
     #   resp.updated_by #=> String
+    #   resp.usage_restrictions #=> Array
+    #   resp.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetGlossaryTerm AWS API Documentation
     #
@@ -6446,6 +6545,9 @@ module Aws::DataZone
     #   resp.item.asset_listing.glossary_terms #=> Array
     #   resp.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.item.asset_listing.governed_glossary_terms #=> Array
+    #   resp.item.asset_listing.governed_glossary_terms[0].name #=> String
+    #   resp.item.asset_listing.governed_glossary_terms[0].short_description #=> String
     #   resp.item.asset_listing.latest_time_series_data_point_forms #=> Array
     #   resp.item.asset_listing.latest_time_series_data_point_forms[0].content_summary #=> String
     #   resp.item.asset_listing.latest_time_series_data_point_forms[0].form_name #=> String
@@ -6585,7 +6687,7 @@ module Aws::DataZone
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
     #   resp.project_profile_id #=> String
-    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_configuration_name #=> String
     #   resp.user_parameters[0].environment_id #=> String
@@ -9127,7 +9229,7 @@ module Aws::DataZone
     #   resp.items[0].failure_reasons[0].message #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
-    #   resp.items[0].project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"
+    #   resp.items[0].project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
     #   resp.items[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -10496,6 +10598,8 @@ module Aws::DataZone
     #   resp.items[0].asset_item.first_revision_created_by #=> String
     #   resp.items[0].asset_item.glossary_terms #=> Array
     #   resp.items[0].asset_item.glossary_terms[0] #=> String
+    #   resp.items[0].asset_item.governed_glossary_terms #=> Array
+    #   resp.items[0].asset_item.governed_glossary_terms[0] #=> String
     #   resp.items[0].asset_item.identifier #=> String
     #   resp.items[0].asset_item.name #=> String
     #   resp.items[0].asset_item.owning_project_id #=> String
@@ -10536,6 +10640,8 @@ module Aws::DataZone
     #   resp.items[0].glossary_item.status #=> String, one of "DISABLED", "ENABLED"
     #   resp.items[0].glossary_item.updated_at #=> Time
     #   resp.items[0].glossary_item.updated_by #=> String
+    #   resp.items[0].glossary_item.usage_restrictions #=> Array
+    #   resp.items[0].glossary_item.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #   resp.items[0].glossary_term_item.additional_attributes.match_rationale #=> Array
     #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches #=> Array
     #   resp.items[0].glossary_term_item.additional_attributes.match_rationale[0].text_matches[0].attribute #=> String
@@ -10558,6 +10664,8 @@ module Aws::DataZone
     #   resp.items[0].glossary_term_item.term_relations.is_a[0] #=> String
     #   resp.items[0].glossary_term_item.updated_at #=> Time
     #   resp.items[0].glossary_term_item.updated_by #=> String
+    #   resp.items[0].glossary_term_item.usage_restrictions #=> Array
+    #   resp.items[0].glossary_term_item.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #   resp.next_token #=> String
     #   resp.total_match_count #=> Integer
     #
@@ -10755,6 +10863,9 @@ module Aws::DataZone
     #   resp.items[0].asset_listing.glossary_terms #=> Array
     #   resp.items[0].asset_listing.glossary_terms[0].name #=> String
     #   resp.items[0].asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.items[0].asset_listing.governed_glossary_terms #=> Array
+    #   resp.items[0].asset_listing.governed_glossary_terms[0].name #=> String
+    #   resp.items[0].asset_listing.governed_glossary_terms[0].short_description #=> String
     #   resp.items[0].asset_listing.listing_created_by #=> String
     #   resp.items[0].asset_listing.listing_id #=> String
     #   resp.items[0].asset_listing.listing_revision #=> String
@@ -12346,6 +12457,7 @@ module Aws::DataZone
     #   * {Types::UpdateGlossaryOutput#name #name} => String
     #   * {Types::UpdateGlossaryOutput#owning_project_id #owning_project_id} => String
     #   * {Types::UpdateGlossaryOutput#status #status} => String
+    #   * {Types::UpdateGlossaryOutput#usage_restrictions #usage_restrictions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -12366,6 +12478,8 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.owning_project_id #=> String
     #   resp.status #=> String, one of "DISABLED", "ENABLED"
+    #   resp.usage_restrictions #=> Array
+    #   resp.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateGlossary AWS API Documentation
     #
@@ -12417,6 +12531,7 @@ module Aws::DataZone
     #   * {Types::UpdateGlossaryTermOutput#short_description #short_description} => String
     #   * {Types::UpdateGlossaryTermOutput#status #status} => String
     #   * {Types::UpdateGlossaryTermOutput#term_relations #term_relations} => Types::TermRelations
+    #   * {Types::UpdateGlossaryTermOutput#usage_restrictions #usage_restrictions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -12447,6 +12562,8 @@ module Aws::DataZone
     #   resp.term_relations.classifies[0] #=> String
     #   resp.term_relations.is_a #=> Array
     #   resp.term_relations.is_a[0] #=> String
+    #   resp.usage_restrictions #=> Array
+    #   resp.usage_restrictions[0] #=> String, one of "ASSET_GOVERNED_TERMS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateGlossaryTerm AWS API Documentation
     #
@@ -12610,7 +12727,7 @@ module Aws::DataZone
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
     #   resp.project_profile_id #=> String
-    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED"
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED", "UPDATING", "UPDATE_FAILED", "MOVING"
     #   resp.user_parameters #=> Array
     #   resp.user_parameters[0].environment_configuration_name #=> String
     #   resp.user_parameters[0].environment_id #=> String
@@ -13231,7 +13348,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

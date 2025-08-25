@@ -49,7 +49,8 @@ module Aws::MediaConvert
     #   HEV1 or HEV2. HEV1 (AAC-HE v1) adds spectral band replication to
     #   improve speech audio at low bitrates. HEV2 (AAC-HE v2) adds
     #   parametric stereo, which optimizes for encoding stereo audio at very
-    #   low bitrates.
+    #   low bitrates. For improved audio quality at lower bitrates, adaptive
+    #   audio bitrate switching, and loudness control: Choose XHE.
     #   @return [String]
     #
     # @!attribute [rw] coding_mode
@@ -3499,6 +3500,31 @@ module Aws::MediaConvert
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The request to share MediaConvert resources with Support.
+    #
+    # @!attribute [rw] job_id
+    #   Specify MediaConvert Job ID or ARN to share
+    #   @return [String]
+    #
+    # @!attribute [rw] support_case_id
+    #   AWS Support case identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateResourceShareRequest AWS API Documentation
+    #
+    class CreateResourceShareRequest < Struct.new(
+      :job_id,
+      :support_case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successfully accepted the request to share MediaConvert resources.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateResourceShareResponse AWS API Documentation
+    #
+    class CreateResourceShareResponse < Aws::EmptyStructure; end
 
     # Specify the details for each additional DASH manifest that you want
     # the service to generate for this output group. Each manifest can
@@ -7566,13 +7592,17 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] i_frame_only_manifest
-    #   Choose Include to have MediaConvert generate a child manifest that
-    #   lists only the I-frames for this rendition, in addition to your
-    #   regular manifest for this rendition. You might use this manifest as
-    #   part of a workflow that creates preview functions for your video.
-    #   MediaConvert adds both the I-frame only child manifest and the
-    #   regular child manifest to the parent manifest. When you don't need
-    #   the I-frame only child manifest, keep the default value Exclude.
+    #   Generate a variant manifest that lists only the I-frames for this
+    #   rendition. You might use this manifest as part of a workflow that
+    #   creates preview functions for your video. MediaConvert adds both the
+    #   I-frame only variant manifest and the regular variant manifest to
+    #   the multivariant manifest. To have MediaConvert write a variant
+    #   manifest that references I-frames from your output content using
+    #   EXT-X-BYTERANGE tags: Choose Include. To have MediaConvert output
+    #   I-frames as single frame TS files and a corresponding variant
+    #   manifest that references them: Choose Include as TS. When you don't
+    #   need the I-frame only variant manifest: Keep the default value,
+    #   Exclude.
     #   @return [String]
     #
     # @!attribute [rw] segment_modifier
@@ -8120,6 +8150,7 @@ module Aws::MediaConvert
     #   secretsmanager:DescribeSecret, and secretsmanager:GetSecretValue
     #   permissions. Format:
     #   arn:aws:events:region:account-id:connection/connection-name/unique-id
+    #   This setting is required when you include TAMS settings in your job.
     #   @return [String]
     #
     # @!attribute [rw] gap_handling
@@ -8144,7 +8175,7 @@ module Aws::MediaConvert
     #   can reference multiple flows for audio, video, or combined
     #   audio/video content. MediaConvert automatically selects the highest
     #   quality flows available for your job. This setting is required when
-    #   include TAMS settings in your job.
+    #   you include TAMS settings in your job.
     #   @return [String]
     #
     # @!attribute [rw] timerange
@@ -8154,8 +8185,8 @@ module Aws::MediaConvert
     #   This must be two timestamp values with the format
     #   \{sign?}\{seconds}:\{nanoseconds}, separated by an underscore,
     #   surrounded by either parentheses or square brackets. Example:
-    #   \[15:0\_35:0) This setting is required when include TAMS settings in
-    #   your job.
+    #   \[15:0\_35:0) This setting is required when you include TAMS
+    #   settings in your job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputTamsSettings AWS API Documentation
@@ -8647,6 +8678,12 @@ module Aws::MediaConvert
     #   a job template.
     #   @return [String]
     #
+    # @!attribute [rw] last_share_details
+    #   Contains information about the most recent share attempt for the
+    #   job. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/creating-resource-share.html
+    #   @return [String]
+    #
     # @!attribute [rw] messages
     #   Provides messages from the service about jobs that you have already
     #   successfully submitted.
@@ -8685,6 +8722,10 @@ module Aws::MediaConvert
     # @!attribute [rw] settings
     #   JobSettings contains all the transcode settings for a job.
     #   @return [Types::JobSettings]
+    #
+    # @!attribute [rw] share_status
+    #   A job's share status can be NOT\_SHARED, INITIATED, or SHARED
+    #   @return [String]
     #
     # @!attribute [rw] simulate_reserved_queue
     #   Enable this setting when you run a test job to estimate how many
@@ -8742,6 +8783,7 @@ module Aws::MediaConvert
       :job_engine_version_used,
       :job_percent_complete,
       :job_template,
+      :last_share_details,
       :messages,
       :output_group_details,
       :priority,
@@ -8750,6 +8792,7 @@ module Aws::MediaConvert
       :retry_count,
       :role,
       :settings,
+      :share_status,
       :simulate_reserved_queue,
       :status,
       :status_update_interval,
@@ -10423,6 +10466,20 @@ module Aws::MediaConvert
 
     # Required when you set Codec to the value MP2.
     #
+    # @!attribute [rw] audio_description_mix
+    #   Choose BROADCASTER\_MIXED\_AD when the input contains pre-mixed main
+    #   audio + audio description (AD) as a stereo pair. The value for
+    #   AudioType will be set to 3, which signals to downstream systems that
+    #   this stream contains "broadcaster mixed AD". Note that the input
+    #   received by the encoder must contain pre-mixed audio; the encoder
+    #   does not perform the mixing. When you choose BROADCASTER\_MIXED\_AD,
+    #   the encoder ignores any values you provide in AudioType and
+    #   FollowInputAudioType. Choose NONE when the input does not contain
+    #   pre-mixed audio + audio description (AD). In this case, the encoder
+    #   will use any values you provide for AudioType and
+    #   FollowInputAudioType.
+    #   @return [String]
+    #
     # @!attribute [rw] bitrate
     #   Specify the average bitrate in bits per second.
     #   @return [Integer]
@@ -10440,6 +10497,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp2Settings AWS API Documentation
     #
     class Mp2Settings < Struct.new(
+      :audio_description_mix,
       :bitrate,
       :channels,
       :sample_rate)
@@ -14695,6 +14753,21 @@ module Aws::MediaConvert
     #   metadata.
     #   @return [String]
     #
+    # @!attribute [rw] selector_type
+    #   Choose the video selector type for your HLS input. Use to specify
+    #   which video rendition MediaConvert uses from your HLS input. To have
+    #   MediaConvert automatically use the highest bitrate rendition from
+    #   your HLS input: Keep the default value, Auto. To manually specify a
+    #   rendition: Choose Stream. Then enter the unique stream number in the
+    #   Streams array, starting at 1, corresponding to the stream order in
+    #   the manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] streams
+    #   Specify a stream for MediaConvert to use from your HLS input. Enter
+    #   an integer corresponding to the stream order in your HLS manifest.
+    #   @return [Array<Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
     #
     class VideoSelector < Struct.new(
@@ -14708,7 +14781,9 @@ module Aws::MediaConvert
       :pid,
       :program_number,
       :rotate,
-      :sample_range)
+      :sample_range,
+      :selector_type,
+      :streams)
       SENSITIVE = []
       include Aws::Structure
     end

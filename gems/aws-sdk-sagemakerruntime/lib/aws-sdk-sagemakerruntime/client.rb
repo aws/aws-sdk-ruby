@@ -487,15 +487,15 @@ module Aws::SageMakerRuntime
 
     # @!group API Operations
 
-    # After you deploy a model into production using Amazon SageMaker
+    # After you deploy a model into production using Amazon SageMaker AI
     # hosting services, your client applications use this API to get
     # inferences from the model hosted at the specified endpoint.
     #
-    # For an overview of Amazon SageMaker, see [How It Works][1].
+    # For an overview of Amazon SageMaker AI, see [How It Works][1].
     #
-    # Amazon SageMaker strips all POST headers except those supported by the
-    # API. Amazon SageMaker might add additional headers. You should not
-    # rely on the behavior of headers outside those enumerated in the
+    # Amazon SageMaker AI strips all POST headers except those supported by
+    # the API. Amazon SageMaker AI might add additional headers. You should
+    # not rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
     # Calls to `InvokeEndpoint` are authenticated by using Amazon Web
@@ -510,9 +510,9 @@ module Aws::SageMakerRuntime
     # be set to be 70 seconds.
     #
     # <note markdown="1"> Endpoints are scoped to an individual account, and are not public. The
-    # URL does not contain the account ID, but Amazon SageMaker determines
-    # the account ID from the authentication token that is supplied by the
-    # caller.
+    # URL does not contain the account ID, but Amazon SageMaker AI
+    # determines the account ID from the authentication token that is
+    # supplied by the caller.
     #
     #  </note>
     #
@@ -531,8 +531,8 @@ module Aws::SageMakerRuntime
     #
     # @option params [required, String, StringIO, File] :body
     #   Provides input data, in the format specified in the `ContentType`
-    #   request header. Amazon SageMaker passes all of the data in the body to
-    #   the model.
+    #   request header. Amazon SageMaker AI passes all of the data in the body
+    #   to the model.
     #
     #   For information about the format of the request body, see [Common Data
     #   Formats-Inference][1].
@@ -550,7 +550,7 @@ module Aws::SageMakerRuntime
     #
     # @option params [String] :custom_attributes
     #   Provides additional information about a request for an inference
-    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   submitted to a model hosted at an Amazon SageMaker AI endpoint. The
     #   information is an opaque value that is forwarded verbatim. You could
     #   use this value, for example, to provide an ID that you can use to
     #   track a request or to provide other metadata that a service endpoint
@@ -565,7 +565,7 @@ module Aws::SageMakerRuntime
     #   custom attribute with `Trace ID:` in your post-processing function.
     #
     #   This feature is currently supported in the Amazon Web Services SDKs
-    #   but not in the Amazon SageMaker Python SDK.
+    #   but not in the Amazon SageMaker AI Python SDK.
     #
     #
     #
@@ -630,7 +630,7 @@ module Aws::SageMakerRuntime
     #   create the session ID and set the expiration time. The model must also
     #   provide that information in the response to your request. You can get
     #   the ID and timestamp from the `NewSessionId` response parameter. For
-    #   any subsequent request where you specify that session ID, SageMaker
+    #   any subsequent request where you specify that session ID, SageMaker AI
     #   routes the request to the same instance that supports the session.
     #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -677,7 +677,7 @@ module Aws::SageMakerRuntime
       req.send_request(options)
     end
 
-    # After you deploy a model into production using Amazon SageMaker
+    # After you deploy a model into production using Amazon SageMaker AI
     # hosting services, your client applications use this API to get
     # inferences from the model hosted at the specified endpoint in an
     # asynchronous manner.
@@ -688,9 +688,9 @@ module Aws::SageMakerRuntime
     # from this API will not contain the result of the inference request but
     # contain information about where you can locate it.
     #
-    # Amazon SageMaker strips all POST headers except those supported by the
-    # API. Amazon SageMaker might add additional headers. You should not
-    # rely on the behavior of headers outside those enumerated in the
+    # Amazon SageMaker AI strips all POST headers except those supported by
+    # the API. Amazon SageMaker AI might add additional headers. You should
+    # not rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
     # Calls to `InvokeEndpointAsync` are authenticated by using Amazon Web
@@ -719,7 +719,7 @@ module Aws::SageMakerRuntime
     #
     # @option params [String] :custom_attributes
     #   Provides additional information about a request for an inference
-    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   submitted to a model hosted at an Amazon SageMaker AI endpoint. The
     #   information is an opaque value that is forwarded verbatim. You could
     #   use this value, for example, to provide an ID that you can use to
     #   track a request or to provide other metadata that a service endpoint
@@ -734,14 +734,14 @@ module Aws::SageMakerRuntime
     #   custom attribute with `Trace ID:` in your post-processing function.
     #
     #   This feature is currently supported in the Amazon Web Services SDKs
-    #   but not in the Amazon SageMaker Python SDK.
+    #   but not in the Amazon SageMaker AI Python SDK.
     #
     #
     #
     #   [1]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
     #
     # @option params [String] :inference_id
-    #   The identifier for the inference request. Amazon SageMaker will
+    #   The identifier for the inference request. Amazon SageMaker AI will
     #   generate an identifier for you if none is specified.
     #
     # @option params [required, String] :input_location
@@ -793,11 +793,11 @@ module Aws::SageMakerRuntime
     # response as a stream. The inference stream provides the response
     # payload incrementally as a series of parts. Before you can get an
     # inference stream, you must have access to a model that's deployed
-    # using Amazon SageMaker hosting services, and the container for that
+    # using Amazon SageMaker AI hosting services, and the container for that
     # model must support inference streaming.
     #
     # For more information that can help you use this API, see the following
-    # sections in the *Amazon SageMaker Developer Guide*:
+    # sections in the *Amazon SageMaker AI Developer Guide*:
     #
     # * For information about how to add streaming support to a model, see
     #   [How Containers Serve Requests][1].
@@ -807,13 +807,13 @@ module Aws::SageMakerRuntime
     #
     # Before you can use this operation, your IAM permissions must allow the
     # `sagemaker:InvokeEndpoint` action. For more information about Amazon
-    # SageMaker actions for IAM policies, see [Actions, resources, and
-    # condition keys for Amazon SageMaker][3] in the *IAM Service
+    # SageMaker AI actions for IAM policies, see [Actions, resources, and
+    # condition keys for Amazon SageMaker AI][3] in the *IAM Service
     # Authorization Reference*.
     #
-    # Amazon SageMaker strips all POST headers except those supported by the
-    # API. Amazon SageMaker might add additional headers. You should not
-    # rely on the behavior of headers outside those enumerated in the
+    # Amazon SageMaker AI strips all POST headers except those supported by
+    # the API. Amazon SageMaker AI might add additional headers. You should
+    # not rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
     # Calls to `InvokeEndpointWithResponseStream` are authenticated by using
@@ -838,8 +838,8 @@ module Aws::SageMakerRuntime
     #
     # @option params [required, String, StringIO, File] :body
     #   Provides input data, in the format specified in the `ContentType`
-    #   request header. Amazon SageMaker passes all of the data in the body to
-    #   the model.
+    #   request header. Amazon SageMaker AI passes all of the data in the body
+    #   to the model.
     #
     #   For information about the format of the request body, see [Common Data
     #   Formats-Inference][1].
@@ -857,7 +857,7 @@ module Aws::SageMakerRuntime
     #
     # @option params [String] :custom_attributes
     #   Provides additional information about a request for an inference
-    #   submitted to a model hosted at an Amazon SageMaker endpoint. The
+    #   submitted to a model hosted at an Amazon SageMaker AI endpoint. The
     #   information is an opaque value that is forwarded verbatim. You could
     #   use this value, for example, to provide an ID that you can use to
     #   track a request or to provide other metadata that a service endpoint
@@ -872,7 +872,7 @@ module Aws::SageMakerRuntime
     #   custom attribute with `Trace ID:` in your post-processing function.
     #
     #   This feature is currently supported in the Amazon Web Services SDKs
-    #   but not in the Amazon SageMaker Python SDK.
+    #   but not in the Amazon SageMaker AI Python SDK.
     #
     #
     #
@@ -1108,7 +1108,7 @@ module Aws::SageMakerRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

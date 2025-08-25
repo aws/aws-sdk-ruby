@@ -960,6 +960,55 @@ module Aws
           region: 'us-east-1'
         )
       end
+
+      it 'can assume a role with ENV as a source' do
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+        profile = 'ar_env_src'
+        assume_role_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'AKID_ENV_STUB',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: profile,
+          region: 'us-east-1'
+        )
+        expect(
+          client.config.credentials.credentials.access_key_id
+        ).to eq('AR_AKID')
+        expect(metric_values(client.config.credentials.metrics)).to include('p', 'g', 'i')
+      end
+
+      it 'emits correct UserAgent metrics during STS calls for ENV as a source' do
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+        profile = 'ar_env_src'
+        assume_role_stub(
+          'arn:aws:iam::123456789012:role/foo',
+          'AKID_ENV_STUB',
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
+        )
+        expect_any_instance_of(STS::Client).to receive(:assume_role).and_wrap_original do |m, *args|
+          resp = m.call(*args)
+          expect(metrics_from_user_agent_header(resp)).to include('p', 'g')
+          resp
+        end
+        ApiHelper.sample_rest_xml::Client.new(
+          profile: profile,
+          region: 'us-east-1'
+        )
+      end
     end
 
     describe 'AWS_SDK_CONFIG_OPT_OUT set' do

@@ -878,8 +878,8 @@ module Aws::SQS
     #
     #   * `MaximumMessageSize` – The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer from
-    #     1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). Default: 262,144
-    #     (256 KiB).
+    #     1,024 bytes (1 KiB) to 1,048,576 bytes (1 MiB). Default: 1,048,576
+    #     bytes (1 MiB).
     #
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for which
     #     Amazon SQS retains a message. Valid values: An integer from 60
@@ -2239,7 +2239,7 @@ module Aws::SQS
     #
     # @option params [required, String] :message_body
     #   The message to send. The minimum size is one character. The maximum
-    #   size is 256 KiB.
+    #   size is 1 MiB or 1,048,576 bytes
     #
     #   A message can include only XML, JSON, and unformatted text. The
     #   following Unicode characters are allowed. For more information, see
@@ -2470,7 +2470,7 @@ module Aws::SQS
     #
     # The maximum allowed individual message size and the maximum total
     # payload size (the sum of the individual lengths of all of the batched
-    # messages) are both 256 KiB (262,144 bytes).
+    # messages) are both 1 MiB 1,048,576 bytes.
     #
     # A message can include only XML, JSON, and unformatted text. The
     # following Unicode characters are allowed. For more information, see
@@ -2606,8 +2606,8 @@ module Aws::SQS
     #
     #   * `MaximumMessageSize` – The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer from
-    #     1,024 bytes (1 KiB) up to 262,144 bytes (256 KiB). Default: 262,144
-    #     (256 KiB).
+    #     1,024 bytes (1 KiB) up to 1,048,576 bytes (1 MiB). Default:
+    #     1,048,576 bytes (1 MiB).
     #
     #   * `MessageRetentionPeriod` – The length of time, in seconds, for which
     #     Amazon SQS retains a message. Valid values: An integer representing
@@ -2983,7 +2983,7 @@ module Aws::SQS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

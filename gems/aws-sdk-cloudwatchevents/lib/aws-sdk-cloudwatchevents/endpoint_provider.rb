@@ -28,7 +28,7 @@ module Aws::CloudWatchEvents
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               if Aws::Endpoints::Matchers.string_equals?(parameters.region, "us-gov-east-1")
                 return Aws::Endpoints::Endpoint.new(url: "https://events.us-gov-east-1.amazonaws.com", headers: {}, properties: {})
               end

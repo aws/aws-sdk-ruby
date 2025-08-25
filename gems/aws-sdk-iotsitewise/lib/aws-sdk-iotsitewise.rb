@@ -56,7 +56,7 @@ module Aws::IoTSiteWise
   autoload :Endpoints, 'aws-sdk-iotsitewise/endpoints'
   autoload :EventStreams, 'aws-sdk-iotsitewise/event_streams'
 
-  GEM_VERSION = '1.91.0'
+  GEM_VERSION = '1.92.0'
 
 end
 

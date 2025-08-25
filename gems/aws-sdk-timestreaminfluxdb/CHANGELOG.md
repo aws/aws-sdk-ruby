@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2025-08-25)
+------------------
+
+* Feature - Add MAINTENANCE status for DbInstance and DbCluster
+
 1.29.0 (2025-08-21)
 ------------------
 

@@ -624,6 +624,10 @@ module Aws::QBusiness
     # @option params [required, Array<Types::Document>] :documents
     #   One or more documents to add to the index.
     #
+    #   Ensure that the name of your document doesn't contain any
+    #   confidential information. Amazon Q Business returns document names in
+    #   chat responses and citations when relevant.
+    #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   access your S3 bucket.
@@ -1699,7 +1703,9 @@ module Aws::QBusiness
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
-    #   access the data source and required resources.
+    #   access the data source and required resources. This field is required
+    #   for all connector types except custom connectors, where it is
+    #   optional.
     #
     # @option params [String] :client_token
     #   A token you provide to identify a request to create a data source
@@ -2272,10 +2278,9 @@ module Aws::QBusiness
     #   The Amazon Resource Name (ARN) of the service role attached to your
     #   web experience.
     #
-    #   <note markdown="1"> You must provide this value if you're using IAM Identity Center to
-    #   manage end user access to your application. If you're using legacy
-    #   identity management to manage user access, you don't need to provide
-    #   this value.
+    #   <note markdown="1"> The `roleArn` parameter is required when your Amazon Q Business
+    #   application is created with IAM Identity Center. It is not required
+    #   for SAML-based applications.
     #
     #    </note>
     #
@@ -3252,7 +3257,7 @@ module Aws::QBusiness
     #   found in chat or chatSync response.
     #
     # @option params [String] :output_format
-    #   Raw document outputFormat.
+    #   Document outputFormat. Defaults to RAW if not selected.
     #
     # @return [Types::GetDocumentContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3266,7 +3271,7 @@ module Aws::QBusiness
     #     index_id: "IndexId", # required
     #     data_source_id: "DataSourceId",
     #     document_id: "DocumentId", # required
-    #     output_format: "RAW", # accepts RAW
+    #     output_format: "RAW", # accepts RAW, EXTRACTED
     #   })
     #
     # @example Response structure
@@ -6250,7 +6255,7 @@ module Aws::QBusiness
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qbusiness'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

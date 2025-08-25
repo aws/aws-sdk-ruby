@@ -177,6 +177,8 @@ module Aws::MediaConvert
     CreatePresetResponse = Shapes::StructureShape.new(name: 'CreatePresetResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
     CreateQueueResponse = Shapes::StructureShape.new(name: 'CreateQueueResponse')
+    CreateResourceShareRequest = Shapes::StructureShape.new(name: 'CreateResourceShareRequest')
+    CreateResourceShareResponse = Shapes::StructureShape.new(name: 'CreateResourceShareResponse')
     DashAdditionalManifest = Shapes::StructureShape.new(name: 'DashAdditionalManifest')
     DashIsoEncryptionSettings = Shapes::StructureShape.new(name: 'DashIsoEncryptionSettings')
     DashIsoGroupAudioChannelConfigSchemeIdUri = Shapes::StringShape.new(name: 'DashIsoGroupAudioChannelConfigSchemeIdUri')
@@ -483,6 +485,7 @@ module Aws::MediaConvert
     MovPaddingControl = Shapes::StringShape.new(name: 'MovPaddingControl')
     MovReference = Shapes::StringShape.new(name: 'MovReference')
     MovSettings = Shapes::StructureShape.new(name: 'MovSettings')
+    Mp2AudioDescriptionMix = Shapes::StringShape.new(name: 'Mp2AudioDescriptionMix')
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
     Mp3RateControlMode = Shapes::StringShape.new(name: 'Mp3RateControlMode')
     Mp3Settings = Shapes::StructureShape.new(name: 'Mp3Settings')
@@ -610,6 +613,7 @@ module Aws::MediaConvert
     SearchJobsRequest = Shapes::StructureShape.new(name: 'SearchJobsRequest')
     SearchJobsResponse = Shapes::StructureShape.new(name: 'SearchJobsResponse')
     ServiceOverride = Shapes::StructureShape.new(name: 'ServiceOverride')
+    ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SimulateReservedQueue = Shapes::StringShape.new(name: 'SimulateReservedQueue')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     SpekeKeyProviderCmaf = Shapes::StructureShape.new(name: 'SpekeKeyProviderCmaf')
@@ -681,6 +685,7 @@ module Aws::MediaConvert
     VideoPreprocessor = Shapes::StructureShape.new(name: 'VideoPreprocessor')
     VideoProperties = Shapes::StructureShape.new(name: 'VideoProperties')
     VideoSelector = Shapes::StructureShape.new(name: 'VideoSelector')
+    VideoSelectorType = Shapes::StringShape.new(name: 'VideoSelectorType')
     VideoTimecodeInsertion = Shapes::StringShape.new(name: 'VideoTimecodeInsertion')
     VorbisSettings = Shapes::StructureShape.new(name: 'VorbisSettings')
     Vp8FramerateControl = Shapes::StringShape.new(name: 'Vp8FramerateControl')
@@ -1395,6 +1400,12 @@ module Aws::MediaConvert
     CreateQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))
     CreateQueueResponse.struct_class = Types::CreateQueueResponse
 
+    CreateResourceShareRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "jobId"))
+    CreateResourceShareRequest.add_member(:support_case_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "supportCaseId"))
+    CreateResourceShareRequest.struct_class = Types::CreateResourceShareRequest
+
+    CreateResourceShareResponse.struct_class = Types::CreateResourceShareResponse
+
     DashAdditionalManifest.add_member(:manifest_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "manifestNameModifier"))
     DashAdditionalManifest.add_member(:selected_outputs, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "selectedOutputs"))
     DashAdditionalManifest.struct_class = Types::DashAdditionalManifest
@@ -2019,6 +2030,7 @@ module Aws::MediaConvert
     Job.add_member(:job_engine_version_used, Shapes::ShapeRef.new(shape: __string, location_name: "jobEngineVersionUsed"))
     Job.add_member(:job_percent_complete, Shapes::ShapeRef.new(shape: __integer, location_name: "jobPercentComplete"))
     Job.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
+    Job.add_member(:last_share_details, Shapes::ShapeRef.new(shape: __string, location_name: "lastShareDetails"))
     Job.add_member(:messages, Shapes::ShapeRef.new(shape: JobMessages, location_name: "messages"))
     Job.add_member(:output_group_details, Shapes::ShapeRef.new(shape: __listOfOutputGroupDetail, location_name: "outputGroupDetails"))
     Job.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
@@ -2027,6 +2039,7 @@ module Aws::MediaConvert
     Job.add_member(:retry_count, Shapes::ShapeRef.new(shape: __integer, location_name: "retryCount"))
     Job.add_member(:role, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "role"))
     Job.add_member(:settings, Shapes::ShapeRef.new(shape: JobSettings, required: true, location_name: "settings"))
+    Job.add_member(:share_status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "shareStatus"))
     Job.add_member(:simulate_reserved_queue, Shapes::ShapeRef.new(shape: SimulateReservedQueue, location_name: "simulateReservedQueue"))
     Job.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
     Job.add_member(:status_update_interval, Shapes::ShapeRef.new(shape: StatusUpdateInterval, location_name: "statusUpdateInterval"))
@@ -2273,6 +2286,7 @@ module Aws::MediaConvert
     MovSettings.add_member(:reference, Shapes::ShapeRef.new(shape: MovReference, location_name: "reference"))
     MovSettings.struct_class = Types::MovSettings
 
+    Mp2Settings.add_member(:audio_description_mix, Shapes::ShapeRef.new(shape: Mp2AudioDescriptionMix, location_name: "audioDescriptionMix"))
     Mp2Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin32000Max384000, location_name: "bitrate"))
     Mp2Settings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
     Mp2Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin32000Max48000, location_name: "sampleRate"))
@@ -2855,6 +2869,8 @@ module Aws::MediaConvert
     VideoSelector.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "programNumber"))
     VideoSelector.add_member(:rotate, Shapes::ShapeRef.new(shape: InputRotate, location_name: "rotate"))
     VideoSelector.add_member(:sample_range, Shapes::ShapeRef.new(shape: InputSampleRange, location_name: "sampleRange"))
+    VideoSelector.add_member(:selector_type, Shapes::ShapeRef.new(shape: VideoSelectorType, location_name: "selectorType"))
+    VideoSelector.add_member(:streams, Shapes::ShapeRef.new(shape: __listOf__integerMin1Max2147483647, location_name: "streams"))
     VideoSelector.struct_class = Types::VideoSelector
 
     VorbisSettings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
@@ -3177,6 +3193,20 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/queues"
         o.input = Shapes::ShapeRef.new(shape: CreateQueueRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateQueueResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_resource_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResourceShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/2017-08-29/resourceShares"
+        o.input = Shapes::ShapeRef.new(shape: CreateResourceShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResourceShareResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

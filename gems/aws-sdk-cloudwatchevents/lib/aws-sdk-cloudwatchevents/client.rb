@@ -2665,7 +2665,7 @@ module Aws::CloudWatchEvents
     #   West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a
     #   target for a rule.
     #
-    # * Firehose delivery stream (Kinesis Data Firehose)
+    # * Firehose delivery stream (Firehose)
     #
     # * Inspector assessment template (Amazon Inspector)
     #
@@ -3464,7 +3464,7 @@ module Aws::CloudWatchEvents
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

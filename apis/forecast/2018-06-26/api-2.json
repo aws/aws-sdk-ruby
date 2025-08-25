@@ -2903,8 +2903,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -3056,8 +3055,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UpdateDatasetGroupRequest":{
       "type":"structure",
@@ -3072,8 +3070,7 @@
     },
     "UpdateDatasetGroupResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UseGeolocationForTimeZone":{"type":"boolean"},
     "Value":{

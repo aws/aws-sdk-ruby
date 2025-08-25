@@ -1136,7 +1136,7 @@ module Aws::Snowball
     #   The tax documents required in your Amazon Web Services Region.
     #
     # @option params [Types::DeviceConfiguration] :device_configuration
-    #   Defines the device configuration for an Snowcone job.
+    #   Defines the device configuration for an Snowball Edge job.
     #
     #   For more information, see
     #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
@@ -2974,7 +2974,7 @@ module Aws::Snowball
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

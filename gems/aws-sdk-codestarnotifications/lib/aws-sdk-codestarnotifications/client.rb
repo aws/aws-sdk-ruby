@@ -477,9 +477,10 @@ module Aws::CodeStarNotifications
     # @!group API Operations
 
     # Creates a notification rule for a resource. The rule specifies the
-    # events you want notifications about and the targets (such as Chatbot
-    # topics or Chatbot clients configured for Slack) where you want to
-    # receive them.
+    # events you want notifications about and the targets (such as Amazon Q
+    # Developer in chat applications topics or Amazon Q Developer in chat
+    # applications clients configured for Slack) where you want to receive
+    # them.
     #
     # @option params [required, String] :name
     #   The name for the notification rule. Notification rule names must be
@@ -497,15 +498,15 @@ module Aws::CodeStarNotifications
     #
     # @option params [required, Array<Types::Target>] :targets
     #   A list of Amazon Resource Names (ARNs) of Amazon Simple Notification
-    #   Service topics and Chatbot clients to associate with the notification
-    #   rule.
+    #   Service topics and Amazon Q Developer in chat applications clients to
+    #   associate with the notification rule.
     #
     # @option params [required, String] :detail_type
     #   The level of detail to include in the notifications for this resource.
     #   `BASIC` will include only the contents of the event as it would appear
     #   in Amazon CloudWatch. `FULL` will include any supplemental information
-    #   provided by AWS CodeStar Notifications and/or the service for the
-    #   resource for which the notification is created.
+    #   provided by CodeStar Notifications and/or the service for the resource
+    #   for which the notification is created.
     #
     # @option params [String] :client_request_token
     #   A unique, client-generated idempotency token that, when provided in a
@@ -601,14 +602,15 @@ module Aws::CodeStarNotifications
     # Deletes a specified target for notifications.
     #
     # @option params [required, String] :target_address
-    #   The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client
+    #   The Amazon Resource Name (ARN) of the Amazon Q Developer in chat
+    #   applications topic or Amazon Q Developer in chat applications client
     #   to delete.
     #
     # @option params [Boolean] :force_unsubscribe_all
     #   A Boolean value that can be used to delete all associations with this
-    #   Chatbot topic. The default value is FALSE. If set to TRUE, all
-    #   associations between that target and every notification rule in your
-    #   Amazon Web Services account are deleted.
+    #   Amazon Q Developer in chat applications topic. The default value is
+    #   FALSE. If set to TRUE, all associations between that target and every
+    #   notification rule in your Amazon Web Services account are deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -881,8 +883,9 @@ module Aws::CodeStarNotifications
       req.send_request(options)
     end
 
-    # Creates an association between a notification rule and an Chatbot
-    # topic or Chatbot client so that the associated target can receive
+    # Creates an association between a notification rule and an Amazon Q
+    # Developer in chat applications topic or Amazon Q Developer in chat
+    # applications client so that the associated target can receive
     # notifications when the events described in the rule are triggered.
     #
     # @option params [required, String] :arn
@@ -890,8 +893,9 @@ module Aws::CodeStarNotifications
     #   want to create the association.
     #
     # @option params [required, Types::Target] :target
-    #   Information about the Chatbot topics or Chatbot clients associated
-    #   with a notification rule.
+    #   Information about the Amazon Q Developer in chat applications topics
+    #   or Amazon Q Developer in chat applications clients associated with a
+    #   notification rule.
     #
     # @option params [String] :client_request_token
     #   An enumeration token that, when provided in a request, returns the
@@ -961,16 +965,17 @@ module Aws::CodeStarNotifications
       req.send_request(options)
     end
 
-    # Removes an association between a notification rule and an Chatbot
-    # topic so that subscribers to that topic stop receiving notifications
-    # when the events described in the rule are triggered.
+    # Removes an association between a notification rule and an Amazon Q
+    # Developer in chat applications topic so that subscribers to that topic
+    # stop receiving notifications when the events described in the rule are
+    # triggered.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the notification rule.
     #
     # @option params [required, String] :target_address
-    #   The ARN of the Chatbot topic to unsubscribe from the notification
-    #   rule.
+    #   The ARN of the Amazon Q Developer in chat applications topic to
+    #   unsubscribe from the notification rule.
     #
     # @return [Types::UnsubscribeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1060,8 +1065,8 @@ module Aws::CodeStarNotifications
     #   The level of detail to include in the notifications for this resource.
     #   BASIC will include only the contents of the event as it would appear
     #   in Amazon CloudWatch. FULL will include any supplemental information
-    #   provided by AWS CodeStar Notifications and/or the service for the
-    #   resource for which the notification is created.
+    #   provided by CodeStar Notifications and/or the service for the resource
+    #   for which the notification is created.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1108,7 +1113,7 @@ module Aws::CodeStarNotifications
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codestarnotifications'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

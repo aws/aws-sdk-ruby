@@ -816,6 +816,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #             mp_2_settings: {
+    #               audio_description_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NONE
     #               bitrate: 1,
     #               channels: 1,
     #               sample_rate: 1,
@@ -1632,6 +1633,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.audio_description_mix #=> String, one of "BROADCASTER_MIXED_AD", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
@@ -2310,6 +2312,33 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Create a new resource share request for MediaConvert resources with
+    # AWS Support.
+    #
+    # @option params [required, String] :job_id
+    #   Specify MediaConvert Job ID or ARN to share
+    #
+    # @option params [required, String] :support_case_id
+    #   AWS Support case identifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_share({
+    #     job_id: "__string", # required
+    #     support_case_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateResourceShare AWS API Documentation
+    #
+    # @overload create_resource_share(params = {})
+    # @param [Hash] params ({})
+    def create_resource_share(params = {}, options = {})
+      req = build_request(:create_resource_share, params)
+      req.send_request(options)
+    end
+
     # Permanently delete a job template you have created.
     #
     # @option params [required, String] :name
@@ -2637,6 +2666,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.audio_description_mix #=> String, one of "BROADCASTER_MIXED_AD", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
@@ -3510,6 +3540,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.flac_settings.bit_depth #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.flac_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.flac_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.audio_description_mix #=> String, one of "BROADCASTER_MIXED_AD", "NONE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
@@ -4650,6 +4681,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #             mp_2_settings: {
+    #               audio_description_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NONE
     #               bitrate: 1,
     #               channels: 1,
     #               sample_rate: 1,
@@ -5463,6 +5495,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.flac_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.audio_description_mix #=> String, one of "BROADCASTER_MIXED_AD", "NONE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
@@ -6147,7 +6180,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.168.0'
+      context[:gem_version] = '1.169.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

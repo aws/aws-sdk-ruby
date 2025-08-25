@@ -488,6 +488,7 @@ module Aws::ServerlessApplicationRepository
 
       api.metadata = {
         "apiVersion" => "2017-09-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "serverlessrepo",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

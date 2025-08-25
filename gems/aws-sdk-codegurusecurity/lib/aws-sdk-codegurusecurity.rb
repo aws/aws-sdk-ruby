@@ -49,12 +49,13 @@ module Aws::CodeGuruSecurity
   end
   autoload :Client, 'aws-sdk-codegurusecurity/client'
   autoload :Errors, 'aws-sdk-codegurusecurity/errors'
+  autoload :Waiters, 'aws-sdk-codegurusecurity/waiters'
   autoload :Resource, 'aws-sdk-codegurusecurity/resource'
   autoload :EndpointParameters, 'aws-sdk-codegurusecurity/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-codegurusecurity/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codegurusecurity/endpoints'
 
-  GEM_VERSION = '1.33.0'
+  GEM_VERSION = '1.34.0'
 
 end
 

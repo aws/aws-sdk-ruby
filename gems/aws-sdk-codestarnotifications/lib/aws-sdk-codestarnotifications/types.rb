@@ -10,8 +10,8 @@
 module Aws::CodeStarNotifications
   module Types
 
-    # AWS CodeStar Notifications can't create the notification rule because
-    # you do not have sufficient permissions.
+    # CodeStar Notifications can't create the notification rule because you
+    # do not have sufficient permissions.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -24,7 +24,7 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # AWS CodeStar Notifications can't complete the request because the
+    # CodeStar Notifications can't complete the request because the
     # resource is being modified by another process. Wait a few minutes and
     # try again.
     #
@@ -71,17 +71,16 @@ module Aws::CodeStarNotifications
     #
     # @!attribute [rw] targets
     #   A list of Amazon Resource Names (ARNs) of Amazon Simple Notification
-    #   Service topics and Chatbot clients to associate with the
-    #   notification rule.
+    #   Service topics and Amazon Q Developer in chat applications clients
+    #   to associate with the notification rule.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] detail_type
     #   The level of detail to include in the notifications for this
     #   resource. `BASIC` will include only the contents of the event as it
     #   would appear in Amazon CloudWatch. `FULL` will include any
-    #   supplemental information provided by AWS CodeStar Notifications
-    #   and/or the service for the resource for which the notification is
-    #   created.
+    #   supplemental information provided by CodeStar Notifications and/or
+    #   the service for the resource for which the notification is created.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -165,15 +164,17 @@ module Aws::CodeStarNotifications
     end
 
     # @!attribute [rw] target_address
-    #   The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot
-    #   client to delete.
+    #   The Amazon Resource Name (ARN) of the Amazon Q Developer in chat
+    #   applications topic or Amazon Q Developer in chat applications client
+    #   to delete.
     #   @return [String]
     #
     # @!attribute [rw] force_unsubscribe_all
     #   A Boolean value that can be used to delete all associations with
-    #   this Chatbot topic. The default value is FALSE. If set to TRUE, all
-    #   associations between that target and every notification rule in your
-    #   Amazon Web Services account are deleted.
+    #   this Amazon Q Developer in chat applications topic. The default
+    #   value is FALSE. If set to TRUE, all associations between that target
+    #   and every notification rule in your Amazon Web Services account are
+    #   deleted.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-notifications-2019-10-15/DeleteTargetRequest AWS API Documentation
@@ -219,7 +220,8 @@ module Aws::CodeStarNotifications
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   A list of the Chatbot topics and Chatbot clients associated with the
+    #   A list of the Amazon Q Developer in chat applications topics and
+    #   Amazon Q Developer in chat applications clients associated with the
     #   notification rule.
     #   @return [Array<Types::TargetSummary>]
     #
@@ -227,7 +229,7 @@ module Aws::CodeStarNotifications
     #   The level of detail included in the notifications for this resource.
     #   BASIC will include only the contents of the event as it would appear
     #   in Amazon CloudWatch. FULL will include any supplemental information
-    #   provided by AWS CodeStar Notifications and/or the service for the
+    #   provided by CodeStar Notifications and/or the service for the
     #   resource for which the notification is created.
     #   @return [String]
     #
@@ -323,7 +325,7 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # One of the AWS CodeStar Notifications limits has been exceeded. Limits
+    # One of the CodeStar Notifications limits has been exceeded. Limits
     # apply to accounts, notification rules, notifications, resources, and
     # targets. For more information, see Limits.
     #
@@ -505,10 +507,10 @@ module Aws::CodeStarNotifications
 
     # Information about a filter to apply to the list of returned targets.
     # You can filter by target type, address, or status. For example, to
-    # filter results to notification rules that have active Chatbot topics
-    # as targets, you could specify a ListTargetsFilter Name as `TargetType`
-    # and a Value of `SNS`, and a Name of `TARGET_STATUS` and a Value of
-    # `ACTIVE`.
+    # filter results to notification rules that have active Amazon Q
+    # Developer in chat applications topics as targets, you could specify a
+    # ListTargetsFilter Name as `TargetType` and a Value of `SNS`, and a
+    # Name of `TARGET_STATUS` and a Value of `ACTIVE`.
     #
     # @!attribute [rw] name
     #   The name of the attribute you want to use to filter the returned
@@ -614,7 +616,7 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # AWS CodeStar Notifications can't find a resource that matches the
+    # CodeStar Notifications can't find a resource that matches the
     # provided ARN.
     #
     # @!attribute [rw] message
@@ -634,8 +636,9 @@ module Aws::CodeStarNotifications
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   Information about the Chatbot topics or Chatbot clients associated
-    #   with a notification rule.
+    #   Information about the Amazon Q Developer in chat applications topics
+    #   or Amazon Q Developer in chat applications clients associated with a
+    #   notification rule.
     #   @return [Types::Target]
     #
     # @!attribute [rw] client_request_token
@@ -696,19 +699,24 @@ module Aws::CodeStarNotifications
       include Aws::Structure
     end
 
-    # Information about the Chatbot topics or Chatbot clients associated
-    # with a notification rule.
+    # Information about the Amazon Q Developer in chat applications topics
+    # or Amazon Q Developer in chat applications clients associated with a
+    # notification rule.
     #
     # @!attribute [rw] target_type
-    #   The target type. Can be an Chatbot topic or Chatbot client.
+    #   The target type. Can be an Amazon Q Developer in chat applications
+    #   topic or Amazon Q Developer in chat applications client.
     #
-    #   * Chatbot topics are specified as `SNS`.
+    #   * Amazon Q Developer in chat applications topics are specified as
+    #     `SNS`.
     #
-    #   * Chatbot clients are specified as `AWSChatbotSlack`.
+    #   * Amazon Q Developer in chat applications clients are specified as
+    #     `AWSChatbotSlack`.
     #   @return [String]
     #
     # @!attribute [rw] target_address
-    #   The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot
+    #   The Amazon Resource Name (ARN) of the Amazon Q Developer in chat
+    #   applications topic or Amazon Q Developer in chat applications
     #   client.
     #   @return [String]
     #
@@ -724,16 +732,19 @@ module Aws::CodeStarNotifications
     # Information about the targets specified for a notification rule.
     #
     # @!attribute [rw] target_address
-    #   The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot
+    #   The Amazon Resource Name (ARN) of the Amazon Q Developer in chat
+    #   applications topic or Amazon Q Developer in chat applications
     #   client.
     #   @return [String]
     #
     # @!attribute [rw] target_type
     #   The type of the target (for example, `SNS`).
     #
-    #   * Chatbot topics are specified as `SNS`.
+    #   * Amazon Q Developer in chat applications topics are specified as
+    #     `SNS`.
     #
-    #   * Chatbot clients are specified as `AWSChatbotSlack`.
+    #   * Amazon Q Developer in chat applications clients are specified as
+    #     `AWSChatbotSlack`.
     #   @return [String]
     #
     # @!attribute [rw] target_status
@@ -755,8 +766,8 @@ module Aws::CodeStarNotifications
     #   @return [String]
     #
     # @!attribute [rw] target_address
-    #   The ARN of the Chatbot topic to unsubscribe from the notification
-    #   rule.
+    #   The ARN of the Amazon Q Developer in chat applications topic to
+    #   unsubscribe from the notification rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-notifications-2019-10-15/UnsubscribeRequest AWS API Documentation
@@ -835,9 +846,8 @@ module Aws::CodeStarNotifications
     #   The level of detail to include in the notifications for this
     #   resource. BASIC will include only the contents of the event as it
     #   would appear in Amazon CloudWatch. FULL will include any
-    #   supplemental information provided by AWS CodeStar Notifications
-    #   and/or the service for the resource for which the notification is
-    #   created.
+    #   supplemental information provided by CodeStar Notifications and/or
+    #   the service for the resource for which the notification is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-notifications-2019-10-15/UpdateNotificationRuleRequest AWS API Documentation

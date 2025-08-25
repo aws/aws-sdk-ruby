@@ -954,8 +954,7 @@
     },
     "DisabledOperationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{
         "code":"DisabledAction",
         "httpStatusCode":409,
@@ -1214,8 +1213,7 @@
     },
     "InternalException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{
         "code":"InternalException",
         "httpStatusCode":500
@@ -1224,8 +1222,7 @@
     },
     "InvalidTypeException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{
         "code":"InvalidType",
         "httpStatusCode":409,
@@ -1246,8 +1243,7 @@
     },
     "LimitExceededException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{
         "code":"LimitExceeded",
         "httpStatusCode":409,
@@ -1356,8 +1352,7 @@
     "PolicyDocument":{"type":"string"},
     "ResourceAlreadyExistsException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{
         "code":"ResourceAlreadyExists",
         "httpStatusCode":409,
@@ -1367,8 +1362,7 @@
     },
     "ResourceNotFoundException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "error":{
         "code":"ResourceNotFound",
         "httpStatusCode":409,
@@ -1553,8 +1547,7 @@
     "UpdateTimestamp":{"type":"timestamp"},
     "ValidationException":{
       "type":"structure",
-      "members":{
-      },
+      "members":{},
       "exception":true
     },
     "Word":{

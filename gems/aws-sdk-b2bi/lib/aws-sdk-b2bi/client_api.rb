@@ -27,6 +27,7 @@ module Aws::B2bi
     CapabilityOptions = Shapes::StructureShape.new(name: 'CapabilityOptions')
     CapabilitySummary = Shapes::StructureShape.new(name: 'CapabilitySummary')
     CapabilityType = Shapes::StringShape.new(name: 'CapabilityType')
+    CodeList = Shapes::ListShape.new(name: 'CodeList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConversionSource = Shapes::StructureShape.new(name: 'ConversionSource')
     ConversionSourceFormat = Shapes::StringShape.new(name: 'ConversionSourceFormat')
@@ -50,6 +51,9 @@ module Aws::B2bi
     DeleteTransformerRequest = Shapes::StructureShape.new(name: 'DeleteTransformerRequest')
     EdiConfiguration = Shapes::StructureShape.new(name: 'EdiConfiguration')
     EdiType = Shapes::UnionShape.new(name: 'EdiType')
+    ElementId = Shapes::StringShape.new(name: 'ElementId')
+    ElementPosition = Shapes::StringShape.new(name: 'ElementPosition')
+    ElementRequirement = Shapes::StringShape.new(name: 'ElementRequirement')
     Email = Shapes::StringShape.new(name: 'Email')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
@@ -170,11 +174,16 @@ module Aws::B2bi
     X12AdvancedOptions = Shapes::StructureShape.new(name: 'X12AdvancedOptions')
     X12ApplicationReceiverCode = Shapes::StringShape.new(name: 'X12ApplicationReceiverCode')
     X12ApplicationSenderCode = Shapes::StringShape.new(name: 'X12ApplicationSenderCode')
+    X12CodeListValidationRule = Shapes::StructureShape.new(name: 'X12CodeListValidationRule')
     X12ComponentSeparator = Shapes::StringShape.new(name: 'X12ComponentSeparator')
     X12ControlNumbers = Shapes::StructureShape.new(name: 'X12ControlNumbers')
     X12DataElementSeparator = Shapes::StringShape.new(name: 'X12DataElementSeparator')
     X12Delimiters = Shapes::StructureShape.new(name: 'X12Delimiters')
     X12Details = Shapes::StructureShape.new(name: 'X12Details')
+    X12ElementLengthValidationRule = Shapes::StructureShape.new(name: 'X12ElementLengthValidationRule')
+    X12ElementLengthValidationRuleMaxLengthInteger = Shapes::IntegerShape.new(name: 'X12ElementLengthValidationRuleMaxLengthInteger')
+    X12ElementLengthValidationRuleMinLengthInteger = Shapes::IntegerShape.new(name: 'X12ElementLengthValidationRuleMinLengthInteger')
+    X12ElementRequirementValidationRule = Shapes::StructureShape.new(name: 'X12ElementRequirementValidationRule')
     X12Envelope = Shapes::StructureShape.new(name: 'X12Envelope')
     X12FunctionalAcknowledgment = Shapes::StringShape.new(name: 'X12FunctionalAcknowledgment')
     X12FunctionalGroupHeaders = Shapes::StructureShape.new(name: 'X12FunctionalGroupHeaders')
@@ -194,6 +203,9 @@ module Aws::B2bi
     X12TransactionSet = Shapes::StringShape.new(name: 'X12TransactionSet')
     X12UsageIndicatorCode = Shapes::StringShape.new(name: 'X12UsageIndicatorCode')
     X12ValidateEdi = Shapes::BooleanShape.new(name: 'X12ValidateEdi')
+    X12ValidationOptions = Shapes::StructureShape.new(name: 'X12ValidationOptions')
+    X12ValidationRule = Shapes::UnionShape.new(name: 'X12ValidationRule')
+    X12ValidationRules = Shapes::ListShape.new(name: 'X12ValidationRules')
     X12Version = Shapes::StringShape.new(name: 'X12Version')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -221,6 +233,8 @@ module Aws::B2bi
     CapabilitySummary.add_member(:modified_at, Shapes::ShapeRef.new(shape: ModifiedDate, location_name: "modifiedAt"))
     CapabilitySummary.struct_class = Types::CapabilitySummary
 
+    CodeList.member = Shapes::ShapeRef.new(shape: String)
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -231,6 +245,7 @@ module Aws::B2bi
     ConversionTarget.add_member(:file_format, Shapes::ShapeRef.new(shape: ConversionTargetFormat, required: true, location_name: "fileFormat"))
     ConversionTarget.add_member(:format_details, Shapes::ShapeRef.new(shape: ConversionTargetFormatDetails, location_name: "formatDetails"))
     ConversionTarget.add_member(:output_sample_file, Shapes::ShapeRef.new(shape: OutputSampleFileSource, location_name: "outputSampleFile"))
+    ConversionTarget.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "advancedOptions"))
     ConversionTarget.struct_class = Types::ConversionTarget
 
     ConversionTargetFormatDetails.add_member(:x12, Shapes::ShapeRef.new(shape: X12Details, location_name: "x12"))
@@ -519,6 +534,7 @@ module Aws::B2bi
 
     OutputConversion.add_member(:to_format, Shapes::ShapeRef.new(shape: ToFormat, required: true, location_name: "toFormat"))
     OutputConversion.add_member(:format_options, Shapes::ShapeRef.new(shape: FormatOptions, location_name: "formatOptions"))
+    OutputConversion.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "advancedOptions"))
     OutputConversion.struct_class = Types::OutputConversion
 
     OutputSampleFileSource.add_member(:file_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "fileLocation"))
@@ -629,6 +645,7 @@ module Aws::B2bi
 
     TestParsingResponse.add_member(:parsed_file_content, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parsedFileContent"))
     TestParsingResponse.add_member(:parsed_split_file_contents, Shapes::ShapeRef.new(shape: ParsedSplitFileContentsList, location_name: "parsedSplitFileContents"))
+    TestParsingResponse.add_member(:validation_messages, Shapes::ShapeRef.new(shape: ValidationMessages, location_name: "validationMessages"))
     TestParsingResponse.struct_class = Types::TestParsingResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -754,7 +771,13 @@ module Aws::B2bi
     X12AcknowledgmentOptions.struct_class = Types::X12AcknowledgmentOptions
 
     X12AdvancedOptions.add_member(:split_options, Shapes::ShapeRef.new(shape: X12SplitOptions, location_name: "splitOptions"))
+    X12AdvancedOptions.add_member(:validation_options, Shapes::ShapeRef.new(shape: X12ValidationOptions, location_name: "validationOptions"))
     X12AdvancedOptions.struct_class = Types::X12AdvancedOptions
+
+    X12CodeListValidationRule.add_member(:element_id, Shapes::ShapeRef.new(shape: ElementId, required: true, location_name: "elementId"))
+    X12CodeListValidationRule.add_member(:codes_to_add, Shapes::ShapeRef.new(shape: CodeList, location_name: "codesToAdd"))
+    X12CodeListValidationRule.add_member(:codes_to_remove, Shapes::ShapeRef.new(shape: CodeList, location_name: "codesToRemove"))
+    X12CodeListValidationRule.struct_class = Types::X12CodeListValidationRule
 
     X12ControlNumbers.add_member(:starting_interchange_control_number, Shapes::ShapeRef.new(shape: StartingInterchangeControlNumber, location_name: "startingInterchangeControlNumber"))
     X12ControlNumbers.add_member(:starting_functional_group_control_number, Shapes::ShapeRef.new(shape: StartingFunctionalGroupControlNumber, location_name: "startingFunctionalGroupControlNumber"))
@@ -769,6 +792,15 @@ module Aws::B2bi
     X12Details.add_member(:transaction_set, Shapes::ShapeRef.new(shape: X12TransactionSet, location_name: "transactionSet"))
     X12Details.add_member(:version, Shapes::ShapeRef.new(shape: X12Version, location_name: "version"))
     X12Details.struct_class = Types::X12Details
+
+    X12ElementLengthValidationRule.add_member(:element_id, Shapes::ShapeRef.new(shape: ElementId, required: true, location_name: "elementId"))
+    X12ElementLengthValidationRule.add_member(:max_length, Shapes::ShapeRef.new(shape: X12ElementLengthValidationRuleMaxLengthInteger, required: true, location_name: "maxLength"))
+    X12ElementLengthValidationRule.add_member(:min_length, Shapes::ShapeRef.new(shape: X12ElementLengthValidationRuleMinLengthInteger, required: true, location_name: "minLength"))
+    X12ElementLengthValidationRule.struct_class = Types::X12ElementLengthValidationRule
+
+    X12ElementRequirementValidationRule.add_member(:element_position, Shapes::ShapeRef.new(shape: ElementPosition, required: true, location_name: "elementPosition"))
+    X12ElementRequirementValidationRule.add_member(:requirement, Shapes::ShapeRef.new(shape: ElementRequirement, required: true, location_name: "requirement"))
+    X12ElementRequirementValidationRule.struct_class = Types::X12ElementRequirementValidationRule
 
     X12Envelope.add_member(:common, Shapes::ShapeRef.new(shape: X12OutboundEdiHeaders, location_name: "common"))
     X12Envelope.add_member(:wrap_options, Shapes::ShapeRef.new(shape: WrapOptions, location_name: "wrapOptions"))
@@ -801,6 +833,21 @@ module Aws::B2bi
 
     X12SplitOptions.add_member(:split_by, Shapes::ShapeRef.new(shape: X12SplitBy, required: true, location_name: "splitBy"))
     X12SplitOptions.struct_class = Types::X12SplitOptions
+
+    X12ValidationOptions.add_member(:validation_rules, Shapes::ShapeRef.new(shape: X12ValidationRules, location_name: "validationRules"))
+    X12ValidationOptions.struct_class = Types::X12ValidationOptions
+
+    X12ValidationRule.add_member(:code_list_validation_rule, Shapes::ShapeRef.new(shape: X12CodeListValidationRule, location_name: "codeListValidationRule"))
+    X12ValidationRule.add_member(:element_length_validation_rule, Shapes::ShapeRef.new(shape: X12ElementLengthValidationRule, location_name: "elementLengthValidationRule"))
+    X12ValidationRule.add_member(:element_requirement_validation_rule, Shapes::ShapeRef.new(shape: X12ElementRequirementValidationRule, location_name: "elementRequirementValidationRule"))
+    X12ValidationRule.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    X12ValidationRule.add_member_subclass(:code_list_validation_rule, Types::X12ValidationRule::CodeListValidationRule)
+    X12ValidationRule.add_member_subclass(:element_length_validation_rule, Types::X12ValidationRule::ElementLengthValidationRule)
+    X12ValidationRule.add_member_subclass(:element_requirement_validation_rule, Types::X12ValidationRule::ElementRequirementValidationRule)
+    X12ValidationRule.add_member_subclass(:unknown, Types::X12ValidationRule::Unknown)
+    X12ValidationRule.struct_class = Types::X12ValidationRule
+
+    X12ValidationRules.member = Shapes::ShapeRef.new(shape: X12ValidationRule)
 
 
     # @api private
