@@ -77,6 +77,24 @@ module Aws
           subject.download(path, params)
         end
 
+        it 'supports File object as destination' do
+          client.stub_responses(:get_object, { body: 'foo', content_range: 'bytes 0-3/4' })
+
+          Tempfile.open('test') do |f|
+            subject.download(f, parts_params)
+            f.rewind
+            expect(f.read).to eq('foo')
+          end
+        end
+
+        it 'supports Pathname as destination' do
+          client.stub_responses(:get_object, { body: 'bar', content_range: 'bytes 0-3/4' })
+
+          pathname = Pathname.new(path)
+          subject.download(pathname, parts_params)
+          expect(pathname.read).to eq('bar')
+        end
+
         it 'calls on_checksum_validated on single object' do
           client.stub_responses(:get_object, { body: 'body', checksum_sha1: 'Agg/RXngimEkJcDBoX7ket14O5Q=' })
           callback_data = { called: 0 }
@@ -169,6 +187,10 @@ module Aws
         end
 
         context 'error handling' do
+          it 'raises when given an invalid destination' do
+            expect { subject.download(nil, single_params) }.to raise_error(ArgumentError, /Invalid destination/)
+          end
+
           it 'raises when checksum validation fails on single object' do
             client.stub_responses(:get_object, { body: 'body', checksum_sha1: 'invalid' })
             expect { subject.download(path, single_params) }.to raise_error(Aws::Errors::ChecksumError)
