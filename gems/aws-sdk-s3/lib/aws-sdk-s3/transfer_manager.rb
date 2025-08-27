@@ -18,10 +18,14 @@ module Aws
       #   will be created automatically.
       def initialize(options = {})
         @client = options.delete(:client) || Client.new
+        @executor = options.delete(:executor)
       end
 
       # @return [S3::Client]
       attr_reader :client
+
+      # @return [Object] executor
+      attr_reader :executor
 
       # Downloads a file in S3 to a path on disk.
       #
@@ -101,6 +105,11 @@ module Aws
         true
       end
 
+      # TODO: Docs
+      def download_directory(destination, bucket:, ** options)
+        # TODO
+      end
+
       # Uploads a file from disk to S3.
       #
       #     # a small file are uploaded with PutObject API
@@ -177,6 +186,11 @@ module Aws
         response = uploader.upload(source, uploading_options.merge(bucket: bucket, key: key))
         yield response if block_given?
         true
+      end
+
+      # TODO: Docs
+      def upload_directory(source, bucket:, ** options)
+        # TODO
       end
 
       # Uploads a stream in a streaming fashion to S3.

@@ -18,6 +18,8 @@ module Aws
     autoload :ObjectMultipartCopier, 'aws-sdk-s3/object_multipart_copier'
     autoload :PresignedPost, 'aws-sdk-s3/presigned_post'
     autoload :Presigner, 'aws-sdk-s3/presigner'
+    autoload :DirectoryUploader, 'aws-sdk-s3/directory_uploader'
+    autoload :DirectoryDownloader, 'aws-sdk-s3/directory_downloader'
     autoload :TransferManager, 'aws-sdk-s3/transfer_manager'
 
     # s3 express session auth
