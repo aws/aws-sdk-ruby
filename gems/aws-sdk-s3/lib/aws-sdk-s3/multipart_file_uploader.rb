@@ -24,6 +24,7 @@ module Aws
       # @option options [Integer] :thread_count (DEFAULT_THREAD_COUNT)
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @executor = options[:executor]
         @thread_count = options[:thread_count] || DEFAULT_THREAD_COUNT
       end
 
@@ -66,7 +67,13 @@ module Aws
       def upload_parts(upload_id, source, options)
         completed = PartList.new
         pending = PartList.new(compute_parts(upload_id, source, options))
-        errors = upload_in_threads(pending, completed, options)
+        errors =
+          if @executor
+            upload_with_executor(pending, completed, options)
+          else
+            upload_in_threads(pending, completed, options)
+          end
+
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -133,6 +140,35 @@ module Aws
           # don't pass through checksum calculations
           hash[key] = options[key] if options.key?(key) && !checksum_key?(key)
         end
+      end
+
+      def upload_with_executor(pending, completed, _options)
+        max_parts = pending.count
+        completion_queue = Queue.new
+        abort_upload = false
+        errors = []
+
+        while (part = pending.shift)
+          break if abort_upload
+
+          @executor.post(part) do |p|
+            resp = @client.upload_part(p)
+            p[:body].close
+            completed_part = { etag: resp.etag, part_number: p[:part_number] }
+            algorithm = resp.context.params[:checksum_algorithm]
+            k = "checksum_#{algorithm.downcase}".to_sym
+            completed_part[k] = resp.send(k)
+            completed.push(completed_part)
+          rescue StandardError => e
+            abort_upload = true
+            errors << e
+          ensure
+            completion_queue << :done
+          end
+        end
+
+        max_parts.times { completion_queue.pop }
+        errors
       end
 
       def upload_in_threads(pending, completed, options)
