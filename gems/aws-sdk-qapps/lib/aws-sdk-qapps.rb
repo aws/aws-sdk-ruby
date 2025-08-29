@@ -55,7 +55,7 @@ module Aws::QApps
   autoload :EndpointProvider, 'aws-sdk-qapps/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qapps/endpoints'
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.23.0'
 
 end
 

@@ -627,7 +627,7 @@ module Aws::EC2InstanceConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2instanceconnect'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

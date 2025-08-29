@@ -8,6 +8,48 @@
 module Aws
   module HealthLake
     module Waiters
+
+      class FHIRDatastoreActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    datastore_id: ::String
+                  ) -> Client::_DescribeFHIRDatastoreResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeFHIRDatastoreResponseSuccess
+      end
+
+      class FHIRDatastoreDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    datastore_id: ::String
+                  ) -> Client::_DescribeFHIRDatastoreResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeFHIRDatastoreResponseSuccess
+      end
+
+      class FHIRExportJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    datastore_id: ::String,
+                    job_id: ::String
+                  ) -> Client::_DescribeFHIRExportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeFHIRExportJobResponseSuccess
+      end
+
+      class FHIRImportJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    datastore_id: ::String,
+                    job_id: ::String
+                  ) -> Client::_DescribeFHIRImportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeFHIRImportJobResponseSuccess
+      end
     end
   end
 end

@@ -1,6 +1,36 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "SearchNearbySuccess",
+    "operationName" : "SearchNearby",
+    "input" : {
+      "QueryPosition" : [ 2.2945, 48.85824 ]
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GeocodeSuccess",
+    "operationName" : "Geocode",
+    "input" : {
+      "QueryText" : "Starbucks"
+    },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "ReverseGeocodeSuccess",
     "operationName" : "ReverseGeocode",
     "input" : {
@@ -31,23 +61,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "SearchNearbySuccess",
-    "operationName" : "SearchNearby",
-    "input" : {
-      "QueryPosition" : [ 2.2945, 48.85824 ]
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "SuggestSuccess",
-    "operationName" : "Suggest",
+    "id" : "SearchTextSuccess",
+    "operationName" : "SearchText",
     "input" : {
       "QueryText" : "Taj Mahal",
       "BiasPosition" : [ 78.0421, 27.1753 ]
@@ -62,23 +77,8 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GeocodeSuccess",
-    "operationName" : "Geocode",
-    "input" : {
-      "QueryText" : "Starbucks"
-    },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "SearchTextSuccess",
-    "operationName" : "SearchText",
+    "id" : "SuggestSuccess",
+    "operationName" : "Suggest",
     "input" : {
       "QueryText" : "Taj Mahal",
       "BiasPosition" : [ 78.0421, 27.1753 ]

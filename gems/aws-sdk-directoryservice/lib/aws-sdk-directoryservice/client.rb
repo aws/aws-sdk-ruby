@@ -1943,6 +1943,46 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Retrieves detailed information about the certificate authority (CA)
+    # enrollment policy for the specified directory. This policy determines
+    # how client certificates are automatically enrolled and managed through
+    # Amazon Web Services Private Certificate Authority.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for which to retrieve the CA
+    #   enrollment policy information.
+    #
+    # @return [Types::DescribeCAEnrollmentPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCAEnrollmentPolicyResult#directory_id #directory_id} => String
+    #   * {Types::DescribeCAEnrollmentPolicyResult#pca_connector_arn #pca_connector_arn} => String
+    #   * {Types::DescribeCAEnrollmentPolicyResult#ca_enrollment_policy_status #ca_enrollment_policy_status} => String
+    #   * {Types::DescribeCAEnrollmentPolicyResult#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeCAEnrollmentPolicyResult#ca_enrollment_policy_status_reason #ca_enrollment_policy_status_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ca_enrollment_policy({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.directory_id #=> String
+    #   resp.pca_connector_arn #=> String
+    #   resp.ca_enrollment_policy_status #=> String, one of "InProgress", "Success", "Failed", "Disabling", "Disabled", "Impaired"
+    #   resp.last_updated_date_time #=> Time
+    #   resp.ca_enrollment_policy_status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCAEnrollmentPolicy AWS API Documentation
+    #
+    # @overload describe_ca_enrollment_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_ca_enrollment_policy(params = {}, options = {})
+      req = build_request(:describe_ca_enrollment_policy, params)
+      req.send_request(options)
+    end
+
     # Displays information about the certificate registered for secure LDAP
     # or client certificate authentication.
     #
@@ -2964,6 +3004,36 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Disables the certificate authority (CA) enrollment policy for the
+    # specified directory. This stops automatic certificate enrollment and
+    # management for domain-joined clients, but does not affect existing
+    # certificates.
+    #
+    # Disabling the CA enrollment policy prevents new certificates from
+    # being automatically enrolled, but existing certificates remain valid
+    # and functional until they expire.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for which to disable the CA enrollment
+    #   policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_ca_enrollment_policy({
+    #     directory_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableCAEnrollmentPolicy AWS API Documentation
+    #
+    # @overload disable_ca_enrollment_policy(params = {})
+    # @param [Hash] params ({})
+    def disable_ca_enrollment_policy(params = {}, options = {})
+      req = build_request(:disable_ca_enrollment_policy, params)
+      req.send_request(options)
+    end
+
     # Disables alternative client authentication methods for the specified
     # directory.
     #
@@ -3137,6 +3207,48 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def disable_sso(params = {}, options = {})
       req = build_request(:disable_sso, params)
+      req.send_request(options)
+    end
+
+    # Enables certificate authority (CA) enrollment policy for the specified
+    # directory. This allows domain-joined clients to automatically request
+    # and receive certificates from the specified Amazon Web Services
+    # Private Certificate Authority.
+    #
+    # <note markdown="1"> Before enabling CA enrollment, ensure that the PCA connector is
+    # properly configured and accessible from the directory. The connector
+    # must be in an active state and have the necessary permissions.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory for which to enable the CA enrollment
+    #   policy.
+    #
+    # @option params [required, String] :pca_connector_arn
+    #   The Amazon Resource Name (ARN) of the Private Certificate Authority
+    #   (PCA) connector to use for automatic certificate enrollment. This
+    #   connector must be properly configured and accessible from the
+    #   directory.
+    #
+    #   The ARN format is:
+    #   `arn:aws:pca-connector-ad:region:account-id:connector/connector-id `
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_ca_enrollment_policy({
+    #     directory_id: "DirectoryId", # required
+    #     pca_connector_arn: "PcaConnectorArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableCAEnrollmentPolicy AWS API Documentation
+    #
+    # @overload enable_ca_enrollment_policy(params = {})
+    # @param [Hash] params ({})
+    def enable_ca_enrollment_policy(params = {}, options = {})
+      req = build_request(:enable_ca_enrollment_policy, params)
       req.send_request(options)
     end
 
@@ -4770,7 +4882,7 @@ module Aws::DirectoryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

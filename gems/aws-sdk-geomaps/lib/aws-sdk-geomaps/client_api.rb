@@ -43,7 +43,6 @@ module Aws::GeoMaps
     GetTileRequestYString = Shapes::StringShape.new(name: 'GetTileRequestYString')
     GetTileRequestZString = Shapes::StringShape.new(name: 'GetTileRequestZString')
     GetTileResponse = Shapes::StructureShape.new(name: 'GetTileResponse')
-    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LabelSize = Shapes::StringShape.new(name: 'LabelSize')
     LanguageTag = Shapes::StringShape.new(name: 'LanguageTag')
@@ -51,7 +50,9 @@ module Aws::GeoMaps
     MapStyle = Shapes::StringShape.new(name: 'MapStyle')
     PositionListString = Shapes::StringShape.new(name: 'PositionListString')
     PositionString = Shapes::StringShape.new(name: 'PositionString')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ScaleBarUnit = Shapes::StringShape.new(name: 'ScaleBarUnit')
+    SensitiveInteger = Shapes::IntegerShape.new(name: 'SensitiveInteger')
     StaticMapStyle = Shapes::StringShape.new(name: 'StaticMapStyle')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -102,7 +103,7 @@ module Aws::GeoMaps
     GetStaticMapRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
     GetStaticMapRequest.add_member(:label_size, Shapes::ShapeRef.new(shape: LabelSize, location: "querystring", location_name: "label-size"))
     GetStaticMapRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location: "querystring", location_name: "lang"))
-    GetStaticMapRequest.add_member(:padding, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "padding"))
+    GetStaticMapRequest.add_member(:padding, Shapes::ShapeRef.new(shape: SensitiveInteger, location: "querystring", location_name: "padding"))
     GetStaticMapRequest.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode, location: "querystring", location_name: "political-view"))
     GetStaticMapRequest.add_member(:points_of_interests, Shapes::ShapeRef.new(shape: MapFeatureMode, location: "querystring", location_name: "pois"))
     GetStaticMapRequest.add_member(:radius, Shapes::ShapeRef.new(shape: DistanceMeters, location: "querystring", location_name: "radius", metadata: {"box" => true}))
@@ -154,6 +155,9 @@ module Aws::GeoMaps
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -231,6 +235,7 @@ module Aws::GeoMaps
         o.input = Shapes::ShapeRef.new(shape: GetTileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTileResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

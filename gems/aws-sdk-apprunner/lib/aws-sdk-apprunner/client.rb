@@ -1054,7 +1054,8 @@ module Aws::AppRunner
     #   single Amazon VPC. App Runner determines the Amazon VPC from the
     #   subnets you specify.
     #
-    #   <note markdown="1"> App Runner currently only provides support for IPv4.
+    #   <note markdown="1"> App Runner only supports subnets of IP address type *IPv4* and *dual
+    #   stack* (IPv4 and IPv6).
     #
     #    </note>
     #
@@ -3004,7 +3005,7 @@ module Aws::AppRunner
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

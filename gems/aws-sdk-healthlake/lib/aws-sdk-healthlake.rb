@@ -49,12 +49,13 @@ module Aws::HealthLake
   end
   autoload :Client, 'aws-sdk-healthlake/client'
   autoload :Errors, 'aws-sdk-healthlake/errors'
+  autoload :Waiters, 'aws-sdk-healthlake/waiters'
   autoload :Resource, 'aws-sdk-healthlake/resource'
   autoload :EndpointParameters, 'aws-sdk-healthlake/endpoint_parameters'
   autoload :EndpointProvider, 'aws-sdk-healthlake/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-healthlake/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

@@ -116,8 +116,7 @@
     },
     "DeleteObjectResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeObjectRequest":{
       "type":"structure",

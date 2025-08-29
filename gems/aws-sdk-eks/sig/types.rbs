@@ -675,6 +675,19 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class DescribeInsightsRefreshRequest
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInsightsRefreshResponse
+      attr_accessor message: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
     class DescribeNodegroupRequest
       attr_accessor cluster_name: ::String
       attr_accessor nodegroup_name: ::String
@@ -1351,6 +1364,17 @@ module Aws::EKS
 
     class ServiceUnavailableException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartInsightsRefreshRequest
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartInsightsRefreshResponse
+      attr_accessor message: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
       SENSITIVE: []
     end
 

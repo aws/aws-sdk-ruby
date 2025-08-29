@@ -1772,6 +1772,8 @@ module Aws::EC2
       attr_accessor copy_image_tags: bool
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor snapshot_copy_completion_duration_minutes: ::Integer
+      attr_accessor destination_availability_zone: ::String
+      attr_accessor destination_availability_zone_id: ::String
       attr_accessor dry_run: bool
       SENSITIVE: []
     end
@@ -1792,6 +1794,7 @@ module Aws::EC2
       attr_accessor source_snapshot_id: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor completion_duration_minutes: ::Integer
+      attr_accessor destination_availability_zone: ::String
       attr_accessor dry_run: bool
       SENSITIVE: [:presigned_url]
     end

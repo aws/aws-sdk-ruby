@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.553.0 (2025-08-28)
+------------------
+
+* Feature - This release adds support for copying Amazon EBS snapshot and AMIs to and from Local Zones.
+
 1.552.0 (2025-08-26)
 ------------------
 

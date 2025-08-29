@@ -4700,6 +4700,60 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the autoscaling configuration for a HyperPod cluster.
+    #
+    # @!attribute [rw] mode
+    #   Describes whether autoscaling is enabled or disabled for the
+    #   cluster. Valid values are `Enable` and `Disable`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaler_type
+    #   The type of autoscaler to use. Currently supported value is
+    #   `Karpenter`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAutoScalingConfig AWS API Documentation
+    #
+    class ClusterAutoScalingConfig < Struct.new(
+      :mode,
+      :auto_scaler_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The autoscaling configuration and status information for a HyperPod
+    # cluster.
+    #
+    # @!attribute [rw] mode
+    #   Describes whether autoscaling is enabled or disabled for the
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaler_type
+    #   The type of autoscaler configured for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the autoscaling configuration. Valid values
+    #   are `InService`, `Failed`, `Creating`, and `Deleting`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   If the autoscaling status is `Failed`, this field contains a message
+    #   describing the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterAutoScalingConfigOutput AWS API Documentation
+    #
+    class ClusterAutoScalingConfigOutput < Struct.new(
+      :mode,
+      :auto_scaler_type,
+      :status,
+      :failure_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the configuration for attaching an additional Amazon Elastic
     # Block Store (EBS) volume to each instance of the SageMaker HyperPod
     # cluster instance group. To learn more, see [SageMaker HyperPod release
@@ -7327,6 +7381,21 @@ module Aws::SageMaker
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] cluster_role
+    #   The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes
+    #   to perform cluster autoscaling operations. This role must have
+    #   permissions for `sagemaker:BatchAddClusterNodes` and
+    #   `sagemaker:BatchDeleteClusterNodes`. This is only required when
+    #   autoscaling is enabled and when HyperPod is performing autoscaling
+    #   operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling
+    #   The autoscaling configuration for the cluster. Enables automatic
+    #   scaling of cluster nodes based on workload demand using a
+    #   Karpenter-based system.
+    #   @return [Types::ClusterAutoScalingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -7337,7 +7406,9 @@ module Aws::SageMaker
       :tags,
       :orchestrator,
       :node_recovery,
-      :node_provisioning_mode)
+      :node_provisioning_mode,
+      :cluster_role,
+      :auto_scaling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15037,6 +15108,15 @@ module Aws::SageMaker
     #   The mode used for provisioning nodes in the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_role
+    #   The Amazon Resource Name (ARN) of the IAM role that HyperPod uses
+    #   for cluster autoscaling operations.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling
+    #   The current autoscaling configuration and status for the autoscaler.
+    #   @return [Types::ClusterAutoScalingConfigOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterResponse AWS API Documentation
     #
     class DescribeClusterResponse < Struct.new(
@@ -15050,7 +15130,9 @@ module Aws::SageMaker
       :vpc_config,
       :orchestrator,
       :node_recovery,
-      :node_provisioning_mode)
+      :node_provisioning_mode,
+      :cluster_role,
+      :auto_scaling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50551,6 +50633,17 @@ module Aws::SageMaker
     #   as the separator between multiple names.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cluster_role
+    #   The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes
+    #   for cluster autoscaling operations. Cannot be updated while
+    #   autoscaling is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling
+    #   Updates the autoscaling configuration for the cluster. Use to enable
+    #   or disable automatic node scaling.
+    #   @return [Types::ClusterAutoScalingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateClusterRequest AWS API Documentation
     #
     class UpdateClusterRequest < Struct.new(
@@ -50558,7 +50651,9 @@ module Aws::SageMaker
       :instance_groups,
       :restricted_instance_groups,
       :node_recovery,
-      :instance_groups_to_delete)
+      :instance_groups_to_delete,
+      :cluster_role,
+      :auto_scaling)
       SENSITIVE = []
       include Aws::Structure
     end

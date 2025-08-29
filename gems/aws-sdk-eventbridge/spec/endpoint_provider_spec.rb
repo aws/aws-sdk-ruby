@@ -546,19 +546,6 @@ module Aws::EventBridge
       end
     end
 
-    context "For region us-iso-east-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: true, use_dual_stack: true})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "For region us-iso-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"url" => "https://events-fips.us-iso-east-1.c2s.ic.gov"}}
@@ -570,19 +557,6 @@ module Aws::EventBridge
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-iso-east-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-east-1", use_fips: false, use_dual_stack: true})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -600,19 +574,6 @@ module Aws::EventBridge
       end
     end
 
-    context "For region us-isob-east-1 with FIPS enabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: true, use_dual_stack: true})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "For region us-isob-east-1 with FIPS enabled and DualStack disabled" do
       let(:expected) do
         {"endpoint" => {"url" => "https://events-fips.us-isob-east-1.sc2s.sgov.gov"}}
@@ -624,19 +585,6 @@ module Aws::EventBridge
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "For region us-isob-east-1 with FIPS disabled and DualStack enabled" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-isob-east-1", use_fips: false, use_dual_stack: true})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 

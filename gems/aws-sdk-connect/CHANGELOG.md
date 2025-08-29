@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.215.0 (2025-08-28)
+------------------
+
+* Feature - AgentStatusDrillDown feature in GetCurrentMetricData API. Adding AGENT_STATUS as filter and grouping in GetCurrentMetricData API
+
 1.214.0 (2025-08-26)
 ------------------
 

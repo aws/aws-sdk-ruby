@@ -263,7 +263,8 @@ module Aws
                                    },
                                    datastore_id: ::String,
                                    data_access_role_arn: ::String,
-                                   ?client_token: ::String
+                                   ?client_token: ::String,
+                                   ?validation_level: ("strict" | "structure-only" | "minimal")
                                  ) -> _StartFHIRImportJobResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRImportJobResponseSuccess
 
@@ -291,6 +292,26 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#wait_until-instance_method
+      def wait_until: (:fhir_datastore_active waiter_name, 
+                    datastore_id: ::String
+                  ) -> Client::_DescribeFHIRDatastoreResponseSuccess
+                    | (:fhir_datastore_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFHIRDatastoreResponseSuccess
+                    | (:fhir_datastore_deleted waiter_name, 
+                    datastore_id: ::String
+                  ) -> Client::_DescribeFHIRDatastoreResponseSuccess
+                    | (:fhir_datastore_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFHIRDatastoreResponseSuccess
+                    | (:fhir_export_job_completed waiter_name, 
+                    datastore_id: ::String,
+                    job_id: ::String
+                  ) -> Client::_DescribeFHIRExportJobResponseSuccess
+                    | (:fhir_export_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFHIRExportJobResponseSuccess
+                    | (:fhir_import_job_completed waiter_name, 
+                    datastore_id: ::String,
+                    job_id: ::String
+                  ) -> Client::_DescribeFHIRImportJobResponseSuccess
+                    | (:fhir_import_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFHIRImportJobResponseSuccess
     end
   end
 end

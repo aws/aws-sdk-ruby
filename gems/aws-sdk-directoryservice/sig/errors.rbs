@@ -71,7 +71,15 @@ module Aws
         def message: () -> ::String
         def request_id: () -> ::String
       end
+      class DisableAlreadyInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
       class DomainControllerLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class EnableAlreadyInProgressException < ::Aws::Errors::ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end

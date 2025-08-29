@@ -5111,6 +5111,8 @@ module Aws::EC2
     CopyImageRequest.add_member(:copy_image_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "CopyImageTags"))
     CopyImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CopyImageRequest.add_member(:snapshot_copy_completion_duration_minutes, Shapes::ShapeRef.new(shape: Long, location_name: "SnapshotCopyCompletionDurationMinutes"))
+    CopyImageRequest.add_member(:destination_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "DestinationAvailabilityZone"))
+    CopyImageRequest.add_member(:destination_availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "DestinationAvailabilityZoneId"))
     CopyImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CopyImageRequest.struct_class = Types::CopyImageRequest
 
@@ -5127,6 +5129,7 @@ module Aws::EC2
     CopySnapshotRequest.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceSnapshotId"))
     CopySnapshotRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CopySnapshotRequest.add_member(:completion_duration_minutes, Shapes::ShapeRef.new(shape: SnapshotCompletionDurationMinutesRequest, location_name: "CompletionDurationMinutes"))
+    CopySnapshotRequest.add_member(:destination_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "DestinationAvailabilityZone"))
     CopySnapshotRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CopySnapshotRequest.struct_class = Types::CopySnapshotRequest
 

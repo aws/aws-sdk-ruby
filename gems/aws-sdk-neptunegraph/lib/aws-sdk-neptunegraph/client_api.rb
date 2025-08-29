@@ -157,8 +157,12 @@ module Aws::NeptuneGraph
     StartExportTaskInputDestinationString = Shapes::StringShape.new(name: 'StartExportTaskInputDestinationString')
     StartExportTaskOutput = Shapes::StructureShape.new(name: 'StartExportTaskOutput')
     StartExportTaskOutputDestinationString = Shapes::StringShape.new(name: 'StartExportTaskOutputDestinationString')
+    StartGraphInput = Shapes::StructureShape.new(name: 'StartGraphInput')
+    StartGraphOutput = Shapes::StructureShape.new(name: 'StartGraphOutput')
     StartImportTaskInput = Shapes::StructureShape.new(name: 'StartImportTaskInput')
     StartImportTaskOutput = Shapes::StructureShape.new(name: 'StartImportTaskOutput')
+    StopGraphInput = Shapes::StructureShape.new(name: 'StopGraphInput')
+    StopGraphOutput = Shapes::StructureShape.new(name: 'StopGraphOutput')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
@@ -755,6 +759,26 @@ module Aws::NeptuneGraph
     StartExportTaskOutput.add_member(:export_filter, Shapes::ShapeRef.new(shape: ExportFilter, location_name: "exportFilter"))
     StartExportTaskOutput.struct_class = Types::StartExportTaskOutput
 
+    StartGraphInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
+    StartGraphInput.struct_class = Types::StartGraphInput
+
+    StartGraphOutput.add_member(:id, Shapes::ShapeRef.new(shape: GraphId, required: true, location_name: "id"))
+    StartGraphOutput.add_member(:name, Shapes::ShapeRef.new(shape: GraphName, required: true, location_name: "name"))
+    StartGraphOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
+    StartGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
+    StartGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    StartGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
+    StartGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    StartGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    StartGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
+    StartGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
+    StartGraphOutput.add_member(:replica_count, Shapes::ShapeRef.new(shape: ReplicaCount, location_name: "replicaCount"))
+    StartGraphOutput.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyIdentifier"))
+    StartGraphOutput.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "sourceSnapshotId"))
+    StartGraphOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    StartGraphOutput.add_member(:build_number, Shapes::ShapeRef.new(shape: String, location_name: "buildNumber"))
+    StartGraphOutput.struct_class = Types::StartGraphOutput
+
     StartImportTaskInput.add_member(:import_options, Shapes::ShapeRef.new(shape: ImportOptions, location_name: "importOptions"))
     StartImportTaskInput.add_member(:fail_on_error, Shapes::ShapeRef.new(shape: Boolean, location_name: "failOnError"))
     StartImportTaskInput.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
@@ -774,6 +798,26 @@ module Aws::NeptuneGraph
     StartImportTaskOutput.add_member(:status, Shapes::ShapeRef.new(shape: ImportTaskStatus, required: true, location_name: "status"))
     StartImportTaskOutput.add_member(:import_options, Shapes::ShapeRef.new(shape: ImportOptions, location_name: "importOptions"))
     StartImportTaskOutput.struct_class = Types::StartImportTaskOutput
+
+    StopGraphInput.add_member(:graph_identifier, Shapes::ShapeRef.new(shape: GraphIdentifier, required: true, location: "uri", location_name: "graphIdentifier"))
+    StopGraphInput.struct_class = Types::StopGraphInput
+
+    StopGraphOutput.add_member(:id, Shapes::ShapeRef.new(shape: GraphId, required: true, location_name: "id"))
+    StopGraphOutput.add_member(:name, Shapes::ShapeRef.new(shape: GraphName, required: true, location_name: "name"))
+    StopGraphOutput.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "arn"))
+    StopGraphOutput.add_member(:status, Shapes::ShapeRef.new(shape: GraphStatus, location_name: "status"))
+    StopGraphOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    StopGraphOutput.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
+    StopGraphOutput.add_member(:provisioned_memory, Shapes::ShapeRef.new(shape: ProvisionedMemory, location_name: "provisionedMemory"))
+    StopGraphOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+    StopGraphOutput.add_member(:public_connectivity, Shapes::ShapeRef.new(shape: Boolean, location_name: "publicConnectivity"))
+    StopGraphOutput.add_member(:vector_search_configuration, Shapes::ShapeRef.new(shape: VectorSearchConfiguration, location_name: "vectorSearchConfiguration"))
+    StopGraphOutput.add_member(:replica_count, Shapes::ShapeRef.new(shape: ReplicaCount, location_name: "replicaCount"))
+    StopGraphOutput.add_member(:kms_key_identifier, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyIdentifier"))
+    StopGraphOutput.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "sourceSnapshotId"))
+    StopGraphOutput.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "deletionProtection"))
+    StopGraphOutput.add_member(:build_number, Shapes::ShapeRef.new(shape: String, location_name: "buildNumber"))
+    StopGraphOutput.struct_class = Types::StopGraphOutput
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -995,8 +1039,8 @@ module Aws::NeptuneGraph
         }
         o.input = Shapes::ShapeRef.new(shape: ExecuteQueryInput)
         o.output = Shapes::ShapeRef.new(shape: ExecuteQueryOutput)
-        o.errors << Shapes::ShapeRef.new(shape: UnprocessableException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1251,12 +1295,38 @@ module Aws::NeptuneGraph
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:start_graph, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartGraph"
+        o.http_method = "POST"
+        o.http_request_uri = "/graphs/{graphIdentifier}/start"
+        o.input = Shapes::ShapeRef.new(shape: StartGraphInput)
+        o.output = Shapes::ShapeRef.new(shape: StartGraphOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_import_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartImportTask"
         o.http_method = "POST"
         o.http_request_uri = "/graphs/{graphIdentifier}/importtasks"
         o.input = Shapes::ShapeRef.new(shape: StartImportTaskInput)
         o.output = Shapes::ShapeRef.new(shape: StartImportTaskOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:stop_graph, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopGraph"
+        o.http_method = "POST"
+        o.http_request_uri = "/graphs/{graphIdentifier}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopGraphInput)
+        o.output = Shapes::ShapeRef.new(shape: StopGraphOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

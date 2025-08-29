@@ -102,6 +102,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AgentStatusIdentifier
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
     class AgentStatusReference
       attr_accessor status_start_timestamp: ::Time
       attr_accessor status_arn: ::String
@@ -1978,6 +1984,7 @@ module Aws::Connect
       attr_accessor channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
       attr_accessor routing_profile: Types::RoutingProfileReference
       attr_accessor routing_step_expression: ::String
+      attr_accessor agent_status: Types::AgentStatusIdentifier
       SENSITIVE: []
     end
 
@@ -2501,6 +2508,7 @@ module Aws::Connect
       attr_accessor channels: ::Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]
       attr_accessor routing_profiles: ::Array[::String]
       attr_accessor routing_step_expressions: ::Array[::String]
+      attr_accessor agent_statuses: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2562,7 +2570,7 @@ module Aws::Connect
     class GetCurrentMetricDataRequest
       attr_accessor instance_id: ::String
       attr_accessor filters: Types::Filters
-      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION")]
+      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS")]
       attr_accessor current_metrics: ::Array[Types::CurrentMetric]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -2639,7 +2647,7 @@ module Aws::Connect
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor filters: Types::Filters
-      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION")]
+      attr_accessor groupings: ::Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS")]
       attr_accessor historical_metrics: ::Array[Types::HistoricalMetric]
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer

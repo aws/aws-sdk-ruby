@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2025-08-28)
+------------------
+
+* Feature - Add ValidationLevel parameter to StartFHIRImportJob API, allowing users to specify a FHIR validation level for their asynchronous import jobs.
+
 1.53.0 (2025-08-26)
 ------------------
 

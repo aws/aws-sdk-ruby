@@ -64,7 +64,7 @@ module Aws::GeoMaps
       attr_accessor style: ("Satellite" | "Standard")
       attr_accessor width: ::Integer
       attr_accessor zoom: ::Float
-      SENSITIVE: [:key]
+      SENSITIVE: [:bounding_box, :bounded_positions, :center, :compact_overlay, :geo_json_overlay, :height, :key, :padding, :political_view, :radius, :width, :zoom]
     end
 
     class GetStaticMapResponse
@@ -81,7 +81,7 @@ module Aws::GeoMaps
       attr_accessor color_scheme: ("Light" | "Dark")
       attr_accessor political_view: ::String
       attr_accessor key: ::String
-      SENSITIVE: [:key]
+      SENSITIVE: [:political_view, :key]
     end
 
     class GetStyleDescriptorResponse
@@ -98,7 +98,7 @@ module Aws::GeoMaps
       attr_accessor x: ::String
       attr_accessor y: ::String
       attr_accessor key: ::String
-      SENSITIVE: [:key]
+      SENSITIVE: [:z, :x, :y, :key]
     end
 
     class GetTileResponse
@@ -111,6 +111,11 @@ module Aws::GeoMaps
     end
 
     class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
     end

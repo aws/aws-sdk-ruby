@@ -847,6 +847,20 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterAutoScalingConfig
+      attr_accessor mode: ("Enable" | "Disable")
+      attr_accessor auto_scaler_type: ("Karpenter")
+      SENSITIVE: []
+    end
+
+    class ClusterAutoScalingConfigOutput
+      attr_accessor mode: ("Enable" | "Disable")
+      attr_accessor auto_scaler_type: ("Karpenter")
+      attr_accessor status: ("InService" | "Failed" | "Creating" | "Deleting")
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
     class ClusterEbsVolumeConfig
       attr_accessor volume_size_in_gb: ::Integer
       attr_accessor volume_kms_key_id: ::String
@@ -1355,6 +1369,8 @@ module Aws::SageMaker
       attr_accessor orchestrator: Types::ClusterOrchestrator
       attr_accessor node_recovery: ("Automatic" | "None")
       attr_accessor node_provisioning_mode: ("Continuous")
+      attr_accessor cluster_role: ::String
+      attr_accessor auto_scaling: Types::ClusterAutoScalingConfig
       SENSITIVE: []
     end
 
@@ -3139,6 +3155,8 @@ module Aws::SageMaker
       attr_accessor orchestrator: Types::ClusterOrchestrator
       attr_accessor node_recovery: ("Automatic" | "None")
       attr_accessor node_provisioning_mode: ("Continuous")
+      attr_accessor cluster_role: ::String
+      attr_accessor auto_scaling: Types::ClusterAutoScalingConfigOutput
       SENSITIVE: []
     end
 
@@ -10538,6 +10556,8 @@ module Aws::SageMaker
       attr_accessor restricted_instance_groups: ::Array[Types::ClusterRestrictedInstanceGroupSpecification]
       attr_accessor node_recovery: ("Automatic" | "None")
       attr_accessor instance_groups_to_delete: ::Array[::String]
+      attr_accessor cluster_role: ::String
+      attr_accessor auto_scaling: Types::ClusterAutoScalingConfig
       SENSITIVE: []
     end
 

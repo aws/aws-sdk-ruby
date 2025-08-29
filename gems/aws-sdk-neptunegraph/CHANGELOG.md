@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2025-08-27)
+------------------
+
+* Feature - Add StartGraph and StopGraph operations to Neptune Analytics
+
 1.38.0 (2025-08-26)
 ------------------
 

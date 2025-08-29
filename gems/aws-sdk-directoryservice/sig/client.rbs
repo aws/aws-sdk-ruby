@@ -405,6 +405,20 @@ module Aws
                                   ) -> _DescribeADAssessmentResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeADAssessmentResponseSuccess
 
+      interface _DescribeCAEnrollmentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCAEnrollmentPolicyResult]
+        def directory_id: () -> ::String
+        def pca_connector_arn: () -> ::String
+        def ca_enrollment_policy_status: () -> ("InProgress" | "Success" | "Failed" | "Disabling" | "Disabled" | "Impaired")
+        def last_updated_date_time: () -> ::Time
+        def ca_enrollment_policy_status_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_ca_enrollment_policy-instance_method
+      def describe_ca_enrollment_policy: (
+                                           directory_id: ::String
+                                         ) -> _DescribeCAEnrollmentPolicyResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCAEnrollmentPolicyResponseSuccess
+
       interface _DescribeCertificateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateResult]
         def certificate: () -> Types::Certificate
@@ -599,6 +613,15 @@ module Aws
                                      ) -> _DescribeUpdateDirectoryResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUpdateDirectoryResponseSuccess
 
+      interface _DisableCAEnrollmentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableCAEnrollmentPolicyResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#disable_ca_enrollment_policy-instance_method
+      def disable_ca_enrollment_policy: (
+                                          directory_id: ::String
+                                        ) -> _DisableCAEnrollmentPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableCAEnrollmentPolicyResponseSuccess
+
       interface _DisableClientAuthenticationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisableClientAuthenticationResult]
       end
@@ -647,6 +670,16 @@ module Aws
                          ?password: ::String
                        ) -> _DisableSsoResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableSsoResponseSuccess
+
+      interface _EnableCAEnrollmentPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableCAEnrollmentPolicyResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#enable_ca_enrollment_policy-instance_method
+      def enable_ca_enrollment_policy: (
+                                         directory_id: ::String,
+                                         pca_connector_arn: ::String
+                                       ) -> _EnableCAEnrollmentPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableCAEnrollmentPolicyResponseSuccess
 
       interface _EnableClientAuthenticationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::EnableClientAuthenticationResult]

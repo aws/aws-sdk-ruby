@@ -144,6 +144,7 @@ module Aws::HealthLake
       attr_accessor job_progress_report: Types::JobProgressReport
       attr_accessor data_access_role_arn: ::String
       attr_accessor message: ::String
+      attr_accessor validation_level: ("strict" | "structure-only" | "minimal")
       SENSITIVE: []
     end
 
@@ -293,6 +294,7 @@ module Aws::HealthLake
       attr_accessor datastore_id: ::String
       attr_accessor data_access_role_arn: ::String
       attr_accessor client_token: ::String
+      attr_accessor validation_level: ("strict" | "structure-only" | "minimal")
       SENSITIVE: []
     end
 

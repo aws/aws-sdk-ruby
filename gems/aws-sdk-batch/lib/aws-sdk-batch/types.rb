@@ -3580,6 +3580,17 @@ module Aws::Batch
     #
     #        </note>
     #
+    #     ECS\_AL2023\_NVIDIA
+    #
+    #     : [Amazon Linux 2023 (GPU)][2]: For all GPU instance families and
+    #       can be used for all non Amazon Web Services Graviton-based
+    #       instance types.
+    #
+    #       <note markdown="1"> ECS\_AL2023\_NVIDIA doesn't support `p3` and `g3` instance
+    #       types.
+    #
+    #        </note>
+    #
     #     ECS\_AL1
     #
     #     : [Amazon Linux][4]. Amazon Linux has reached the end-of-life of
@@ -3594,6 +3605,22 @@ module Aws::Batch
     #     `imageId` nor a `imageIdOverride` parameter is specified, then the
     #     latest Amazon EKS optimized AMI for that image type that Batch
     #     supports is used.
+    #
+    #     Starting end of October 2025 Amazon EKS optimized Amazon Linux
+    #     2023 AMIs will be the default on Batch for EKS versions prior to
+    #     1.33. Starting from Kubernetes version 1.33, EKS optimized Amazon
+    #     Linux 2023 AMIs will be the default when it becomes supported on
+    #     Batch.
+    #
+    #      Amazon Web Services will end support for Amazon EKS AL2-optimized
+    #     and AL2-accelerated AMIs, starting 11/26/25. You can continue
+    #     using Batch-provided Amazon EKS optimized Amazon Linux 2 AMIs on
+    #     your Amazon EKS compute environments beyond the 11/26/25
+    #     end-of-support date, these compute environments will no longer
+    #     receive any new software updates, security patches, or bug fixes
+    #     from Amazon Web Services. For more information on upgrading from
+    #     AL2 to AL2023, see [How to upgrade from EKS AL2 to EKS AL2023]()
+    #     in the *Batch User Guide*.
     #
     #     EKS\_AL2
     #
@@ -8534,7 +8561,7 @@ module Aws::Batch
     #   for share identifiers that start with that prefix. The list of share
     #   identifiers in a fair-share policy can't overlap. For example, you
     #   can't have one that specifies a `shareIdentifier` of `UserA*` and
-    #   another that specifies a `shareIdentifier` of `UserA-1`.
+    #   another that specifies a `shareIdentifier` of `UserA1`.
     #
     #   There can be no more than 500 share identifiers active in a job
     #   queue.

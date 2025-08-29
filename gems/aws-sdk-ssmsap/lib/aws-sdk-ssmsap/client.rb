@@ -662,6 +662,48 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Gets the details of a configuration check operation by specifying the
+    # operation ID.
+    #
+    # @option params [required, String] :operation_id
+    #   The ID of the configuration check operation.
+    #
+    # @return [Types::GetConfigurationCheckOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfigurationCheckOperationOutput#configuration_check_operation #configuration_check_operation} => Types::ConfigurationCheckOperation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configuration_check_operation({
+    #     operation_id: "OperationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_check_operation.id #=> String
+    #   resp.configuration_check_operation.application_id #=> String
+    #   resp.configuration_check_operation.status #=> String, one of "INPROGRESS", "SUCCESS", "ERROR"
+    #   resp.configuration_check_operation.status_message #=> String
+    #   resp.configuration_check_operation.configuration_check_id #=> String, one of "SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"
+    #   resp.configuration_check_operation.configuration_check_name #=> String
+    #   resp.configuration_check_operation.configuration_check_description #=> String
+    #   resp.configuration_check_operation.start_time #=> Time
+    #   resp.configuration_check_operation.end_time #=> Time
+    #   resp.configuration_check_operation.rule_status_counts.failed #=> Integer
+    #   resp.configuration_check_operation.rule_status_counts.warning #=> Integer
+    #   resp.configuration_check_operation.rule_status_counts.info #=> Integer
+    #   resp.configuration_check_operation.rule_status_counts.passed #=> Integer
+    #   resp.configuration_check_operation.rule_status_counts.unknown #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetConfigurationCheckOperation AWS API Documentation
+    #
+    # @overload get_configuration_check_operation(params = {})
+    # @param [Hash] params ({})
+    def get_configuration_check_operation(params = {}, options = {})
+      req = build_request(:get_configuration_check_operation, params)
+      req.send_request(options)
+    end
+
     # Gets the SAP HANA database of an application registered with AWS
     # Systems Manager for SAP.
     #
@@ -897,6 +939,128 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Lists all configuration check types supported by AWS Systems Manager
+    # for SAP.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListConfigurationCheckDefinitionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationCheckDefinitionsOutput#configuration_checks #configuration_checks} => Array&lt;Types::ConfigurationCheckDefinition&gt;
+    #   * {Types::ListConfigurationCheckDefinitionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configuration_check_definitions({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_checks #=> Array
+    #   resp.configuration_checks[0].id #=> String, one of "SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"
+    #   resp.configuration_checks[0].name #=> String
+    #   resp.configuration_checks[0].description #=> String
+    #   resp.configuration_checks[0].applicable_application_types #=> Array
+    #   resp.configuration_checks[0].applicable_application_types[0] #=> String, one of "HANA", "SAP_ABAP"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListConfigurationCheckDefinitions AWS API Documentation
+    #
+    # @overload list_configuration_check_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_configuration_check_definitions(params = {}, options = {})
+      req = build_request(:list_configuration_check_definitions, params)
+      req.send_request(options)
+    end
+
+    # Lists the configuration check operations performed by AWS Systems
+    # Manager for SAP.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @option params [String] :list_mode
+    #   The mode for listing configuration check operations. Defaults to
+    #   "LATEST\_PER\_CHECK".
+    #
+    #   * LATEST\_PER\_CHECK - Will list the latest configuration check
+    #     operation per check type.
+    #
+    #   * ALL\_OPERATIONS - Will list all configuration check operations
+    #     performed on the application.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters of an operation.
+    #
+    # @return [Types::ListConfigurationCheckOperationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationCheckOperationsOutput#configuration_check_operations #configuration_check_operations} => Array&lt;Types::ConfigurationCheckOperation&gt;
+    #   * {Types::ListConfigurationCheckOperationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configuration_check_operations({
+    #     application_id: "ApplicationId", # required
+    #     list_mode: "ALL_OPERATIONS", # accepts ALL_OPERATIONS, LATEST_PER_CHECK
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     filters: [
+    #       {
+    #         name: "FilterName", # required
+    #         value: "FilterValue", # required
+    #         operator: "Equals", # required, accepts Equals, GreaterThanOrEquals, LessThanOrEquals
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_check_operations #=> Array
+    #   resp.configuration_check_operations[0].id #=> String
+    #   resp.configuration_check_operations[0].application_id #=> String
+    #   resp.configuration_check_operations[0].status #=> String, one of "INPROGRESS", "SUCCESS", "ERROR"
+    #   resp.configuration_check_operations[0].status_message #=> String
+    #   resp.configuration_check_operations[0].configuration_check_id #=> String, one of "SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"
+    #   resp.configuration_check_operations[0].configuration_check_name #=> String
+    #   resp.configuration_check_operations[0].configuration_check_description #=> String
+    #   resp.configuration_check_operations[0].start_time #=> Time
+    #   resp.configuration_check_operations[0].end_time #=> Time
+    #   resp.configuration_check_operations[0].rule_status_counts.failed #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.warning #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.info #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.passed #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.unknown #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListConfigurationCheckOperations AWS API Documentation
+    #
+    # @overload list_configuration_check_operations(params = {})
+    # @param [Hash] params ({})
+    def list_configuration_check_operations(params = {}, options = {})
+      req = build_request(:list_configuration_check_operations, params)
+      req.send_request(options)
+    end
+
     # Lists the SAP HANA databases of an application registered with AWS
     # Systems Manager for SAP.
     #
@@ -1083,6 +1247,103 @@ module Aws::SsmSap
     # @param [Hash] params ({})
     def list_operations(params = {}, options = {})
       req = build_request(:list_operations, params)
+      req.send_request(options)
+    end
+
+    # Lists the sub-check results of a specified configuration check
+    # operation.
+    #
+    # @option params [required, String] :operation_id
+    #   The ID of the configuration check operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListSubCheckResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSubCheckResultsOutput#sub_check_results #sub_check_results} => Array&lt;Types::SubCheckResult&gt;
+    #   * {Types::ListSubCheckResultsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sub_check_results({
+    #     operation_id: "OperationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sub_check_results #=> Array
+    #   resp.sub_check_results[0].id #=> String
+    #   resp.sub_check_results[0].name #=> String
+    #   resp.sub_check_results[0].description #=> String
+    #   resp.sub_check_results[0].references #=> Array
+    #   resp.sub_check_results[0].references[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListSubCheckResults AWS API Documentation
+    #
+    # @overload list_sub_check_results(params = {})
+    # @param [Hash] params ({})
+    def list_sub_check_results(params = {}, options = {})
+      req = build_request(:list_sub_check_results, params)
+      req.send_request(options)
+    end
+
+    # Lists the rules of a specified sub-check belonging to a configuration
+    # check operation.
+    #
+    # @option params [required, String] :sub_check_result_id
+    #   The ID of the sub check result.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListSubCheckRuleResultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSubCheckRuleResultsOutput#rule_results #rule_results} => Array&lt;Types::RuleResult&gt;
+    #   * {Types::ListSubCheckRuleResultsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sub_check_rule_results({
+    #     sub_check_result_id: "SubCheckResultId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_results #=> Array
+    #   resp.rule_results[0].id #=> String
+    #   resp.rule_results[0].description #=> String
+    #   resp.rule_results[0].status #=> String, one of "PASSED", "FAILED", "WARNING", "INFO", "UNKNOWN"
+    #   resp.rule_results[0].message #=> String
+    #   resp.rule_results[0].metadata #=> Hash
+    #   resp.rule_results[0].metadata["RuleResultMetadataKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListSubCheckRuleResults AWS API Documentation
+    #
+    # @overload list_sub_check_rule_results(params = {})
+    # @param [Hash] params ({})
+    def list_sub_check_rule_results(params = {}, options = {})
+      req = build_request(:list_sub_check_rule_results, params)
       req.send_request(options)
     end
 
@@ -1308,6 +1569,53 @@ module Aws::SsmSap
       req.send_request(options)
     end
 
+    # Initiates configuration check operations against a specified
+    # application.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application.
+    #
+    # @option params [Array<String>] :configuration_check_ids
+    #   The list of configuration checks to perform.
+    #
+    # @return [Types::StartConfigurationChecksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartConfigurationChecksOutput#configuration_check_operations #configuration_check_operations} => Array&lt;Types::ConfigurationCheckOperation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_configuration_checks({
+    #     application_id: "ApplicationId", # required
+    #     configuration_check_ids: ["SAP_CHECK_01"], # accepts SAP_CHECK_01, SAP_CHECK_02, SAP_CHECK_03
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_check_operations #=> Array
+    #   resp.configuration_check_operations[0].id #=> String
+    #   resp.configuration_check_operations[0].application_id #=> String
+    #   resp.configuration_check_operations[0].status #=> String, one of "INPROGRESS", "SUCCESS", "ERROR"
+    #   resp.configuration_check_operations[0].status_message #=> String
+    #   resp.configuration_check_operations[0].configuration_check_id #=> String, one of "SAP_CHECK_01", "SAP_CHECK_02", "SAP_CHECK_03"
+    #   resp.configuration_check_operations[0].configuration_check_name #=> String
+    #   resp.configuration_check_operations[0].configuration_check_description #=> String
+    #   resp.configuration_check_operations[0].start_time #=> Time
+    #   resp.configuration_check_operations[0].end_time #=> Time
+    #   resp.configuration_check_operations[0].rule_status_counts.failed #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.warning #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.info #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.passed #=> Integer
+    #   resp.configuration_check_operations[0].rule_status_counts.unknown #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartConfigurationChecks AWS API Documentation
+    #
+    # @overload start_configuration_checks(params = {})
+    # @param [Hash] params ({})
+    def start_configuration_checks(params = {}, options = {})
+      req = build_request(:start_configuration_checks, params)
+      req.send_request(options)
+    end
+
     # Request is an operation to stop an application.
     #
     # Parameter `ApplicationId` is required. Parameters
@@ -1489,7 +1797,7 @@ module Aws::SsmSap
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssmsap'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

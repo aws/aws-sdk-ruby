@@ -198,8 +198,7 @@
     },
     "DeleteScalingPlanResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeScalingPlanResourcesRequest":{
       "type":"structure",
@@ -631,8 +630,7 @@
     },
     "UpdateScalingPlanResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "ValidationException":{
       "type":"structure",

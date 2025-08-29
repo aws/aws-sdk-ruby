@@ -139,6 +139,8 @@ module Aws::EKS
     DescribeIdentityProviderConfigResponse = Shapes::StructureShape.new(name: 'DescribeIdentityProviderConfigResponse')
     DescribeInsightRequest = Shapes::StructureShape.new(name: 'DescribeInsightRequest')
     DescribeInsightResponse = Shapes::StructureShape.new(name: 'DescribeInsightResponse')
+    DescribeInsightsRefreshRequest = Shapes::StructureShape.new(name: 'DescribeInsightsRefreshRequest')
+    DescribeInsightsRefreshResponse = Shapes::StructureShape.new(name: 'DescribeInsightsRefreshResponse')
     DescribeNodegroupRequest = Shapes::StructureShape.new(name: 'DescribeNodegroupRequest')
     DescribeNodegroupResponse = Shapes::StructureShape.new(name: 'DescribeNodegroupResponse')
     DescribePodIdentityAssociationRequest = Shapes::StructureShape.new(name: 'DescribePodIdentityAssociationRequest')
@@ -188,6 +190,7 @@ module Aws::EKS
     InsightSummaries = Shapes::ListShape.new(name: 'InsightSummaries')
     InsightSummary = Shapes::StructureShape.new(name: 'InsightSummary')
     InsightsFilter = Shapes::StructureShape.new(name: 'InsightsFilter')
+    InsightsRefreshStatus = Shapes::StringShape.new(name: 'InsightsRefreshStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -281,6 +284,8 @@ module Aws::EKS
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StartInsightsRefreshRequest = Shapes::StructureShape.new(name: 'StartInsightsRefreshRequest')
+    StartInsightsRefreshResponse = Shapes::StructureShape.new(name: 'StartInsightsRefreshResponse')
     StorageConfigRequest = Shapes::StructureShape.new(name: 'StorageConfigRequest')
     StorageConfigResponse = Shapes::StructureShape.new(name: 'StorageConfigResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -864,6 +869,15 @@ module Aws::EKS
     DescribeInsightResponse.add_member(:insight, Shapes::ShapeRef.new(shape: Insight, location_name: "insight"))
     DescribeInsightResponse.struct_class = Types::DescribeInsightResponse
 
+    DescribeInsightsRefreshRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribeInsightsRefreshRequest.struct_class = Types::DescribeInsightsRefreshRequest
+
+    DescribeInsightsRefreshResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DescribeInsightsRefreshResponse.add_member(:status, Shapes::ShapeRef.new(shape: InsightsRefreshStatus, location_name: "status"))
+    DescribeInsightsRefreshResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
+    DescribeInsightsRefreshResponse.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endedAt"))
+    DescribeInsightsRefreshResponse.struct_class = Types::DescribeInsightsRefreshResponse
+
     DescribeNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
     DescribeNodegroupRequest.struct_class = Types::DescribeNodegroupRequest
@@ -1396,6 +1410,13 @@ module Aws::EKS
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    StartInsightsRefreshRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    StartInsightsRefreshRequest.struct_class = Types::StartInsightsRefreshRequest
+
+    StartInsightsRefreshResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    StartInsightsRefreshResponse.add_member(:status, Shapes::ShapeRef.new(shape: InsightsRefreshStatus, location_name: "status"))
+    StartInsightsRefreshResponse.struct_class = Types::StartInsightsRefreshResponse
 
     StorageConfigRequest.add_member(:block_storage, Shapes::ShapeRef.new(shape: BlockStorage, location_name: "blockStorage"))
     StorageConfigRequest.struct_class = Types::StorageConfigRequest
@@ -1987,6 +2008,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
+      api.add_operation(:describe_insights_refresh, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInsightsRefresh"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/insights-refresh"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInsightsRefreshRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInsightsRefreshResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:describe_nodegroup, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeNodegroup"
         o.http_method = "GET"
@@ -2289,6 +2322,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePropagationDelayException)
+      end)
+
+      api.add_operation(:start_insights_refresh, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartInsightsRefresh"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/insights-refresh"
+        o.input = Shapes::ShapeRef.new(shape: StartInsightsRefreshRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartInsightsRefreshResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

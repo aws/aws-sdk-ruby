@@ -3323,6 +3323,7 @@ module Aws::RDS
       attr_accessor min_storage_throughput_per_iops: ::Float
       attr_accessor max_storage_throughput_per_iops: ::Float
       attr_accessor supports_dedicated_log_volume: bool
+      attr_accessor supports_http_endpoint: bool
       SENSITIVE: []
     end
 

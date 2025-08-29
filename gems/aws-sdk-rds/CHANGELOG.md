@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.290.0 (2025-08-28)
+------------------
+
+* Feature - Added RDS HTTP Endpoint feature support flag to DescribeOrderableDBInstanceOptions API
+
 1.289.0 (2025-08-26)
 ------------------
 

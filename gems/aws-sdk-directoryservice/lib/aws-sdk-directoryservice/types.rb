@@ -1613,6 +1613,79 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # Contains the inputs for the DescribeCAEnrollmentPolicy operation.
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to retrieve the CA
+    #   enrollment policy information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCAEnrollmentPolicyRequest AWS API Documentation
+    #
+    class DescribeCAEnrollmentPolicyRequest < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results of the DescribeCAEnrollmentPolicy operation.
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory associated with this CA enrollment
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] pca_connector_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Private
+    #   Certificate Authority (PCA) connector that is configured for
+    #   automatic certificate enrollment in this directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] ca_enrollment_policy_status
+    #   The current status of the CA enrollment policy. This indicates if
+    #   automatic certificate enrollment is currently active, inactive, or
+    #   in a transitional state.
+    #
+    #   Valid values:
+    #
+    #   * `IN_PROGRESS` - The policy is being activated T
+    #
+    #   * `SUCCESS` - The policy is active and automatic certificate
+    #     enrollment is operational
+    #
+    #   * `FAILED` - The policy activation or deactivation failed
+    #
+    #   * `DISABLING` - The policy is being deactivated
+    #
+    #   * `DISABLED` - The policy is inactive and automatic certificate
+    #     enrollment is not available
+    #
+    #   * `IMPAIRED` - Network connectivity is impaired.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time when the CA enrollment policy was last modified or
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ca_enrollment_policy_status_reason
+    #   Additional information explaining the current status of the CA
+    #   enrollment policy, particularly useful when the policy is in an
+    #   error or transitional state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCAEnrollmentPolicyResult AWS API Documentation
+    #
+    class DescribeCAEnrollmentPolicyResult < Struct.new(
+      :directory_id,
+      :pca_connector_arn,
+      :ca_enrollment_policy_status,
+      :last_updated_date_time,
+      :ca_enrollment_policy_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] directory_id
     #   The identifier of the directory.
     #   @return [String]
@@ -2816,6 +2889,47 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # A disable operation for CA enrollment policy is already in progress
+    # for this directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableAlreadyInProgressException AWS API Documentation
+    #
+    class DisableAlreadyInProgressException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the inputs for the DisableCAEnrollmentPolicy operation.
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to disable the CA
+    #   enrollment policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableCAEnrollmentPolicyRequest AWS API Documentation
+    #
+    class DisableCAEnrollmentPolicyRequest < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results of the DisableCAEnrollmentPolicy operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableCAEnrollmentPolicyResult AWS API Documentation
+    #
+    class DisableCAEnrollmentPolicyResult < Aws::EmptyStructure; end
+
     # @!attribute [rw] directory_id
     #   The identifier of the directory
     #   @return [String]
@@ -3017,6 +3131,58 @@ module Aws::DirectoryService
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # An enable operation for CA enrollment policy is already in progress
+    # for this directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableAlreadyInProgressException AWS API Documentation
+    #
+    class EnableAlreadyInProgressException < Struct.new(
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the inputs for the EnableCAEnrollmentPolicy operation.
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory for which to enable the CA
+    #   enrollment policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] pca_connector_arn
+    #   The Amazon Resource Name (ARN) of the Private Certificate Authority
+    #   (PCA) connector to use for automatic certificate enrollment. This
+    #   connector must be properly configured and accessible from the
+    #   directory.
+    #
+    #   The ARN format is:
+    #   `arn:aws:pca-connector-ad:region:account-id:connector/connector-id `
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableCAEnrollmentPolicyRequest AWS API Documentation
+    #
+    class EnableCAEnrollmentPolicyRequest < Struct.new(
+      :directory_id,
+      :pca_connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the results of the EnableCAEnrollmentPolicy operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableCAEnrollmentPolicyResult AWS API Documentation
+    #
+    class EnableCAEnrollmentPolicyResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] directory_id
     #   The identifier of the specified directory.

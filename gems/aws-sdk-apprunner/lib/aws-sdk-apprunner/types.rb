@@ -804,7 +804,8 @@ module Aws::AppRunner
     #   subnets of a single Amazon VPC. App Runner determines the Amazon VPC
     #   from the subnets you specify.
     #
-    #   <note markdown="1"> App Runner currently only provides support for IPv4.
+    #   <note markdown="1"> App Runner only supports subnets of IP address type *IPv4* and *dual
+    #   stack* (IPv4 and IPv6).
     #
     #    </note>
     #   @return [Array<String>]
@@ -2168,19 +2169,9 @@ module Aws::AppRunner
     #   @return [Types::IngressConfiguration]
     #
     # @!attribute [rw] ip_address_type
-    #   App Runner provides you with the option to choose between *Internet
-    #   Protocol version 4 (IPv4)* and *dual stack* (IPv4 and IPv6) for your
-    #   incoming public network configuration. This is an optional
-    #   parameter. If you do not specify an `IpAddressType`, it defaults to
-    #   select IPv4.
-    #
-    #   <note markdown="1"> Currently, App Runner supports dual stack for only Public endpoint.
-    #   Only IPv4 is supported for Private endpoint. If you update a service
-    #   that's using dual-stack Public endpoint to a Private endpoint, your
-    #   App Runner service will default to support only IPv4 for Private
-    #   endpoint and fail to receive traffic originating from IPv6 endpoint.
-    #
-    #    </note>
+    #   App Runner provides you with the option to choose between *IPv4* and
+    #   *dual stack* (IPv4 and IPv6). This is an optional parameter. If you
+    #   do not specify an `IpAddressType`, it defaults to select IPv4.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/NetworkConfiguration AWS API Documentation

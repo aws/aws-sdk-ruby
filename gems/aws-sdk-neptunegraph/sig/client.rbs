@@ -124,7 +124,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -232,7 +232,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -324,7 +324,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -511,7 +511,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -536,7 +536,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -602,6 +602,30 @@ module Aws
                              ) -> _StartExportTaskResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExportTaskResponseSuccess
 
+      interface _StartGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#start_graph-instance_method
+      def start_graph: (
+                         graph_identifier: ::String
+                       ) -> _StartGraphResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartGraphResponseSuccess
+
       interface _StartImportTaskResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartImportTaskOutput]
         def graph_id: () -> ::String
@@ -633,6 +657,30 @@ module Aws
                              ) -> _StartImportTaskResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportTaskResponseSuccess
 
+      interface _StopGraphResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopGraphOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
+        def status_reason: () -> ::String
+        def create_time: () -> ::Time
+        def provisioned_memory: () -> ::Integer
+        def endpoint: () -> ::String
+        def public_connectivity: () -> bool
+        def vector_search_configuration: () -> Types::VectorSearchConfiguration
+        def replica_count: () -> ::Integer
+        def kms_key_identifier: () -> ::String
+        def source_snapshot_id: () -> ::String
+        def deletion_protection: () -> bool
+        def build_number: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#stop_graph-instance_method
+      def stop_graph: (
+                        graph_identifier: ::String
+                      ) -> _StopGraphResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopGraphResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
       end
@@ -658,7 +706,7 @@ module Aws
         def id: () -> ::String
         def name: () -> ::String
         def arn: () -> ::String
-        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+        def status: () -> ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
         def status_reason: () -> ::String
         def create_time: () -> ::Time
         def provisioned_memory: () -> ::Integer
@@ -705,6 +753,10 @@ module Aws
                     snapshot_identifier: ::String
                   ) -> Client::_GetGraphSnapshotResponseSuccess
                     | (:graph_snapshot_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetGraphSnapshotResponseSuccess
+                    | (:graph_stopped waiter_name, 
+                    graph_identifier: ::String
+                  ) -> Client::_GetGraphResponseSuccess
+                    | (:graph_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetGraphResponseSuccess
                     | (:import_task_cancelled waiter_name, 
                     task_identifier: ::String
                   ) -> Client::_GetImportTaskResponseSuccess

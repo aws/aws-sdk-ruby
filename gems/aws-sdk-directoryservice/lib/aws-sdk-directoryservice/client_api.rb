@@ -59,6 +59,8 @@ module Aws::DirectoryService
     AuthenticationFailedException = Shapes::StructureShape.new(name: 'AuthenticationFailedException')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+    CaEnrollmentPolicyStatus = Shapes::StringShape.new(name: 'CaEnrollmentPolicyStatus')
+    CaEnrollmentPolicyStatusReason = Shapes::StringShape.new(name: 'CaEnrollmentPolicyStatusReason')
     CancelSchemaExtensionRequest = Shapes::StructureShape.new(name: 'CancelSchemaExtensionRequest')
     CancelSchemaExtensionResult = Shapes::StructureShape.new(name: 'CancelSchemaExtensionResult')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
@@ -138,6 +140,8 @@ module Aws::DirectoryService
     DeregisterEventTopicResult = Shapes::StructureShape.new(name: 'DeregisterEventTopicResult')
     DescribeADAssessmentRequest = Shapes::StructureShape.new(name: 'DescribeADAssessmentRequest')
     DescribeADAssessmentResult = Shapes::StructureShape.new(name: 'DescribeADAssessmentResult')
+    DescribeCAEnrollmentPolicyRequest = Shapes::StructureShape.new(name: 'DescribeCAEnrollmentPolicyRequest')
+    DescribeCAEnrollmentPolicyResult = Shapes::StructureShape.new(name: 'DescribeCAEnrollmentPolicyResult')
     DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
     DescribeCertificateResult = Shapes::StructureShape.new(name: 'DescribeCertificateResult')
     DescribeClientAuthenticationSettingsRequest = Shapes::StructureShape.new(name: 'DescribeClientAuthenticationSettingsRequest')
@@ -202,6 +206,9 @@ module Aws::DirectoryService
     DirectoryUnavailableException = Shapes::StructureShape.new(name: 'DirectoryUnavailableException')
     DirectoryVpcSettings = Shapes::StructureShape.new(name: 'DirectoryVpcSettings')
     DirectoryVpcSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryVpcSettingsDescription')
+    DisableAlreadyInProgressException = Shapes::StructureShape.new(name: 'DisableAlreadyInProgressException')
+    DisableCAEnrollmentPolicyRequest = Shapes::StructureShape.new(name: 'DisableCAEnrollmentPolicyRequest')
+    DisableCAEnrollmentPolicyResult = Shapes::StructureShape.new(name: 'DisableCAEnrollmentPolicyResult')
     DisableClientAuthenticationRequest = Shapes::StructureShape.new(name: 'DisableClientAuthenticationRequest')
     DisableClientAuthenticationResult = Shapes::StructureShape.new(name: 'DisableClientAuthenticationResult')
     DisableDirectoryDataAccessRequest = Shapes::StructureShape.new(name: 'DisableDirectoryDataAccessRequest')
@@ -220,6 +227,9 @@ module Aws::DirectoryService
     DomainControllerStatus = Shapes::StringShape.new(name: 'DomainControllerStatus')
     DomainControllerStatusReason = Shapes::StringShape.new(name: 'DomainControllerStatusReason')
     DomainControllers = Shapes::ListShape.new(name: 'DomainControllers')
+    EnableAlreadyInProgressException = Shapes::StructureShape.new(name: 'EnableAlreadyInProgressException')
+    EnableCAEnrollmentPolicyRequest = Shapes::StructureShape.new(name: 'EnableCAEnrollmentPolicyRequest')
+    EnableCAEnrollmentPolicyResult = Shapes::StructureShape.new(name: 'EnableCAEnrollmentPolicyResult')
     EnableClientAuthenticationRequest = Shapes::StructureShape.new(name: 'EnableClientAuthenticationRequest')
     EnableClientAuthenticationResult = Shapes::StructureShape.new(name: 'EnableClientAuthenticationResult')
     EnableDirectoryDataAccessRequest = Shapes::StructureShape.new(name: 'EnableDirectoryDataAccessRequest')
@@ -304,6 +314,7 @@ module Aws::DirectoryService
     OwnerDirectoryDescription = Shapes::StructureShape.new(name: 'OwnerDirectoryDescription')
     PageLimit = Shapes::IntegerShape.new(name: 'PageLimit')
     Password = Shapes::StringShape.new(name: 'Password')
+    PcaConnectorArn = Shapes::StringShape.new(name: 'PcaConnectorArn')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     RadiusAuthenticationProtocol = Shapes::StringShape.new(name: 'RadiusAuthenticationProtocol')
     RadiusDisplayLabel = Shapes::StringShape.new(name: 'RadiusDisplayLabel')
@@ -763,6 +774,16 @@ module Aws::DirectoryService
     DescribeADAssessmentResult.add_member(:assessment_reports, Shapes::ShapeRef.new(shape: AssessmentReports, location_name: "AssessmentReports"))
     DescribeADAssessmentResult.struct_class = Types::DescribeADAssessmentResult
 
+    DescribeCAEnrollmentPolicyRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeCAEnrollmentPolicyRequest.struct_class = Types::DescribeCAEnrollmentPolicyRequest
+
+    DescribeCAEnrollmentPolicyResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    DescribeCAEnrollmentPolicyResult.add_member(:pca_connector_arn, Shapes::ShapeRef.new(shape: PcaConnectorArn, location_name: "PcaConnectorArn"))
+    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status, Shapes::ShapeRef.new(shape: CaEnrollmentPolicyStatus, location_name: "CaEnrollmentPolicyStatus"))
+    DescribeCAEnrollmentPolicyResult.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    DescribeCAEnrollmentPolicyResult.add_member(:ca_enrollment_policy_status_reason, Shapes::ShapeRef.new(shape: CaEnrollmentPolicyStatusReason, location_name: "CaEnrollmentPolicyStatusReason"))
+    DescribeCAEnrollmentPolicyResult.struct_class = Types::DescribeCAEnrollmentPolicyResult
+
     DescribeCertificateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DescribeCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location_name: "CertificateId"))
     DescribeCertificateRequest.struct_class = Types::DescribeCertificateRequest
@@ -996,6 +1017,15 @@ module Aws::DirectoryService
     DirectoryVpcSettingsDescription.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     DirectoryVpcSettingsDescription.struct_class = Types::DirectoryVpcSettingsDescription
 
+    DisableAlreadyInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DisableAlreadyInProgressException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DisableAlreadyInProgressException.struct_class = Types::DisableAlreadyInProgressException
+
+    DisableCAEnrollmentPolicyRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DisableCAEnrollmentPolicyRequest.struct_class = Types::DisableCAEnrollmentPolicyRequest
+
+    DisableCAEnrollmentPolicyResult.struct_class = Types::DisableCAEnrollmentPolicyResult
+
     DisableClientAuthenticationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DisableClientAuthenticationRequest.add_member(:type, Shapes::ShapeRef.new(shape: ClientAuthenticationType, required: true, location_name: "Type"))
     DisableClientAuthenticationRequest.struct_class = Types::DisableClientAuthenticationRequest
@@ -1046,6 +1076,16 @@ module Aws::DirectoryService
     DomainControllerLimitExceededException.struct_class = Types::DomainControllerLimitExceededException
 
     DomainControllers.member = Shapes::ShapeRef.new(shape: DomainController)
+
+    EnableAlreadyInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    EnableAlreadyInProgressException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    EnableAlreadyInProgressException.struct_class = Types::EnableAlreadyInProgressException
+
+    EnableCAEnrollmentPolicyRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    EnableCAEnrollmentPolicyRequest.add_member(:pca_connector_arn, Shapes::ShapeRef.new(shape: PcaConnectorArn, required: true, location_name: "PcaConnectorArn"))
+    EnableCAEnrollmentPolicyRequest.struct_class = Types::EnableCAEnrollmentPolicyRequest
+
+    EnableCAEnrollmentPolicyResult.struct_class = Types::EnableCAEnrollmentPolicyResult
 
     EnableClientAuthenticationRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     EnableClientAuthenticationRequest.add_member(:type, Shapes::ShapeRef.new(shape: ClientAuthenticationType, required: true, location_name: "Type"))
@@ -1943,6 +1983,18 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
       end)
 
+      api.add_operation(:describe_ca_enrollment_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCAEnrollmentPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCAEnrollmentPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCAEnrollmentPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:describe_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeCertificate"
         o.http_method = "POST"
@@ -2201,6 +2253,22 @@ module Aws::DirectoryService
         )
       end)
 
+      api.add_operation(:disable_ca_enrollment_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableCAEnrollmentPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableCAEnrollmentPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableCAEnrollmentPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DisableAlreadyInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:disable_client_authentication, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableClientAuthentication"
         o.http_method = "POST"
@@ -2267,6 +2335,23 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: AuthenticationFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:enable_ca_enrollment_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableCAEnrollmentPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableCAEnrollmentPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableCAEnrollmentPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EnableAlreadyInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:enable_client_authentication, Seahorse::Model::Operation.new.tap do |o|

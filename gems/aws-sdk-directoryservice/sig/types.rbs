@@ -433,6 +433,20 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class DescribeCAEnrollmentPolicyRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCAEnrollmentPolicyResult
+      attr_accessor directory_id: ::String
+      attr_accessor pca_connector_arn: ::String
+      attr_accessor ca_enrollment_policy_status: ("InProgress" | "Success" | "Failed" | "Disabling" | "Disabled" | "Impaired")
+      attr_accessor last_updated_date_time: ::Time
+      attr_accessor ca_enrollment_policy_status_reason: ::String
+      SENSITIVE: []
+    end
+
     class DescribeCertificateRequest
       attr_accessor directory_id: ::String
       attr_accessor certificate_id: ::String
@@ -745,6 +759,20 @@ module Aws::DirectoryService
       SENSITIVE: []
     end
 
+    class DisableAlreadyInProgressException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableCAEnrollmentPolicyRequest
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableCAEnrollmentPolicyResult < Aws::EmptyStructure
+    end
+
     class DisableClientAuthenticationRequest
       attr_accessor directory_id: ::String
       attr_accessor type: ("SmartCard" | "SmartCardOrPassword")
@@ -807,6 +835,21 @@ module Aws::DirectoryService
       attr_accessor message: ::String
       attr_accessor request_id: ::String
       SENSITIVE: []
+    end
+
+    class EnableAlreadyInProgressException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableCAEnrollmentPolicyRequest
+      attr_accessor directory_id: ::String
+      attr_accessor pca_connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnableCAEnrollmentPolicyResult < Aws::EmptyStructure
     end
 
     class EnableClientAuthenticationRequest

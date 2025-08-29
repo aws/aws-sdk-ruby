@@ -880,8 +880,7 @@
     },
     "PutRecommendationFeedbackResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "Reaction":{
       "type":"string",
@@ -1208,8 +1207,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{
       "type":"string",
@@ -1270,8 +1268,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "UserId":{
       "type":"string",

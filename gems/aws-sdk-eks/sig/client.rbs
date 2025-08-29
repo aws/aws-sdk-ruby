@@ -585,6 +585,19 @@ module Aws
                             ) -> _DescribeInsightResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInsightResponseSuccess
 
+      interface _DescribeInsightsRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInsightsRefreshResponse]
+        def message: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_insights_refresh-instance_method
+      def describe_insights_refresh: (
+                                       cluster_name: ::String
+                                     ) -> _DescribeInsightsRefreshResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInsightsRefreshResponseSuccess
+
       interface _DescribeNodegroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNodegroupResponse]
         def nodegroup: () -> Types::Nodegroup
@@ -839,6 +852,17 @@ module Aws
                               ?tags: Hash[::String, ::String]
                             ) -> _RegisterClusterResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterClusterResponseSuccess
+
+      interface _StartInsightsRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartInsightsRefreshResponse]
+        def message: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#start_insights_refresh-instance_method
+      def start_insights_refresh: (
+                                    cluster_name: ::String
+                                  ) -> _StartInsightsRefreshResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInsightsRefreshResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

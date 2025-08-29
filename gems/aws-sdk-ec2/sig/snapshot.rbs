@@ -122,6 +122,7 @@ module Aws
                     },
                   ],
                   ?completion_duration_minutes: ::Integer,
+                  ?destination_availability_zone: ::String,
                   ?dry_run: bool
                 ) -> Types::CopySnapshotResult
               | (?Hash[Symbol, untyped]) -> Types::CopySnapshotResult

@@ -3152,7 +3152,7 @@ module Aws::Glue
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor resource_share_type: ("FOREIGN" | "ALL" | "FEDERATED")
-      attr_accessor attributes_to_get: ::Array[("NAME")]
+      attr_accessor attributes_to_get: ::Array[("NAME" | "TARGET_DATABASE")]
       SENSITIVE: []
     end
 

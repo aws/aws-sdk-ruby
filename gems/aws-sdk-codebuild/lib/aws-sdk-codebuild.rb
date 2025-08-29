@@ -54,7 +54,7 @@ module Aws::CodeBuild
   autoload :EndpointProvider, 'aws-sdk-codebuild/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codebuild/endpoints'
 
-  GEM_VERSION = '1.163.0'
+  GEM_VERSION = '1.164.0'
 
 end
 

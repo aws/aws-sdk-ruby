@@ -124,6 +124,16 @@ module Aws
                          ) -> _GetComponentResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentResponseSuccess
 
+      interface _GetConfigurationCheckOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationCheckOperationOutput]
+        def configuration_check_operation: () -> Types::ConfigurationCheckOperation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#get_configuration_check_operation-instance_method
+      def get_configuration_check_operation: (
+                                               operation_id: ::String
+                                             ) -> _GetConfigurationCheckOperationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationCheckOperationResponseSuccess
+
       interface _GetDatabaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDatabaseOutput]
         def database: () -> Types::Database
@@ -191,6 +201,39 @@ module Aws
                            ) -> _ListComponentsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
 
+      interface _ListConfigurationCheckDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationCheckDefinitionsOutput]
+        def configuration_checks: () -> ::Array[Types::ConfigurationCheckDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_configuration_check_definitions-instance_method
+      def list_configuration_check_definitions: (
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListConfigurationCheckDefinitionsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationCheckDefinitionsResponseSuccess
+
+      interface _ListConfigurationCheckOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationCheckOperationsOutput]
+        def configuration_check_operations: () -> ::Array[Types::ConfigurationCheckOperation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_configuration_check_operations-instance_method
+      def list_configuration_check_operations: (
+                                                 application_id: ::String,
+                                                 ?list_mode: ("ALL_OPERATIONS" | "LATEST_PER_CHECK"),
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String,
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ::String,
+                                                     value: ::String,
+                                                     operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
+                                                   },
+                                                 ]
+                                               ) -> _ListConfigurationCheckOperationsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationCheckOperationsResponseSuccess
+
       interface _ListDatabasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatabasesOutput]
         def databases: () -> ::Array[Types::DatabaseSummary]
@@ -244,6 +287,32 @@ module Aws
                              ]
                            ) -> _ListOperationsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
+
+      interface _ListSubCheckResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubCheckResultsOutput]
+        def sub_check_results: () -> ::Array[Types::SubCheckResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_sub_check_results-instance_method
+      def list_sub_check_results: (
+                                    operation_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListSubCheckResultsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubCheckResultsResponseSuccess
+
+      interface _ListSubCheckRuleResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubCheckRuleResultsOutput]
+        def rule_results: () -> ::Array[Types::RuleResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_sub_check_rule_results-instance_method
+      def list_sub_check_rule_results: (
+                                         sub_check_result_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListSubCheckRuleResultsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubCheckRuleResultsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -317,6 +386,17 @@ module Aws
                                        application_id: ::String
                                      ) -> _StartApplicationRefreshResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationRefreshResponseSuccess
+
+      interface _StartConfigurationChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartConfigurationChecksOutput]
+        def configuration_check_operations: () -> ::Array[Types::ConfigurationCheckOperation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#start_configuration_checks-instance_method
+      def start_configuration_checks: (
+                                        application_id: ::String,
+                                        ?configuration_check_ids: Array[("SAP_CHECK_01" | "SAP_CHECK_02" | "SAP_CHECK_03")]
+                                      ) -> _StartConfigurationChecksResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartConfigurationChecksResponseSuccess
 
       interface _StopApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopApplicationOutput]

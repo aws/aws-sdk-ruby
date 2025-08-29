@@ -400,6 +400,23 @@ module Aws
                              request_id: ::String,
                              ?accelerators: ("GPU"),
                              ?storage_type: ("STATIC" | "DYNAMIC"),
+                             ?container_registry_map: {
+                               registry_mappings: Array[
+                                 {
+                                   upstream_registry_url: ::String?,
+                                   ecr_repository_prefix: ::String?,
+                                   upstream_repository_prefix: ::String?,
+                                   ecr_account_id: ::String?
+                                 },
+                               ]?,
+                               image_mappings: Array[
+                                 {
+                                   source_image: ::String?,
+                                   destination_image: ::String?
+                                 },
+                               ]?
+                             },
+                             ?container_registry_map_uri: ::String,
                              ?readme_markdown: ::String,
                              ?parameter_template_path: ::String,
                              ?readme_path: ::String,
@@ -445,6 +462,23 @@ module Aws
                                      ?storage_capacity: ::Integer,
                                      ?tags: Hash[::String, ::String],
                                      ?workflow_bucket_owner_id: ::String,
+                                     ?container_registry_map: {
+                                       registry_mappings: Array[
+                                         {
+                                           upstream_registry_url: ::String?,
+                                           ecr_repository_prefix: ::String?,
+                                           upstream_repository_prefix: ::String?,
+                                           ecr_account_id: ::String?
+                                         },
+                                       ]?,
+                                       image_mappings: Array[
+                                         {
+                                           source_image: ::String?,
+                                           destination_image: ::String?
+                                         },
+                                       ]?
+                                     },
+                                     ?container_registry_map_uri: ::String,
                                      ?readme_markdown: ::String,
                                      ?parameter_template_path: ::String,
                                      ?readme_path: ::String,
@@ -904,6 +938,7 @@ module Aws
         def gpus: () -> ::Integer
         def instance_type: () -> ::String
         def failure_reason: () -> ::String
+        def image_details: () -> Types::ImageDetails
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run_task-instance_method
       def get_run_task: (
@@ -1020,6 +1055,7 @@ module Aws
         def accelerators: () -> ("GPU")
         def storage_type: () -> ("STATIC" | "DYNAMIC")
         def uuid: () -> ::String
+        def container_registry_map: () -> Types::ContainerRegistryMap
         def readme: () -> ::String
         def definition_repository_details: () -> Types::DefinitionRepositoryDetails
         def readme_path: () -> ::String
@@ -1055,6 +1091,7 @@ module Aws
         def tags: () -> ::Hash[::String, ::String]
         def uuid: () -> ::String
         def workflow_bucket_owner_id: () -> ::String
+        def container_registry_map: () -> Types::ContainerRegistryMap
         def readme: () -> ::String
         def definition_repository_details: () -> Types::DefinitionRepositoryDetails
         def readme_path: () -> ::String
@@ -1617,7 +1654,7 @@ module Aws
                        ?parameters: {
                        },
                        ?storage_capacity: ::Integer,
-                       ?output_uri: ::String,
+                       output_uri: ::String,
                        ?log_level: ("OFF" | "FATAL" | "ERROR" | "ALL"),
                        ?tags: Hash[::String, ::String],
                        request_id: ::String,

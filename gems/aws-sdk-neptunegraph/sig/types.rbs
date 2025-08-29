@@ -75,7 +75,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
@@ -166,7 +166,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
@@ -302,7 +302,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
@@ -428,7 +428,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor provisioned_memory: ::Integer
       attr_accessor public_connectivity: bool
       attr_accessor endpoint: ::String
@@ -604,7 +604,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
@@ -639,7 +639,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer
@@ -689,6 +689,30 @@ module Aws::NeptuneGraph
       SENSITIVE: []
     end
 
+    class StartGraphInput
+      attr_accessor graph_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
+      SENSITIVE: []
+    end
+
     class StartImportTaskInput
       attr_accessor import_options: Types::ImportOptions
       attr_accessor fail_on_error: bool
@@ -710,6 +734,30 @@ module Aws::NeptuneGraph
       attr_accessor role_arn: ::String
       attr_accessor status: ("INITIALIZING" | "EXPORTING" | "ANALYZING_DATA" | "IMPORTING" | "REPROVISIONING" | "ROLLING_BACK" | "SUCCEEDED" | "FAILED" | "CANCELLING" | "CANCELLED" | "DELETED")
       attr_accessor import_options: Types::ImportOptions
+      SENSITIVE: []
+    end
+
+    class StopGraphInput
+      attr_accessor graph_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopGraphOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
+      attr_accessor status_reason: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor provisioned_memory: ::Integer
+      attr_accessor endpoint: ::String
+      attr_accessor public_connectivity: bool
+      attr_accessor vector_search_configuration: Types::VectorSearchConfiguration
+      attr_accessor replica_count: ::Integer
+      attr_accessor kms_key_identifier: ::String
+      attr_accessor source_snapshot_id: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor build_number: ::String
       SENSITIVE: []
     end
 
@@ -754,7 +802,7 @@ module Aws::NeptuneGraph
       attr_accessor id: ::String
       attr_accessor name: ::String
       attr_accessor arn: ::String
-      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING")
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "DELETING" | "RESETTING" | "UPDATING" | "SNAPSHOTTING" | "FAILED" | "IMPORTING" | "STARTING" | "STOPPING" | "STOPPED")
       attr_accessor status_reason: ::String
       attr_accessor create_time: ::Time
       attr_accessor provisioned_memory: ::Integer

@@ -666,6 +666,7 @@ module Aws::Schemas
 
       api.metadata = {
         "apiVersion" => "2019-12-02",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "schemas",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

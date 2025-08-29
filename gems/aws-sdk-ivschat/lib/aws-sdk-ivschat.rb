@@ -55,7 +55,7 @@ module Aws::Ivschat
   autoload :EndpointProvider, 'aws-sdk-ivschat/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ivschat/endpoints'
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end
 

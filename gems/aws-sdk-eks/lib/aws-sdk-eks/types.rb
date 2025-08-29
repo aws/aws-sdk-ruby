@@ -3061,6 +3061,46 @@ module Aws::EKS
     end
 
     # @!attribute [rw] cluster_name
+    #   The name of the cluster associated with the insights refresh
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightsRefreshRequest AWS API Documentation
+    #
+    class DescribeInsightsRefreshRequest < Struct.new(
+      :cluster_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   The message associated with the insights refresh operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the insights refresh operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time when the insights refresh operation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The date and time when the insights refresh operation ended.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightsRefreshResponse AWS API Documentation
+    #
+    class DescribeInsightsRefreshResponse < Struct.new(
+      :message,
+      :status,
+      :started_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
     #   The name of your cluster.
     #   @return [String]
     #
@@ -6469,6 +6509,35 @@ module Aws::EKS
     #
     class ServiceUnavailableException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster for the refresh insights operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/StartInsightsRefreshRequest AWS API Documentation
+    #
+    class StartInsightsRefreshRequest < Struct.new(
+      :cluster_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   The message associated with the insights refresh operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the insights refresh operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/StartInsightsRefreshResponse AWS API Documentation
+    #
+    class StartInsightsRefreshResponse < Struct.new(
+      :message,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

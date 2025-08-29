@@ -54,7 +54,7 @@ module Aws::AutoScalingPlans
   autoload :EndpointProvider, 'aws-sdk-autoscalingplans/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-autoscalingplans/endpoints'
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end
 

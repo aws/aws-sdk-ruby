@@ -814,19 +814,6 @@ module Aws::Kinesis
       end
     end
 
-    context "Dual Stack not supported region." do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-west-1", use_fips: true, use_dual_stack: true, stream_arn: "arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream", operation_type: "control"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "OperationType not set" do
       let(:expected) do
         {"error" => "Operation Type is not set. Please contact service team for resolution."}
@@ -1175,19 +1162,6 @@ module Aws::Kinesis
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, consumer_arn: "arn:aws:kinesis:us-east-1:123:accesspoint/testStream/consumer/test-consumer:1525898737"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
-    context "Dual Stack not supported region." do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-west-1", use_fips: true, use_dual_stack: true, consumer_arn: "arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream/consumer/test-consumer:1525898737", operation_type: "control"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
@@ -1576,19 +1550,6 @@ module Aws::Kinesis
       end
     end
 
-    context "ResourceARN as StreamARN test: Dual Stack not supported region." do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-west-1", use_fips: true, use_dual_stack: true, resource_arn: "arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream", operation_type: "control"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "ResourceARN as StreamARN test: OperationType not set" do
       let(:expected) do
         {"error" => "Operation Type is not set. Please contact service team for resolution."}
@@ -1924,19 +1885,6 @@ module Aws::Kinesis
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-east-1", use_fips: false, use_dual_stack: false, resource_arn: "arn:aws:kinesis:us-east-1:123:accesspoint/testStream/consumer/test-consumer:1525898737"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
-    context "ResourceARN as ConsumerARN test: Dual Stack not supported region." do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "us-iso-west-1", use_fips: true, use_dual_stack: true, resource_arn: "arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream/consumer/test-consumer:1525898737", operation_type: "control"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

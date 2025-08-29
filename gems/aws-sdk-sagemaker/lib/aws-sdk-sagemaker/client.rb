@@ -2213,6 +2213,19 @@ module Aws::SageMaker
     #
     #   ^
     #
+    # @option params [String] :cluster_role
+    #   The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes
+    #   to perform cluster autoscaling operations. This role must have
+    #   permissions for `sagemaker:BatchAddClusterNodes` and
+    #   `sagemaker:BatchDeleteClusterNodes`. This is only required when
+    #   autoscaling is enabled and when HyperPod is performing autoscaling
+    #   operations.
+    #
+    # @option params [Types::ClusterAutoScalingConfig] :auto_scaling
+    #   The autoscaling configuration for the cluster. Enables automatic
+    #   scaling of cluster nodes based on workload demand using a
+    #   Karpenter-based system.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster_arn #cluster_arn} => String
@@ -2339,6 +2352,11 @@ module Aws::SageMaker
     #     },
     #     node_recovery: "Automatic", # accepts Automatic, None
     #     node_provisioning_mode: "Continuous", # accepts Continuous
+    #     cluster_role: "RoleArn",
+    #     auto_scaling: {
+    #       mode: "Enable", # required, accepts Enable, Disable
+    #       auto_scaler_type: "Karpenter", # accepts Karpenter
+    #     },
     #   })
     #
     # @example Response structure
@@ -13304,6 +13322,8 @@ module Aws::SageMaker
     #   * {Types::DescribeClusterResponse#orchestrator #orchestrator} => Types::ClusterOrchestrator
     #   * {Types::DescribeClusterResponse#node_recovery #node_recovery} => String
     #   * {Types::DescribeClusterResponse#node_provisioning_mode #node_provisioning_mode} => String
+    #   * {Types::DescribeClusterResponse#cluster_role #cluster_role} => String
+    #   * {Types::DescribeClusterResponse#auto_scaling #auto_scaling} => Types::ClusterAutoScalingConfigOutput
     #
     # @example Request syntax with placeholder values
     #
@@ -13388,6 +13408,11 @@ module Aws::SageMaker
     #   resp.orchestrator.eks.cluster_arn #=> String
     #   resp.node_recovery #=> String, one of "Automatic", "None"
     #   resp.node_provisioning_mode #=> String, one of "Continuous"
+    #   resp.cluster_role #=> String
+    #   resp.auto_scaling.mode #=> String, one of "Enable", "Disable"
+    #   resp.auto_scaling.auto_scaler_type #=> String, one of "Karpenter"
+    #   resp.auto_scaling.status #=> String, one of "InService", "Failed", "Creating", "Deleting"
+    #   resp.auto_scaling.failure_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCluster AWS API Documentation
     #
@@ -27395,6 +27420,15 @@ module Aws::SageMaker
     #   Specify the names of the instance groups to delete. Use a single `,`
     #   as the separator between multiple names.
     #
+    # @option params [String] :cluster_role
+    #   The Amazon Resource Name (ARN) of the IAM role that HyperPod assumes
+    #   for cluster autoscaling operations. Cannot be updated while
+    #   autoscaling is enabled.
+    #
+    # @option params [Types::ClusterAutoScalingConfig] :auto_scaling
+    #   Updates the autoscaling configuration for the cluster. Use to enable
+    #   or disable automatic node scaling.
+    #
     # @return [Types::UpdateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateClusterResponse#cluster_arn #cluster_arn} => String
@@ -27506,6 +27540,11 @@ module Aws::SageMaker
     #     ],
     #     node_recovery: "Automatic", # accepts Automatic, None
     #     instance_groups_to_delete: ["ClusterInstanceGroupName"],
+    #     cluster_role: "RoleArn",
+    #     auto_scaling: {
+    #       mode: "Enable", # required, accepts Enable, Disable
+    #       auto_scaler_type: "Karpenter", # accepts Karpenter
+    #     },
     #   })
     #
     # @example Response structure
@@ -31114,7 +31153,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.326.0'
+      context[:gem_version] = '1.327.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

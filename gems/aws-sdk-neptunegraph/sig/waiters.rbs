@@ -69,6 +69,16 @@ module Aws
                 | (Hash[Symbol, untyped]) -> Client::_GetGraphSnapshotResponseSuccess
       end
 
+      class GraphStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    graph_identifier: ::String
+                  ) -> Client::_GetGraphResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetGraphResponseSuccess
+      end
+
       class ImportTaskCancelled
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

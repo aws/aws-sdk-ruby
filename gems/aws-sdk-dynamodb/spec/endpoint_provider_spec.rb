@@ -2608,7 +2608,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2629,7 +2629,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.list_tables(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -2641,7 +2641,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2662,7 +2662,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.batch_get_item(
           request_items: {"arn:aws:dynamodb:us-east-1:333333333333:table/table_name" => {keys: [{"pk" => {s: "value"}}]}},
         )
@@ -2675,7 +2675,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2689,7 +2689,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2703,7 +2703,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2717,7 +2717,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2731,7 +2731,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2745,7 +2745,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2766,7 +2766,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.list_tables(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -2817,7 +2817,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2837,7 +2837,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
         )
@@ -2850,7 +2850,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2870,7 +2870,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
         )
@@ -2883,7 +2883,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2903,7 +2903,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
         )
@@ -2916,7 +2916,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2969,7 +2969,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -2989,7 +2989,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.batch_get_item(
           request_items: {"arn:aws:dynamodb:us-east-1:333333333333:table/table_name" => {keys: [{"pk" => {s: "value"}}]}},
         )
@@ -3002,7 +3002,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3016,7 +3016,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=preferred, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3069,7 +3069,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3090,7 +3090,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.list_tables(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -3102,7 +3102,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3123,7 +3123,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.batch_get_item(
           request_items: {"arn:aws:dynamodb:us-east-1:333333333333:table/table_name" => {keys: [{"pk" => {s: "value"}}]}},
         )
@@ -3136,7 +3136,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3150,7 +3150,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3164,7 +3164,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3178,7 +3178,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3192,7 +3192,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3206,7 +3206,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3227,7 +3227,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.list_tables(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -3278,7 +3278,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3298,7 +3298,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
         )
@@ -3311,7 +3311,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3331,7 +3331,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
         )
@@ -3344,7 +3344,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3364,7 +3364,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
         )
@@ -3377,7 +3377,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3430,7 +3430,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3450,7 +3450,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.batch_get_item(
           request_items: {"arn:aws:dynamodb:us-east-1:333333333333:table/table_name" => {keys: [{"pk" => {s: "value"}}]}},
         )
@@ -3463,7 +3463,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3477,7 +3477,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=disabled, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3530,7 +3530,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3551,7 +3551,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.list_tables(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -3563,7 +3563,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3584,7 +3584,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.batch_get_item(
           request_items: {"arn:aws:dynamodb:us-east-1:333333333333:table/table_name" => {keys: [{"pk" => {s: "value"}}]}},
         )
@@ -3597,7 +3597,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3611,7 +3611,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3625,7 +3625,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3639,7 +3639,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-west-2:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3653,7 +3653,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=111111111111, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, ResourceArnList=[arn:aws:s3:us-east-1:333333333333:stream/testStream], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3667,7 +3667,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountId=, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3688,7 +3688,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.list_tables(
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
@@ -3739,7 +3739,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3759,7 +3759,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:dynamodb:us-east-1:222222222222:table/table_name',
         )
@@ -3772,7 +3772,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-west-2:222222222222:table/table_name, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3792,7 +3792,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:dynamodb:us-west-2:222222222222:table/table_name',
         )
@@ -3805,7 +3805,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:s3:us-west-2:222222222222:stream/testStream, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3825,7 +3825,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.describe_table(
           table_name: 'arn:aws:s3:us-west-2:222222222222:stream/testStream',
         )
@@ -3838,7 +3838,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3891,7 +3891,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3911,7 +3911,7 @@ module Aws::DynamoDB
           simple_attributes: false,
           stub_responses: true
         )
-        expect_auth({"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"})
+        expect_auth({"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"})
         resp = client.batch_get_item(
           request_items: {"arn:aws:dynamodb:us-east-1:333333333333:table/table_name" => {keys: [{"pk" => {s: "value"}}]}},
         )
@@ -3924,7 +3924,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -3938,7 +3938,7 @@ module Aws::DynamoDB
 
     context "{UseFIPS=false, UseDualStack=false, AccountIdEndpointMode=required, Region=local}" do
       let(:expected) do
-        {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "dynamodb", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
+        {"endpoint" => {"properties" => {"authSchemes" => [{"signingName" => "dynamodb", "name" => "sigv4", "signingRegion" => "us-east-1"}]}, "url" => "http://localhost:8000"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -6672,19 +6672,6 @@ module Aws::DynamoDB
       end
     end
 
-    context "{UseFIPS=true, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-iso-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "{UseFIPS=true, UseDualStack=false, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
       let(:expected) do
         {"endpoint" => {"url" => "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}}
@@ -6696,19 +6683,6 @@ module Aws::DynamoDB
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "{UseFIPS=false, UseDualStack=true, AccountId=111111111111, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, account_id: "111111111111", account_id_endpoint_mode: "preferred", region: "us-iso-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -6879,19 +6853,6 @@ module Aws::DynamoDB
       end
     end
 
-    context "{UseFIPS=true, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "{UseFIPS=true, UseDualStack=false, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
       let(:expected) do
         {"endpoint" => {"url" => "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}}
@@ -6903,19 +6864,6 @@ module Aws::DynamoDB
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "{UseFIPS=false, UseDualStack=true, ResourceArn=arn:aws:dynamodb:us-east-1:222222222222:table/table_name, AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn: "arn:aws:dynamodb:us-east-1:222222222222:table/table_name", account_id_endpoint_mode: "preferred", region: "us-iso-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
@@ -7029,19 +6977,6 @@ module Aws::DynamoDB
       end
     end
 
-    context "{UseFIPS=true, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
-      let(:expected) do
-        {"error" => "FIPS and DualStack are enabled, but this partition does not support one or both"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: true, use_dual_stack: true, resource_arn_list: ["arn:aws:dynamodb:us-east-1:333333333333:table/table_name"], account_id_endpoint_mode: "preferred", region: "us-iso-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
     context "{UseFIPS=true, UseDualStack=false, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
       let(:expected) do
         {"endpoint" => {"url" => "https://dynamodb-fips.us-iso-east-1.c2s.ic.gov"}}
@@ -7053,19 +6988,6 @@ module Aws::DynamoDB
         expect(endpoint.url).to eq(expected['endpoint']['url'])
         expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
         expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
-      end
-    end
-
-    context "{UseFIPS=false, UseDualStack=true, ResourceArnList=[arn:aws:dynamodb:us-east-1:333333333333:table/table_name], AccountIdEndpointMode=preferred, Region=us-iso-east-1}" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{use_fips: false, use_dual_stack: true, resource_arn_list: ["arn:aws:dynamodb:us-east-1:333333333333:table/table_name"], account_id_endpoint_mode: "preferred", region: "us-iso-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
       end
     end
 

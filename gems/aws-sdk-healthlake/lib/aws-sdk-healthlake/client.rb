@@ -483,35 +483,34 @@ module Aws::HealthLake
 
     # @!group API Operations
 
-    # Creates a data store that can ingest and export FHIR formatted data.
+    # Create a FHIR-enabled data store.
     #
     # @option params [String] :datastore_name
-    #   The user generated name for the data store.
+    #   The data store name (user-generated).
     #
     # @option params [required, String] :datastore_type_version
-    #   The FHIR version of the data store. The only supported version is R4.
+    #   The FHIR release version supported by the data store. Current support
+    #   is for version `R4`.
     #
     # @option params [Types::SseConfiguration] :sse_configuration
-    #   The server-side encryption key configuration for a customer provided
+    #   The server-side encryption key configuration for a customer-provided
     #   encryption key specified for creating a data store.
     #
     # @option params [Types::PreloadDataConfig] :preload_data_config
-    #   Optional parameter to preload data upon creation of the data store.
-    #   Currently, the only supported preloaded data is synthetic data
-    #   generated from Synthea.
+    #   An optional parameter to preload (import) open source Synthea FHIR
+    #   data upon creation of the data store.
     #
     # @option params [String] :client_token
-    #   Optional user provided token used for ensuring idempotency.
+    #   An optional user-provided token to ensure API idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Resource tags that are applied to a data store when it is created.
+    #   The resource tags applied to a data store when it is created.
     #
     # @option params [Types::IdentityProviderConfiguration] :identity_provider_configuration
-    #   The configuration of the identity provider that you want to use for
-    #   your data store.
+    #   The identity provider configuration to use for the data store.
     #
     # @return [Types::CreateFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -565,10 +564,10 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Deletes a data store.
+    # Delete a FHIR-enabled data store.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated ID for the data store to be deleted.
+    #   The AWS-generated identifier for the data store to be deleted.
     #
     # @return [Types::DeleteFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -599,13 +598,10 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Gets the properties associated with the FHIR data store, including the
-    # data store ID, data store ARN, data store name, data store status,
-    # when the data store was created, data store type version, and the data
-    # store's endpoint.
+    # Get properties for a FHIR-enabled data store.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated data store ID.
+    #   The data store identifier.
     #
     # @return [Types::DescribeFHIRDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -636,6 +632,12 @@ module Aws::HealthLake
     #   resp.datastore_properties.error_cause.error_message #=> String
     #   resp.datastore_properties.error_cause.error_category #=> String, one of "RETRYABLE_ERROR", "NON_RETRYABLE_ERROR"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * fhir_datastore_active
+    #   * fhir_datastore_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastore AWS API Documentation
     #
     # @overload describe_fhir_datastore(params = {})
@@ -645,15 +647,13 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Displays the properties of a FHIR export job, including the ID, ARN,
-    # name, and the status of the job.
+    # Get FHIR export job properties.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS generated ID for the data store from which files are being
-    #   exported from for an export job.
+    #   The data store identifier from which FHIR data is being exported from.
     #
     # @option params [required, String] :job_id
-    #   The AWS generated ID for an export job.
+    #   The export job identifier.
     #
     # @return [Types::DescribeFHIRExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -679,6 +679,11 @@ module Aws::HealthLake
     #   resp.export_job_properties.data_access_role_arn #=> String
     #   resp.export_job_properties.message #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * fhir_export_job_completed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRExportJob AWS API Documentation
     #
     # @overload describe_fhir_export_job(params = {})
@@ -688,14 +693,14 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Displays the properties of a FHIR import job, including the ID, ARN,
-    # name, and the status of the job.
+    # Get the import job properties to learn more about the job or job
+    # progress.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated ID of the data store.
+    #   The data store identifier.
     #
     # @option params [required, String] :job_id
-    #   The AWS-generated job ID.
+    #   The import job identifier.
     #
     # @return [Types::DescribeFHIRImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -729,6 +734,12 @@ module Aws::HealthLake
     #   resp.import_job_properties.job_progress_report.throughput #=> Float
     #   resp.import_job_properties.data_access_role_arn #=> String
     #   resp.import_job_properties.message #=> String
+    #   resp.import_job_properties.validation_level #=> String, one of "strict", "structure-only", "minimal"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * fhir_import_job_completed
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRImportJob AWS API Documentation
     #
@@ -739,18 +750,18 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Lists all FHIR data stores that are in the user’s account, regardless
-    # of data store status.
+    # List all FHIR-enabled data stores in a user’s account, regardless of
+    # data store status.
     #
     # @option params [Types::DatastoreFilter] :filter
-    #   Lists all filters associated with a FHIR data store request.
+    #   List all filters associated with a FHIR data store request.
     #
     # @option params [String] :next_token
-    #   Fetches the next page of data stores when results are paginated.
+    #   The token used to retrieve the next page of data stores when results
+    #   are paginated.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of data stores returned in a single page of a
-    #   ListFHIRDatastoresRequest call.
+    #   The maximum number of data stores returned on a page.
     #
     # @return [Types::ListFHIRDatastoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -806,32 +817,30 @@ module Aws::HealthLake
     # statuses.
     #
     # @option params [required, String] :datastore_id
-    #   This parameter limits the response to the export job with the
-    #   specified data store ID.
+    #   Limits the response to the export job with the specified data store
+    #   ID.
     #
     # @option params [String] :next_token
-    #   A pagination token used to identify the next page of results to return
-    #   for a ListFHIRExportJobs query.
+    #   A pagination token used to identify the next page of results to
+    #   return.
     #
     # @option params [Integer] :max_results
-    #   This parameter limits the number of results returned for a
-    #   ListFHIRExportJobs to a maximum quantity specified by the user.
+    #   Limits the number of results returned for a ListFHIRExportJobs to a
+    #   maximum quantity specified by the user.
     #
     # @option params [String] :job_name
-    #   This parameter limits the response to the export job with the
-    #   specified job name.
+    #   Limits the response to the export job with the specified job name.
     #
     # @option params [String] :job_status
-    #   This parameter limits the response to the export jobs with the
-    #   specified job status.
+    #   Limits the response to export jobs with the specified job status.
     #
     # @option params [Time,DateTime,Date,Integer,String] :submitted_before
-    #   This parameter limits the response to FHIR export jobs submitted
-    #   before a user specified date.
+    #   Limits the response to FHIR export jobs submitted before a user-
+    #   specified date.
     #
     # @option params [Time,DateTime,Date,Integer,String] :submitted_after
-    #   This parameter limits the response to FHIR export jobs submitted after
-    #   a user specified date.
+    #   Limits the response to FHIR export jobs submitted after a
+    #   user-specified date.
     #
     # @return [Types::ListFHIRExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -876,36 +885,34 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Lists all FHIR import jobs associated with an account and their
+    # List all FHIR import jobs associated with an account and their
     # statuses.
     #
     # @option params [required, String] :datastore_id
-    #   This parameter limits the response to the import job with the
-    #   specified data store ID.
+    #   Limits the response to the import job with the specified data store
+    #   ID.
     #
     # @option params [String] :next_token
-    #   A pagination token used to identify the next page of results to return
-    #   for a ListFHIRImportJobs query.
+    #   The pagination token used to identify the next page of results to
+    #   return.
     #
     # @option params [Integer] :max_results
-    #   This parameter limits the number of results returned for a
-    #   ListFHIRImportJobs to a maximum quantity specified by the user.
+    #   Limits the number of results returned for `ListFHIRImportJobs` to a
+    #   maximum quantity specified by the user.
     #
     # @option params [String] :job_name
-    #   This parameter limits the response to the import job with the
-    #   specified job name.
+    #   Limits the response to the import job with the specified job name.
     #
     # @option params [String] :job_status
-    #   This parameter limits the response to the import job with the
-    #   specified job status.
+    #   Limits the response to the import job with the specified job status.
     #
     # @option params [Time,DateTime,Date,Integer,String] :submitted_before
-    #   This parameter limits the response to FHIR import jobs submitted
-    #   before a user specified date.
+    #   Limits the response to FHIR import jobs submitted before a user-
+    #   specified date.
     #
     # @option params [Time,DateTime,Date,Integer,String] :submitted_after
-    #   This parameter limits the response to FHIR import jobs submitted after
-    #   a user specified date.
+    #   Limits the response to FHIR import jobs submitted after a
+    #   user-specified date.
     #
     # @return [Types::ListFHIRImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -948,6 +955,7 @@ module Aws::HealthLake
     #   resp.import_job_properties_list[0].job_progress_report.throughput #=> Float
     #   resp.import_job_properties_list[0].data_access_role_arn #=> String
     #   resp.import_job_properties_list[0].message #=> String
+    #   resp.import_job_properties_list[0].validation_level #=> String, one of "strict", "structure-only", "minimal"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRImportJobs AWS API Documentation
@@ -962,7 +970,7 @@ module Aws::HealthLake
     # Returns a list of all existing tags associated with a data store.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name(ARN) of the data store for which tags are
+    #   The Amazon Resource Name (ARN) of the data store to which tags are
     #   being added.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -990,24 +998,24 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Begins a FHIR export job.
+    # Start a FHIR export job.
     #
     # @option params [String] :job_name
-    #   The user generated name for an export job.
+    #   The export job name.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
-    #   The output data configuration that was supplied when the export job
-    #   was created.
+    #   The output data configuration supplied when the export job was
+    #   started.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS generated ID for the data store from which files are being
-    #   exported for an export job.
+    #   The data store identifier from which files are being exported.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name used during the initiation of the job.
+    #   The Amazon Resource Name (ARN) used during initiation of the export
+    #   job.
     #
     # @option params [String] :client_token
-    #   An optional user provided token used for ensuring idempotency.
+    #   An optional user provided token used for ensuring API idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1048,31 +1056,35 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Begins a FHIR Import job.
+    # Start importing bulk FHIR data into an ACTIVE data store. The import
+    # job imports FHIR data found in the `InputDataConfig` object and stores
+    # processing results in the `JobOutputDataConfig` object.
     #
     # @option params [String] :job_name
-    #   The name of the FHIR Import job in the StartFHIRImport job request.
+    #   The import job name.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
-    #   The input properties of the FHIR Import job in the StartFHIRImport job
-    #   request.
+    #   The input properties for the import job request.
     #
     # @option params [required, Types::OutputDataConfig] :job_output_data_config
-    #   The output data configuration that was supplied when the export job
-    #   was created.
+    #   The output data configuration supplied when the export job was
+    #   created.
     #
     # @option params [required, String] :datastore_id
-    #   The AWS-generated data store ID.
+    #   The data store identifier.
     #
     # @option params [required, String] :data_access_role_arn
-    #   The Amazon Resource Name (ARN) that gives AWS HealthLake access
-    #   permission.
+    #   The Amazon Resource Name (ARN) that grants access permission to AWS
+    #   HealthLake.
     #
     # @option params [String] :client_token
-    #   Optional user provided token used for ensuring idempotency.
+    #   The optional user-provided token used for ensuring API idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :validation_level
+    #   The validation level of the import job.
     #
     # @return [Types::StartFHIRImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1096,6 +1108,7 @@ module Aws::HealthLake
     #     datastore_id: "DatastoreId", # required
     #     data_access_role_arn: "IamRoleArn", # required
     #     client_token: "ClientTokenString",
+    #     validation_level: "strict", # accepts strict, structure-only, minimal
     #   })
     #
     # @example Response structure
@@ -1113,14 +1126,14 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Adds a user specified key and value tag to a data store.
+    # Add a user-specifed key and value tag to a data store.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name(ARN)that gives AWS HealthLake access to the
-    #   data store which tags are being added to.
+    #   The Amazon Resource Name (ARN) that grants access to the data store
+    #   tags are being added to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The user specified key and value pair tags being added to a data
+    #   The user-specified key and value pair tags being added to a data
     #   store.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1146,14 +1159,14 @@ module Aws::HealthLake
       req.send_request(options)
     end
 
-    # Removes tags from a data store.
+    # Remove a user-specifed key and value tag from a data store.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name(ARN) of the data store for which tags are
+    #   The Amazon Resource Name (ARN) of the data store from which tags are
     #   being removed.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The keys for the tags to be removed from the HealthLake data store.
+    #   The keys for the tags to be removed from the data store.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1191,14 +1204,133 @@ module Aws::HealthLake
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name               | params                            | :delay   | :max_attempts |
+    # | ------------------------- | --------------------------------- | -------- | ------------- |
+    # | fhir_datastore_active     | {Client#describe_fhir_datastore}  | 60       | 360           |
+    # | fhir_datastore_deleted    | {Client#describe_fhir_datastore}  | 120      | 360           |
+    # | fhir_export_job_completed | {Client#describe_fhir_export_job} | 120      | 360           |
+    # | fhir_import_job_completed | {Client#describe_fhir_import_job} | 120      | 720           |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        fhir_datastore_active: Waiters::FHIRDatastoreActive,
+        fhir_datastore_deleted: Waiters::FHIRDatastoreDeleted,
+        fhir_export_job_completed: Waiters::FHIRExportJobCompleted,
+        fhir_import_job_completed: Waiters::FHIRImportJobCompleted
+      }
     end
 
     class << self

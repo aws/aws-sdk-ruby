@@ -5320,8 +5320,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web
-    # ServicesSupport.
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
     #
     # Describes the target authentication profile.
     #
@@ -7847,10 +7847,15 @@ module Aws::Connect
     #
     #   * RoutingStepExpressions: 50
     #
+    #   * AgentStatuses: 50
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You can
     #   include both resource IDs and resource ARNs in the same request.
+    #
+    #   When using `AgentStatuses` as filter make sure Queues is added as
+    #   primary filter.
     #
     #   When using the `RoutingStepExpression` filter, you need to pass
     #   exactly one `QueueId`. The filter is also case sensitive so when using
@@ -7861,20 +7866,28 @@ module Aws::Connect
     #   in the filter.
     #
     # @option params [Array<String>] :groupings
-    #   The grouping applied to the metrics returned. For example, when
-    #   grouped by `QUEUE`, the metrics returned apply to each queue rather
-    #   than aggregated for all queues.
+    #   Defines the level of aggregation for metrics data by a dimension(s).
+    #   Its similar to sorting items into buckets based on a common
+    #   characteristic, then counting or calculating something for each
+    #   bucket. For example, when grouped by `QUEUE`, the metrics returned
+    #   apply to each queue rather than aggregated for all queues.
+    #
+    #   The grouping list is an ordered list, with the first item in the list
+    #   defined as the primary grouping. If no grouping is included in the
+    #   request, the aggregation happens at the instance-level.
     #
     #   * If you group by `CHANNEL`, you should include a Channels filter.
     #     VOICE, CHAT, and TASK channels are supported.
+    #
+    #   * If you group by `AGENT_STATUS`, you must include the `QUEUE` as the
+    #     primary grouping and use queue filter. When you group by
+    #     `AGENT_STATUS`, the only metric available is the `AGENTS_ONLINE`
+    #     metric.
     #
     #   * If you group by `ROUTING_PROFILE`, you must include either a queue
     #     or routing profile filter. In addition, a routing profile filter is
     #     required for metrics `CONTACTS_SCHEDULED`, `CONTACTS_IN_QUEUE`, and
     #     ` OLDEST_CONTACT_AGE`.
-    #
-    #   * If no `Grouping` is included in the request, a summary of metrics is
-    #     returned.
     #
     #   * When using the `RoutingStepExpression` filter, group by
     #     `ROUTING_STEP_EXPRESSION` is required.
@@ -8039,8 +8052,9 @@ module Aws::Connect
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK, EMAIL
     #       routing_profiles: ["RoutingProfileId"],
     #       routing_step_expressions: ["RoutingExpression"],
+    #       agent_statuses: ["AgentStatusId"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
@@ -8067,6 +8081,8 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.routing_profile.id #=> String
     #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
     #   resp.metric_results[0].dimensions.routing_step_expression #=> String
+    #   resp.metric_results[0].dimensions.agent_status.arn #=> String
+    #   resp.metric_results[0].dimensions.agent_status.id #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
@@ -8701,8 +8717,9 @@ module Aws::Connect
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK, EMAIL
     #       routing_profiles: ["RoutingProfileId"],
     #       routing_step_expressions: ["RoutingExpression"],
+    #       agent_statuses: ["AgentStatusId"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION, AGENT_STATUS
     #     historical_metrics: [ # required
     #       {
     #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
@@ -8728,6 +8745,8 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.routing_profile.id #=> String
     #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
     #   resp.metric_results[0].dimensions.routing_step_expression #=> String
+    #   resp.metric_results[0].dimensions.agent_status.arn #=> String
+    #   resp.metric_results[0].dimensions.agent_status.id #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -10791,7 +10810,7 @@ module Aws::Connect
     # service level quota of 99 phone numbers, and in any 180 day period you
     # release 99, claim 99, and then release 99, you will have exceeded the
     # 200% limit. At that point you are blocked from claiming any more
-    # numbers until you open an Amazon Web ServicesSupport ticket.
+    # numbers until you open an Amazon Web Services Support ticket.
     #
     #
     #
@@ -11135,8 +11154,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web
-    # ServicesSupport.
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
     #
     # Provides summary information about the authentication profiles in a
     # specified Amazon Connect instance.
@@ -14008,7 +14027,7 @@ module Aws::Connect
     #  After releasing a phone number, the phone number enters into a
     # cooldown period for up to 180 days. It cannot be searched for or
     # claimed again until the period has ended. If you accidentally release
-    # a phone number, contact Amazon Web ServicesSupport.
+    # a phone number, contact Amazon Web Services Support.
     #
     # If you plan to claim and release numbers frequently, contact us for a
     # service quota exception. Otherwise, it is possible you will be blocked
@@ -16513,8 +16532,8 @@ module Aws::Connect
     #
     # If you use the `ChatDurationInMinutes` parameter and receive a 400
     # error, your account may not support the ability to configure custom
-    # chat durations. For more information, contact Amazon Web
-    # ServicesSupport.
+    # chat durations. For more information, contact Amazon Web Services
+    # Support.
     #
     # For more information about chat, see the following topics in the
     # *Amazon Connect Administrator Guide*:
@@ -18511,8 +18530,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web
-    # ServicesSupport.
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
     #
     # Updates the selected authentication profile.
     #
@@ -19608,7 +19627,7 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact Amazon Web ServicesSupport for
+    #   access this feature, contact Amazon Web Services Support for
     #   allowlisting.
     #
     #    </note>
@@ -21543,7 +21562,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.214.0'
+      context[:gem_version] = '1.215.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

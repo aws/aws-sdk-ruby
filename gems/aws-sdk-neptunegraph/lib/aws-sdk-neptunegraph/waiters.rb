@@ -75,6 +75,7 @@ module Aws::NeptuneGraph
   # | graph_deleted                    | {Client#get_graph}                  | 60       | 60            |
   # | graph_snapshot_available         | {Client#get_graph_snapshot}         | 60       | 120           |
   # | graph_snapshot_deleted           | {Client#get_graph_snapshot}         | 60       | 60            |
+  # | graph_stopped                    | {Client#get_graph}                  | 20       | 90            |
   # | import_task_cancelled            | {Client#get_import_task}            | 60       | 60            |
   # | import_task_successful           | {Client#get_import_task}            | 60       | 480           |
   # | private_graph_endpoint_available | {Client#get_private_graph_endpoint} | 10       | 180           |
@@ -365,6 +366,51 @@ module Aws::NeptuneGraph
 
       # @option (see Client#get_graph_snapshot)
       # @return (see Client#get_graph_snapshot)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until Graph is Stopped
+    class GraphStopped
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (90)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 90,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_graph,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "STOPPED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status != 'STOPPING'",
+                "state" => "failure",
+                "expected" => true
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_graph)
+      # @return (see Client#get_graph)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

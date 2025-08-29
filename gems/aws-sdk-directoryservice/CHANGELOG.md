@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2025-08-27)
+------------------
+
+* Feature - Add APIs for CA AutoEnrollment support: DescribeCAEnrollmentPolicy, EnableCAEnrollmentPolicy and DisableCAEnrollmentPolicy.
+
 1.92.0 (2025-08-26)
 ------------------
 

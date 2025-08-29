@@ -80,7 +80,7 @@ module Aws::RDS
   autoload :ReservedDBInstancesOffering, 'aws-sdk-rds/reserved_db_instances_offering'
   autoload :ResourcePendingMaintenanceActionList, 'aws-sdk-rds/resource_pending_maintenance_action_list'
 
-  GEM_VERSION = '1.289.0'
+  GEM_VERSION = '1.290.0'
 
 end
 

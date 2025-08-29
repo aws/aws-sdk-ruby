@@ -54,7 +54,7 @@ module Aws::SupplyChain
   autoload :EndpointProvider, 'aws-sdk-supplychain/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-supplychain/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

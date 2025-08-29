@@ -92,6 +92,28 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class ConfigurationCheckDefinition
+      attr_accessor id: ("SAP_CHECK_01" | "SAP_CHECK_02" | "SAP_CHECK_03")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor applicable_application_types: ::Array[("HANA" | "SAP_ABAP")]
+      SENSITIVE: []
+    end
+
+    class ConfigurationCheckOperation
+      attr_accessor id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor status: ("INPROGRESS" | "SUCCESS" | "ERROR")
+      attr_accessor status_message: ::String
+      attr_accessor configuration_check_id: ("SAP_CHECK_01" | "SAP_CHECK_02" | "SAP_CHECK_03")
+      attr_accessor configuration_check_name: ::String
+      attr_accessor configuration_check_description: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor rule_status_counts: Types::RuleStatusCounts
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -182,6 +204,16 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class GetConfigurationCheckOperationInput
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationCheckOperationOutput
+      attr_accessor configuration_check_operation: Types::ConfigurationCheckOperation
+      SENSITIVE: []
+    end
+
     class GetDatabaseInput
       attr_accessor application_id: ::String
       attr_accessor component_id: ::String
@@ -265,6 +297,33 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class ListConfigurationCheckDefinitionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationCheckDefinitionsOutput
+      attr_accessor configuration_checks: ::Array[Types::ConfigurationCheckDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationCheckOperationsInput
+      attr_accessor application_id: ::String
+      attr_accessor list_mode: ("ALL_OPERATIONS" | "LATEST_PER_CHECK")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListConfigurationCheckOperationsOutput
+      attr_accessor configuration_check_operations: ::Array[Types::ConfigurationCheckOperation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDatabasesInput
       attr_accessor application_id: ::String
       attr_accessor component_id: ::String
@@ -303,6 +362,32 @@ module Aws::SsmSap
 
     class ListOperationsOutput
       attr_accessor operations: ::Array[Types::Operation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubCheckResultsInput
+      attr_accessor operation_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubCheckResultsOutput
+      attr_accessor sub_check_results: ::Array[Types::SubCheckResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubCheckRuleResultsInput
+      attr_accessor sub_check_result_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubCheckRuleResultsOutput
+      attr_accessor rule_results: ::Array[Types::RuleResult]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -392,6 +477,24 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class RuleResult
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("PASSED" | "FAILED" | "WARNING" | "INFO" | "UNKNOWN")
+      attr_accessor message: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RuleStatusCounts
+      attr_accessor failed: ::Integer
+      attr_accessor warning: ::Integer
+      attr_accessor info: ::Integer
+      attr_accessor passed: ::Integer
+      attr_accessor unknown: ::Integer
+      SENSITIVE: []
+    end
+
     class StartApplicationInput
       attr_accessor application_id: ::String
       SENSITIVE: []
@@ -412,6 +515,17 @@ module Aws::SsmSap
       SENSITIVE: []
     end
 
+    class StartConfigurationChecksInput
+      attr_accessor application_id: ::String
+      attr_accessor configuration_check_ids: ::Array[("SAP_CHECK_01" | "SAP_CHECK_02" | "SAP_CHECK_03")]
+      SENSITIVE: []
+    end
+
+    class StartConfigurationChecksOutput
+      attr_accessor configuration_check_operations: ::Array[Types::ConfigurationCheckOperation]
+      SENSITIVE: []
+    end
+
     class StopApplicationInput
       attr_accessor application_id: ::String
       attr_accessor stop_connected_entity: ("DBMS")
@@ -421,6 +535,14 @@ module Aws::SsmSap
 
     class StopApplicationOutput
       attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubCheckResult
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor references: ::Array[::String]
       SENSITIVE: []
     end
 

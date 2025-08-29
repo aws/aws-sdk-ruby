@@ -1,13 +1,13 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "GetSpritesSuccess",
-    "operationName" : "GetSprites",
+    "id" : "GetTileSuccess",
+    "operationName" : "GetTile",
     "input" : {
-      "Style" : "Standard",
-      "ColorScheme" : "Light",
-      "Variant" : "Default",
-      "FileName" : "sprites.json"
+      "Tileset" : "vector.basemap",
+      "X" : "5190",
+      "Y" : "11218",
+      "Z" : "15"
     },
     "expectation" : {
       "success" : { }
@@ -19,13 +19,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetTileSuccess",
-    "operationName" : "GetTile",
+    "id" : "GetSpritesSuccess",
+    "operationName" : "GetSprites",
     "input" : {
-      "Tileset" : "vector.basemap",
-      "X" : "5190",
-      "Y" : "11218",
-      "Z" : "15"
+      "Style" : "Standard",
+      "ColorScheme" : "Light",
+      "Variant" : "Default",
+      "FileName" : "sprites.json"
     },
     "expectation" : {
       "success" : { }

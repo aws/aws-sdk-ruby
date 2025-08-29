@@ -379,6 +379,100 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # Represents a configuration check definition supported by AWS Systems
+    # Manager for SAP.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the configuration check.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration check.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the configuration check validates.
+    #   @return [String]
+    #
+    # @!attribute [rw] applicable_application_types
+    #   The list of SSMSAP application types that this configuration check
+    #   can be evaluated against.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ConfigurationCheckDefinition AWS API Documentation
+    #
+    class ConfigurationCheckDefinition < Struct.new(
+      :id,
+      :name,
+      :description,
+      :applicable_application_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a configuration check operation that has been executed
+    # against an application.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the configuration check operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the application against which the configuration check was
+    #   performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the configuration check operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message providing additional details about the status of the
+    #   configuration check operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_check_id
+    #   The unique identifier of the configuration check that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_check_name
+    #   The name of the configuration check that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_check_description
+    #   A description of the configuration check that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the configuration check operation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time at which the configuration check operation completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rule_status_counts
+    #   A summary of all the rule results, showing counts for each status
+    #   type.
+    #   @return [Types::RuleStatusCounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ConfigurationCheckOperation AWS API Documentation
+    #
+    class ConfigurationCheckOperation < Struct.new(
+      :id,
+      :application_id,
+      :status,
+      :status_message,
+      :configuration_check_id,
+      :configuration_check_name,
+      :configuration_check_description,
+      :start_time,
+      :end_time,
+      :rule_status_counts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A conflict has occurred.
     #
     # @!attribute [rw] message
@@ -679,6 +773,30 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # @!attribute [rw] operation_id
+    #   The ID of the configuration check operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetConfigurationCheckOperationInput AWS API Documentation
+    #
+    class GetConfigurationCheckOperationInput < Struct.new(
+      :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_check_operation
+    #   Returns the details of a configuration check operation.
+    #   @return [Types::ConfigurationCheckOperation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/GetConfigurationCheckOperationOutput AWS API Documentation
+    #
+    class GetConfigurationCheckOperationOutput < Struct.new(
+      :configuration_check_operation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The ID of the application.
     #   @return [String]
@@ -938,6 +1056,104 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListConfigurationCheckDefinitionsInput AWS API Documentation
+    #
+    class ListConfigurationCheckDefinitionsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_checks
+    #   The configuration check types supported by AWS Systems Manager for
+    #   SAP.
+    #   @return [Array<Types::ConfigurationCheckDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListConfigurationCheckDefinitionsOutput AWS API Documentation
+    #
+    class ListConfigurationCheckDefinitionsOutput < Struct.new(
+      :configuration_checks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] list_mode
+    #   The mode for listing configuration check operations. Defaults to
+    #   "LATEST\_PER\_CHECK".
+    #
+    #   * LATEST\_PER\_CHECK - Will list the latest configuration check
+    #     operation per check type.
+    #
+    #   * ALL\_OPERATIONS - Will list all configuration check operations
+    #     performed on the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters of an operation.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListConfigurationCheckOperationsInput AWS API Documentation
+    #
+    class ListConfigurationCheckOperationsInput < Struct.new(
+      :application_id,
+      :list_mode,
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_check_operations
+    #   The configuration check operations performed by AWS Systems Manager
+    #   for SAP.
+    #   @return [Array<Types::ConfigurationCheckOperation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListConfigurationCheckOperationsOutput AWS API Documentation
+    #
+    class ListConfigurationCheckOperationsOutput < Struct.new(
+      :configuration_check_operations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The ID of the application.
     #   @return [String]
@@ -1085,6 +1301,91 @@ module Aws::SsmSap
     #
     class ListOperationsOutput < Struct.new(
       :operations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation_id
+    #   The ID of the configuration check operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListSubCheckResultsInput AWS API Documentation
+    #
+    class ListSubCheckResultsInput < Struct.new(
+      :operation_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sub_check_results
+    #   The sub-check results of a configuration check operation.
+    #   @return [Array<Types::SubCheckResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListSubCheckResultsOutput AWS API Documentation
+    #
+    class ListSubCheckResultsOutput < Struct.new(
+      :sub_check_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sub_check_result_id
+    #   The ID of the sub check result.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   nextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListSubCheckRuleResultsInput AWS API Documentation
+    #
+    class ListSubCheckRuleResultsInput < Struct.new(
+      :sub_check_result_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_results
+    #   The rule results of a sub-check belonging to a configuration check
+    #   operation.
+    #   @return [Array<Types::RuleResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/ListSubCheckRuleResultsOutput AWS API Documentation
+    #
+    class ListSubCheckRuleResultsOutput < Struct.new(
+      :rule_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1407,6 +1708,74 @@ module Aws::SsmSap
       include Aws::Structure
     end
 
+    # Represents the result of a single rule within a configuration check.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the rule result.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the rule validates.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the rule result.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message providing details about the rule result.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   Additional metadata associated with the rule result.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RuleResult AWS API Documentation
+    #
+    class RuleResult < Struct.new(
+      :id,
+      :description,
+      :status,
+      :message,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of rule results, providing counts for each status type.
+    #
+    # @!attribute [rw] failed
+    #   The number of rules that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] warning
+    #   The number of rules that returned warnings.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] info
+    #   The number of rules that returned informational results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] passed
+    #   The number of rules that passed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unknown
+    #   The number of rules with unknown status.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/RuleStatusCounts AWS API Documentation
+    #
+    class RuleStatusCounts < Struct.new(
+      :failed,
+      :warning,
+      :info,
+      :passed,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_id
     #   The ID of the application.
     #   @return [String]
@@ -1459,6 +1828,35 @@ module Aws::SsmSap
     #   The ID of the application.
     #   @return [String]
     #
+    # @!attribute [rw] configuration_check_ids
+    #   The list of configuration checks to perform.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartConfigurationChecksInput AWS API Documentation
+    #
+    class StartConfigurationChecksInput < Struct.new(
+      :application_id,
+      :configuration_check_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_check_operations
+    #   The configuration check operations that were started.
+    #   @return [Array<Types::ConfigurationCheckOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/StartConfigurationChecksOutput AWS API Documentation
+    #
+    class StartConfigurationChecksOutput < Struct.new(
+      :configuration_check_operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   The ID of the application.
+    #   @return [String]
+    #
     # @!attribute [rw] stop_connected_entity
     #   Specify the `ConnectedEntityType`. Accepted type is `DBMS`.
     #
@@ -1490,6 +1888,37 @@ module Aws::SsmSap
     #
     class StopApplicationOutput < Struct.new(
       :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the result of a sub-check within a configuration check
+    # operation.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the sub-check result.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the sub-check.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the sub-check validates.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of references or documentation links related to the
+    #   sub-check.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-sap-2018-05-10/SubCheckResult AWS API Documentation
+    #
+    class SubCheckResult < Struct.new(
+      :id,
+      :name,
+      :description,
+      :references)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -8025,7 +8025,7 @@ module Aws::Glue
     #     next_token: "Token",
     #     max_results: 1,
     #     resource_share_type: "FOREIGN", # accepts FOREIGN, ALL, FEDERATED
-    #     attributes_to_get: ["NAME"], # accepts NAME
+    #     attributes_to_get: ["NAME"], # accepts NAME, TARGET_DATABASE
     #   })
     #
     # @example Response structure
@@ -17918,7 +17918,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.234.0'
+      context[:gem_version] = '1.235.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

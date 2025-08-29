@@ -167,6 +167,12 @@ module Aws::Omics
       SENSITIVE: []
     end
 
+    class ContainerRegistryMap
+      attr_accessor registry_mappings: ::Array[Types::RegistryMapping]
+      attr_accessor image_mappings: ::Array[Types::ImageMapping]
+      SENSITIVE: []
+    end
+
     class CreateAnnotationStoreRequest
       attr_accessor reference: Types::ReferenceItem
       attr_accessor name: ::String
@@ -370,6 +376,8 @@ module Aws::Omics
       attr_accessor request_id: ::String
       attr_accessor accelerators: ("GPU")
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
+      attr_accessor container_registry_map: Types::ContainerRegistryMap
+      attr_accessor container_registry_map_uri: ::String
       attr_accessor readme_markdown: ::String
       attr_accessor parameter_template_path: ::String
       attr_accessor readme_path: ::String
@@ -403,6 +411,8 @@ module Aws::Omics
       attr_accessor storage_capacity: ::Integer
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor workflow_bucket_owner_id: ::String
+      attr_accessor container_registry_map: Types::ContainerRegistryMap
+      attr_accessor container_registry_map_uri: ::String
       attr_accessor readme_markdown: ::String
       attr_accessor parameter_template_path: ::String
       attr_accessor readme_path: ::String
@@ -942,6 +952,7 @@ module Aws::Omics
       attr_accessor gpus: ::Integer
       attr_accessor instance_type: ::String
       attr_accessor failure_reason: ::String
+      attr_accessor image_details: Types::ImageDetails
       SENSITIVE: []
     end
 
@@ -1060,6 +1071,7 @@ module Aws::Omics
       attr_accessor accelerators: ("GPU")
       attr_accessor storage_type: ("STATIC" | "DYNAMIC")
       attr_accessor uuid: ::String
+      attr_accessor container_registry_map: Types::ContainerRegistryMap
       attr_accessor readme: ::String
       attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails
       attr_accessor readme_path: ::String
@@ -1096,9 +1108,23 @@ module Aws::Omics
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor uuid: ::String
       attr_accessor workflow_bucket_owner_id: ::String
+      attr_accessor container_registry_map: Types::ContainerRegistryMap
       attr_accessor readme: ::String
       attr_accessor definition_repository_details: Types::DefinitionRepositoryDetails
       attr_accessor readme_path: ::String
+      SENSITIVE: []
+    end
+
+    class ImageDetails
+      attr_accessor image: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor source_image: ::String
+      SENSITIVE: []
+    end
+
+    class ImageMapping
+      attr_accessor source_image: ::String
+      attr_accessor destination_image: ::String
       SENSITIVE: []
     end
 
@@ -1681,6 +1707,14 @@ module Aws::Omics
       attr_accessor name: ::String
       attr_accessor created_after: ::Time
       attr_accessor created_before: ::Time
+      SENSITIVE: []
+    end
+
+    class RegistryMapping
+      attr_accessor upstream_registry_url: ::String
+      attr_accessor ecr_repository_prefix: ::String
+      attr_accessor upstream_repository_prefix: ::String
+      attr_accessor ecr_account_id: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2025-08-28)
+------------------
+
+* Feature - Added support for Configuration Checks on SAP HANA Applications.
+
 1.42.0 (2025-08-26)
 ------------------
 

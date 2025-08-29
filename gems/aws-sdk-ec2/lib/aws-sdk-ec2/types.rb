@@ -7474,17 +7474,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the new AMI in the destination Region.
+    #   A description for the new AMI.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
-    #   Specifies whether the destination snapshots of the copied image
-    #   should be encrypted. You can encrypt a copy of an unencrypted
-    #   snapshot, but you cannot create an unencrypted copy of an encrypted
-    #   snapshot. The default KMS key for Amazon EBS is used unless you
-    #   specify a non-default Key Management Service (KMS) KMS key using
-    #   `KmsKeyId`. For more information, see [Use encryption with
-    #   EBS-backed AMIs][1] in the *Amazon EC2 User Guide*.
+    #   Specifies whether to encrypt the snapshots of the copied image.
+    #
+    #   You can encrypt a copy of an unencrypted snapshot, but you cannot
+    #   create an unencrypted copy of an encrypted snapshot. The default KMS
+    #   key for Amazon EBS is used unless you specify a non-default Key
+    #   Management Service (KMS) KMS key using `KmsKeyId`. For more
+    #   information, see [Use encryption with EBS-backed AMIs][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -7520,7 +7521,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the new AMI in the destination Region.
+    #   The name of the new AMI.
     #   @return [String]
     #
     # @!attribute [rw] source_image_id
@@ -7532,14 +7533,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] destination_outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
-    #   AMI. Only specify this parameter when copying an AMI from an Amazon
-    #   Web Services Region to an Outpost. The AMI must be in the Region of
-    #   the destination Outpost. You cannot copy an AMI from an Outpost to a
+    #   The Amazon Resource Name (ARN) of the Outpost for the new AMI.
+    #
+    #   Only specify this parameter when copying an AMI from an Amazon Web
+    #   Services Region to an Outpost. The AMI must be in the Region of the
+    #   destination Outpost. You can't copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
     #   For more information, see [Copy AMIs from an Amazon Web Services
     #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
+    #
+    #   Only one of `DestinationAvailabilityZone`,
+    #   `DestinationAvailabilityZoneId`, or `DestinationOutpostArn` can be
+    #   specified.
     #
     #
     #
@@ -7547,10 +7553,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] copy_image_tags
-    #   Indicates whether to include your user-defined AMI tags when copying
-    #   the AMI.
+    #   Specifies whether to copy your user-defined AMI tags to the new AMI.
     #
-    #   The following tags will not be copied:
+    #   The following tags are not be copied:
     #
     #   * System tags (prefixed with `aws:`)
     #
@@ -7590,6 +7595,11 @@ module Aws::EC2
     #   If you do not specify a value, the AMI copy operation is completed
     #   on a best-effort basis.
     #
+    #   <note markdown="1"> This parameter is not supported when copying an AMI to or from a
+    #   Local Zone, or to an Outpost.
+    #
+    #    </note>
+    #
     #   For more information, see [Time-based copies for Amazon EBS
     #   snapshots and EBS-backed AMIs][1].
     #
@@ -7597,6 +7607,23 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] destination_availability_zone
+    #   The Local Zone for the new AMI (for example, `cn-north-1-pkx-1a`).
+    #
+    #   Only one of `DestinationAvailabilityZone`,
+    #   `DestinationAvailabilityZoneId`, or `DestinationOutpostArn` can be
+    #   specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_availability_zone_id
+    #   The ID of the Local Zone for the new AMI (for example,
+    #   `cnn1-pkx1-az1`).
+    #
+    #   Only one of `DestinationAvailabilityZone`,
+    #   `DestinationAvailabilityZoneId`, or `DestinationOutpostArn` can be
+    #   specified.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7619,6 +7646,8 @@ module Aws::EC2
       :copy_image_tags,
       :tag_specifications,
       :snapshot_copy_completion_duration_minutes,
+      :destination_availability_zone,
+      :destination_availability_zone_id,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure
@@ -7644,11 +7673,11 @@ module Aws::EC2
     #
     # @!attribute [rw] destination_outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
-    #   snapshot. Only specify this parameter when copying a snapshot from
-    #   an Amazon Web Services Region to an Outpost. The snapshot must be in
-    #   the Region for the destination Outpost. You cannot copy a snapshot
-    #   from an Outpost to a Region, from one Outpost to another, or within
-    #   the same Outpost.
+    #   snapshot.
+    #
+    #   <note markdown="1"> Only supported when copying a snapshot to an Outpost.
+    #
+    #    </note>
     #
     #   For more information, see [ Copy snapshots from an Amazon Web
     #   Services Region to an Outpost][1] in the *Amazon EBS User Guide*.
@@ -7744,6 +7773,11 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] completion_duration_minutes
+    #   <note markdown="1"> Not supported when copying snapshots to or from Local Zones or
+    #   Outposts.
+    #
+    #    </note>
+    #
     #   Specify a completion duration, in 15 minute increments, to initiate
     #   a time-based snapshot copy. Time-based snapshot copy operations
     #   complete within the specified duration. For more information, see [
@@ -7756,6 +7790,15 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html
     #   @return [Integer]
+    #
+    # @!attribute [rw] destination_availability_zone
+    #   The Local Zone, for example, `cn-north-1-pkx-1a` to which to copy
+    #   the snapshot.
+    #
+    #   <note markdown="1"> Only supported when copying a snapshot to a Local Zone.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7777,6 +7820,7 @@ module Aws::EC2
       :source_snapshot_id,
       :tag_specifications,
       :completion_duration_minutes,
+      :destination_availability_zone,
       :dry_run)
       SENSITIVE = [:presigned_url]
       include Aws::Structure

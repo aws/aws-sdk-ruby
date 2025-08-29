@@ -668,7 +668,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1016,7 +1016,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1292,7 +1292,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -1310,6 +1310,7 @@ module Aws::NeptuneGraph
     #
     #   * graph_available
     #   * graph_deleted
+    #   * graph_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/GetGraph AWS API Documentation
     #
@@ -1729,7 +1730,7 @@ module Aws::NeptuneGraph
     #   resp.graphs[0].id #=> String
     #   resp.graphs[0].name #=> String
     #   resp.graphs[0].arn #=> String
-    #   resp.graphs[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.graphs[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.graphs[0].provisioned_memory #=> Integer
     #   resp.graphs[0].public_connectivity #=> Boolean
     #   resp.graphs[0].endpoint #=> String
@@ -1966,7 +1967,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -2065,7 +2066,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -2197,6 +2198,62 @@ module Aws::NeptuneGraph
       req.send_request(options)
     end
 
+    # Starts the specific graph.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @return [Types::StartGraphOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartGraphOutput#id #id} => String
+    #   * {Types::StartGraphOutput#name #name} => String
+    #   * {Types::StartGraphOutput#arn #arn} => String
+    #   * {Types::StartGraphOutput#status #status} => String
+    #   * {Types::StartGraphOutput#status_reason #status_reason} => String
+    #   * {Types::StartGraphOutput#create_time #create_time} => Time
+    #   * {Types::StartGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::StartGraphOutput#endpoint #endpoint} => String
+    #   * {Types::StartGraphOutput#public_connectivity #public_connectivity} => Boolean
+    #   * {Types::StartGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
+    #   * {Types::StartGraphOutput#replica_count #replica_count} => Integer
+    #   * {Types::StartGraphOutput#kms_key_identifier #kms_key_identifier} => String
+    #   * {Types::StartGraphOutput#source_snapshot_id #source_snapshot_id} => String
+    #   * {Types::StartGraphOutput#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::StartGraphOutput#build_number #build_number} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_graph({
+    #     graph_identifier: "GraphIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.status_reason #=> String
+    #   resp.create_time #=> Time
+    #   resp.provisioned_memory #=> Integer
+    #   resp.endpoint #=> String
+    #   resp.public_connectivity #=> Boolean
+    #   resp.vector_search_configuration.dimension #=> Integer
+    #   resp.replica_count #=> Integer
+    #   resp.kms_key_identifier #=> String
+    #   resp.source_snapshot_id #=> String
+    #   resp.deletion_protection #=> Boolean
+    #   resp.build_number #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/StartGraph AWS API Documentation
+    #
+    # @overload start_graph(params = {})
+    # @param [Hash] params ({})
+    def start_graph(params = {}, options = {})
+      req = build_request(:start_graph, params)
+      req.send_request(options)
+    end
+
     # Import data into existing Neptune Analytics graph from Amazon Simple
     # Storage Service (S3). The graph needs to be empty and in the AVAILABLE
     # state.
@@ -2290,6 +2347,62 @@ module Aws::NeptuneGraph
     # @param [Hash] params ({})
     def start_import_task(params = {}, options = {})
       req = build_request(:start_import_task, params)
+      req.send_request(options)
+    end
+
+    # Stops the specific graph.
+    #
+    # @option params [required, String] :graph_identifier
+    #   The unique identifier of the Neptune Analytics graph.
+    #
+    # @return [Types::StopGraphOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopGraphOutput#id #id} => String
+    #   * {Types::StopGraphOutput#name #name} => String
+    #   * {Types::StopGraphOutput#arn #arn} => String
+    #   * {Types::StopGraphOutput#status #status} => String
+    #   * {Types::StopGraphOutput#status_reason #status_reason} => String
+    #   * {Types::StopGraphOutput#create_time #create_time} => Time
+    #   * {Types::StopGraphOutput#provisioned_memory #provisioned_memory} => Integer
+    #   * {Types::StopGraphOutput#endpoint #endpoint} => String
+    #   * {Types::StopGraphOutput#public_connectivity #public_connectivity} => Boolean
+    #   * {Types::StopGraphOutput#vector_search_configuration #vector_search_configuration} => Types::VectorSearchConfiguration
+    #   * {Types::StopGraphOutput#replica_count #replica_count} => Integer
+    #   * {Types::StopGraphOutput#kms_key_identifier #kms_key_identifier} => String
+    #   * {Types::StopGraphOutput#source_snapshot_id #source_snapshot_id} => String
+    #   * {Types::StopGraphOutput#deletion_protection #deletion_protection} => Boolean
+    #   * {Types::StopGraphOutput#build_number #build_number} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_graph({
+    #     graph_identifier: "GraphIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.status_reason #=> String
+    #   resp.create_time #=> Time
+    #   resp.provisioned_memory #=> Integer
+    #   resp.endpoint #=> String
+    #   resp.public_connectivity #=> Boolean
+    #   resp.vector_search_configuration.dimension #=> Integer
+    #   resp.replica_count #=> Integer
+    #   resp.kms_key_identifier #=> String
+    #   resp.source_snapshot_id #=> String
+    #   resp.deletion_protection #=> Boolean
+    #   resp.build_number #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-graph-2023-11-29/StopGraph AWS API Documentation
+    #
+    # @overload stop_graph(params = {})
+    # @param [Hash] params ({})
+    def stop_graph(params = {}, options = {})
+      req = build_request(:stop_graph, params)
       req.send_request(options)
     end
 
@@ -2414,7 +2527,7 @@ module Aws::NeptuneGraph
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING"
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "RESETTING", "UPDATING", "SNAPSHOTTING", "FAILED", "IMPORTING", "STARTING", "STOPPING", "STOPPED"
     #   resp.status_reason #=> String
     #   resp.create_time #=> Time
     #   resp.provisioned_memory #=> Integer
@@ -2454,7 +2567,7 @@ module Aws::NeptuneGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunegraph'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2528,6 +2641,7 @@ module Aws::NeptuneGraph
     # | graph_deleted                    | {Client#get_graph}                  | 60       | 60            |
     # | graph_snapshot_available         | {Client#get_graph_snapshot}         | 60       | 120           |
     # | graph_snapshot_deleted           | {Client#get_graph_snapshot}         | 60       | 60            |
+    # | graph_stopped                    | {Client#get_graph}                  | 20       | 90            |
     # | import_task_cancelled            | {Client#get_import_task}            | 60       | 60            |
     # | import_task_successful           | {Client#get_import_task}            | 60       | 480           |
     # | private_graph_endpoint_available | {Client#get_private_graph_endpoint} | 10       | 180           |
@@ -2588,6 +2702,7 @@ module Aws::NeptuneGraph
         graph_deleted: Waiters::GraphDeleted,
         graph_snapshot_available: Waiters::GraphSnapshotAvailable,
         graph_snapshot_deleted: Waiters::GraphSnapshotDeleted,
+        graph_stopped: Waiters::GraphStopped,
         import_task_cancelled: Waiters::ImportTaskCancelled,
         import_task_successful: Waiters::ImportTaskSuccessful,
         private_graph_endpoint_available: Waiters::PrivateGraphEndpointAvailable,

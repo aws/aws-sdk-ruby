@@ -264,7 +264,25 @@ module Aws::NeptuneGraph
       end
     end
 
+    class StartGraph
+      def self.build(context)
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
+          api_type: "ControlPlane",
+        )
+      end
+    end
+
     class StartImportTask
+      def self.build(context)
+        Aws::NeptuneGraph::EndpointParameters.create(
+          context.config,
+          api_type: "ControlPlane",
+        )
+      end
+    end
+
+    class StopGraph
       def self.build(context)
         Aws::NeptuneGraph::EndpointParameters.create(
           context.config,
@@ -359,8 +377,12 @@ module Aws::NeptuneGraph
         RestoreGraphFromSnapshot.build(context)
       when :start_export_task
         StartExportTask.build(context)
+      when :start_graph
+        StartGraph.build(context)
       when :start_import_task
         StartImportTask.build(context)
+      when :stop_graph
+        StopGraph.build(context)
       when :tag_resource
         TagResource.build(context)
       when :untag_resource

@@ -890,7 +890,12 @@ module Aws
                               }
                             },
                             ?node_recovery: ("Automatic" | "None"),
-                            ?node_provisioning_mode: ("Continuous")
+                            ?node_provisioning_mode: ("Continuous"),
+                            ?cluster_role: ::String,
+                            ?auto_scaling: {
+                              mode: ("Enable" | "Disable"),
+                              auto_scaler_type: ("Karpenter")?
+                            }
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
@@ -5416,6 +5421,8 @@ module Aws
         def orchestrator: () -> Types::ClusterOrchestrator
         def node_recovery: () -> ("Automatic" | "None")
         def node_provisioning_mode: () -> ("Continuous")
+        def cluster_role: () -> ::String
+        def auto_scaling: () -> Types::ClusterAutoScalingConfigOutput
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_cluster-instance_method
       def describe_cluster: (
@@ -9003,7 +9010,12 @@ module Aws
                               },
                             ],
                             ?node_recovery: ("Automatic" | "None"),
-                            ?instance_groups_to_delete: Array[::String]
+                            ?instance_groups_to_delete: Array[::String],
+                            ?cluster_role: ::String,
+                            ?auto_scaling: {
+                              mode: ("Enable" | "Disable"),
+                              auto_scaler_type: ("Karpenter")?
+                            }
                           ) -> _UpdateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
 

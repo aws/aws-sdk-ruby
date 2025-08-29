@@ -1907,9 +1907,10 @@ module Aws
                                        queues: Array[::String]?,
                                        channels: Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]?,
                                        routing_profiles: Array[::String]?,
-                                       routing_step_expressions: Array[::String]?
+                                       routing_step_expressions: Array[::String]?,
+                                       agent_statuses: Array[::String]?
                                      },
-                                     ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION")],
+                                     ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS")],
                                      current_metrics: Array[
                                        {
                                          name: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE")?,
@@ -2005,9 +2006,10 @@ module Aws
                                queues: Array[::String]?,
                                channels: Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]?,
                                routing_profiles: Array[::String]?,
-                               routing_step_expressions: Array[::String]?
+                               routing_step_expressions: Array[::String]?,
+                               agent_statuses: Array[::String]?
                              },
-                             ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION")],
+                             ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS")],
                              historical_metrics: Array[
                                {
                                  name: ("CONTACTS_QUEUED" | "CONTACTS_HANDLED" | "CONTACTS_ABANDONED" | "CONTACTS_CONSULTED" | "CONTACTS_AGENT_HUNG_UP_FIRST" | "CONTACTS_HANDLED_INCOMING" | "CONTACTS_HANDLED_OUTBOUND" | "CONTACTS_HOLD_ABANDONS" | "CONTACTS_TRANSFERRED_IN" | "CONTACTS_TRANSFERRED_OUT" | "CONTACTS_TRANSFERRED_IN_FROM_QUEUE" | "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE" | "CONTACTS_MISSED" | "CALLBACK_CONTACTS_HANDLED" | "API_CONTACTS_HANDLED" | "OCCUPANCY" | "HANDLE_TIME" | "AFTER_CONTACT_WORK_TIME" | "QUEUED_TIME" | "ABANDON_TIME" | "QUEUE_ANSWER_TIME" | "HOLD_TIME" | "INTERACTION_TIME" | "INTERACTION_AND_HOLD_TIME" | "SERVICE_LEVEL")?,

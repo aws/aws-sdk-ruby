@@ -398,6 +398,7 @@ module Aws::EC2
     #       },
     #     ],
     #     completion_duration_minutes: 1,
+    #     destination_availability_zone: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -405,11 +406,11 @@ module Aws::EC2
     #   A description for the EBS snapshot.
     # @option options [String] :destination_outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
-    #   snapshot. Only specify this parameter when copying a snapshot from an
-    #   Amazon Web Services Region to an Outpost. The snapshot must be in the
-    #   Region for the destination Outpost. You cannot copy a snapshot from an
-    #   Outpost to a Region, from one Outpost to another, or within the same
-    #   Outpost.
+    #   snapshot.
+    #
+    #   <note markdown="1"> Only supported when copying a snapshot to an Outpost.
+    #
+    #    </note>
     #
     #   For more information, see [ Copy snapshots from an Amazon Web Services
     #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
@@ -483,6 +484,11 @@ module Aws::EC2
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new snapshot.
     # @option options [Integer] :completion_duration_minutes
+    #   <note markdown="1"> Not supported when copying snapshots to or from Local Zones or
+    #   Outposts.
+    #
+    #    </note>
+    #
     #   Specify a completion duration, in 15 minute increments, to initiate a
     #   time-based snapshot copy. Time-based snapshot copy operations complete
     #   within the specified duration. For more information, see [ Time-based
@@ -494,6 +500,13 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html
+    # @option options [String] :destination_availability_zone
+    #   The Local Zone, for example, `cn-north-1-pkx-1a` to which to copy the
+    #   snapshot.
+    #
+    #   <note markdown="1"> Only supported when copying a snapshot to a Local Zone.
+    #
+    #    </note>
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

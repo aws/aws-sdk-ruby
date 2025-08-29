@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2025-08-27)
+------------------
+
+* Feature - Add support for on-demand refresh of EKS cluster insights
+
 1.146.0 (2025-08-26)
 ------------------
 

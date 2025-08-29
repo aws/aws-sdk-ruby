@@ -37,8 +37,7 @@
   "shapes":{
     "AbortTransactionRequest":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "AbortTransactionResult":{
       "type":"structure",
@@ -84,8 +83,7 @@
     },
     "EndSessionRequest":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "EndSessionResult":{
       "type":"structure",
@@ -248,8 +246,7 @@
     },
     "StartTransactionRequest":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "StartTransactionResult":{
       "type":"structure",

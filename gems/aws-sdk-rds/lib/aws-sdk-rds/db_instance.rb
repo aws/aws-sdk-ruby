@@ -2414,15 +2414,15 @@ module Aws::RDS
     #   The name of the DB parameter group to associate with this read replica
     #   DB instance.
     #
-    #   For the Db2 DB engine, if your source DB instance uses the Bring Your
-    #   Own License model, then a custom parameter group must be associated
-    #   with the replica. For a same Amazon Web Services Region replica, if
-    #   you don't specify a custom parameter group, Amazon RDS associates the
-    #   custom parameter group associated with the source DB instance. For a
-    #   cross-Region replica, you must specify a custom parameter group. This
-    #   custom parameter group must include your IBM Site ID and IBM Customer
-    #   ID. For more information, see [ IBM IDs for Bring Your Own License for
-    #   Db2][1].
+    #   For the Db2 DB engine, if your source DB instance uses the bring your
+    #   own license (BYOL) model, then a custom parameter group must be
+    #   associated with the replica. For a same Amazon Web Services Region
+    #   replica, if you don't specify a custom parameter group, Amazon RDS
+    #   associates the custom parameter group associated with the source DB
+    #   instance. For a cross-Region replica, you must specify a custom
+    #   parameter group. This custom parameter group must include your IBM
+    #   Site ID and IBM Customer ID. For more information, see [IBM IDs for
+    #   bring your own license (BYOL) for Db2][1].
     #
     #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
     #   don't specify a value for `DBParameterGroupName`, then Amazon RDS

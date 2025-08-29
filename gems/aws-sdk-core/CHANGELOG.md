@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.232.0 (2025-08-28)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Remove incorrect endpoint tests
+
 3.231.0 (2025-08-26)
 ------------------
 

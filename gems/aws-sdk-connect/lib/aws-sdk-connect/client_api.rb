@@ -43,6 +43,7 @@ module Aws::Connect
     AgentStatus = Shapes::StructureShape.new(name: 'AgentStatus')
     AgentStatusDescription = Shapes::StringShape.new(name: 'AgentStatusDescription')
     AgentStatusId = Shapes::StringShape.new(name: 'AgentStatusId')
+    AgentStatusIdentifier = Shapes::StructureShape.new(name: 'AgentStatusIdentifier')
     AgentStatusList = Shapes::ListShape.new(name: 'AgentStatusList')
     AgentStatusName = Shapes::StringShape.new(name: 'AgentStatusName')
     AgentStatusOrderNumber = Shapes::IntegerShape.new(name: 'AgentStatusOrderNumber')
@@ -55,6 +56,7 @@ module Aws::Connect
     AgentStatusSummaryList = Shapes::ListShape.new(name: 'AgentStatusSummaryList')
     AgentStatusType = Shapes::StringShape.new(name: 'AgentStatusType')
     AgentStatusTypes = Shapes::ListShape.new(name: 'AgentStatusTypes')
+    AgentStatuses = Shapes::ListShape.new(name: 'AgentStatuses')
     AgentUsername = Shapes::StringShape.new(name: 'AgentUsername')
     AgentsCriteria = Shapes::StructureShape.new(name: 'AgentsCriteria')
     AgentsMinOneMaxHundred = Shapes::ListShape.new(name: 'AgentsMinOneMaxHundred')
@@ -1646,6 +1648,10 @@ module Aws::Connect
     AgentStatus.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     AgentStatus.struct_class = Types::AgentStatus
 
+    AgentStatusIdentifier.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    AgentStatusIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "Id"))
+    AgentStatusIdentifier.struct_class = Types::AgentStatusIdentifier
+
     AgentStatusList.member = Shapes::ShapeRef.new(shape: AgentStatus)
 
     AgentStatusReference.add_member(:status_start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StatusStartTimestamp"))
@@ -1674,6 +1680,8 @@ module Aws::Connect
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
 
     AgentStatusTypes.member = Shapes::ShapeRef.new(shape: AgentStatusType)
+
+    AgentStatuses.member = Shapes::ShapeRef.new(shape: AgentStatusId)
 
     AgentsCriteria.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, location_name: "AgentIds"))
     AgentsCriteria.struct_class = Types::AgentsCriteria
@@ -3098,6 +3106,7 @@ module Aws::Connect
     Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
     Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
     Dimensions.add_member(:routing_step_expression, Shapes::ShapeRef.new(shape: RoutingExpression, location_name: "RoutingStepExpression"))
+    Dimensions.add_member(:agent_status, Shapes::ShapeRef.new(shape: AgentStatusIdentifier, location_name: "AgentStatus"))
     Dimensions.struct_class = Types::Dimensions
 
     DimensionsV2Map.key = Shapes::ShapeRef.new(shape: DimensionsV2Key)
@@ -3527,6 +3536,7 @@ module Aws::Connect
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
     Filters.add_member(:routing_step_expressions, Shapes::ShapeRef.new(shape: RoutingExpressions, location_name: "RoutingStepExpressions"))
+    Filters.add_member(:agent_statuses, Shapes::ShapeRef.new(shape: AgentStatuses, location_name: "AgentStatuses"))
     Filters.struct_class = Types::Filters
 
     FiltersV2List.member = Shapes::ShapeRef.new(shape: FilterV2)

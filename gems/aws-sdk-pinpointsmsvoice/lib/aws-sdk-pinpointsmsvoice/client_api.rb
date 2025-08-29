@@ -192,6 +192,7 @@ module Aws::PinpointSMSVoice
 
       api.metadata = {
         "apiVersion" => "2018-09-05",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "sms-voice.pinpoint",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -734,18 +734,5 @@ module Aws::SESV2
       end
     end
 
-    context "Valid EndpointId with DualStack enabled and partition does not support DualStack" do
-      let(:expected) do
-        {"error" => "DualStack is enabled but this partition does not support DualStack"}
-      end
-
-      it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{endpoint_id: "abc123.456def", use_dual_stack: true, region: "us-isob-east-1"})
-        expect do
-          subject.resolve_endpoint(params)
-        end.to raise_error(ArgumentError, expected['error'])
-      end
-    end
-
   end
 end

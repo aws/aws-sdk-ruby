@@ -204,8 +204,7 @@
     },
     "DeleteQueuedSavingsPlanResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "DescribeSavingsPlanRatesRequest":{
       "type":"structure",
@@ -785,8 +784,7 @@
     },
     "TagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "TagValue":{"type":"string"},
     "TermDurationInSeconds":{"type":"long"},
@@ -811,8 +809,7 @@
     },
     "UntagResourceResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "ValidationException":{
       "type":"structure",

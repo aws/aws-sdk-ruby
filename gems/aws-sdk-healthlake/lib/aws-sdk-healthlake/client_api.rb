@@ -96,6 +96,7 @@ module Aws::HealthLake
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationLevel = Shapes::StringShape.new(name: 'ValidationLevel')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -202,6 +203,7 @@ module Aws::HealthLake
     ImportJobProperties.add_member(:job_progress_report, Shapes::ShapeRef.new(shape: JobProgressReport, location_name: "JobProgressReport"))
     ImportJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     ImportJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ImportJobProperties.add_member(:validation_level, Shapes::ShapeRef.new(shape: ValidationLevel, location_name: "ValidationLevel"))
     ImportJobProperties.struct_class = Types::ImportJobProperties
 
     ImportJobPropertiesList.member = Shapes::ShapeRef.new(shape: ImportJobProperties)
@@ -307,6 +309,7 @@ module Aws::HealthLake
     StartFHIRImportJobRequest.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     StartFHIRImportJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     StartFHIRImportJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartFHIRImportJobRequest.add_member(:validation_level, Shapes::ShapeRef.new(shape: ValidationLevel, location_name: "ValidationLevel"))
     StartFHIRImportJobRequest.struct_class = Types::StartFHIRImportJobRequest
 
     StartFHIRImportJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))

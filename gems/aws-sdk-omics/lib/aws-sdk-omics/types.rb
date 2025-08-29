@@ -525,6 +525,34 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # Use a container registry map to specify mappings between the ECR
+    # private repository and one or more upstream registries. For more
+    # information, see [Container images][1] in the *Amazon Web Services
+    # HealthOmics User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+    #
+    # @!attribute [rw] registry_mappings
+    #   Mapping that provides the ECR repository path where upstream
+    #   container images are pulled and synchronized.
+    #   @return [Array<Types::RegistryMapping>]
+    #
+    # @!attribute [rw] image_mappings
+    #   Image mappings specify path mappings between the ECR private
+    #   repository and their corresponding external repositories.
+    #   @return [Array<Types::ImageMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ContainerRegistryMap AWS API Documentation
+    #
+    class ContainerRegistryMap < Struct.new(
+      :registry_mappings,
+      :image_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] reference
     #   The genome reference for the store's annotations.
     #   @return [Types::ReferenceItem]
@@ -1077,12 +1105,12 @@ module Aws::Omics
     #   @return [Types::SseConfig]
     #
     # @!attribute [rw] tags
-    #   Tags for the store.
+    #   Tags for the store. You can configure up to 50 tags.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   To ensure that requests don't run multiple times, specify a unique
-    #   token for each request.
+    #   An idempotency token used to dedupe retry requests so that duplicate
+    #   runs are not created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1090,20 +1118,31 @@ module Aws::Omics
     #
     # @!attribute [rw] fallback_location
     #   An S3 location that is used to store files that have failed a direct
-    #   upload.
+    #   upload. You can add or change the `fallbackLocation` after creating
+    #   a sequence store. This is not required if you are uploading files
+    #   from a different S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] e_tag_algorithm_family
-    #   The ETag algorithm family to use for ingested read sets.
+    #   The ETag algorithm family to use for ingested read sets. The default
+    #   value is MD5up. For more information on ETags, see [ETags and data
+    #   provenance][1] in the *Amazon Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/etags-and-provenance.html
     #   @return [String]
     #
     # @!attribute [rw] propagated_set_level_tags
     #   The tags keys to propagate to the S3 objects associated with read
-    #   sets in the sequence store.
+    #   sets in the sequence store. These tags can be used as input to add
+    #   metadata to your read sets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] s3_access_config
-    #   S3 access configuration parameters
+    #   S3 access configuration parameters. This specifies the parameters
+    #   needed to access logs stored in S3 buckets. The S3 bucket must be in
+    #   the same region and account as the sequence store.
     #   @return [Types::S3AccessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStoreRequest AWS API Documentation
@@ -1139,7 +1178,8 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] sse_config
-    #   The store's SSE settings.
+    #   Server-side encryption (SSE) settings for the store. This contains
+    #   the KMS key ARN that is used to encrypt read set objects.
     #   @return [Types::SseConfig]
     #
     # @!attribute [rw] creation_time
@@ -1398,6 +1438,21 @@ module Aws::Omics
     #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
     #   @return [String]
     #
+    # @!attribute [rw] container_registry_map
+    #   (Optional) Use a container registry map to specify mappings between
+    #   the ECR private repository and one or more upstream registries. For
+    #   more information, see [Container images][1] in the *Amazon Web
+    #   Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+    #   @return [Types::ContainerRegistryMap]
+    #
+    # @!attribute [rw] container_registry_map_uri
+    #   (Optional) URI of the S3 location for the registry mapping file.
+    #   @return [String]
+    #
     # @!attribute [rw] readme_markdown
     #   The markdown content for the workflow's README file. This provides
     #   documentation and usage information for users of the workflow.
@@ -1456,6 +1511,8 @@ module Aws::Omics
       :request_id,
       :accelerators,
       :storage_type,
+      :container_registry_map,
+      :container_registry_map_uri,
       :readme_markdown,
       :parameter_template_path,
       :readme_path,
@@ -1499,7 +1556,8 @@ module Aws::Omics
     end
 
     # @!attribute [rw] workflow_id
-    #   The ID of the workflow where you are creating the new version.
+    #   The ID of the workflow where you are creating the new version. The
+    #   `workflowId` is not the UUID.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -1516,13 +1574,16 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] definition_zip
-    #   A zip archive containing the workflow definition for this workflow
-    #   version.
+    #   A ZIP archive containing the main workflow definition file and
+    #   dependencies that it imports for this workflow version. You can use
+    #   a file with a ://fileb prefix instead of the Base64 string. For more
+    #   information, see Workflow definition requirements in the *Amazon Web
+    #   Services HealthOmics User Guide*.
     #   @return [String]
     #
     # @!attribute [rw] definition_uri
-    #   The URI specifies the location of the workflow definition for this
-    #   workflow version.
+    #   The S3 URI of a definition for this workflow version. The S3 bucket
+    #   must be in the same region as this workflow version.
     #   @return [String]
     #
     # @!attribute [rw] accelerators
@@ -1534,52 +1595,91 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The workflow engine for this workflow version.
+    #   The workflow engine for this workflow version. This is only required
+    #   if you have workflow definition files from more than one engine in
+    #   your zip file. Otherwise, the service can detect the engine
+    #   automatically from your workflow definition.
     #   @return [String]
     #
     # @!attribute [rw] main
-    #   The path of the main definition file for this workflow version.
+    #   The path of the main definition file for this workflow version. This
+    #   parameter is not required if the ZIP archive contains only one
+    #   workflow definition file, or if the main definition file is named
+    #   “main”. An example path is: `workflow-definition/main-file.wdl`.
     #   @return [String]
     #
     # @!attribute [rw] parameter_template
-    #   The parameter template defines the input parameters for runs that
-    #   use this workflow version.
+    #   A parameter template for this workflow version. If this field is
+    #   blank, Amazon Web Services HealthOmics will automatically parse the
+    #   parameter template values from your workflow definition file. To
+    #   override these service generated default values, provide a parameter
+    #   template. To view an example of a parameter template, see [Parameter
+    #   template files][1] in the *Amazon Web Services HealthOmics User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/parameter-templates.html
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] request_id
-    #   To ensure that requests don't run multiple times, specify a unique
-    #   ID for each request.
+    #   An idempotency token to ensure that duplicate workflows are not
+    #   created when Amazon Web Services HealthOmics submits retry requests.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   The default storage type for runs that use this workflow. STATIC
-    #   storage allocates a fixed amount of storage. DYNAMIC storage
+    #   The default storage type for runs that use this workflow version.
+    #   The `storageType` can be overridden at run time. `DYNAMIC` storage
     #   dynamically scales the storage up or down, based on file system
-    #   utilization. For more information about static and dynamic storage,
-    #   see [Running workflows][1] in the *Amazon Web Services HealthOmics
-    #   User Guide*.
+    #   utilization. STATIC storage allocates a fixed amount of storage. For
+    #   more information about dynamic and static storage types, see [Run
+    #   storage types][1] in the *Amazon Web Services HealthOmics User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
     #   The default static storage capacity (in gibibytes) for runs that use
-    #   this workflow or workflow version.
+    #   this workflow version. The `storageCapacity` can be overwritten at
+    #   run time. The storage capacity is not required for runs with a
+    #   `DYNAMIC` storage type.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   Optional tags to associate with this workflow version.
+    #   Tags for this workflow version. You can define up to 50 tags for the
+    #   workflow. For more information, see [Adding a tag][1] in the *Amazon
+    #   Web Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/add-a-tag.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] workflow_bucket_owner_id
     #   Amazon Web Services Id of the owner of the S3 bucket that contains
     #   the workflow definition. You need to specify this parameter if your
     #   account is not the bucket owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_registry_map
+    #   (Optional) Use a container registry map to specify mappings between
+    #   the ECR private repository and one or more upstream registries. For
+    #   more information, see [Container images][1] in the *Amazon Web
+    #   Services HealthOmics User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
+    #   @return [Types::ContainerRegistryMap]
+    #
+    # @!attribute [rw] container_registry_map_uri
+    #   (Optional) URI of the S3 location for the registry mapping file.
     #   @return [String]
     #
     # @!attribute [rw] readme_markdown
@@ -1637,6 +1737,8 @@ module Aws::Omics
       :storage_capacity,
       :tags,
       :workflow_bucket_owner_id,
+      :container_registry_map,
+      :container_registry_map_uri,
       :readme_markdown,
       :parameter_template_path,
       :readme_path,
@@ -3490,6 +3592,10 @@ module Aws::Omics
     #   The reason a task has failed.
     #   @return [String]
     #
+    # @!attribute [rw] image_details
+    #   Details about the container image that this task uses.
+    #   @return [Types::ImageDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunTaskResponse AWS API Documentation
     #
     class GetRunTaskResponse < Struct.new(
@@ -3507,7 +3613,8 @@ module Aws::Omics
       :log_stream,
       :gpus,
       :instance_type,
-      :failure_reason)
+      :failure_reason,
+      :image_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3926,6 +4033,10 @@ module Aws::Omics
     #   The universally unique identifier (UUID) value for this workflow.
     #   @return [String]
     #
+    # @!attribute [rw] container_registry_map
+    #   The registry map that this workflow is using.
+    #   @return [Types::ContainerRegistryMap]
+    #
     # @!attribute [rw] readme
     #   The README content for the workflow, providing documentation and
     #   usage information.
@@ -3965,6 +4076,7 @@ module Aws::Omics
       :accelerators,
       :storage_type,
       :uuid,
+      :container_registry_map,
       :readme,
       :definition_repository_details,
       :readme_path)
@@ -3973,7 +4085,7 @@ module Aws::Omics
     end
 
     # @!attribute [rw] workflow_id
-    #   The workflow's ID.
+    #   The workflow's ID. The `workflowId` is not the UUID.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -3989,7 +4101,9 @@ module Aws::Omics
     #   @return [Array<String>]
     #
     # @!attribute [rw] workflow_owner_id
-    #   Amazon Web Services Id of the owner of the workflow.
+    #   The 12-digit account ID of the workflow owner. The workflow owner ID
+    #   can be retrieved using the `GetShare` API operation. If you are the
+    #   workflow owner, you do not need to include this ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetWorkflowVersionRequest AWS API Documentation
@@ -4085,6 +4199,10 @@ module Aws::Omics
     #   Amazon Web Services Id of the owner of the bucket.
     #   @return [String]
     #
+    # @!attribute [rw] container_registry_map
+    #   The registry map that this workflow version uses.
+    #   @return [Types::ContainerRegistryMap]
+    #
     # @!attribute [rw] readme
     #   The README content for the workflow version, providing documentation
     #   and usage information specific to this version.
@@ -4125,9 +4243,63 @@ module Aws::Omics
       :tags,
       :uuid,
       :workflow_bucket_owner_id,
+      :container_registry_map,
       :readme,
       :definition_repository_details,
       :readme_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the container image used for a task.
+    #
+    # @!attribute [rw] image
+    #   The URI of the container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_digest
+    #   The container image digest. If the image URI was transformed, this
+    #   will be the digest of the container image referenced by the
+    #   transformed URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image
+    #   URI of the source registry. If the URI is from a third-party
+    #   registry, Amazon Web Services HealthOmics transforms the URI to the
+    #   corresponding ECR path, using the pull-through cache mapping rules.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ImageDetails AWS API Documentation
+    #
+    class ImageDetails < Struct.new(
+      :image,
+      :image_digest,
+      :source_image)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies image mappings that workflow tasks can use. For example, you
+    # can replace all the task references of a public image to use an
+    # equivalent image in your private ECR repository. You can use image
+    # mappings with upstream registries that don't support pull through
+    # cache. You need to manually synchronize the upstream registry with
+    # your private repository.
+    #
+    # @!attribute [rw] source_image
+    #   Specifies the URI of the source image in the upstream registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_image
+    #   Specifies the URI of the corresponding image in the private ECR
+    #   registry.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ImageMapping AWS API Documentation
+    #
+    class ImageMapping < Struct.new(
+      :source_image,
+      :destination_image)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5390,7 +5562,7 @@ module Aws::Omics
     end
 
     # @!attribute [rw] workflow_id
-    #   The workflow's ID.
+    #   The workflow's ID. The `workflowId` is not the UUID.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -5398,7 +5570,9 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] workflow_owner_id
-    #   Amazon Web Services Id of the owner of the workflow.
+    #   The 12-digit account ID of the workflow owner. The workflow owner ID
+    #   can be retrieved using the `GetShare` API operation. If you are the
+    #   workflow owner, you do not need to include this ID.
     #   @return [String]
     #
     # @!attribute [rw] starting_token
@@ -6118,6 +6292,38 @@ module Aws::Omics
       :name,
       :created_after,
       :created_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If you are using the ECR pull through cache feature, the registry
+    # mapping maps between the ECR repository and the upstream registry
+    # where container images are pulled and synchronized.
+    #
+    # @!attribute [rw] upstream_registry_url
+    #   The URI of the upstream registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] ecr_repository_prefix
+    #   The repository prefix to use in the ECR private repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] upstream_repository_prefix
+    #   The repository prefix of the corresponding repository in the
+    #   upstream registry.
+    #   @return [String]
+    #
+    # @!attribute [rw] ecr_account_id
+    #   Account ID of the account that owns the upstream container image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/RegistryMapping AWS API Documentation
+    #
+    class RegistryMapping < Struct.new(
+      :upstream_registry_url,
+      :ecr_repository_prefix,
+      :upstream_repository_prefix,
+      :ecr_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7939,7 +8145,7 @@ module Aws::Omics
     end
 
     # @!attribute [rw] workflow_id
-    #   The workflow's ID.
+    #   The workflow's ID. The `workflowId` is not the UUID.
     #   @return [String]
     #
     # @!attribute [rw] version_name
@@ -7951,21 +8157,24 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   The default storage type for runs that use this workflow. STATIC
-    #   storage allocates a fixed amount of storage. DYNAMIC storage
+    #   The default storage type for runs that use this workflow version.
+    #   The `storageType` can be overridden at run time. `DYNAMIC` storage
     #   dynamically scales the storage up or down, based on file system
-    #   utilization. For more information about static and dynamic storage,
-    #   see [Running workflows][1] in the *Amazon Web Services HealthOmics
-    #   User Guide*.
+    #   utilization. STATIC storage allocates a fixed amount of storage. For
+    #   more information about dynamic and static storage types, see [Run
+    #   storage types][1] in the <i>in the <i>Amazon Web Services
+    #   HealthOmics User Guide</i> </i>.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
+    #   [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-types.html
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
     #   The default static storage capacity (in gibibytes) for runs that use
-    #   this workflow or workflow version.
+    #   this workflow version. The `storageCapacity` can be overwritten at
+    #   run time. The storage capacity is not required for runs with a
+    #   `DYNAMIC` storage type.
     #   @return [Integer]
     #
     # @!attribute [rw] readme_markdown

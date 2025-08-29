@@ -4842,23 +4842,73 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Initiates an AMI copy operation. You can copy an AMI from one Region
-    # to another, or from a Region to an Outpost. You can't copy an AMI
-    # from an Outpost to a Region, from one Outpost to another, or within
-    # the same Outpost. To copy an AMI to another partition, see
-    # [CreateStoreImageTask][1].
+    # Initiates an AMI copy operation. You must specify the source AMI ID
+    # and both the source and destination locations. The copy operation must
+    # be initiated in the destination Region.
     #
-    # When you copy an AMI from one Region to another, the destination
-    # Region is the current Region.
+    # **CopyImage supports the following source to destination copies:**
     #
-    # When you copy an AMI from a Region to an Outpost, specify the ARN of
-    # the Outpost as the destination. Backing snapshots copied to an Outpost
-    # are encrypted by default using the default encryption key for the
-    # Region or the key that you specify. Outposts do not support
-    # unencrypted snapshots.
+    # * Region to Region
     #
-    # For information about the prerequisites when copying an AMI, see [Copy
-    # an Amazon EC2 AMI][2] in the *Amazon EC2 User Guide*.
+    # * Region to Outpost
+    #
+    # * Parent Region to Local Zone
+    #
+    # * Local Zone to parent Region
+    #
+    # * Between Local Zones with the same parent Region (only supported for
+    #   certain Local Zones)
+    #
+    # **CopyImage does not support the following source to destination
+    # copies:**
+    #
+    # * Local Zone to non-parent Regions
+    #
+    # * Between Local Zones with different parent Regions
+    #
+    # * Local Zone to Outpost
+    #
+    # * Outpost to Local Zone
+    #
+    # * Outpost to Region
+    #
+    # * Between Outposts
+    #
+    # * Within same Outpost
+    #
+    # * Cross-partition copies (use [CreateStoreImageTask][1] instead)
+    #
+    # **Destination specification**
+    #
+    # * Region to Region: The destination Region is the Region in which you
+    #   initiate the copy operation.
+    #
+    # * Region to Outpost: Specify the destination using the
+    #   `DestinationOutpostArn` parameter (the ARN of the Outpost)
+    #
+    # * Region to Local Zone, and Local Zone to Local Zone copies: Specify
+    #   the destination using the `DestinationAvailabilityZone` parameter
+    #   (the name of the destination Local Zone) or
+    #   `DestinationAvailabilityZoneId` parameter (the ID of the destination
+    #   Local Zone).
+    #
+    # **Snapshot encryption**
+    #
+    # * Region to Outpost: Backing snapshots copied to an Outpost are
+    #   encrypted by default using the default encryption key for the Region
+    #   or the key that you specify. Outposts do not support unencrypted
+    #   snapshots.
+    #
+    # * Region to Local Zone, and Local Zone to Local Zone: Not all Local
+    #   Zones require encrypted snapshots. In Local Zones that require
+    #   encrypted snapshots, backing snapshots are automatically encrypted
+    #   during copy. In Local Zones where encryption is not required,
+    #   snapshots retain their original encryption state (encrypted or
+    #   unencrypted) by default.
+    #
+    # For more information, including the required permissions for copying
+    # an AMI, see [Copy an Amazon EC2 AMI][2] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -4878,15 +4928,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [String] :description
-    #   A description for the new AMI in the destination Region.
+    #   A description for the new AMI.
     #
     # @option params [Boolean] :encrypted
-    #   Specifies whether the destination snapshots of the copied image should
-    #   be encrypted. You can encrypt a copy of an unencrypted snapshot, but
-    #   you cannot create an unencrypted copy of an encrypted snapshot. The
-    #   default KMS key for Amazon EBS is used unless you specify a
-    #   non-default Key Management Service (KMS) KMS key using `KmsKeyId`. For
-    #   more information, see [Use encryption with EBS-backed AMIs][1] in the
+    #   Specifies whether to encrypt the snapshots of the copied image.
+    #
+    #   You can encrypt a copy of an unencrypted snapshot, but you cannot
+    #   create an unencrypted copy of an encrypted snapshot. The default KMS
+    #   key for Amazon EBS is used unless you specify a non-default Key
+    #   Management Service (KMS) KMS key using `KmsKeyId`. For more
+    #   information, see [Use encryption with EBS-backed AMIs][1] in the
     #   *Amazon EC2 User Guide*.
     #
     #
@@ -4921,7 +4972,7 @@ module Aws::EC2
     #   Amazon EBS does not support asymmetric KMS keys.
     #
     # @option params [required, String] :name
-    #   The name of the new AMI in the destination Region.
+    #   The name of the new AMI.
     #
     # @option params [required, String] :source_image_id
     #   The ID of the AMI to copy.
@@ -4930,24 +4981,28 @@ module Aws::EC2
     #   The name of the Region that contains the AMI to copy.
     #
     # @option params [String] :destination_outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
-    #   AMI. Only specify this parameter when copying an AMI from an Amazon
-    #   Web Services Region to an Outpost. The AMI must be in the Region of
-    #   the destination Outpost. You cannot copy an AMI from an Outpost to a
+    #   The Amazon Resource Name (ARN) of the Outpost for the new AMI.
+    #
+    #   Only specify this parameter when copying an AMI from an Amazon Web
+    #   Services Region to an Outpost. The AMI must be in the Region of the
+    #   destination Outpost. You can't copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
     #   For more information, see [Copy AMIs from an Amazon Web Services
     #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
+    #
+    #   Only one of `DestinationAvailabilityZone`,
+    #   `DestinationAvailabilityZoneId`, or `DestinationOutpostArn` can be
+    #   specified.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis
     #
     # @option params [Boolean] :copy_image_tags
-    #   Indicates whether to include your user-defined AMI tags when copying
-    #   the AMI.
+    #   Specifies whether to copy your user-defined AMI tags to the new AMI.
     #
-    #   The following tags will not be copied:
+    #   The following tags are not be copied:
     #
     #   * System tags (prefixed with `aws:`)
     #
@@ -4985,12 +5040,32 @@ module Aws::EC2
     #   If you do not specify a value, the AMI copy operation is completed on
     #   a best-effort basis.
     #
+    #   <note markdown="1"> This parameter is not supported when copying an AMI to or from a Local
+    #   Zone, or to an Outpost.
+    #
+    #    </note>
+    #
     #   For more information, see [Time-based copies for Amazon EBS snapshots
     #   and EBS-backed AMIs][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html
+    #
+    # @option params [String] :destination_availability_zone
+    #   The Local Zone for the new AMI (for example, `cn-north-1-pkx-1a`).
+    #
+    #   Only one of `DestinationAvailabilityZone`,
+    #   `DestinationAvailabilityZoneId`, or `DestinationOutpostArn` can be
+    #   specified.
+    #
+    # @option params [String] :destination_availability_zone_id
+    #   The ID of the Local Zone for the new AMI (for example,
+    #   `cnn1-pkx1-az1`).
+    #
+    #   Only one of `DestinationAvailabilityZone`,
+    #   `DestinationAvailabilityZoneId`, or `DestinationOutpostArn` can be
+    #   specified.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5043,6 +5118,8 @@ module Aws::EC2
     #       },
     #     ],
     #     snapshot_copy_completion_duration_minutes: 1,
+    #     destination_availability_zone: "String",
+    #     destination_availability_zone_id: "String",
     #     dry_run: false,
     #   })
     #
@@ -5059,14 +5136,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Copies a point-in-time snapshot of an EBS volume and stores it in
-    # Amazon S3. You can copy a snapshot within the same Region, from one
-    # Region to another, or from a Region to an Outpost. You can't copy a
-    # snapshot from an Outpost to a Region, from one Outpost to another, or
-    # within the same Outpost.
+    # Creates an exact copy of an Amazon EBS snapshot.
     #
-    # You can use the snapshot to create EBS volumes or Amazon Machine
-    # Images (AMIs).
+    # The location of the source snapshot determines whether you can copy it
+    # or not, and the allowed destinations for the snapshot copy.
+    #
+    # * If the source snapshot is in a Region, you can copy it within that
+    #   Region, to another Region, to an Outpost associated with that
+    #   Region, or to a Local Zone in that Region.
+    #
+    # * If the source snapshot is in a Local Zone, you can copy it within
+    #   that Local Zone, to another Local Zone in the same zone group, or to
+    #   the parent Region of the Local Zone.
+    #
+    # * If the source snapshot is on an Outpost, you can't copy it.
     #
     # When copying snapshots to a Region, copies of encrypted EBS snapshots
     # remain encrypted. Copies of unencrypted snapshots remain unencrypted,
@@ -5082,8 +5165,10 @@ module Aws::EC2
     # unencrypted snapshots. For more information, see [Amazon EBS local
     # snapshots on Outposts][1] in the *Amazon EBS User Guide*.
     #
-    # Snapshots created by copying another snapshot have an arbitrary volume
-    # ID that should not be used for any purpose.
+    # <note markdown="1"> Snapshots copies have an arbitrary source volume ID. Do not use this
+    # volume ID for any purpose.
+    #
+    #  </note>
     #
     # For more information, see [Copy an Amazon EBS snapshot][2] in the
     # *Amazon EBS User Guide*.
@@ -5098,11 +5183,11 @@ module Aws::EC2
     #
     # @option params [String] :destination_outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost to which to copy the
-    #   snapshot. Only specify this parameter when copying a snapshot from an
-    #   Amazon Web Services Region to an Outpost. The snapshot must be in the
-    #   Region for the destination Outpost. You cannot copy a snapshot from an
-    #   Outpost to a Region, from one Outpost to another, or within the same
-    #   Outpost.
+    #   snapshot.
+    #
+    #   <note markdown="1"> Only supported when copying a snapshot to an Outpost.
+    #
+    #    </note>
     #
     #   For more information, see [ Copy snapshots from an Amazon Web Services
     #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
@@ -5186,6 +5271,11 @@ module Aws::EC2
     #   The tags to apply to the new snapshot.
     #
     # @option params [Integer] :completion_duration_minutes
+    #   <note markdown="1"> Not supported when copying snapshots to or from Local Zones or
+    #   Outposts.
+    #
+    #    </note>
+    #
     #   Specify a completion duration, in 15 minute increments, to initiate a
     #   time-based snapshot copy. Time-based snapshot copy operations complete
     #   within the specified duration. For more information, see [ Time-based
@@ -5197,6 +5287,14 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/time-based-copies.html
+    #
+    # @option params [String] :destination_availability_zone
+    #   The Local Zone, for example, `cn-north-1-pkx-1a` to which to copy the
+    #   snapshot.
+    #
+    #   <note markdown="1"> Only supported when copying a snapshot to a Local Zone.
+    #
+    #    </note>
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5275,6 +5373,7 @@ module Aws::EC2
     #       },
     #     ],
     #     completion_duration_minutes: 1,
+    #     destination_availability_zone: "String",
     #     dry_run: false,
     #   })
     #
@@ -8015,7 +8114,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-usage.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html
     #
     # @option params [required, String] :image_id
     #   The ID of the image to report on.
@@ -18199,7 +18298,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-usage.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html
     #
     # @option params [required, String] :report_id
     #   The ID of the report to delete.
@@ -26862,8 +26961,8 @@ module Aws::EC2
     # Describes your Amazon Web Services resources that are referencing the
     # specified images.
     #
-    # For more information, see [Identiy your resources referencing selected
-    # AMIs][1] in the *Amazon EC2 User Guide*.
+    # For more information, see [Identify your resources referencing
+    # specified AMIs][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -26967,7 +27066,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-usage.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html
     #
     # @option params [Array<String>] :image_ids
     #   The IDs of the images for filtering the report entries. If specified,
@@ -27059,7 +27158,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-ami-usage.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/your-ec2-ami-usage.html
     #
     # @option params [Array<String>] :image_ids
     #   The IDs of the images for filtering the reports. If specified, only
@@ -67054,7 +67153,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.552.0'
+      context[:gem_version] = '1.553.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

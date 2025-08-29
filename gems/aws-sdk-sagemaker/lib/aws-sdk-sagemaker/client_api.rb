@@ -313,6 +313,11 @@ module Aws::SageMaker
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
+    ClusterAutoScalerType = Shapes::StringShape.new(name: 'ClusterAutoScalerType')
+    ClusterAutoScalingConfig = Shapes::StructureShape.new(name: 'ClusterAutoScalingConfig')
+    ClusterAutoScalingConfigOutput = Shapes::StructureShape.new(name: 'ClusterAutoScalingConfigOutput')
+    ClusterAutoScalingMode = Shapes::StringShape.new(name: 'ClusterAutoScalingMode')
+    ClusterAutoScalingStatus = Shapes::StringShape.new(name: 'ClusterAutoScalingStatus')
     ClusterAvailabilityZone = Shapes::StringShape.new(name: 'ClusterAvailabilityZone')
     ClusterAvailabilityZoneId = Shapes::StringShape.new(name: 'ClusterAvailabilityZoneId')
     ClusterEbsVolumeConfig = Shapes::StructureShape.new(name: 'ClusterEbsVolumeConfig')
@@ -3391,6 +3396,16 @@ module Aws::SageMaker
     ClarifyTextConfig.add_member(:granularity, Shapes::ShapeRef.new(shape: ClarifyTextGranularity, required: true, location_name: "Granularity"))
     ClarifyTextConfig.struct_class = Types::ClarifyTextConfig
 
+    ClusterAutoScalingConfig.add_member(:mode, Shapes::ShapeRef.new(shape: ClusterAutoScalingMode, required: true, location_name: "Mode"))
+    ClusterAutoScalingConfig.add_member(:auto_scaler_type, Shapes::ShapeRef.new(shape: ClusterAutoScalerType, location_name: "AutoScalerType"))
+    ClusterAutoScalingConfig.struct_class = Types::ClusterAutoScalingConfig
+
+    ClusterAutoScalingConfigOutput.add_member(:mode, Shapes::ShapeRef.new(shape: ClusterAutoScalingMode, required: true, location_name: "Mode"))
+    ClusterAutoScalingConfigOutput.add_member(:auto_scaler_type, Shapes::ShapeRef.new(shape: ClusterAutoScalerType, location_name: "AutoScalerType"))
+    ClusterAutoScalingConfigOutput.add_member(:status, Shapes::ShapeRef.new(shape: ClusterAutoScalingStatus, required: true, location_name: "Status"))
+    ClusterAutoScalingConfigOutput.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    ClusterAutoScalingConfigOutput.struct_class = Types::ClusterAutoScalingConfigOutput
+
     ClusterEbsVolumeConfig.add_member(:volume_size_in_gb, Shapes::ShapeRef.new(shape: ClusterEbsVolumeSizeInGB, location_name: "VolumeSizeInGB"))
     ClusterEbsVolumeConfig.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     ClusterEbsVolumeConfig.add_member(:root_volume, Shapes::ShapeRef.new(shape: Boolean, location_name: "RootVolume", metadata: {"box" => true}))
@@ -3839,6 +3854,8 @@ module Aws::SageMaker
     CreateClusterRequest.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
     CreateClusterRequest.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     CreateClusterRequest.add_member(:node_provisioning_mode, Shapes::ShapeRef.new(shape: ClusterNodeProvisioningMode, location_name: "NodeProvisioningMode"))
+    CreateClusterRequest.add_member(:cluster_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ClusterRole"))
+    CreateClusterRequest.add_member(:auto_scaling, Shapes::ShapeRef.new(shape: ClusterAutoScalingConfig, location_name: "AutoScaling"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
@@ -5177,6 +5194,8 @@ module Aws::SageMaker
     DescribeClusterResponse.add_member(:orchestrator, Shapes::ShapeRef.new(shape: ClusterOrchestrator, location_name: "Orchestrator"))
     DescribeClusterResponse.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     DescribeClusterResponse.add_member(:node_provisioning_mode, Shapes::ShapeRef.new(shape: ClusterNodeProvisioningMode, location_name: "NodeProvisioningMode"))
+    DescribeClusterResponse.add_member(:cluster_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ClusterRole"))
+    DescribeClusterResponse.add_member(:auto_scaling, Shapes::ShapeRef.new(shape: ClusterAutoScalingConfigOutput, location_name: "AutoScaling"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
 
     DescribeClusterSchedulerConfigRequest.add_member(:cluster_scheduler_config_id, Shapes::ShapeRef.new(shape: ClusterSchedulerConfigId, required: true, location_name: "ClusterSchedulerConfigId"))
@@ -11287,6 +11306,8 @@ module Aws::SageMaker
     UpdateClusterRequest.add_member(:restricted_instance_groups, Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupSpecifications, location_name: "RestrictedInstanceGroups"))
     UpdateClusterRequest.add_member(:node_recovery, Shapes::ShapeRef.new(shape: ClusterNodeRecovery, location_name: "NodeRecovery"))
     UpdateClusterRequest.add_member(:instance_groups_to_delete, Shapes::ShapeRef.new(shape: ClusterInstanceGroupsToDelete, location_name: "InstanceGroupsToDelete"))
+    UpdateClusterRequest.add_member(:cluster_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ClusterRole"))
+    UpdateClusterRequest.add_member(:auto_scaling, Shapes::ShapeRef.new(shape: ClusterAutoScalingConfig, location_name: "AutoScaling"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
 
     UpdateClusterResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))

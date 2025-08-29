@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2025-08-27)
+------------------
+
+* Feature - Added ECS_AL2023_NVIDIA as an option for Ec2Configuration.imageType.
+
 1.123.0 (2025-08-26)
 ------------------
 

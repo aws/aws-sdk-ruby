@@ -99,8 +99,7 @@
     },
     "PutRawMessageContentResponse":{
       "type":"structure",
-      "members":{
-      }
+      "members":{}
     },
     "RawMessageContent":{
       "type":"structure",

@@ -389,6 +389,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the agent status assigned to the user.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the agent status.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the agent status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusIdentifier AWS API Documentation
+    #
+    class AgentStatusIdentifier < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the agent's status.
     #
     # @!attribute [rw] status_start_timestamp
@@ -1564,8 +1583,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web
-    # ServicesSupport.
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
     #
     # Information about an authentication profile. An authentication profile
     # is a resource that stores the authentication settings for users in
@@ -1678,8 +1697,8 @@ module Aws::Connect
     end
 
     # This API is in preview release for Amazon Connect and is subject to
-    # change. To request access to this API, contact Amazon Web
-    # ServicesSupport.
+    # change. To request access to this API, contact Amazon Web Services
+    # Support.
     #
     # A summary of a given authentication profile.
     #
@@ -7936,13 +7955,18 @@ module Aws::Connect
     #   The expression of a step in a routing criteria.
     #   @return [String]
     #
+    # @!attribute [rw] agent_status
+    #   Information about the agent status assigned to the user.
+    #   @return [Types::AgentStatusIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
       :queue,
       :channel,
       :routing_profile,
-      :routing_step_expression)
+      :routing_step_expression,
+      :agent_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9868,13 +9892,18 @@ module Aws::Connect
     #   object of a step in a routing criteria.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] agent_statuses
+    #   A list of up to 50 agent status IDs or ARNs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters AWS API Documentation
     #
     class Filters < Struct.new(
       :queues,
       :channels,
       :routing_profiles,
-      :routing_step_expressions)
+      :routing_step_expressions,
+      :agent_statuses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10118,10 +10147,15 @@ module Aws::Connect
     #
     #   * RoutingStepExpressions: 50
     #
+    #   * AgentStatuses: 50
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You
     #   can include both resource IDs and resource ARNs in the same request.
+    #
+    #   When using `AgentStatuses` as filter make sure Queues is added as
+    #   primary filter.
     #
     #   When using the `RoutingStepExpression` filter, you need to pass
     #   exactly one `QueueId`. The filter is also case sensitive so when
@@ -10133,20 +10167,28 @@ module Aws::Connect
     #   @return [Types::Filters]
     #
     # @!attribute [rw] groupings
-    #   The grouping applied to the metrics returned. For example, when
-    #   grouped by `QUEUE`, the metrics returned apply to each queue rather
-    #   than aggregated for all queues.
+    #   Defines the level of aggregation for metrics data by a dimension(s).
+    #   Its similar to sorting items into buckets based on a common
+    #   characteristic, then counting or calculating something for each
+    #   bucket. For example, when grouped by `QUEUE`, the metrics returned
+    #   apply to each queue rather than aggregated for all queues.
+    #
+    #   The grouping list is an ordered list, with the first item in the
+    #   list defined as the primary grouping. If no grouping is included in
+    #   the request, the aggregation happens at the instance-level.
     #
     #   * If you group by `CHANNEL`, you should include a Channels filter.
     #     VOICE, CHAT, and TASK channels are supported.
+    #
+    #   * If you group by `AGENT_STATUS`, you must include the `QUEUE` as
+    #     the primary grouping and use queue filter. When you group by
+    #     `AGENT_STATUS`, the only metric available is the `AGENTS_ONLINE`
+    #     metric.
     #
     #   * If you group by `ROUTING_PROFILE`, you must include either a queue
     #     or routing profile filter. In addition, a routing profile filter
     #     is required for metrics `CONTACTS_SCHEDULED`, `CONTACTS_IN_QUEUE`,
     #     and ` OLDEST_CONTACT_AGE`.
-    #
-    #   * If no `Grouping` is included in the request, a summary of metrics
-    #     is returned.
     #
     #   * When using the `RoutingStepExpression` filter, group by
     #     `ROUTING_STEP_EXPRESSION` is required.
@@ -25993,7 +26035,7 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact Amazon Web ServicesSupport for
+    #   access this feature, contact Amazon Web Services Support for
     #   allowlisting.
     #
     #    </note>

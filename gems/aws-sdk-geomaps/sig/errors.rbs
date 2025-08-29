@@ -17,6 +17,9 @@ module Aws
       class InternalServerException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ThrottlingException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

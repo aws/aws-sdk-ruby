@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.327.0 (2025-08-27)
+------------------
+
+* Feature - This release adds support for AutoScaling on SageMaker HyperPod.
+
 1.326.0 (2025-08-26)
 ------------------
 

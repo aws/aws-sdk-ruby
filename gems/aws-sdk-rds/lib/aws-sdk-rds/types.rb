@@ -5047,15 +5047,15 @@ module Aws::RDS
     #   The name of the DB parameter group to associate with this read
     #   replica DB instance.
     #
-    #   For the Db2 DB engine, if your source DB instance uses the Bring
-    #   Your Own License model, then a custom parameter group must be
+    #   For the Db2 DB engine, if your source DB instance uses the bring
+    #   your own license (BYOL) model, then a custom parameter group must be
     #   associated with the replica. For a same Amazon Web Services Region
     #   replica, if you don't specify a custom parameter group, Amazon RDS
     #   associates the custom parameter group associated with the source DB
     #   instance. For a cross-Region replica, you must specify a custom
     #   parameter group. This custom parameter group must include your IBM
-    #   Site ID and IBM Customer ID. For more information, see [ IBM IDs for
-    #   Bring Your Own License for Db2][1].
+    #   Site ID and IBM Customer ID. For more information, see [IBM IDs for
+    #   bring your own license (BYOL) for Db2][1].
     #
     #   For Single-AZ or Multi-AZ DB instance read replica instances, if you
     #   don't specify a value for `DBParameterGroupName`, then Amazon RDS
@@ -16596,10 +16596,14 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] global_cluster_resource_id
-    #   The Amazon Web Services Region-unique, immutable identifier for the
-    #   global database cluster. This identifier is found in Amazon Web
-    #   Services CloudTrail log entries whenever the Amazon Web Services KMS
-    #   key for the DB cluster is accessed.
+    #   The Amazon Web Services [partition][1]-unique, immutable identifier
+    #   for the global database cluster. This identifier is found in Amazon
+    #   Web Services CloudTrail log entries whenever the Amazon Web Services
+    #   KMS key for the DB cluster is accessed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html?id=docs_gateway#partition
     #   @return [String]
     #
     # @!attribute [rw] global_cluster_arn
@@ -21532,6 +21536,10 @@ module Aws::RDS
     #   volume (DLV).
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_http_endpoint
+    #   Indicates whether a DB instance supports HTTP endpoints.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -21570,7 +21578,8 @@ module Aws::RDS
       :max_storage_throughput_per_db_instance,
       :min_storage_throughput_per_iops,
       :max_storage_throughput_per_iops,
-      :supports_dedicated_log_volume)
+      :supports_dedicated_log_volume,
+      :supports_http_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

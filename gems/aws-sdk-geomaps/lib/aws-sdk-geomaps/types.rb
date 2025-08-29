@@ -671,7 +671,7 @@ module Aws::GeoMaps
       :style,
       :width,
       :zoom)
-      SENSITIVE = [:key]
+      SENSITIVE = [:bounding_box, :bounded_positions, :center, :compact_overlay, :geo_json_overlay, :height, :key, :padding, :political_view, :radius, :width, :zoom]
       include Aws::Structure
     end
 
@@ -777,7 +777,7 @@ module Aws::GeoMaps
       :color_scheme,
       :political_view,
       :key)
-      SENSITIVE = [:key]
+      SENSITIVE = [:political_view, :key]
       include Aws::Structure
     end
 
@@ -841,7 +841,7 @@ module Aws::GeoMaps
       :x,
       :y,
       :key)
-      SENSITIVE = [:key]
+      SENSITIVE = [:z, :x, :y, :key]
       include Aws::Structure
     end
 
@@ -888,6 +888,19 @@ module Aws::GeoMaps
     # @see http://docs.aws.amazon.com/goto/WebAPI/geo-maps-2020-11-19/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Exception thrown when the associated resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/geo-maps-2020-11-19/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

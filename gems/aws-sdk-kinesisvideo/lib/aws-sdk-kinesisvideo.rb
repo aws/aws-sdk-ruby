@@ -54,7 +54,7 @@ module Aws::KinesisVideo
   autoload :EndpointProvider, 'aws-sdk-kinesisvideo/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisvideo/endpoints'
 
-  GEM_VERSION = '1.84.0'
+  GEM_VERSION = '1.85.0'
 
 end
 

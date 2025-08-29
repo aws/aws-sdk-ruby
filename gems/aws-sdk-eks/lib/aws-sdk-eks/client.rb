@@ -3401,6 +3401,42 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Returns the status of the latest on-demand cluster insights refresh
+    # operation.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster associated with the insights refresh
+    #   operation.
+    #
+    # @return [Types::DescribeInsightsRefreshResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInsightsRefreshResponse#message #message} => String
+    #   * {Types::DescribeInsightsRefreshResponse#status #status} => String
+    #   * {Types::DescribeInsightsRefreshResponse#started_at #started_at} => Time
+    #   * {Types::DescribeInsightsRefreshResponse#ended_at #ended_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_insights_refresh({
+    #     cluster_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.started_at #=> Time
+    #   resp.ended_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeInsightsRefresh AWS API Documentation
+    #
+    # @overload describe_insights_refresh(params = {})
+    # @param [Hash] params ({})
+    def describe_insights_refresh(params = {}, options = {})
+      req = build_request(:describe_insights_refresh, params)
+      req.send_request(options)
+    end
+
     # Describes a managed node group.
     #
     # @option params [required, String] :cluster_name
@@ -4665,6 +4701,37 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Initiates an on-demand refresh operation for cluster insights, getting
+    # the latest analysis outside of the standard refresh schedule.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster for the refresh insights operation.
+    #
+    # @return [Types::StartInsightsRefreshResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartInsightsRefreshResponse#message #message} => String
+    #   * {Types::StartInsightsRefreshResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_insights_refresh({
+    #     cluster_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/StartInsightsRefresh AWS API Documentation
+    #
+    # @overload start_insights_refresh(params = {})
+    # @param [Hash] params ({})
+    def start_insights_refresh(params = {}, options = {})
+      req = build_request(:start_insights_refresh, params)
+      req.send_request(options)
+    end
+
     # Associates the specified tags to an Amazon EKS resource with the
     # specified `resourceArn`. If existing tags on a resource are not
     # specified in the request parameters, they aren't changed. When a
@@ -5722,7 +5789,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

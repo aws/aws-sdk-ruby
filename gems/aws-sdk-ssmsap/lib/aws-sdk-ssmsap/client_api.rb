@@ -26,6 +26,7 @@ module Aws::SsmSap
     ApplicationSummary = Shapes::StructureShape.new(name: 'ApplicationSummary')
     ApplicationSummaryList = Shapes::ListShape.new(name: 'ApplicationSummaryList')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
+    ApplicationTypeList = Shapes::ListShape.new(name: 'ApplicationTypeList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociatedHost = Shapes::StructureShape.new(name: 'AssociatedHost')
     BackintConfig = Shapes::StructureShape.new(name: 'BackintConfig')
@@ -42,6 +43,13 @@ module Aws::SsmSap
     ComponentSummary = Shapes::StructureShape.new(name: 'ComponentSummary')
     ComponentSummaryList = Shapes::ListShape.new(name: 'ComponentSummaryList')
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
+    ConfigurationCheckDefinition = Shapes::StructureShape.new(name: 'ConfigurationCheckDefinition')
+    ConfigurationCheckDefinitionList = Shapes::ListShape.new(name: 'ConfigurationCheckDefinitionList')
+    ConfigurationCheckOperation = Shapes::StructureShape.new(name: 'ConfigurationCheckOperation')
+    ConfigurationCheckOperationList = Shapes::ListShape.new(name: 'ConfigurationCheckOperationList')
+    ConfigurationCheckOperationListingMode = Shapes::StringShape.new(name: 'ConfigurationCheckOperationListingMode')
+    ConfigurationCheckType = Shapes::StringShape.new(name: 'ConfigurationCheckType')
+    ConfigurationCheckTypeList = Shapes::ListShape.new(name: 'ConfigurationCheckTypeList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectedEntityType = Shapes::StringShape.new(name: 'ConnectedEntityType')
     CredentialType = Shapes::StringShape.new(name: 'CredentialType')
@@ -68,6 +76,8 @@ module Aws::SsmSap
     GetApplicationOutput = Shapes::StructureShape.new(name: 'GetApplicationOutput')
     GetComponentInput = Shapes::StructureShape.new(name: 'GetComponentInput')
     GetComponentOutput = Shapes::StructureShape.new(name: 'GetComponentOutput')
+    GetConfigurationCheckOperationInput = Shapes::StructureShape.new(name: 'GetConfigurationCheckOperationInput')
+    GetConfigurationCheckOperationOutput = Shapes::StructureShape.new(name: 'GetConfigurationCheckOperationOutput')
     GetDatabaseInput = Shapes::StructureShape.new(name: 'GetDatabaseInput')
     GetDatabaseOutput = Shapes::StructureShape.new(name: 'GetDatabaseOutput')
     GetOperationInput = Shapes::StructureShape.new(name: 'GetOperationInput')
@@ -87,12 +97,20 @@ module Aws::SsmSap
     ListApplicationsOutput = Shapes::StructureShape.new(name: 'ListApplicationsOutput')
     ListComponentsInput = Shapes::StructureShape.new(name: 'ListComponentsInput')
     ListComponentsOutput = Shapes::StructureShape.new(name: 'ListComponentsOutput')
+    ListConfigurationCheckDefinitionsInput = Shapes::StructureShape.new(name: 'ListConfigurationCheckDefinitionsInput')
+    ListConfigurationCheckDefinitionsOutput = Shapes::StructureShape.new(name: 'ListConfigurationCheckDefinitionsOutput')
+    ListConfigurationCheckOperationsInput = Shapes::StructureShape.new(name: 'ListConfigurationCheckOperationsInput')
+    ListConfigurationCheckOperationsOutput = Shapes::StructureShape.new(name: 'ListConfigurationCheckOperationsOutput')
     ListDatabasesInput = Shapes::StructureShape.new(name: 'ListDatabasesInput')
     ListDatabasesOutput = Shapes::StructureShape.new(name: 'ListDatabasesOutput')
     ListOperationEventsInput = Shapes::StructureShape.new(name: 'ListOperationEventsInput')
     ListOperationEventsOutput = Shapes::StructureShape.new(name: 'ListOperationEventsOutput')
     ListOperationsInput = Shapes::StructureShape.new(name: 'ListOperationsInput')
     ListOperationsOutput = Shapes::StructureShape.new(name: 'ListOperationsOutput')
+    ListSubCheckResultsInput = Shapes::StructureShape.new(name: 'ListSubCheckResultsInput')
+    ListSubCheckResultsOutput = Shapes::StructureShape.new(name: 'ListSubCheckResultsOutput')
+    ListSubCheckRuleResultsInput = Shapes::StructureShape.new(name: 'ListSubCheckRuleResultsInput')
+    ListSubCheckRuleResultsOutput = Shapes::StructureShape.new(name: 'ListSubCheckRuleResultsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -120,6 +138,14 @@ module Aws::SsmSap
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RuleResult = Shapes::StructureShape.new(name: 'RuleResult')
+    RuleResultId = Shapes::StringShape.new(name: 'RuleResultId')
+    RuleResultList = Shapes::ListShape.new(name: 'RuleResultList')
+    RuleResultMetadata = Shapes::MapShape.new(name: 'RuleResultMetadata')
+    RuleResultMetadataKey = Shapes::StringShape.new(name: 'RuleResultMetadataKey')
+    RuleResultMetadataValue = Shapes::StringShape.new(name: 'RuleResultMetadataValue')
+    RuleResultStatus = Shapes::StringShape.new(name: 'RuleResultStatus')
+    RuleStatusCounts = Shapes::StructureShape.new(name: 'RuleStatusCounts')
     SAPInstanceNumber = Shapes::StringShape.new(name: 'SAPInstanceNumber')
     SID = Shapes::StringShape.new(name: 'SID')
     SecretId = Shapes::StringShape.new(name: 'SecretId')
@@ -128,9 +154,15 @@ module Aws::SsmSap
     StartApplicationOutput = Shapes::StructureShape.new(name: 'StartApplicationOutput')
     StartApplicationRefreshInput = Shapes::StructureShape.new(name: 'StartApplicationRefreshInput')
     StartApplicationRefreshOutput = Shapes::StructureShape.new(name: 'StartApplicationRefreshOutput')
+    StartConfigurationChecksInput = Shapes::StructureShape.new(name: 'StartConfigurationChecksInput')
+    StartConfigurationChecksOutput = Shapes::StructureShape.new(name: 'StartConfigurationChecksOutput')
     StopApplicationInput = Shapes::StructureShape.new(name: 'StopApplicationInput')
     StopApplicationOutput = Shapes::StructureShape.new(name: 'StopApplicationOutput')
     String = Shapes::StringShape.new(name: 'String')
+    SubCheckReferencesList = Shapes::ListShape.new(name: 'SubCheckReferencesList')
+    SubCheckResult = Shapes::StructureShape.new(name: 'SubCheckResult')
+    SubCheckResultId = Shapes::StringShape.new(name: 'SubCheckResultId')
+    SubCheckResultList = Shapes::ListShape.new(name: 'SubCheckResultList')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -174,6 +206,8 @@ module Aws::SsmSap
     ApplicationSummary.struct_class = Types::ApplicationSummary
 
     ApplicationSummaryList.member = Shapes::ShapeRef.new(shape: ApplicationSummary)
+
+    ApplicationTypeList.member = Shapes::ShapeRef.new(shape: ApplicationType)
 
     AssociatedHost.add_member(:hostname, Shapes::ShapeRef.new(shape: String, location_name: "Hostname"))
     AssociatedHost.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "Ec2InstanceId"))
@@ -226,6 +260,30 @@ module Aws::SsmSap
     ComponentSummary.struct_class = Types::ComponentSummary
 
     ComponentSummaryList.member = Shapes::ShapeRef.new(shape: ComponentSummary)
+
+    ConfigurationCheckDefinition.add_member(:id, Shapes::ShapeRef.new(shape: ConfigurationCheckType, location_name: "Id"))
+    ConfigurationCheckDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ConfigurationCheckDefinition.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ConfigurationCheckDefinition.add_member(:applicable_application_types, Shapes::ShapeRef.new(shape: ApplicationTypeList, location_name: "ApplicableApplicationTypes"))
+    ConfigurationCheckDefinition.struct_class = Types::ConfigurationCheckDefinition
+
+    ConfigurationCheckDefinitionList.member = Shapes::ShapeRef.new(shape: ConfigurationCheckDefinition)
+
+    ConfigurationCheckOperation.add_member(:id, Shapes::ShapeRef.new(shape: OperationId, location_name: "Id"))
+    ConfigurationCheckOperation.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
+    ConfigurationCheckOperation.add_member(:status, Shapes::ShapeRef.new(shape: OperationStatus, location_name: "Status"))
+    ConfigurationCheckOperation.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "StatusMessage"))
+    ConfigurationCheckOperation.add_member(:configuration_check_id, Shapes::ShapeRef.new(shape: ConfigurationCheckType, location_name: "ConfigurationCheckId"))
+    ConfigurationCheckOperation.add_member(:configuration_check_name, Shapes::ShapeRef.new(shape: String, location_name: "ConfigurationCheckName"))
+    ConfigurationCheckOperation.add_member(:configuration_check_description, Shapes::ShapeRef.new(shape: String, location_name: "ConfigurationCheckDescription"))
+    ConfigurationCheckOperation.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    ConfigurationCheckOperation.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    ConfigurationCheckOperation.add_member(:rule_status_counts, Shapes::ShapeRef.new(shape: RuleStatusCounts, location_name: "RuleStatusCounts"))
+    ConfigurationCheckOperation.struct_class = Types::ConfigurationCheckOperation
+
+    ConfigurationCheckOperationList.member = Shapes::ShapeRef.new(shape: ConfigurationCheckOperation)
+
+    ConfigurationCheckTypeList.member = Shapes::ShapeRef.new(shape: ConfigurationCheckType)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
@@ -298,6 +356,12 @@ module Aws::SsmSap
     GetComponentOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetComponentOutput.struct_class = Types::GetComponentOutput
 
+    GetConfigurationCheckOperationInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
+    GetConfigurationCheckOperationInput.struct_class = Types::GetConfigurationCheckOperationInput
+
+    GetConfigurationCheckOperationOutput.add_member(:configuration_check_operation, Shapes::ShapeRef.new(shape: ConfigurationCheckOperation, location_name: "ConfigurationCheckOperation"))
+    GetConfigurationCheckOperationOutput.struct_class = Types::GetConfigurationCheckOperationOutput
+
     GetDatabaseInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     GetDatabaseInput.add_member(:component_id, Shapes::ShapeRef.new(shape: ComponentId, location_name: "ComponentId"))
     GetDatabaseInput.add_member(:database_id, Shapes::ShapeRef.new(shape: DatabaseId, location_name: "DatabaseId"))
@@ -361,6 +425,25 @@ module Aws::SsmSap
     ListComponentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListComponentsOutput.struct_class = Types::ListComponentsOutput
 
+    ListConfigurationCheckDefinitionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListConfigurationCheckDefinitionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationCheckDefinitionsInput.struct_class = Types::ListConfigurationCheckDefinitionsInput
+
+    ListConfigurationCheckDefinitionsOutput.add_member(:configuration_checks, Shapes::ShapeRef.new(shape: ConfigurationCheckDefinitionList, location_name: "ConfigurationChecks"))
+    ListConfigurationCheckDefinitionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationCheckDefinitionsOutput.struct_class = Types::ListConfigurationCheckDefinitionsOutput
+
+    ListConfigurationCheckOperationsInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
+    ListConfigurationCheckOperationsInput.add_member(:list_mode, Shapes::ShapeRef.new(shape: ConfigurationCheckOperationListingMode, location_name: "ListMode"))
+    ListConfigurationCheckOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListConfigurationCheckOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationCheckOperationsInput.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    ListConfigurationCheckOperationsInput.struct_class = Types::ListConfigurationCheckOperationsInput
+
+    ListConfigurationCheckOperationsOutput.add_member(:configuration_check_operations, Shapes::ShapeRef.new(shape: ConfigurationCheckOperationList, location_name: "ConfigurationCheckOperations"))
+    ListConfigurationCheckOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationCheckOperationsOutput.struct_class = Types::ListConfigurationCheckOperationsOutput
+
     ListDatabasesInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
     ListDatabasesInput.add_member(:component_id, Shapes::ShapeRef.new(shape: ComponentId, location_name: "ComponentId"))
     ListDatabasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -390,6 +473,24 @@ module Aws::SsmSap
     ListOperationsOutput.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "Operations"))
     ListOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOperationsOutput.struct_class = Types::ListOperationsOutput
+
+    ListSubCheckResultsInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
+    ListSubCheckResultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListSubCheckResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSubCheckResultsInput.struct_class = Types::ListSubCheckResultsInput
+
+    ListSubCheckResultsOutput.add_member(:sub_check_results, Shapes::ShapeRef.new(shape: SubCheckResultList, location_name: "SubCheckResults"))
+    ListSubCheckResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSubCheckResultsOutput.struct_class = Types::ListSubCheckResultsOutput
+
+    ListSubCheckRuleResultsInput.add_member(:sub_check_result_id, Shapes::ShapeRef.new(shape: SubCheckResultId, required: true, location_name: "SubCheckResultId"))
+    ListSubCheckRuleResultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListSubCheckRuleResultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSubCheckRuleResultsInput.struct_class = Types::ListSubCheckRuleResultsInput
+
+    ListSubCheckRuleResultsOutput.add_member(:rule_results, Shapes::ShapeRef.new(shape: RuleResultList, location_name: "RuleResults"))
+    ListSubCheckRuleResultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSubCheckRuleResultsOutput.struct_class = Types::ListSubCheckRuleResultsOutput
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: SsmSapArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -463,6 +564,25 @@ module Aws::SsmSap
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RuleResult.add_member(:id, Shapes::ShapeRef.new(shape: RuleResultId, location_name: "Id"))
+    RuleResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    RuleResult.add_member(:status, Shapes::ShapeRef.new(shape: RuleResultStatus, location_name: "Status"))
+    RuleResult.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    RuleResult.add_member(:metadata, Shapes::ShapeRef.new(shape: RuleResultMetadata, location_name: "Metadata"))
+    RuleResult.struct_class = Types::RuleResult
+
+    RuleResultList.member = Shapes::ShapeRef.new(shape: RuleResult)
+
+    RuleResultMetadata.key = Shapes::ShapeRef.new(shape: RuleResultMetadataKey)
+    RuleResultMetadata.value = Shapes::ShapeRef.new(shape: RuleResultMetadataValue)
+
+    RuleStatusCounts.add_member(:failed, Shapes::ShapeRef.new(shape: Integer, location_name: "Failed"))
+    RuleStatusCounts.add_member(:warning, Shapes::ShapeRef.new(shape: Integer, location_name: "Warning"))
+    RuleStatusCounts.add_member(:info, Shapes::ShapeRef.new(shape: Integer, location_name: "Info"))
+    RuleStatusCounts.add_member(:passed, Shapes::ShapeRef.new(shape: Integer, location_name: "Passed"))
+    RuleStatusCounts.add_member(:unknown, Shapes::ShapeRef.new(shape: Integer, location_name: "Unknown"))
+    RuleStatusCounts.struct_class = Types::RuleStatusCounts
+
     StartApplicationInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
     StartApplicationInput.struct_class = Types::StartApplicationInput
 
@@ -475,6 +595,13 @@ module Aws::SsmSap
     StartApplicationRefreshOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     StartApplicationRefreshOutput.struct_class = Types::StartApplicationRefreshOutput
 
+    StartConfigurationChecksInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
+    StartConfigurationChecksInput.add_member(:configuration_check_ids, Shapes::ShapeRef.new(shape: ConfigurationCheckTypeList, location_name: "ConfigurationCheckIds"))
+    StartConfigurationChecksInput.struct_class = Types::StartConfigurationChecksInput
+
+    StartConfigurationChecksOutput.add_member(:configuration_check_operations, Shapes::ShapeRef.new(shape: ConfigurationCheckOperationList, location_name: "ConfigurationCheckOperations"))
+    StartConfigurationChecksOutput.struct_class = Types::StartConfigurationChecksOutput
+
     StopApplicationInput.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
     StopApplicationInput.add_member(:stop_connected_entity, Shapes::ShapeRef.new(shape: ConnectedEntityType, location_name: "StopConnectedEntity"))
     StopApplicationInput.add_member(:include_ec2_instance_shutdown, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeEc2InstanceShutdown"))
@@ -482,6 +609,16 @@ module Aws::SsmSap
 
     StopApplicationOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     StopApplicationOutput.struct_class = Types::StopApplicationOutput
+
+    SubCheckReferencesList.member = Shapes::ShapeRef.new(shape: String)
+
+    SubCheckResult.add_member(:id, Shapes::ShapeRef.new(shape: SubCheckResultId, location_name: "Id"))
+    SubCheckResult.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    SubCheckResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    SubCheckResult.add_member(:references, Shapes::ShapeRef.new(shape: SubCheckReferencesList, location_name: "References"))
+    SubCheckResult.struct_class = Types::SubCheckResult
+
+    SubCheckResultList.member = Shapes::ShapeRef.new(shape: SubCheckResult)
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -580,6 +717,16 @@ module Aws::SsmSap
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_configuration_check_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConfigurationCheckOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/get-configuration-check-operation"
+        o.input = Shapes::ShapeRef.new(shape: GetConfigurationCheckOperationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetConfigurationCheckOperationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_database, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDatabase"
         o.http_method = "POST"
@@ -646,6 +793,39 @@ module Aws::SsmSap
         )
       end)
 
+      api.add_operation(:list_configuration_check_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConfigurationCheckDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-configuration-check-definitions"
+        o.input = Shapes::ShapeRef.new(shape: ListConfigurationCheckDefinitionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListConfigurationCheckDefinitionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_configuration_check_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConfigurationCheckOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-configuration-check-operations"
+        o.input = Shapes::ShapeRef.new(shape: ListConfigurationCheckOperationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListConfigurationCheckOperationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_databases, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDatabases"
         o.http_method = "POST"
@@ -685,6 +865,38 @@ module Aws::SsmSap
         o.http_request_uri = "/list-operations"
         o.input = Shapes::ShapeRef.new(shape: ListOperationsInput)
         o.output = Shapes::ShapeRef.new(shape: ListOperationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sub_check_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSubCheckResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-sub-check-results"
+        o.input = Shapes::ShapeRef.new(shape: ListSubCheckResultsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSubCheckResultsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sub_check_rule_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSubCheckRuleResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-sub-check-rule-results"
+        o.input = Shapes::ShapeRef.new(shape: ListSubCheckRuleResultsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSubCheckRuleResultsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
@@ -736,8 +948,8 @@ module Aws::SsmSap
         o.input = Shapes::ShapeRef.new(shape: StartApplicationInput)
         o.output = Shapes::ShapeRef.new(shape: StartApplicationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -754,6 +966,18 @@ module Aws::SsmSap
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_configuration_checks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartConfigurationChecks"
+        o.http_method = "POST"
+        o.http_request_uri = "/start-configuration-checks"
+        o.input = Shapes::ShapeRef.new(shape: StartConfigurationChecksInput)
+        o.output = Shapes::ShapeRef.new(shape: StartConfigurationChecksOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:stop_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopApplication"
         o.http_method = "POST"
@@ -761,8 +985,8 @@ module Aws::SsmSap
         o.input = Shapes::ShapeRef.new(shape: StopApplicationInput)
         o.output = Shapes::ShapeRef.new(shape: StopApplicationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

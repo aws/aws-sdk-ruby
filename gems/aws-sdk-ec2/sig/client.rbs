@@ -1047,6 +1047,8 @@ module Aws
                           },
                         ],
                         ?snapshot_copy_completion_duration_minutes: ::Integer,
+                        ?destination_availability_zone: ::String,
+                        ?destination_availability_zone_id: ::String,
                         ?dry_run: bool
                       ) -> _CopyImageResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyImageResponseSuccess
@@ -1078,6 +1080,7 @@ module Aws
                              },
                            ],
                            ?completion_duration_minutes: ::Integer,
+                           ?destination_availability_zone: ::String,
                            ?dry_run: bool
                          ) -> _CopySnapshotResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotResponseSuccess
