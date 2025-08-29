@@ -14,6 +14,7 @@ module Aws
 
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @executor = options[:executor]
       end
 
       # @return [Client]
@@ -25,24 +26,25 @@ module Aws
           raise ArgumentError, "Invalid destination, expected #{valid_types.join(', ')} but got: #{destination.class}"
         end
 
+        @temp_path = nil
         @destination = destination
         @mode = options.delete(:mode) || 'auto'
         @thread_count = options.delete(:thread_count) || 10
         @chunk_size = options.delete(:chunk_size)
         @on_checksum_validated = options.delete(:on_checksum_validated)
         @progress_callback = options.delete(:progress_callback)
-        @params = options
+        params = options
         validate!
 
         Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
           case @mode
-          when 'auto' then multipart_download
-          when 'single_request' then single_request
+          when 'auto' then multipart_download(params)
+          when 'single_request' then single_request(params)
           when 'get_range'
             raise ArgumentError, 'In get_range mode, :chunk_size must be provided' unless @chunk_size
 
             resp = @client.head_object(@params)
-            multithreaded_get_by_ranges(resp.content_length, resp.etag)
+            multithreaded_get_by_ranges(resp.content_length, resp.etag, params)
           else
             raise ArgumentError, "Invalid mode #{@mode} provided, :mode should be single_request, get_range or auto"
           end
@@ -60,34 +62,34 @@ module Aws
         raise ArgumentError, ':on_checksum_validated must be callable'
       end
 
-      def multipart_download
-        resp = @client.head_object(@params.merge(part_number: 1))
+      def multipart_download(params)
+        resp = @client.head_object(params.merge(part_number: 1))
         count = resp.parts_count
 
         if count.nil? || count <= 1
           if resp.content_length <= MIN_CHUNK_SIZE
-            single_request
+            single_request(params)
           else
-            multithreaded_get_by_ranges(resp.content_length, resp.etag)
+            multithreaded_get_by_ranges(resp.content_length, resp.etag, params)
           end
         else
           # covers cases when given object is not uploaded via UploadPart API
-          resp = @client.head_object(@params) # partNumber is an option
+          resp = @client.head_object(params) # partNumber is an option
           if resp.content_length <= MIN_CHUNK_SIZE
-            single_request
+            single_request(params)
           else
-            compute_mode(resp.content_length, count, resp.etag)
+            compute_mode(resp.content_length, count, resp.etag, params)
           end
         end
       end
 
-      def compute_mode(file_size, count, etag)
+      def compute_mode(file_size, count, etag, params)
         chunk_size = compute_chunk(file_size)
         part_size = (file_size.to_f / count).ceil
         if chunk_size < part_size
-          multithreaded_get_by_ranges(file_size, etag)
+          multithreaded_get_by_ranges(file_size, etag, params)
         else
-          multithreaded_get_by_parts(count, file_size, etag)
+          multithreaded_get_by_parts(count, file_size, etag, params)
         end
       end
 
@@ -97,7 +99,7 @@ module Aws
         @chunk_size || [(file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE].max.to_i
       end
 
-      def multithreaded_get_by_ranges(file_size, etag)
+      def multithreaded_get_by_ranges(file_size, etag, params)
         offset = 0
         default_chunk_size = compute_chunk(file_size)
         chunks = []
@@ -105,19 +107,58 @@ module Aws
         while offset < file_size
           progress = offset + default_chunk_size
           progress = file_size if progress > file_size
-          params = @params.merge(range: "bytes=#{offset}-#{progress - 1}", if_match: etag)
+          params = params.merge(range: "bytes=#{offset}-#{progress - 1}", if_match: etag)
           chunks << Part.new(part_number: part_number, size: (progress - offset), params: params)
           part_number += 1
           offset = progress
         end
-        download_in_threads(PartList.new(chunks), file_size)
+        if @executor
+          download_with_executor(PartList.new(chunks))
+        else
+          download_in_threads(PartList.new(chunks), file_size)
+        end
       end
 
-      def multithreaded_get_by_parts(n_parts, total_size, etag)
+      def multithreaded_get_by_parts(n_parts, total_size, etag, params)
         parts = (1..n_parts).map do |part|
-          Part.new(part_number: part, params: @params.merge(part_number: part, if_match: etag))
+          Part.new(part_number: part, params: params.merge(part_number: part, if_match: etag))
         end
-        download_in_threads(PartList.new(parts), total_size)
+        if @executor
+          download_with_executor(PartList.new(parts))
+        else
+          download_in_threads(PartList.new(parts), total_size)
+        end
+      end
+
+      def download_with_executor(pending)
+        max_parts = pending.size
+        completion_queue = Queue.new
+        @abort_download = false
+        unless [File, Tempfile].include?(@destination.class)
+          @temp_path = "#{@destination}.s3tmp.#{SecureRandom.alphanumeric(8)}"
+        end
+
+        while (part = pending.shift)
+          break if @abort_download
+
+          @executor.post(part) do |p|
+            resp = @client.get_object(p.params)
+            range = extract_range(resp.content_range)
+            validate_range(range, p.params[:range]) if p.params[:range]
+            write(resp.body, range)
+
+            if @on_checksum_validated && resp.checksum_validated
+              @on_checksum_validated.call(resp.checksum_validated, resp)
+            end
+          rescue StandardError => e
+            @abort_download = true
+            raise e
+          ensure
+            completion_queue << :done
+          end
+        end
+
+        max_parts.times { completion_queue.pop }
       end
 
       def download_in_threads(pending, total_size)
@@ -170,8 +211,8 @@ module Aws
         File.write(path, body.read, range.split('-').first.to_i)
       end
 
-      def single_request
-        params = @params.merge(response_target: @destination)
+      def single_request(params)
+        params = params.merge(response_target: @destination)
         params[:on_chunk_received] = single_part_progress if @progress_callback
         resp = @client.get_object(params)
         return resp unless @on_checksum_validated
