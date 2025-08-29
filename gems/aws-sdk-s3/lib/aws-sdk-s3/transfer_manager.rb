@@ -106,7 +106,7 @@ module Aws
       end
 
       # TODO: Docs
-      def download_directory(destination, bucket:, ** options)
+      def download_directory(destination, bucket:, **options)
         # TODO
       end
 
@@ -189,7 +189,7 @@ module Aws
       end
 
       # TODO: Docs
-      def upload_directory(source, bucket:, ** options)
+      def upload_directory(source, bucket:, **options)
         # TODO
       end
 
@@ -256,5 +256,6 @@ module Aws
         true
       end
     end
+
   end
 end
